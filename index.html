@@ -1,1064 +1,585 @@
 <html lang="es" class="scroll-smooth"><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tarjetas de Presentación Premium – APEX Creative</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Creative - Creamos negocios que destacan</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        apex: {
-                            black: '#111111',
-                            dark: '#1a1a1a',
-                            darker: '#0a0a0a',
-                            purple: { bg: '#22112a', text: '#e9d5ff', btn: '#a855f7' },
-                            navy: { bg: '#0B1B3D', text: '#bfdbfe', btn: '#3b82f6' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        /* 1. CURSOR PERSONALIZADO NATIVO */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
         body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #111111;
-            color: #ffffff;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30.37 27.82' width='34' height='34'%3E%3Cpath fill='%23ffffff' d='M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z'/%3E%3Cpath fill='%23ffffff' d='M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z'/%3E%3Cpath fill='%23ffffff' d='M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z'/%3E%3Cpath fill='%23ffffff' d='M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z'/%3E%3C/svg%3E") 12 10, auto;
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #FAFAFA;
         }
-
-        a, button, .clickable {
-            cursor: inherit;
-        }
-
-        /* Heading Trim & Adjustments */
-        h1, h2, h3, h4, h5, h6 { line-height: 0.9; }
-
-        /* Underline Link Effect */
-        .underline-link {
-            text-decoration: none;
-            position: relative;
-        }
-        .underline-link::before {
-            content: "";
-            position: absolute;
-            bottom: -0.1rem;
-            left: 0;
-            width: 100%;
-            height: 0.1rem;
-            background-color: currentColor;
-            transition: transform 0.6s cubic-bezier(0.625, 0.05, 0, 1);
-            transform-origin: right;
-            transform: scaleX(0);
-        }
-        .underline-link:hover::before { transform-origin: left; transform: scaleX(1); }
-
-        /* Complex Button CSS */
-        .btn-main {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border-radius: 9999px;
-            --elastic-in: linear(0, 0.2178 2.1%, 1.1144 8.49%, 1.2959 10.7%, 1.3463 11.81%, 1.3705 12.94%, 1.3726, 1.3643 14.48%, 1.3151 16.2%, 1.0317 21.81%, 0.941 24.01%, 0.8912 25.91%, 0.8694 27.84%, 0.8824 30.71%, 1.0122 38.33%, 1 100%);
-            --smooth-ease: cubic-bezier(.32, .72, 0, 1);
-        }
-
-        .btn-icon-left, .btn-icon-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%) scale(0);
-            opacity: 0;
-            transition: transform 0.7s var(--elastic-in), opacity 0.6s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .btn-icon-left { left: 0.75rem; }
-        .btn-icon-right { right: 0.75rem; transform: translateY(-50%) scale(1); opacity: 1; }
-
-        .btn-text {
-            display: block;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.7s var(--smooth-ease), margin 0.7s var(--smooth-ease);
-            margin-left: 0;
-            margin-right: 2.5rem;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            .btn-main:hover .btn-icon-right { transform: translateY(-50%) scale(0); opacity: 0; }
-            .btn-main:hover .btn-icon-left { transform: translateY(-50%) scale(1); opacity: 1; }
-            .btn-main:hover .btn-text { transform: translateX(0.5rem); margin-left: 1.5rem; margin-right: 0.5rem; }
-        }
-        .btn-main:active { transform: scale(0.965); transition: transform 0.15s ease; }
-
-        @media screen and (max-width: 767px) {
-            .btn-main { transform: none !important; padding-left: 1.5rem; padding-right: 1.5rem; }
-            .btn-icon-left { display: none !important; }
-            .btn-icon-right { display: none !important; }
-            .btn-text { margin: 0 !important; transform: none !important; }
-        }
-
-        /* Image Reveal Hover */
-        .hover-img-wrap { overflow: hidden; }
-        .hover-img-wrap img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .hover-trigger:hover .hover-img-wrap img { transform: scale(1.05); }
-
-        /* MAGICAL CURSOR CLICK EFFECT */
-        .click-magic-star {
-            position: absolute;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            animation: star-burst 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes star-burst {
-            0% { transform: translate(-50%, -50%) scale(0) rotate(-20deg); opacity: 1; filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8)); }
-            50% { transform: translate(-50%, -50%) scale(1.5) rotate(15deg); opacity: 1; filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 1)); }
-            100% { transform: translate(-50%, -50%) scale(0.5) rotate(45deg); opacity: 0; }
-        }
-
-        /* LOGO ANIMADO */
-        .logo-wrapper { display: flex; justify-content: center; align-items: center; margin: 2rem auto; width: 9rem; }
-        .logo-floating-magic { animation: logo-float 4s ease-in-out infinite; overflow: visible !important; }
-        .logo-magic-star { transform-origin: center; transform-box: fill-box; animation: logo-pulse-glow 2.5s ease-in-out infinite alternate; }
-        
-        @keyframes logo-float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-0.5rem); }
-        }
-        @keyframes logo-pulse-glow {
-            0% { transform: scale(0.9) rotate(0deg); filter: drop-shadow(0 0 0.1rem rgba(255, 255, 255, 0.4)); }
-            100% { transform: scale(1.15) rotate(15deg); filter: drop-shadow(0 0 0.25rem rgba(255, 255, 255, 0.9)) drop-shadow(0 0 0.6rem rgba(255, 255, 255, 0.5)); }
-        }
-
-        /* SCROLL TOP BUTTON */
-        .btn-scroll-top {
-            position: fixed; bottom: 2.5rem; right: 2.5rem; width: 4rem; height: 4rem;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%;
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
-            backdrop-filter: blur(0.5rem);
-            opacity: 0; visibility: hidden; transform: translateY(1.5rem);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1000;
-        }
-        .btn-scroll-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .btn-scroll-top svg { width: 2.25rem; height: 2.25rem; overflow: visible !important; }
-        
-        .scroll-magic-star {
-            transform-origin: center; transform-box: fill-box;
-            animation: scroll-float-star 3s ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.4)); transition: all 0.4s ease;
-        }
-        .scroll-magic-hand {
-            transform: translateY(1rem); opacity: 0;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
-        }
-
-        .btn-scroll-top:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5); }
-        .btn-scroll-top:hover .scroll-magic-hand { transform: translateY(0); opacity: 1; }
-        .btn-scroll-top:hover .scroll-magic-star { animation: none; transform: scale(1.15) rotate(15deg) translateY(-0.1rem); filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 1)) drop-shadow(0 0 1rem rgba(255, 255, 255, 0.5)); }
-        .btn-scroll-top.is-launching { transform: translateY(-120vh) scale(0.8); opacity: 0; transition: transform 1s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.8s ease; }
-
-        @keyframes scroll-float-star {
-            0% { transform: translateY(0.1rem) scale(0.95); }
-            100% { transform: translateY(-0.25rem) scale(1.05); }
+        /* Prevención de flash antes de que cargue GSAP */
+        .invisible-until-scroll {
+            visibility: hidden;
         }
     </style>
 </head>
-<body class="font-sans bg-apex-black text-white selection:bg-apex-purple-btn selection:text-white relative">
+<body class="selection:bg-neutral-800 selection:text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Ambient Background Glow -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900/40 via-[#000000]/0 to-transparent blur-[120px]"></div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 mix-blend-difference px-6 py-6 md:px-12 flex justify-between items-center">
-        <a href="#" class="text-xl tracking-[0.2em] font-semibold uppercase text-white hover:opacity-70 transition-opacity">A P E X</a>
-        <a href="#contacto" class="btn-main bg-white text-black py-2.5 px-3 md:py-3 md:px-4 text-sm font-medium">
-            <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-up-linear" width="1.2rem" stroke-width="1.5"></iconify-icon></span>
-            <span class="btn-text">Contacto</span>
-            <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-up-linear" width="1.2rem" stroke-width="1.5"></iconify-icon></span>
-        </a>
+    <nav class="hero-anim fixed top-6 inset-x-0 flex justify-center z-50 px-6 opacity-0">
+        <div class="flex items-center justify-between px-5 py-3 bg-neutral-950/80 backdrop-blur-md border border-neutral-800 rounded-xl w-full max-w-4xl shadow-2xl">
+            <a href="#" class="text-base font-medium tracking-tighter uppercase text-white hover:text-neutral-300 transition-colors">
+                APEX
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm text-neutral-400 font-medium">
+                <a href="#servicios" class="hover:text-neutral-50 transition-colors">Qué hacemos</a>
+                <a href="#portafolio" class="hover:text-neutral-50 transition-colors">Portafolio</a>
+                <a href="#metodo" class="hover:text-neutral-50 transition-colors">Método</a>
+            </div>
+            <a href="#contacto" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-9 px-4 py-2">
+                Consultar
+            </a>
+        </div>
     </nav>
 
-    <!-- 1. Hero -->
-    <header id="hero-section" class="relative w-full min-h-[90vh] flex flex-col justify-end pb-24 pt-40 px-6 md:px-12 overflow-hidden bg-apex-black">
-        <div id="hero-webgl-container" class="absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-apex-black via-apex-black/60 to-transparent pointer-events-none"></div>
+    <!-- 1. Hero Section -->
+    <section class="relative pt-40 pb-24 md:pt-52 md:pb-32 px-6 flex flex-col items-center text-center max-w-5xl mx-auto">
+        <div class="hero-anim opacity-0 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950 px-3 py-1 text-xs font-semibold text-neutral-300 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 mb-8">
+            <iconify-icon icon="solar:stars-linear" stroke-width="1.5" class="text-neutral-400"></iconify-icon>
+            Agencia Creativa &amp; Consultoría
+        </div>
+        
+        <h1 class="hero-anim opacity-0 text-5xl md:text-7xl lg:text-[5rem] font-medium tracking-tight leading-[1.1] text-balance mb-8 text-white">
+            No vendemos diseño.<br class="hidden md:block"> 
+            Creamos negocios que <span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 to-neutral-500">destacan</span>.
+        </h1>
+        
+        <p class="hero-anim opacity-0 text-lg md:text-xl text-neutral-400 font-normal max-w-2xl text-balance mb-12">
+            La mayoría de los negocios solo intenta vender más.<br class="hidden md:block">
+            Nosotros ayudamos a que sean imposibles de ignorar.
+        </p>
 
-        <div class="relative z-10 max-w-7xl mx-auto w-full pointer-events-none">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-12">
-                <div class="max-w-5xl">
-                    <div class="flex gap-3 mb-8 flex-wrap pointer-events-auto">
-                        <span class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-white/10 text-gray-200 backdrop-blur-md uppercase tracking-wider border border-white/5">APEX Creative</span>
-                        <span class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-apex-purple-bg/90 text-apex-purple-text uppercase tracking-wider backdrop-blur-md border border-apex-purple-btn/20">Tarjetas Premium</span>
-                    </div>
-                    <h1 class="text-5xl md:text-[5.5vw] font-semibold tracking-tighter uppercase text-white mb-8">
-                        Una tarjeta que habla de tu negocio antes de que tú lo hagas.
-                    </h1>
+        <a href="#contacto" class="hero-anim opacity-0 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-11 px-8 py-2 group">
+            Solicitar una consulta
+            <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="ml-2 text-lg group-hover:translate-x-1 transition-transform"></iconify-icon>
+        </a>
+    </section>
+
+    <!-- 2. Qué hacemos Section -->
+    <section id="servicios" class="py-24 px-6 w-full max-w-6xl mx-auto">
+        <div class="section-anim invisible-until-scroll mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white">Qué hacemos</h2>
+            <p class="text-sm text-neutral-400 max-w-xs font-normal">Soluciones estratégicas divididas en tres bloques simples.</p>
+        </div>
+
+        <div class="stagger-container grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Branding -->
+            <div class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
+                    <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
                 </div>
-                <div class="md:max-w-sm flex flex-col gap-8 pb-4 pointer-events-auto">
-                    <p class="text-lg md:text-xl text-gray-300 font-light leading-relaxed drop-shadow-md">
-                        En una reunión, una tarjeta no es solo un papel.<br>
-                        <span class="text-white font-medium">Es el primer mensaje que tu marca deja en la mesa.</span>
-                    </p>
-                    <div>
-                        <a href="#contacto" class="btn-main bg-apex-purple-btn text-white py-4 px-6 text-base font-medium w-full md:w-auto hover:shadow-lg hover:shadow-apex-purple-btn/20 transition-shadow">
-                            <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
-                            <span class="btn-text">Solicitar información</span>
-                            <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
-                        </a>
-                    </div>
+                <h3 class="text-xl font-medium tracking-tight mb-4 text-white">Branding</h3>
+                <ul class="space-y-3 text-sm text-neutral-400 font-normal">
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Identidad visual
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Diseño de marca
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Estrategia creativa
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Consultoría -->
+            <div class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
+                    <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
                 </div>
+                <h3 class="text-xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
+                <ul class="space-y-3 text-sm text-neutral-400 font-normal">
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Estrategia para negocios
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Optimización de marketing
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Crecimiento comercial
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Impresión Creativa -->
+            <div class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
+                    <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-medium tracking-tight mb-4 text-white">Impresión creativa</h3>
+                <ul class="space-y-3 text-sm text-neutral-400 font-normal">
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Papelería premium
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Tarjetas de marca
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Volantes que venden
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- 2. La realidad (Bento Layout) -->
-    <section class="py-24 px-4 md:px-8 relative z-20 bg-apex-black">
-        <div class="max-w-[1440px] mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                <!-- Large Dark Card -->
-                <div class="md:col-span-2 bg-apex-dark rounded-[2rem] p-8 md:p-14 flex flex-col justify-between min-h-[50vh] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-                        <iconify-icon icon="solar:trash-bin-trash-linear" width="8rem" stroke-width="1"></iconify-icon>
+    <!-- 3. Resultados / Portafolio Section -->
+    <section id="portafolio" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
+        <div class="section-anim invisible-until-scroll mb-16">
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Portafolio</h2>
+            <p class="text-sm text-neutral-400 font-normal">Trabajos fuertes. Resultados reales.</p>
+        </div>
+
+        <div class="stagger-container grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            <!-- Project 1 -->
+            <div class="stagger-item invisible-until-scroll group cursor-pointer flex flex-col gap-5 relative">
+                <!-- Apple-style Ambient Blur Shadow -->
+                <div class="absolute inset-0 top-[-5%] left-[-5%] w-[110%] h-[110%] z-0 opacity-0 blur-3xl group-hover:opacity-40 transition-opacity duration-700 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover rounded-xl" alt="shadow">
+                </div>
+                
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 relative z-10">
+                    <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Branding Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="flex items-start justify-between gap-4 px-1 relative z-10">
+                    <div>
+                        <h3 class="text-lg font-medium tracking-tight text-white">Aura Botanics</h3>
+                        <p class="text-sm text-neutral-400 font-normal mt-1">Identidad visual y empaque premium.</p>
                     </div>
-                    <div class="relative z-10 mb-20">
-                        <div class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-white/5 text-gray-400 uppercase tracking-wider mb-6">La realidad</div>
-                        <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-white max-w-2xl leading-[0.9]">
-                            La mayoría de tarjetas de presentación se olvidan en minutos.
-                        </h2>
-                    </div>
-                    <div class="relative z-10 flex flex-wrap gap-4 mt-auto">
-                        <div class="px-5 py-3 rounded-full border border-white/10 text-gray-400 text-sm md:text-base flex items-center gap-2">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon> Demasiado delgadas.
-                        </div>
-                        <div class="px-5 py-3 rounded-full border border-white/10 text-gray-400 text-sm md:text-base flex items-center gap-2">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon> Demasiado comunes.
-                        </div>
-                        <div class="px-5 py-3 rounded-full border border-white/10 text-gray-400 text-sm md:text-base flex items-center gap-2">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon> Demasiado parecidas.
-                        </div>
-                    </div>
+                    <span class="inline-flex items-center rounded-full border border-neutral-800 bg-neutral-900 px-2.5 py-0.5 text-xs font-semibold text-neutral-300 whitespace-nowrap">
+                        +150% Ventas
+                    </span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="stagger-item invisible-until-scroll group cursor-pointer flex flex-col gap-5 relative">
+                <div class="absolute inset-0 top-[-5%] left-[-5%] w-[110%] h-[110%] z-0 opacity-0 blur-3xl group-hover:opacity-40 transition-opacity duration-700 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover rounded-xl" alt="shadow">
                 </div>
 
-                <!-- Purple Accent Card -->
-                <div class="md:col-span-1 bg-apex-purple-bg border border-apex-purple-btn/10 rounded-[2rem] p-8 md:p-12 flex flex-col justify-center relative overflow-hidden text-apex-purple-text">
-                    <iconify-icon icon="solar:star-fall-linear" width="4rem" stroke-width="1.5" class="mb-8 opacity-50"></iconify-icon>
-                    <h3 class="text-3xl md:text-4xl font-semibold tracking-tighter mb-6 leading-[0.9]">
-                        Una tarjeta premium es diferente.
-                    </h3>
-                    <p class="text-base md:text-lg opacity-80 font-medium">
-                        Cuando alguien la sostiene, siente inmediatamente que está tratando con un negocio serio.
-                    </p>
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 relative z-10">
+                    <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Packaging Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="flex items-start justify-between gap-4 px-1 relative z-10">
+                    <div>
+                        <h3 class="text-lg font-medium tracking-tight text-white">Maison Noir</h3>
+                        <p class="text-sm text-neutral-400 font-normal mt-1">Tarjetas de marca y diseño estratégico.</p>
+                    </div>
+                    <span class="inline-flex items-center rounded-full border border-neutral-800 bg-neutral-900 px-2.5 py-0.5 text-xs font-semibold text-neutral-300 whitespace-nowrap">
+                        Posicionamiento
+                    </span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="stagger-item invisible-until-scroll group cursor-pointer flex flex-col gap-5 relative">
+                <div class="absolute inset-0 top-[-5%] left-[-5%] w-[110%] h-[110%] z-0 opacity-0 blur-3xl group-hover:opacity-40 transition-opacity duration-700 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover rounded-xl" alt="shadow">
+                </div>
+
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 relative z-10">
+                    <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Consulting Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="flex items-start justify-between gap-4 px-1 relative z-10">
+                    <div>
+                        <h3 class="text-lg font-medium tracking-tight text-white">TechFlow</h3>
+                        <p class="text-sm text-neutral-400 font-normal mt-1">Consultoría y optimización de marketing.</p>
+                    </div>
+                    <span class="inline-flex items-center rounded-full border border-neutral-800 bg-neutral-900 px-2.5 py-0.5 text-xs font-semibold text-neutral-300 whitespace-nowrap">
+                        3x Crecimiento
+                    </span>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="stagger-item invisible-until-scroll group cursor-pointer flex flex-col gap-5 relative">
+                <div class="absolute inset-0 top-[-5%] left-[-5%] w-[110%] h-[110%] z-0 opacity-0 blur-3xl group-hover:opacity-40 transition-opacity duration-700 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover rounded-xl" alt="shadow">
+                </div>
+
+                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 relative z-10">
+                    <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Design Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="flex items-start justify-between gap-4 px-1 relative z-10">
+                    <div>
+                        <h3 class="text-lg font-medium tracking-tight text-white">Eventos Elysium</h3>
+                        <p class="text-sm text-neutral-400 font-normal mt-1">Papelería premium e impresiones.</p>
+                    </div>
+                    <span class="inline-flex items-center rounded-full border border-neutral-800 bg-neutral-900 px-2.5 py-0.5 text-xs font-semibold text-neutral-300 whitespace-nowrap">
+                        Autoridad
+                    </span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. Diferenciadores (Focus Cards) -->
-    <section class="py-24 px-4 md:px-8 bg-apex-darker">
-        <div class="max-w-[1440px] mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-                <div>
-                    <div class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-white/10 text-gray-300 uppercase tracking-wider mb-6">El estándar APEX</div>
-                    <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-white max-w-xl">
-                        Qué hace diferente a una tarjeta premium
-                    </h2>
+    <!-- 4. Cómo trabajamos Section -->
+    <section id="metodo" class="pt-24 pb-16 px-6 w-full max-w-4xl mx-auto border-t border-neutral-900">
+        <h2 class="section-anim invisible-until-scroll text-3xl md:text-4xl font-medium tracking-tight text-center text-white mb-20">Cómo trabajamos</h2>
+        
+        <div class="stagger-container flex flex-col gap-12 md:gap-16 relative mb-24">
+            <!-- Connecting line for desktop -->
+            <div class="hidden md:block absolute left-[2.25rem] top-4 bottom-12 w-px bg-neutral-800"></div>
+
+            <!-- Step 1 -->
+            <div class="stagger-item invisible-until-scroll flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tighter text-neutral-600 bg-black py-2">
+                    01
                 </div>
-                <p class="text-gray-400 text-lg max-w-md">
-                    En APEX Creative producimos piezas que destacan desde el primer instante.
+                <div>
+                    <h3 class="text-xl font-medium tracking-tight text-white mb-1">Diagnóstico</h3>
+                    <p class="text-base text-neutral-400 font-normal">Entendemos tu negocio.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="stagger-item invisible-until-scroll flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tighter text-neutral-600 bg-black py-2">
+                    02
+                </div>
+                <div>
+                    <h3 class="text-xl font-medium tracking-tight text-white mb-1">Diseño estratégico</h3>
+                    <p class="text-base text-neutral-400 font-normal">Creamos la solución.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="stagger-item invisible-until-scroll flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tighter text-neutral-600 bg-black py-2">
+                    03
+                </div>
+                <div>
+                    <h3 class="text-xl font-medium tracking-tight text-white mb-1">Producción</h3>
+                    <p class="text-base text-neutral-400 font-normal">Entregamos estrategia a seguir y materiales premium.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- En detalle trabajamos de esta manera -->
+        <div class="w-full">
+            <div class="text-center mb-16 section-anim invisible-until-scroll">
+                <h3 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-6">En detalle trabajamos de esta manera</h3>
+                <p class="text-lg text-white font-medium mb-4 text-balance">Un buen diseño no empieza en la computadora.<br class="hidden sm:block"> Empieza en la estrategia.</p>
+                <p class="text-sm text-neutral-400 font-normal max-w-2xl mx-auto text-balance">En APEX Creative cada proyecto sigue un proceso pensado para que el resultado no solo se vea bien, sino que también comunique valor y ayude a tu negocio a crecer.</p>
+            </div>
+
+            <!-- Timeline Detailed Steps -->
+            <div class="max-w-3xl mx-auto relative border-l border-neutral-800 pl-8 ml-4 md:ml-8 md:pl-12 space-y-16 stagger-container">
+                
+                <!-- Detalle 1 -->
+                <div class="stagger-item invisible-until-scroll relative">
+                    <div class="absolute -left-[37px] md:-left-[53px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-500 ring-4 ring-black"></div>
+                    <h4 class="text-xl font-medium text-white mb-3">1. Diagnóstico estratégico</h4>
+                    <p class="text-sm text-neutral-400 mb-4 font-normal">Antes de diseñar cualquier pieza entendemos el contexto de tu negocio. Analizamos:</p>
+                    <ul class="space-y-3 text-sm text-neutral-400 mb-5 font-normal">
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> qué vendes</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> tu historia</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> quién es tu cliente ideal</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> cómo te perciben actualmente</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> cómo se presenta tu competencia</li>
+                    </ul>
+                    <p class="text-sm text-white font-medium">Esto nos permite definir qué debe comunicar tu marca.</p>
+                </div>
+
+                <!-- Detalle 2 -->
+                <div class="stagger-item invisible-until-scroll relative">
+                    <div class="absolute -left-[37px] md:-left-[53px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-500 ring-4 ring-black"></div>
+                    <h4 class="text-xl font-medium text-white mb-3">2. Concepto creativo</h4>
+                    <p class="text-sm text-neutral-400 font-normal">Una vez que entendemos tu negocio, desarrollamos el concepto visual.</p>
+                </div>
+
+                <!-- Detalle 3 -->
+                <div class="stagger-item invisible-until-scroll relative">
+                    <div class="absolute -left-[37px] md:-left-[53px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-500 ring-4 ring-black"></div>
+                    <h4 class="text-xl font-medium text-white mb-3">3. Diseño y refinamiento</h4>
+                    <p class="text-sm text-neutral-400 font-normal">Creamos las propuestas iniciales y refinamos cada detalle. Trabajamos especialmente en la alineación estratégica de cada elemento visual.</p>
+                </div>
+
+                <!-- Detalle 4 -->
+                <div class="stagger-item invisible-until-scroll relative">
+                    <div class="absolute -left-[37px] md:-left-[53px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-500 ring-4 ring-black"></div>
+                    <h4 class="text-xl font-medium text-white mb-3">4. Producción e impresión</h4>
+                    <p class="text-sm text-neutral-400 mb-4 font-normal">Cuando el diseño está listo pasamos a producción. Aquí cuidamos aspectos como:</p>
+                    <ul class="space-y-3 text-sm text-neutral-400 font-normal">
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> calidad de impresión</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> elección de papeles</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> acabados</li>
+                    </ul>
+                </div>
+
+                <!-- Detalle 5 -->
+                <div class="stagger-item invisible-until-scroll relative">
+                    <div class="absolute -left-[37px] md:-left-[53px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-500 ring-4 ring-black"></div>
+                    <h4 class="text-xl font-medium text-white mb-3">5. Entrega y aplicación</h4>
+                    <p class="text-sm text-neutral-400 mb-4 font-normal">Finalmente te entregamos las piezas listas para usar. Nuestro objetivo es que cada elemento que entregamos te ayude a:</p>
+                    <ul class="space-y-3 text-sm text-neutral-400 font-normal">
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> mejorar la presentación de tu negocio</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> reforzar tu marca</li>
+                        <li class="flex items-start gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-neutral-600 mt-0.5 shrink-0 text-base"></iconify-icon> generar confianza en tus clientes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-24 text-center section-anim invisible-until-scroll flex flex-col items-center">
+                <p class="text-xl md:text-2xl text-white font-medium tracking-tight mb-8 text-balance">
+                    Los negocios que crecen no dejan su imagen al azar.<br class="hidden sm:block"> La diseñan estratégicamente.
+                </p>
+                <a href="#contacto" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-11 px-8 py-2 group">
+                    Iniciar un proyecto
+                    <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="ml-2 text-lg group-hover:translate-x-1 transition-transform"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. ¿Para quién es? Section -->
+    <section class="py-24 px-6 w-full max-w-5xl mx-auto border-t border-neutral-900">
+        <div class="text-center mb-16 section-anim invisible-until-scroll">
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">APEX Creative no es para todos.</h2>
+            <p class="text-base text-neutral-400 font-normal max-w-2xl mx-auto text-balance">
+                Trabajamos con negocios que entienden que el diseño y la presentación no son un gasto, sino una inversión estratégica.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-20 stagger-container">
+            <!-- Es para ti -->
+            <div class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 md:p-10">
+                <h3 class="text-lg font-medium text-white mb-8 flex items-center gap-3">
+                    Es para ti si…
+                </h3>
+                <ul class="space-y-5 text-sm text-neutral-300 font-normal">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">Diriges un negocio que ya genera ingresos constantes</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">Sabes que la imagen de tu marca influye en la percepción del cliente</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">Quieres diferenciarte de la competencia con materiales de alta calidad</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">Estás dispuesto a invertir en diseño, estrategia y presentación profesional</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">Entiendes que los detalles comunican el valor de tu negocio</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- No es para ti -->
+            <div class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-black p-8 md:p-10 opacity-70">
+                <h3 class="text-lg font-medium text-white mb-8 flex items-center gap-3">
+                    No es para ti si…
+                </h3>
+                <ul class="space-y-5 text-sm text-neutral-400 font-normal">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="1.5" class="text-neutral-600 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">Buscas lo más barato posible</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="1.5" class="text-neutral-600 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">Solo quieres "algo rápido" sin estrategia</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="1.5" class="text-neutral-600 mt-0.5 shrink-0 text-lg"></iconify-icon> 
+                        <span class="leading-relaxed">No te importa cómo perciben tu marca tus clientes</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center section-anim invisible-until-scroll flex flex-col items-center">
+            <p class="text-lg text-white font-medium tracking-tight mb-2 text-balance">
+                Los negocios que crecen no improvisan su imagen.<br class="hidden sm:block"> La diseñan estratégicamente.
+            </p>
+            <p class="text-base text-neutral-400 mb-8 font-normal">
+                Si ese es tu caso, podemos trabajar juntos.
+            </p>
+            <a href="#contacto" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-11 px-8 py-2 group">
+                Solicitar una consulta
+                <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="ml-2 text-lg group-hover:translate-x-1 transition-transform"></iconify-icon>
+            </a>
+        </div>
+    </section>
+
+    <!-- 6. Qué puedes esperar al trabajar con nosotros -->
+    <section class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
+        <div class="text-center mb-16 section-anim invisible-until-scroll">
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Qué puedes esperar al trabajar con nosotros</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 stagger-container">
+            <!-- Item 1 -->
+            <div class="stagger-item invisible-until-scroll">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-5 text-neutral-100">
+                    <iconify-icon icon="solar:chat-round-line-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-base font-medium text-white mb-3">Comunicación clara durante todo el proceso</h3>
+                <p class="text-sm text-neutral-400 font-normal leading-relaxed">Desde el primer contacto hasta la entrega final, mantenemos comunicación directa para que siempre sepas cómo avanza tu proyecto.</p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="stagger-item invisible-until-scroll">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-5 text-neutral-100">
+                    <iconify-icon icon="solar:users-group-rounded-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-base font-medium text-white mb-3">Espacios de retroalimentación</h3>
+                <p class="text-sm text-neutral-400 font-normal leading-relaxed">Durante el proceso tendrás oportunidades para revisar el avance y compartir tu opinión, asegurando que el resultado final represente correctamente tu negocio.</p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="stagger-item invisible-until-scroll">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-5 text-neutral-100">
+                    <iconify-icon icon="solar:headphones-round-sound-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-base font-medium text-white mb-3">Disponibilidad para aclarar detalles</h3>
+                <p class="text-sm text-neutral-400 font-normal leading-relaxed">Si surge alguna duda o necesitas ajustar algo durante el proceso, estamos disponibles para revisarlo y encontrar la mejor solución.</p>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="stagger-item invisible-until-scroll">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-5 text-neutral-100">
+                    <iconify-icon icon="solar:hand-shake-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-base font-medium text-white mb-3">Un proceso colaborativo</h3>
+                <p class="text-sm text-neutral-400 font-normal leading-relaxed">Creemos que los mejores resultados se logran cuando el cliente participa activamente. Por eso escuchamos tus ideas y las integramos estratégicamente al diseño.</p>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="stagger-item invisible-until-scroll">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-5 text-neutral-100">
+                    <iconify-icon icon="solar:eye-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-base font-medium text-white mb-3">Claridad en cada decisión</h3>
+                <p class="text-sm text-neutral-400 font-normal leading-relaxed">Te explicamos las razones detrás de cada propuesta de diseño, materiales o acabados, para que puedas tomar decisiones informadas.</p>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="stagger-item invisible-until-scroll">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-5 text-neutral-100">
+                    <iconify-icon icon="solar:flag-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-base font-medium text-white mb-3">Seguimiento hasta la entrega</h3>
+                <p class="text-sm text-neutral-400 font-normal leading-relaxed">No solo diseñamos, también acompañamos el proceso hasta que el proyecto esté completamente terminado y listo para usarse.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7 & 8. CTA & Contact Section -->
+    <section id="contacto" class="py-24 px-6 w-full max-w-6xl mx-auto mb-10 border-t border-neutral-900">
+        <div class="section-anim invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 md:p-16 lg:p-24 flex flex-col lg:flex-row gap-16 justify-between items-center relative overflow-hidden shadow-sm">
+            
+            <!-- Subtle glow inside container -->
+            <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-neutral-100 opacity-[0.02] blur-[100px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-lg relative z-10 w-full text-center lg:text-left">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] text-white mb-6 text-balance">
+                    Donde intervenimos,<br> <span class="text-neutral-500">aparece la estrella.</span>
+                </h2>
+                <p class="text-base text-neutral-400 font-normal mb-8 text-balance">
+                    Escríbenos directamente a <a href="mailto:hola@apex-creative.com.mx" class="text-white hover:underline underline-offset-4 transition-all">hola@apex-creative.com.mx</a> o agenda una consulta completando el formulario.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <!-- Card 1: Navy -->
-                <div class="bg-apex-navy-bg border border-apex-navy-btn/20 rounded-[2rem] p-8 md:p-12 text-apex-navy-text flex flex-col md:flex-row justify-between gap-8 hover-trigger">
-                    <div class="flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl md:text-3xl font-semibold tracking-tighter mb-4 text-white">Materiales superiores</h3>
-                            <p class="text-lg opacity-90 max-w-sm">
-                                Papeles gruesos y texturas elegantes que transmiten calidad desde el primer contacto.
-                            </p>
-                        </div>
-                        <div class="mt-12">
-                            <span class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-apex-navy-btn/20 text-apex-navy-text uppercase tracking-wider">Tacto inconfundible</span>
-                        </div>
+            <div class="w-full max-w-md relative z-10">
+                <form class="flex flex-col gap-4" onsubmit="event.preventDefault();">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none text-neutral-200">Nombre completo</label>
+                        <input type="text" placeholder="Tu nombre" class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors" required="">
                     </div>
-                    <div class="w-full md:w-1/2 rounded-2xl overflow-hidden hover-img-wrap aspect-square md:aspect-auto">
-                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Textura de papel grueso" class="w-full h-full object-cover mix-blend-multiply opacity-80">
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none text-neutral-200">Email corporativo</label>
+                        <input type="email" placeholder="tu@empresa.com" class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors" required="">
                     </div>
-                </div>
-
-                <!-- Card 2: Purple -->
-                <div class="bg-apex-purple-bg border border-apex-purple-btn/20 rounded-[2rem] p-8 md:p-12 text-apex-purple-text flex flex-col md:flex-row justify-between gap-8 hover-trigger">
-                    <div class="flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl md:text-3xl font-semibold tracking-tighter mb-4 text-white">Diseños para ser recordados</h3>
-                            <p class="text-lg opacity-90 max-w-sm">
-                                Una tarjeta premium no se satura de información. Se enfoca en comunicar valor puro.
-                            </p>
-                        </div>
-                        <div class="mt-12">
-                            <span class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-apex-purple-btn/20 text-apex-purple-text uppercase tracking-wider">Minimalismo visual</span>
-                        </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none text-neutral-200">Mensaje</label>
+                        <textarea placeholder="¿En qué podemos ayudarte?" class="flex min-h-[80px] w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors resize-none" required=""></textarea>
                     </div>
-                    <div class="w-full md:w-1/2 rounded-2xl overflow-hidden hover-img-wrap aspect-square md:aspect-auto">
-                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" alt="Diseño minimalista" class="w-full h-full object-cover mix-blend-multiply opacity-80">
-                    </div>
-                </div>
+                    
+                    <button type="submit" class="mt-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-10 px-4 py-2 w-full">
+                        Agenda una consulta
+                    </button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- 4. Tipos de tarjetas (List + Images) -->
-    <section class="py-32 px-4 md:px-8">
-        <div class="max-w-[1440px] mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-                <div class="lg:col-span-5 lg:sticky lg:top-32 h-fit">
-                    <div class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-white/10 text-gray-300 uppercase tracking-wider mb-6">Nuestro catálogo</div>
-                    <h2 class="text-4xl md:text-6xl font-semibold tracking-tighter text-white mb-8">
-                        Tipos de tarjetas premium
-                    </h2>
-                    <p class="text-xl text-gray-400 font-light">
-                        Cada acabado cuenta una historia diferente sobre tu marca. Elige la textura que mejor te represente.
-                    </p>
-                </div>
-
-                <div class="lg:col-span-7 flex flex-col gap-8 md:gap-12">
-                    <!-- Item 1 -->
-                    <div class="group border-b border-white/10 pb-12 hover-trigger">
-                        <div class="flex flex-col md:flex-row gap-8 justify-between">
-                            <div class="flex-1">
-                                <h3 class="text-3xl font-semibold tracking-tighter text-white mb-4 group-hover:text-apex-purple-btn transition-colors">Foil metálico</h3>
-                                <p class="text-lg text-gray-400 mb-6">Detalles brillantes que capturan la luz. Oro, plata, cobre o colores holográficos estampados sobre papel mate para un contraste espectacular.</p>
-                                <ul class="text-sm text-gray-500 space-y-2 font-medium">
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-purple-btn"></iconify-icon> Marcas de lujo</li>
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-purple-btn"></iconify-icon> Sector inmobiliario</li>
-                                </ul>
-                            </div>
-                            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0">
-                                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c543a9e1-f226-4ced-80b0-feb8445a75b9_1600w.jpg" alt="Foil metálico" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="group border-b border-white/10 pb-12 hover-trigger">
-                        <div class="flex flex-col md:flex-row gap-8 justify-between">
-                            <div class="flex-1">
-                                <h3 class="text-3xl font-semibold tracking-tighter text-white mb-4 group-hover:text-apex-navy-btn transition-colors">Letterpress</h3>
-                                <p class="text-lg text-gray-400 mb-6">Impresión profunda que crea una textura elegante en el papel algodonado. La tinta se presiona dentro del material, creando una sensación táctil distintiva.</p>
-                                <ul class="text-sm text-gray-500 space-y-2 font-medium">
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-navy-btn"></iconify-icon> Estudios profesionales</li>
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-navy-btn"></iconify-icon> Arquitectos</li>
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-navy-btn"></iconify-icon> Marcas exclusivas</li>
-                                </ul>
-                            </div>
-                            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0">
-                                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5bab247f-35d9-400d-a82b-fd87cfe913d2_1600w.webp" alt="Letterpress texture" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="group border-b border-white/10 pb-12 hover-trigger">
-                        <div class="flex flex-col md:flex-row gap-8 justify-between">
-                            <div class="flex-1">
-                                <h3 class="text-3xl font-semibold tracking-tighter text-white mb-4 transition-colors">Bordes pintados</h3>
-                                <p class="text-lg text-gray-400 mb-6">Capas gruesas de papel empalmado con bordes de color brillante y visible. Este detalle hace que la tarjeta destaque incluso cuando está sobre una mesa.</p>
-                                <ul class="text-sm text-gray-500 space-y-2 font-medium">
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-white"></iconify-icon> Marcas creativas</li>
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-white"></iconify-icon> Empresas que buscan diferenciarse</li>
-                                </ul>
-                            </div>
-                            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0">
-                                <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Bordes pintados" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 4 -->
-                    <div class="group pb-12 hover-trigger">
-                        <div class="flex flex-col md:flex-row gap-8 justify-between">
-                            <div class="flex-1">
-                                <h3 class="text-3xl font-semibold tracking-tighter text-white mb-4 group-hover:text-apex-purple-btn transition-colors">Soft-touch</h3>
-                                <p class="text-lg text-gray-400 mb-6">Un laminado especial que otorga un acabado suave tipo terciopelo o piel de durazno. Transmite elegancia, modernidad y una experiencia táctil adictiva.</p>
-                                <ul class="text-sm text-gray-500 space-y-2 font-medium">
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-purple-btn"></iconify-icon> Negocios modernos</li>
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-purple-btn"></iconify-icon> Marcas de diseño</li>
-                                    <li class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-apex-purple-btn"></iconify-icon> Profesionales independientes</li>
-                                </ul>
-                            </div>
-                            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0">
-                                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Soft touch business card" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5 & 7. Para quién y Qué esperar -->
-    <section class="transition-colors duration-700 bg-apex-purple-bg text-white border-y border-white/5" id="stats-section">
-        <div class="py-24 px-4 md:px-8">
-            <div class="max-w-[1440px] mx-auto">
-                <div class="flex flex-col md:flex-row justify-between mb-16 gap-8">
-                    <div>
-                        <div class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-apex-purple-btn/20 text-apex-purple-text uppercase tracking-wider mb-6">Audiencia ideal</div>
-                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white">
-                            La elección correcta
-                        </h2>
-                    </div>
-                    <p class="text-lg md:text-xl font-medium max-w-xl text-gray-300">
-                        La tarjeta correcta depende del cliente que quieres impresionar. El tipo de papel y el acabado influyen en cómo perciben tu negocio.
-                    </p>
-                </div>
-
-                <div class="border-t border-white/10 mb-8"></div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
-                    <!-- Left -->
-                    <div>
-                        <h3 class="text-2xl font-semibold tracking-tighter text-white mb-8">Pensadas para negocios que entienden el valor de la presentación.</h3>
-                        <ul class="space-y-6">
-                            <li class="flex items-start gap-4">
-                                <iconify-icon icon="solar:users-group-two-rounded-linear" class="text-apex-purple-btn text-2xl shrink-0 mt-1"></iconify-icon>
-                                <span class="text-lg font-medium text-gray-300">Empresarios que se reúnen con clientes importantes.</span>
-                            </li>
-                            <li class="flex items-start gap-4">
-                                <iconify-icon icon="solar:case-minimalistic-linear" class="text-apex-purple-btn text-2xl shrink-0 mt-1"></iconify-icon>
-                                <span class="text-lg font-medium text-gray-300">Profesionales que quieren proyectar máxima seriedad.</span>
-                            </li>
-                            <li class="flex items-start gap-4">
-                                <iconify-icon icon="solar:eye-linear" class="text-apex-purple-btn text-2xl shrink-0 mt-1"></iconify-icon>
-                                <span class="text-lg font-medium text-gray-300">Negocios que cuidan cada detalle minúsculo de su imagen.</span>
-                            </li>
-                            <li class="flex items-start gap-4">
-                                <iconify-icon icon="solar:star-linear" class="text-apex-purple-btn text-2xl shrink-0 mt-1"></iconify-icon>
-                                <span class="text-lg font-medium text-gray-300">Marcas que buscan diferenciarse desde el primer contacto.</span>
-                            </li>
-                        </ul>
-                        <div class="mt-12 bg-white/5 border border-white/10 p-6 rounded-2xl">
-                            <p class="font-semibold text-white">No están pensadas para impresión rápida o económica. Están pensadas para crear una impresión duradera.</p>
-                        </div>
-                    </div>
-
-                    <!-- Right -->
-                    <div>
-                        <h3 class="text-2xl font-semibold tracking-tighter text-white mb-8">Lo que puedes esperar de nosotros.</h3>
-                        <div class="grid grid-cols-1 gap-4">
-                            <div class="bg-white/5 border border-white/5 p-5 rounded-2xl flex items-center gap-4">
-                                <iconify-icon icon="solar:chat-line-linear" class="text-apex-purple-btn text-xl shrink-0"></iconify-icon>
-                                <span class="font-medium text-gray-200">Comunicación clara durante todo el proceso.</span>
-                            </div>
-                            <div class="bg-white/5 border border-white/5 p-5 rounded-2xl flex items-center gap-4">
-                                <iconify-icon icon="solar:question-circle-linear" class="text-apex-purple-btn text-xl shrink-0"></iconify-icon>
-                                <span class="font-medium text-gray-200">Disponibilidad total para aclarar cualquier detalle.</span>
-                            </div>
-                            <div class="bg-white/5 border border-white/5 p-5 rounded-2xl flex items-center gap-4">
-                                <iconify-icon icon="solar:document-add-linear" class="text-apex-purple-btn text-xl shrink-0"></iconify-icon>
-                                <span class="font-medium text-gray-200">Revisión exhaustiva de opciones antes de producir.</span>
-                            </div>
-                            <div class="bg-white/5 border border-white/5 p-5 rounded-2xl flex items-center gap-4">
-                                <iconify-icon icon="solar:verified-check-linear" class="text-apex-purple-btn text-xl shrink-0"></iconify-icon>
-                                <span class="font-medium text-gray-200">Atención cuidadosa a materiales y acabados finos.</span>
-                            </div>
-                            <div class="bg-apex-purple-btn text-white p-5 rounded-2xl flex items-center gap-4 mt-2">
-                                <iconify-icon icon="solar:cup-star-linear" class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="font-semibold">Un resultado pensado exclusivamente para impresionar.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Cómo trabajamos -->
-    <section class="py-24 px-4 md:px-8 bg-apex-black">
-        <div class="max-w-[1440px] mx-auto">
-            <div class="text-center mb-16">
-                <div class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-white/10 text-gray-300 uppercase tracking-wider mb-6">Proceso</div>
-                <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white">
-                    Cómo trabajamos
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <!-- Step 1 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl font-semibold mb-8 text-white">1</div>
-                    <h3 class="text-xl font-semibold mb-4 tracking-tight">Entendemos tu negocio</h3>
-                    <p class="text-gray-400 font-light text-sm md:text-base">Conversamos contigo para entender qué quieres comunicar exactamente cuando entregas tu tarjeta.</p>
-                </div>
-                <!-- Step 2 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl font-semibold mb-8 text-white">2</div>
-                    <h3 class="text-xl font-semibold mb-4 tracking-tight">Elegimos el formato</h3>
-                    <p class="text-gray-400 font-light text-sm md:text-base mb-4">Definimos los elementos clave:</p>
-                    <ul class="text-gray-500 text-sm space-y-1 font-medium">
-                        <li>— Tipo de papel</li>
-                        <li>— Acabados especiales</li>
-                        <li>— Estilo visual general</li>
-                    </ul>
-                </div>
-                <!-- Step 3 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl font-semibold mb-8 text-white">3</div>
-                    <h3 class="text-xl font-semibold mb-4 tracking-tight">Producción premium</h3>
-                    <p class="text-gray-400 font-light text-sm md:text-base mb-4">Cuidamos cada detalle milimétrico:</p>
-                    <ul class="text-gray-500 text-sm space-y-1 font-medium">
-                        <li>— Calidad de impresión</li>
-                        <li>— Precisión en acabados</li>
-                        <li>— Consistencia total</li>
-                    </ul>
-                </div>
-                <!-- Step 4 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div class="w-12 h-12 rounded-full bg-apex-purple-btn flex items-center justify-center text-xl font-semibold mb-8 text-white">4</div>
-                    <h3 class="text-xl font-semibold mb-4 tracking-tight">Entrega</h3>
-                    <p class="text-gray-400 font-light text-sm md:text-base">Recibes piezas físicas impecables, listas para representar la seriedad y valor de tu negocio en cualquier mesa.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Cierre Poderoso -->
-    <footer class="bg-apex-darker py-32 px-4 md:px-8 relative overflow-hidden" id="contacto">
-        <div class="absolute top-0 right-0 -mr-[20vw] -mt-[10vw] w-[50vw] h-[50vw] rounded-full border-[1px] border-white/5 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -ml-[20vw] -mb-[10vw] w-[40vw] h-[40vw] rounded-full border-[1px] border-white/5 pointer-events-none"></div>
-
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <div class="inline-block px-4 py-2 rounded-full text-xs font-medium bg-white/5 text-gray-400 uppercase tracking-wider mb-8">El impacto final</div>
-            <h2 class="text-5xl md:text-[5vw] font-semibold tracking-tighter text-white uppercase leading-[0.9] mb-8">
-                Las personas olvidan muchas conversaciones.
-                <span class="text-apex-purple-btn block mt-2">Pero recuerdan cómo las hiciste sentir.</span>
-            </h2>
-            <p class="text-xl md:text-2xl text-gray-400 font-light mb-8">
-                Una buena tarjeta de presentación hace exactamente eso.
-            </p>
-
-            <!-- Animated Logo injected here -->
-            <div class="logo-wrapper">
-                <svg class="logo-floating-magic" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82">
-                    <g id="Capa_1-2" data-name="Capa 1">
-                        <g>
-                            <path class="logo-magic-star fill-white stroke-white stroke-[1.21px] stroke-linecap-round stroke-linejoin-round" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
-                            <g class="fill-white">
-                                <path d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
-                                <path d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
-                                <path d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
-                                <path d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a href="mailto:hola@apex-creative.com.mx" class="btn-main bg-white text-black py-4 px-8 text-lg font-medium">
-                    <span class="btn-icon-left"><iconify-icon icon="solar:letter-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
-                    <span class="btn-text">Solicitar información</span>
-                    <span class="btn-icon-right"><iconify-icon icon="solar:letter-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
-                </a>
-            </div>
-
-            <div class="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 font-light">
-                <div>
-                    <a href="mailto:hola@apex-creative.com.mx" class="underline-link hover:text-white transition-colors">hola@apex-creative.com.mx</a>
-                </div>
-                <div class="tracking-[0.2em] font-semibold uppercase text-gray-400">
-                    A P E X © 2024
-                </div>
-                <div>
-                    Tarjetas de Presentación Premium
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="mt-auto py-8 border-t border-neutral-900 w-full">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-normal text-neutral-500">
+            <p class="uppercase tracking-tighter font-medium text-neutral-400">APEX CREATIVE</p>
+            <p>© 2024 Apex Creative. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Scroll Top Button -->
-    <button class="btn-scroll-top" id="scrollTopBtn" aria-label="Volver arriba">
-        <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82">
-            <g id="Capa_1-2" data-name="Capa 1">
-                <path class="scroll-magic-star fill-white stroke-white stroke-[1.21px] stroke-linecap-round stroke-linejoin-round" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
-                <g class="scroll-magic-hand fill-white">
-                    <path d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
-                    <path d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
-                    <path d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
-                    <path d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
-                </g>
-            </g>
-        </svg>
-    </button>
-
-    <!-- Magic Cursor & Scroll Effect Script -->
+    <!-- GSAP Animations Script -->
     <script>
-        // Magic click star
-        document.addEventListener('click', function(e) {
-            const star = document.createElement('div');
-            star.className = 'click-magic-star';
-            star.style.left = e.pageX + 'px';
-            star.style.top = (e.pageY - 15) + 'px';
-            star.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82" width="40" height="40">
-                    <path fill="#ffffff" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"/>
-                </svg>
-            `;
-            document.body.appendChild(star);
-            setTimeout(() => { star.remove(); }, 600);
-        });
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
 
-        // Scroll to top button logic
-        const scrollBtn = document.getElementById('scrollTopBtn');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollBtn.classList.add('is-visible');
-            } else {
-                scrollBtn.classList.remove('is-visible');
-                scrollBtn.classList.remove('is-launching');
-            }
-        });
-
-        scrollBtn.addEventListener('click', () => {
-            scrollBtn.classList.add('is-launching');
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            document.querySelectorAll('.invisible-until-scroll').forEach(el => {
+                el.classList.remove('invisible-until-scroll');
+                el.style.opacity = '0';
             });
-        });
-    </script>
 
-    <!-- WebGL Background Script for Hero Section -->
-    <script>
-        class TouchTexture {
-            constructor() {
-                this.size = 64;
-                this.width = this.height = this.size;
-                this.maxAge = 64;
-                this.radius = 0.25 * this.size;
-                this.speed = 1 / this.maxAge;
-                this.trail = [];
-                this.last = null;
-                this.initTexture();
-            }
+            gsap.to(".hero-anim", {
+                y: 0,
+                yFrom: 20,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: "power3.out",
+                delay: 0.1
+            });
 
-            initTexture() {
-                this.canvas = document.createElement("canvas");
-                this.canvas.width = this.width;
-                this.canvas.height = this.height;
-                this.ctx = this.canvas.getContext("2d");
-                this.ctx.fillStyle = "black";
-                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-                this.texture = new THREE.Texture(this.canvas);
-            }
-
-            update() {
-                this.clear();
-                let speed = this.speed;
-                for (let i = this.trail.length - 1; i >= 0; i--) {
-                    const point = this.trail[i];
-                    let f = point.force * speed * (1 - point.age / this.maxAge);
-                    point.x += point.vx * f;
-                    point.y += point.vy * f;
-                    point.age++;
-                    if (point.age > this.maxAge) {
-                        this.trail.splice(i, 1);
-                    } else {
-                        this.drawPoint(point);
-                    }
-                }
-                this.texture.needsUpdate = true;
-            }
-
-            clear() {
-                this.ctx.fillStyle = "black";
-                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            }
-
-            addTouch(point) {
-                let force = 0;
-                let vx = 0;
-                let vy = 0;
-                const last = this.last;
-                if (last) {
-                    const dx = point.x - last.x;
-                    const dy = point.y - last.y;
-                    if (dx === 0 && dy === 0) return;
-                    const dd = dx * dx + dy * dy;
-                    let d = Math.sqrt(dd);
-                    vx = dx / d;
-                    vy = dy / d;
-                    force = Math.min(dd * 20000, 2.0);
-                }
-                this.last = { x: point.x, y: point.y };
-                this.trail.push({ x: point.x, y: point.y, age: 0, force, vx, vy });
-            }
-
-            drawPoint(point) {
-                const pos = { x: point.x * this.width, y: (1 - point.y) * this.height };
-                let intensity = 1;
-                
-                if (point.age < this.maxAge * 0.3) {
-                    intensity = Math.sin((point.age / (this.maxAge * 0.3)) * (Math.PI / 2));
-                } else {
-                    const t = 1 - (point.age - this.maxAge * 0.3) / (this.maxAge * 0.7);
-                    intensity = -t * (t - 2);
-                }
-                intensity *= point.force;
-
-                const radius = this.radius;
-                let color = `${((point.vx + 1) / 2) * 255}, ${((point.vy + 1) / 2) * 255}, ${intensity * 255}`;
-                let offset = this.size * 5;
-                
-                this.ctx.shadowOffsetX = offset;
-                this.ctx.shadowOffsetY = offset;
-                this.ctx.shadowBlur = radius * 1;
-                this.ctx.shadowColor = `rgba(${color},${0.2 * intensity})`;
-
-                this.ctx.beginPath();
-                this.ctx.fillStyle = "rgba(255,0,0,1)";
-                this.ctx.arc(pos.x - offset, pos.y - offset, radius, 0, Math.PI * 2);
-                this.ctx.fill();
-            }
-        }
-
-        class GradientBackground {
-            constructor(sceneManager) {
-                this.sceneManager = sceneManager;
-                this.mesh = null;
-                this.uniforms = {
-                    uTime: { value: 0 },
-                    uResolution: { value: new THREE.Vector2(1, 1) },
-                    uColor1: { value: new THREE.Vector3(0.545, 0.361, 0.965) },
-                    uColor2: { value: new THREE.Vector3(0.18, 0.063, 0.396) },
-                    uColor3: { value: new THREE.Vector3(0.851, 0.275, 0.937) },
-                    uColor4: { value: new THREE.Vector3(0.545, 0.361, 0.965) },
-                    uColor5: { value: new THREE.Vector3(0.18, 0.063, 0.396) },
-                    uColor6: { value: new THREE.Vector3(0.851, 0.275, 0.937) },
-                    uSpeed: { value: 1.2 },
-                    uIntensity: { value: 1.8 },
-                    uTouchTexture: { value: null },
-                    uGrainIntensity: { value: 0.08 },
-                    uZoom: { value: 1.0 },
-                    uDarkNavy: { value: new THREE.Vector3(0.059, 0.02, 0.094) },
-                    uGradientSize: { value: 0.5 },
-                    uGradientCount: { value: 8.0 },
-                    uColor1Weight: { value: 1.0 },
-                    uColor2Weight: { value: 1.0 }
-                };
-            }
-
-            init() {
-                const viewSize = this.sceneManager.getViewSize();
-                const geometry = new THREE.PlaneGeometry(viewSize.width, viewSize.height, 1, 1);
-
-                const material = new THREE.ShaderMaterial({
-                    uniforms: this.uniforms,
-                    vertexShader: `
-                        varying vec2 vUv;
-                        void main() {
-                            vec3 pos = position.xyz;
-                            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
-                            vUv = uv;
-                        }
-                    `,
-                    fragmentShader: `
-                        uniform float uTime;
-                        uniform vec2 uResolution;
-                        uniform vec3 uColor1;
-                        uniform vec3 uColor2;
-                        uniform vec3 uColor3;
-                        uniform vec3 uColor4;
-                        uniform vec3 uColor5;
-                        uniform vec3 uColor6;
-                        uniform float uSpeed;
-                        uniform float uIntensity;
-                        uniform sampler2D uTouchTexture;
-                        uniform float uGrainIntensity;
-                        uniform float uZoom;
-                        uniform vec3 uDarkNavy;
-                        uniform float uGradientSize;
-                        uniform float uGradientCount;
-                        uniform float uColor1Weight;
-                        uniform float uColor2Weight;
-                        
-                        varying vec2 vUv;
-                        
-                        float grain(vec2 uv, float time) {
-                            vec2 grainUv = uv * uResolution * 0.5;
-                            float grainValue = fract(sin(dot(grainUv + time, vec2(12.9898, 78.233))) * 43758.5453);
-                            return grainValue * 2.0 - 1.0;
-                        }
-                        
-                        vec3 getGradientColor(vec2 uv, float time) {
-                            float gradientRadius = uGradientSize;
-                            
-                            vec2 center1 = vec2(0.5 + sin(time * uSpeed * 0.4) * 0.4, 0.5 + cos(time * uSpeed * 0.5) * 0.4);
-                            vec2 center2 = vec2(0.5 + cos(time * uSpeed * 0.6) * 0.5, 0.5 + sin(time * uSpeed * 0.45) * 0.5);
-                            vec2 center3 = vec2(0.5 + sin(time * uSpeed * 0.35) * 0.45, 0.5 + cos(time * uSpeed * 0.55) * 0.45);
-                            vec2 center4 = vec2(0.5 + cos(time * uSpeed * 0.5) * 0.4, 0.5 + sin(time * uSpeed * 0.4) * 0.4);
-                            vec2 center5 = vec2(0.5 + sin(time * uSpeed * 0.7) * 0.35, 0.5 + cos(time * uSpeed * 0.6) * 0.35);
-                            vec2 center6 = vec2(0.5 + cos(time * uSpeed * 0.45) * 0.5, 0.5 + sin(time * uSpeed * 0.65) * 0.5);
-                            
-                            vec2 center7 = vec2(0.5 + sin(time * uSpeed * 0.55) * 0.38, 0.5 + cos(time * uSpeed * 0.48) * 0.42);
-                            vec2 center8 = vec2(0.5 + cos(time * uSpeed * 0.65) * 0.36, 0.5 + sin(time * uSpeed * 0.52) * 0.44);
-                            
-                            float dist1 = length(uv - center1); float dist2 = length(uv - center2);
-                            float dist3 = length(uv - center3); float dist4 = length(uv - center4);
-                            float dist5 = length(uv - center5); float dist6 = length(uv - center6);
-                            float dist7 = length(uv - center7); float dist8 = length(uv - center8);
-                            
-                            float inf1 = 1.0 - smoothstep(0.0, gradientRadius, dist1);
-                            float inf2 = 1.0 - smoothstep(0.0, gradientRadius, dist2);
-                            float inf3 = 1.0 - smoothstep(0.0, gradientRadius, dist3);
-                            float inf4 = 1.0 - smoothstep(0.0, gradientRadius, dist4);
-                            float inf5 = 1.0 - smoothstep(0.0, gradientRadius, dist5);
-                            float inf6 = 1.0 - smoothstep(0.0, gradientRadius, dist6);
-                            float inf7 = 1.0 - smoothstep(0.0, gradientRadius, dist7);
-                            float inf8 = 1.0 - smoothstep(0.0, gradientRadius, dist8);
-                            
-                            vec2 rotatedUv1 = uv - 0.5;
-                            float angle1 = time * uSpeed * 0.15;
-                            rotatedUv1 = vec2(rotatedUv1.x * cos(angle1) - rotatedUv1.y * sin(angle1), rotatedUv1.x * sin(angle1) + rotatedUv1.y * cos(angle1)) + 0.5;
-                            
-                            vec2 rotatedUv2 = uv - 0.5;
-                            float angle2 = -time * uSpeed * 0.12;
-                            rotatedUv2 = vec2(rotatedUv2.x * cos(angle2) - rotatedUv2.y * sin(angle2), rotatedUv2.x * sin(angle2) + rotatedUv2.y * cos(angle2)) + 0.5;
-                            
-                            float radialInfluence1 = 1.0 - smoothstep(0.0, 0.8, length(rotatedUv1 - 0.5));
-                            float radialInfluence2 = 1.0 - smoothstep(0.0, 0.8, length(rotatedUv2 - 0.5));
-                            
-                            vec3 color = vec3(0.0);
-                            color += uColor1 * inf1 * (0.55 + 0.45 * sin(time * uSpeed)) * uColor1Weight;
-                            color += uColor2 * inf2 * (0.55 + 0.45 * cos(time * uSpeed * 1.2)) * uColor2Weight;
-                            color += uColor3 * inf3 * (0.55 + 0.45 * sin(time * uSpeed * 0.8)) * uColor1Weight;
-                            color += uColor4 * inf4 * (0.55 + 0.45 * cos(time * uSpeed * 1.3)) * uColor2Weight;
-                            color += uColor5 * inf5 * (0.55 + 0.45 * sin(time * uSpeed * 1.1)) * uColor1Weight;
-                            color += uColor6 * inf6 * (0.55 + 0.45 * cos(time * uSpeed * 0.9)) * uColor2Weight;
-                            
-                            if (uGradientCount > 6.0) {
-                                color += uColor1 * inf7 * (0.55 + 0.45 * sin(time * uSpeed * 1.4)) * uColor1Weight;
-                                color += uColor2 * inf8 * (0.55 + 0.45 * cos(time * uSpeed * 1.5)) * uColor2Weight;
-                            }
-                            
-                            color += mix(uColor1, uColor3, radialInfluence1) * 0.45 * uColor1Weight;
-                            color += mix(uColor2, uColor4, radialInfluence2) * 0.4 * uColor2Weight;
-                            
-                            color = clamp(color, vec3(0.0), vec3(1.0)) * uIntensity;
-                            
-                            float luminance = dot(color, vec3(0.299, 0.587, 0.114));
-                            color = mix(vec3(luminance), color, 1.35);
-                            color = pow(color, vec3(0.92)); 
-                            
-                            float brightness1 = length(color);
-                            float mixFactor1 = max(brightness1 * 1.2, 0.15); 
-                            color = mix(uDarkNavy, color, mixFactor1);
-                            
-                            float maxBrightness = 1.0;
-                            float brightness = length(color);
-                            if (brightness > maxBrightness) {
-                                color = color * (maxBrightness / brightness);
-                            }
-                            return color;
-                        }
-                        
-                        void main() {
-                            vec2 uv = vUv;
-                            vec4 touchTex = texture2D(uTouchTexture, uv);
-                            float vx = -(touchTex.r * 2.0 - 1.0);
-                            float vy = -(touchTex.g * 2.0 - 1.0);
-                            float intensity = touchTex.b;
-
-                            uv.x += vx * 0.8 * intensity;
-                            uv.y += vy * 0.8 * intensity;
-                            
-                            vec2 center = vec2(0.5);
-                            float dist = length(uv - center);
-                            float ripple = sin(dist * 20.0 - uTime * 3.0) * 0.04 * intensity;
-                            float wave = sin(dist * 15.0 - uTime * 2.0) * 0.03 * intensity;
-                            uv += vec2(ripple + wave);
-                            
-                            vec3 color = getGradientColor(uv, uTime);
-                            color += grain(uv, uTime) * uGrainIntensity;
-                            
-                            float timeShift = uTime * 0.5;
-                            color.r += sin(timeShift) * 0.02;
-                            color.g += cos(timeShift * 1.4) * 0.02;
-                            color.b += sin(timeShift * 1.2) * 0.02;
-                            
-                            float mixFactor2 = max(length(color) * 1.2, 0.15); 
-                            color = mix(uDarkNavy, color, mixFactor2);
-                            
-                            color = clamp(color, vec3(0.0), vec3(1.0));
-                            float b = length(color);
-                            if (b > 1.0) color = color * (1.0 / b);
-                            
-                            gl_FragColor = vec4(color, 1.0);
-                        }
-                    `
+            gsap.utils.toArray('.section-anim').forEach(section => {
+                gsap.to(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                    },
+                    y: 0,
+                    yFrom: 40,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out"
                 });
+            });
 
-                this.mesh = new THREE.Mesh(geometry, material);
-                this.mesh.position.z = 0;
-                this.sceneManager.scene.add(this.mesh);
-                
-                const w = this.sceneManager.container.clientWidth;
-                const h = this.sceneManager.container.clientHeight;
-                this.uniforms.uResolution.value.set(w, h);
-            }
-
-            update(delta) {
-                if (this.uniforms.uTime) this.uniforms.uTime.value += delta;
-            }
-
-            onResize(width, height) {
-                const viewSize = this.sceneManager.getViewSize();
-                if (this.mesh) {
-                    this.mesh.geometry.dispose();
-                    this.mesh.geometry = new THREE.PlaneGeometry(viewSize.width, viewSize.height, 1, 1);
-                }
-                if (this.uniforms.uResolution) {
-                    this.uniforms.uResolution.value.set(width, height);
-                }
-            }
-        }
-
-        class App {
-            constructor(containerId) {
-                this.container = document.getElementById(containerId);
-                if(!this.container) return;
-
-                this.renderer = new THREE.WebGLRenderer({
-                    antialias: true,
-                    powerPreference: "high-performance",
-                    alpha: true,
-                    stencil: false,
-                    depth: false
+            gsap.utils.toArray('.stagger-container').forEach(container => {
+                const items = container.querySelectorAll('.stagger-item');
+                gsap.to(items, {
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 80%",
+                    },
+                    y: 0,
+                    yFrom: 40,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power2.out"
                 });
-                
-                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-                this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-                this.container.appendChild(this.renderer.domElement);
-
-                this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / this.container.clientHeight, 0.1, 10000);
-                this.camera.position.z = 50;
-                
-                this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color(0x111111); // Adjusted base to elegance black
-                this.clock = new THREE.Clock();
-
-                this.touchTexture = new TouchTexture();
-                this.gradientBackground = new GradientBackground(this);
-                this.gradientBackground.uniforms.uTouchTexture.value = this.touchTexture.texture;
-
-                this.isVisible = true;
-
-                this.init();
-            }
-
-            init() {
-                this.gradientBackground.init();
-                
-                const observer = new IntersectionObserver((entries) => {
-                    this.isVisible = entries[0].isIntersecting;
-                }, { threshold: 0 });
-                observer.observe(this.container);
-
-                window.addEventListener("resize", () => this.onResize());
-                
-                window.addEventListener("mousemove", (ev) => this.onPointerMove(ev));
-                window.addEventListener("touchmove", (ev) => {
-                    if(ev.touches.length > 0) this.onPointerMove(ev.touches[0]);
-                });
-
-                this.render();
-                this.tick();
-            }
-
-            onPointerMove(ev) {
-                if(!this.isVisible) return;
-                const rect = this.container.getBoundingClientRect();
-                
-                const x = ev.clientX - rect.left;
-                const y = ev.clientY - rect.top;
-
-                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                    this.mouse = {
-                        x: x / rect.width,
-                        y: 1 - (y / rect.height)
-                    };
-                    this.touchTexture.addTouch(this.mouse);
-                }
-            }
-
-            getViewSize() {
-                const fovInRadians = (this.camera.fov * Math.PI) / 180;
-                const height = Math.abs(this.camera.position.z * Math.tan(fovInRadians / 2) * 2);
-                return { width: height * this.camera.aspect, height };
-            }
-
-            update(delta) {
-                this.touchTexture.update();
-                this.gradientBackground.update(delta);
-            }
-
-            render() {
-                const delta = this.clock.getDelta();
-                const clampedDelta = Math.min(delta, 0.1);
-                this.renderer.render(this.scene, this.camera);
-                this.update(clampedDelta);
-            }
-
-            tick() {
-                if(this.isVisible) {
-                    this.render();
-                }
-                requestAnimationFrame(() => this.tick());
-            }
-
-            onResize() {
-                if(!this.container) return;
-                const w = this.container.clientWidth;
-                const h = this.container.clientHeight;
-                this.camera.aspect = w / h;
-                this.camera.updateProjectionMatrix();
-                this.renderer.setSize(w, h);
-                this.gradientBackground.onResize(w, h);
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const app = new App('hero-webgl-container');
+            });
         });
     </script>
 
