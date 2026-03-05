@@ -1,0 +1,638 @@
+<html lang="es" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Creative Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+    <style>
+        /* Preloader Animations */
+        #preloader { position: fixed; inset: 0; background-color: #000000; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease; }
+        .loader-logo-wrapper { width: 140px; position: relative; }
+        .loader-svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.5)); }
+        .loader-svg path { fill: transparent; stroke: #ffffff; stroke-linecap: round; stroke-linejoin: round; }
+        .hand-paths path { stroke-width: 0.5px; }
+        .star-wrapper path { stroke-width: 1.2px; }
+        .star-wrapper { transform-origin: center; transform-box: fill-box; }
+        .start-animation .draw-animate { animation: sketchLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards, fillSolid 1s cubic-bezier(0.4, 0, 0.2, 1) 2.2s forwards; }
+        @keyframes sketchLine { to { stroke-dashoffset: 0; } }
+        @keyframes fillSolid { to { fill: #ffffff; stroke: transparent; } }
+        .loader-text { color: #ffffff; letter-spacing: 4px; font-size: 0.85rem; text-transform: uppercase; margin-top: 40px; opacity: 0; transform: translateY(10px); }
+        .start-animation .loader-text { animation: textReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards; }
+        @keyframes textReveal { to { opacity: 0.6; transform: translateY(0); } }
+
+        /* 3D Parallax Logo Animations */
+        .logo-3d-stage { position: relative; width: 260px; height: 260px; transform-style: preserve-3d; transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform; margin: auto; }
+        @media (min-width: 1024px) { .logo-3d-stage { width: 340px; height: 340px; } }
+        .logo-3d-stage.reset { transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: rotateX(0deg) rotateY(0deg) !important; }
+        .parallax-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+        .layer-glow { transform: translateZ(-40px); width: 70%; height: 70%; background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%); border-radius: 50%; }
+        .layer-hand { transform: translateZ(30px); filter: drop-shadow(0 15px 15px rgba(0,0,0,0.6)); }
+        .layer-star { transform: translateZ(80px); }
+        .layer-hand svg, .layer-star svg { width: 100%; height: 100%; overflow: visible; }
+        .cls-1, .cls-2 { fill: #ffffff; }
+        .cls-2 { stroke: #ffffff; stroke-width: 1.2px; stroke-linecap: round; stroke-linejoin: round; }
+        
+        /* Star Animations */
+        .magic-star-hero { transform-origin: center; transform-box: fill-box; animation: star-pulse 3s ease-in-out infinite alternate; }
+        @keyframes star-pulse { 0% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); transform: scale(0.95); } 100% { filter: drop-shadow(0 0 12px #ffffff) drop-shadow(0 0 25px rgba(255,255,255,0.4)); transform: scale(1.1); } }
+
+        /* Scroll to Top Button Magic */
+        .btn-scroll-top { position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1000; }
+        .btn-scroll-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .btn-scroll-top svg { width: 35px; height: 35px; overflow: visible !important; }
+        .btn-scroll-top .magic-star { transform-origin: center; transform-box: fill-box; animation: float-star 3s ease-in-out infinite alternate; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4)); transition: all 0.4s ease; }
+        .btn-scroll-top .magic-hand { transform: translateY(15px); opacity: 0; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease; }
+        .btn-scroll-top:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); }
+        .btn-scroll-top:hover .magic-hand { transform: translateY(0); opacity: 1; }
+        .btn-scroll-top:hover .magic-star { animation: none; transform: scale(1.15) rotate(15deg) translateY(-2px); filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); }
+        .btn-scroll-top.is-launching { transform: translateY(-120vh) scale(0.8); opacity: 0; transition: transform 1s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.8s ease; }
+        @keyframes float-star { 0% { transform: translateY(2px) scale(0.95); } 100% { transform: translateY(-4px) scale(1.05); } }
+    </style>
+</head>
+<body style="font-family: 'Inter', sans-serif; background-color: #000000; color: #FAFAFA;" class="selection:bg-neutral-800 selection:text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden overflow-hidden">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-logo-wrapper">
+            <svg class="loader-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82">
+                <g>
+                    <g class="star-wrapper">
+                        <path class="draw-animate" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
+                    </g>
+                    <g class="hand-paths">
+                        <path class="draw-animate" d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
+                        <path class="draw-animate" d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
+                        <path class="draw-animate" d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
+                        <path class="draw-animate" d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="loader-text">Apex Creative</div>
+    </div>
+
+    <!-- Ambient Background Glow -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900/40 via-black/0 to-transparent blur-3xl"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="hero-anim fixed top-6 inset-x-0 flex justify-center z-50 px-6 opacity-0" style="opacity: 0;">
+        <div class="flex items-center justify-between px-5 py-3 bg-neutral-950/80 backdrop-blur-md border border-neutral-800/80 rounded-xl w-full max-w-4xl shadow-2xl">
+            <a href="#" class="flex items-center gap-2.5 text-base font-normal tracking-tight uppercase text-white hover:text-neutral-300 transition-colors">
+                <svg class="w-5 h-5" viewBox="0 0 30.37 27.82" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path class="cls-2" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
+                        <g>
+                            <path class="cls-1" d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
+                            <path class="cls-1" d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
+                            <path class="cls-1" d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
+                            <path class="cls-1" d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
+                        </g>
+                    </g>
+                </svg>
+                APEX CREATIVE
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm text-neutral-400 font-normal">
+                <a href="#problem" class="hover:text-neutral-50 transition-colors">El Problema</a>
+                <a href="#services" class="hover:text-neutral-50 transition-colors">Qué Hacemos</a>
+                <a href="#process" class="hover:text-neutral-50 transition-colors">Proceso</a>
+            </div>
+            <a href="#contact" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-9 px-4 py-2">
+                Contáctanos
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="heroArea" class="relative pt-40 pb-24 md:pt-48 md:pb-32 px-6 w-full max-w-6xl mx-auto flex items-center min-h-[90vh]">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center w-full">
+            
+            <!-- Hero Copy -->
+            <div class="flex flex-col items-start text-left z-10 w-full lg:max-w-xl">
+                <div class="hero-anim opacity-0 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950 px-3 py-1 text-xs font-normal text-neutral-300 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 mb-8" style="opacity: 0;">
+                    <iconify-icon icon="solar:stars-linear" stroke-width="1.5" class="text-neutral-400"></iconify-icon>
+                    Especialistas en Presencia Web
+                </div>
+                
+                <h1 class="hero-anim opacity-0 text-5xl md:text-6xl lg:text-[4.2rem] font-light tracking-tight leading-[1.05] text-balance mb-8 text-white" style="opacity: 0;">
+                    Si tu negocio no tiene página web,<br class="hidden md:block"> 
+                    estás perdiendo <span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 to-neutral-500">oportunidades</span>.
+                </h1>
+                
+                <p class="hero-anim opacity-0 text-lg md:text-xl text-neutral-400 font-light max-w-lg text-balance mb-12" style="opacity: 0;">
+                    Hoy la mayoría de las personas buscan información en internet antes de tomar una decisión. 
+                    Si tu negocio no aparece, simplemente eligen a otro.
+                </p>
+
+                <a href="#contact" class="hero-anim opacity-0 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-11 px-8 py-2 group" style="opacity: 0;">
+                    Crear mi página web
+                    <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="ml-2 text-lg group-hover:translate-x-1 transition-transform"></iconify-icon>
+                </a>
+            </div>
+
+            <!-- 3D Parallax SVG -->
+            <div class="hero-anim opacity-0 flex justify-center lg:justify-end w-full" style="opacity: 0;">
+                <div class="logo-3d-stage" id="logoStage">
+                    <div class="parallax-layer layer-glow"></div>
+                    <div class="parallax-layer layer-hand">
+                        <svg viewBox="0 0 30.37 27.82">
+                            <g>
+                                <path class="cls-1" d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
+                                <path class="cls-1" d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
+                                <path class="cls-1" d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
+                                <path class="cls-1" d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="parallax-layer layer-star">
+                        <svg viewBox="0 0 30.37 27.82">
+                            <path class="cls-2 magic-star-hero" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- El Problema / Contexto -->
+    <section id="problem" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
+            
+            <!-- Left Block -->
+            <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;">
+                <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-6 text-balance">
+                    La primera impresión de tu negocio ocurre en internet.
+                </h2>
+                <p class="text-base text-neutral-400 font-light mb-8 text-balance">
+                    Antes, las personas descubrían negocios caminando por la calle. Hoy lo hacen en su teléfono.
+                </p>
+                
+                <div class="p-6 rounded-xl border border-neutral-800 bg-neutral-950 shadow-sm">
+                    <p class="text-sm font-normal text-white mb-4">Cuando alguien escucha sobre tu negocio normalmente busca:</p>
+                    <ul class="space-y-4 text-sm text-neutral-400 font-light">
+                        <li class="flex items-center gap-3">
+                            <iconify-icon icon="solar:magnifer-linear" stroke-width="1.5" class="text-neutral-500 text-lg"></iconify-icon> 
+                            tu nombre en Google
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <iconify-icon icon="solar:global-linear" stroke-width="1.5" class="text-neutral-500 text-lg"></iconify-icon> 
+                            tu página web
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <iconify-icon icon="solar:document-text-linear" stroke-width="1.5" class="text-neutral-500 text-lg"></iconify-icon> 
+                            información sobre tus servicios
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Block -->
+            <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;">
+                <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-6 text-balance">
+                    Una página web es el centro digital de tu negocio.
+                </h2>
+                <p class="text-base text-neutral-400 font-light mb-8 text-balance">
+                    No es solo un diseño. Es el lugar donde tus clientes pueden:
+                </p>
+                
+                <ul class="space-y-4 text-base text-neutral-300 font-light mb-8">
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:lightbulb-bolt-linear" stroke-width="1.5" class="text-neutral-500 text-xl"></iconify-icon> 
+                        entender qué haces
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:shield-check-linear" stroke-width="1.5" class="text-neutral-500 text-xl"></iconify-icon> 
+                        confiar en tu negocio
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:layers-linear" stroke-width="1.5" class="text-neutral-500 text-xl"></iconify-icon> 
+                        conocer tus servicios
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:phone-calling-linear" stroke-width="1.5" class="text-neutral-500 text-xl"></iconify-icon> 
+                        decidir contactarte
+                    </li>
+                </ul>
+
+                <div class="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-4 py-3 text-sm font-normal text-neutral-300 w-fit">
+                    <iconify-icon icon="solar:clock-circle-linear" stroke-width="1.5" class="text-neutral-400 text-lg"></iconify-icon>
+                    Una página web bien diseñada trabaja para tu negocio las 24 horas.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Beneficios (Lo que puede lograr) -->
+    <section class="py-16 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
+        <div class="section-anim opacity-0 text-center mb-12" style="opacity: 0;">
+            <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-4">Lo que una buena página web puede lograr</h2>
+            <p class="text-sm text-neutral-400 font-light text-balance">En muchos casos, es el primer paso para que alguien decida trabajar contigo.</p>
+        </div>
+
+        <div class="stagger-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors" style="opacity: 0;">
+                <iconify-icon icon="solar:eye-linear" stroke-width="1.5" class="text-2xl text-neutral-300 mb-3"></iconify-icon>
+                <span class="text-sm font-light text-neutral-300">Mostrar tu negocio con claridad</span>
+            </div>
+            
+            <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors" style="opacity: 0;">
+                <iconify-icon icon="solar:medal-star-linear" stroke-width="1.5" class="text-2xl text-neutral-300 mb-3"></iconify-icon>
+                <span class="text-sm font-light text-neutral-300">Generar confianza en clientes</span>
+            </div>
+            
+            <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors" style="opacity: 0;">
+                <iconify-icon icon="solar:document-text-linear" stroke-width="1.5" class="text-2xl text-neutral-300 mb-3"></iconify-icon>
+                <span class="text-sm font-light text-neutral-300">Explicar tus servicios correctamente</span>
+            </div>
+            
+            <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors" style="opacity: 0;">
+                <iconify-icon icon="solar:star-linear" stroke-width="1.5" class="text-2xl text-neutral-300 mb-3"></iconify-icon>
+                <span class="text-sm font-light text-neutral-300">Diferenciarte de la competencia</span>
+            </div>
+            
+            <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors col-span-2 lg:col-span-1" style="opacity: 0;">
+                <iconify-icon icon="solar:chat-round-check-linear" stroke-width="1.5" class="text-2xl text-neutral-300 mb-3"></iconify-icon>
+                <span class="text-sm font-light text-neutral-300">Facilitar que te contacten</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (Qué hacemos) -->
+    <section id="services" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
+        <div class="section-anim opacity-0 mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6" style="opacity: 0;">
+            <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white max-w-lg text-balance">Creamos páginas web pensadas para negocios reales</h2>
+            <p class="text-sm text-neutral-400 max-w-xs font-light text-balance">En APEX Creative diseñamos sitios web que ayudan a presentar tu negocio de forma clara y profesional.</p>
+        </div>
+
+        <div class="stagger-container grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Servicio 1 -->
+            <div class="stagger-item opacity-0 rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50" style="opacity: 0;">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
+                    <iconify-icon icon="solar:monitor-smartphone-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-2xl font-normal tracking-tight mb-4 text-white">Diseño web profesional</h3>
+                <p class="text-sm text-neutral-400 font-light mb-4">Creamos páginas que transmiten:</p>
+                <ul class="space-y-3 text-sm text-neutral-400 font-light">
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Profesionalismo
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Claridad
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Confianza
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Servicio 2 -->
+            <div class="stagger-item opacity-0 rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50" style="opacity: 0;">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
+                    <iconify-icon icon="solar:sitemap-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-2xl font-normal tracking-tight mb-4 text-white">Estructura estratégica</h3>
+                <p class="text-sm text-neutral-400 font-light mb-4">Organizamos la información para que se entienda:</p>
+                <ul class="space-y-3 text-sm text-neutral-400 font-light">
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Qué haces
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Cómo puedes ayudarle
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Cómo contactarte
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Servicio 3 -->
+            <div class="stagger-item opacity-0 rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50" style="opacity: 0;">
+                <div class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
+                    <iconify-icon icon="solar:routing-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="text-2xl font-normal tracking-tight mb-4 text-white">Experiencia clara</h3>
+                <p class="text-sm text-neutral-400 font-light mb-4">Diseñamos sitios que sean:</p>
+                <ul class="space-y-3 text-sm text-neutral-400 font-light">
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Fáciles de navegar
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Rápidos
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-500"></iconify-icon> Claros para el usuario
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section (Cómo trabajamos) -->
+    <section id="process" class="pt-24 pb-16 px-6 w-full max-w-4xl mx-auto border-t border-neutral-900">
+        <h2 class="section-anim opacity-0 text-3xl md:text-4xl font-normal tracking-tight text-center text-white mb-20" style="opacity: 0;">Nuestro Proceso</h2>
+        
+        <div class="stagger-container flex flex-col gap-12 md:gap-16 relative mb-12">
+            <div class="hidden md:block absolute left-[2.25rem] top-4 bottom-12 w-px bg-neutral-800"></div>
+
+            <!-- Step 1 -->
+            <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative" style="opacity: 0;">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                    01
+                </div>
+                <div>
+                    <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Entendemos tu negocio</h3>
+                    <p class="text-base text-neutral-400 font-light">Antes de diseñar la página entendemos qué haces, qué ofreces y quién es tu cliente.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative" style="opacity: 0;">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                    02
+                </div>
+                <div>
+                    <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Diseñamos la estructura del sitio</h3>
+                    <p class="text-base text-neutral-400 font-light">Organizamos el contenido para que tu negocio se presente de forma clara y profesional.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative" style="opacity: 0;">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                    03
+                </div>
+                <div>
+                    <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Diseñamos y desarrollamos</h3>
+                    <p class="text-base text-neutral-400 font-light">Creamos el diseño visual y desarrollamos el sitio web para que quede impecable.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative" style="opacity: 0;">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                    04
+                </div>
+                <div>
+                    <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Publicamos tu página</h3>
+                    <p class="text-base text-neutral-400 font-light">Tu página queda lista para que cualquier persona pueda encontrarte y conocer tu negocio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience (Para quién es) -->
+    <section class="py-24 px-6 w-full max-w-5xl mx-auto border-t border-neutral-900">
+        <div class="section-anim opacity-0 text-center mb-16" style="opacity: 0;">
+            <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-4">Este servicio es ideal para negocios que aún no tienen página web</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <!-- Es para ti -->
+            <div class="section-anim opacity-0 rounded-xl border border-neutral-800 bg-neutral-950 p-8 shadow-sm transition-colors hover:bg-neutral-900/50" style="opacity: 0;">
+                <h3 class="text-xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                    <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5" class="text-neutral-300 text-2xl"></iconify-icon>
+                    Es para ti si:
+                </h3>
+                <ul class="space-y-4 text-sm text-neutral-400 font-light">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-square-linear" stroke-width="1.5" class="text-neutral-500 text-lg shrink-0 mt-0.5"></iconify-icon> 
+                        <span>tu negocio aún no tiene página web</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-square-linear" stroke-width="1.5" class="text-neutral-500 text-lg shrink-0 mt-0.5"></iconify-icon> 
+                        <span>quieres una presencia profesional en internet</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-square-linear" stroke-width="1.5" class="text-neutral-500 text-lg shrink-0 mt-0.5"></iconify-icon> 
+                        <span>quieres que tus clientes encuentren información clara sobre tu negocio</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-square-linear" stroke-width="1.5" class="text-neutral-500 text-lg shrink-0 mt-0.5"></iconify-icon> 
+                        <span>quieres mejorar la confianza en tu marca</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- No es para ti -->
+            <div class="section-anim opacity-0 rounded-xl border border-neutral-900 bg-black p-8 relative overflow-hidden" style="opacity: 0;">
+                <h3 class="text-xl font-normal tracking-tight text-neutral-400 mb-6 flex items-center gap-3 relative z-10">
+                    <iconify-icon icon="solar:close-circle-linear" stroke-width="1.5" class="text-neutral-600 text-2xl"></iconify-icon>
+                    No es para ti si:
+                </h3>
+                <ul class="space-y-4 text-sm text-neutral-500 font-light relative z-10">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:close-square-linear" stroke-width="1.5" class="text-neutral-700 text-lg shrink-0 mt-0.5"></iconify-icon> 
+                        <span>buscas lo más barato posible</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:close-square-linear" stroke-width="1.5" class="text-neutral-700 text-lg shrink-0 mt-0.5"></iconify-icon> 
+                        <span>solo quieres algo rápido sin estrategia</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:close-square-linear" stroke-width="1.5" class="text-neutral-700 text-lg shrink-0 mt-0.5"></iconify-icon> 
+                        <span>no te importa la presencia digital de tu negocio</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section / Llamado a la acción -->
+    <section id="contact" class="py-24 px-6 w-full max-w-6xl mx-auto mb-10 border-t border-neutral-900">
+        <div class="section-anim opacity-0 rounded-xl border border-neutral-800 bg-neutral-950 p-8 md:p-16 lg:p-24 flex flex-col lg:flex-row gap-16 justify-between items-center relative overflow-hidden shadow-sm" style="opacity: 0;">
+            
+            <div class="absolute top-0 right-0 w-full max-w-lg aspect-square bg-neutral-100 opacity-[0.02] blur-3xl rounded-full pointer-events-none"></div>
+
+            <div class="max-w-lg relative z-10 w-full text-center lg:text-left">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.1] text-white mb-6 text-balance">
+                    Tu negocio merece<br> <span class="text-neutral-500">ser encontrado.</span>
+                </h2>
+                <p class="text-base text-neutral-400 font-light mb-6 text-balance">
+                    Una página web profesional puede ser el primer paso para que más personas confíen en tu negocio.
+                </p>
+                <p class="text-sm text-neutral-500 font-light mb-8 text-balance">
+                    Comunícate directamente a <a href="mailto:hola@apex-creative.com.mx" class="text-neutral-300 hover:text-white hover:underline underline-offset-4 transition-all">hola@apex-creative.com.mx</a> o completa el formulario.
+                </p>
+            </div>
+
+            <div class="w-full max-w-md relative z-10">
+                <form class="flex flex-col gap-5" onsubmit="event.preventDefault();">
+                    <div class="space-y-2 flex flex-col">
+                        <label class="text-sm font-normal leading-none text-neutral-200">Nombre</label>
+                        <input type="text" placeholder="Tu nombre" class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors">
+                    </div>
+
+                    <div class="space-y-2 flex flex-col">
+                        <label class="text-sm font-normal leading-none text-neutral-200">Empresa</label>
+                        <input type="text" placeholder="Nombre de tu negocio" class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors">
+                    </div>
+                    
+                    <div class="space-y-2 flex flex-col">
+                        <label class="text-sm font-normal leading-none text-neutral-200">Correo</label>
+                        <input type="email" placeholder="tu@correo.com" class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors">
+                    </div>
+                    
+                    <div class="space-y-2 flex flex-col">
+                        <label class="text-sm font-normal leading-none text-neutral-200">Mensaje</label>
+                        <textarea placeholder="Cuéntanos qué necesitas..." class="flex min-h-[100px] w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors resize-none"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="mt-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-10 px-4 py-2 w-full">
+                        Enviar mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-8 border-t border-neutral-900 w-full">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-neutral-500">
+            <p class="uppercase tracking-tight font-normal text-neutral-400">APEX CREATIVE</p>
+            <p>© 2024 Apex Creative. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="btn-scroll-top" id="scrollTopBtn" aria-label="Volver arriba">
+        <svg viewBox="0 0 30.37 27.82" xmlns="http://www.w3.org/2000/svg">
+            <path class="cls-2 magic-star" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
+            <g class="magic-hand">
+                <path class="cls-1" d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
+                <path class="cls-1" d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
+                <path class="cls-1" d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
+                <path class="cls-1" d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
+            </g>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Preloader Logic
+            const preloader = document.getElementById('preloader');
+            const drawPaths = document.querySelectorAll('#preloader .draw-animate');
+            
+            drawPaths.forEach(path => {
+                const length = path.getTotalLength();
+                path.style.setProperty('--path-length', length);
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+            });
+
+            // Start preloader animation
+            preloader.classList.add('start-animation');
+
+            // Fade out preloader and start main animations
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    document.body.classList.remove('overflow-hidden');
+                    initMainAnimations();
+                }, 800);
+            }, 3200);
+
+            // 3D Parallax Logic
+            const heroArea = document.getElementById('heroArea');
+            const logoStage = document.getElementById('logoStage');
+            const maxRotation = 12;
+
+            if (heroArea && logoStage) {
+                heroArea.addEventListener('mousemove', (e) => {
+                    logoStage.classList.remove('reset');
+                    
+                    const rect = heroArea.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+
+                    const percentX = (e.clientX - centerX) / (rect.width / 2);
+                    const percentY = (e.clientY - centerY) / (rect.height / 2);
+
+                    const rotateX = percentY * -maxRotation;
+                    const rotateY = percentX * maxRotation;
+
+                    logoStage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                heroArea.addEventListener('mouseleave', () => {
+                    logoStage.classList.add('reset');
+                    logoStage.style.transform = ''; 
+                });
+            }
+
+            // Scroll to Top Logic
+            const scrollBtn = document.getElementById('scrollTopBtn');
+            if(scrollBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollBtn.classList.add('is-visible');
+                    } else {
+                        scrollBtn.classList.remove('is-visible');
+                        scrollBtn.classList.remove('is-launching');
+                    }
+                });
+
+                scrollBtn.addEventListener('click', () => {
+                    scrollBtn.classList.add('is-launching');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Main GSAP Animations Function
+            function initMainAnimations() {
+                gsap.to(".hero-anim", {
+                    y: 0,
+                    yFrom: 20,
+                    opacity: 1,
+                    duration: 1.2,
+                    stagger: 0.15,
+                    ease: "power3.out"
+                });
+
+                gsap.utils.toArray('.section-anim').forEach(section => {
+                    gsap.to(section, {
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 85%",
+                        },
+                        y: 0,
+                        yFrom: 40,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power3.out"
+                    });
+                });
+
+                gsap.utils.toArray('.stagger-container').forEach(container => {
+                    const items = container.querySelectorAll('.stagger-item');
+                    gsap.to(items, {
+                        scrollTrigger: {
+                            trigger: container,
+                            start: "top 80%",
+                        },
+                        y: 0,
+                        yFrom: 40,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.15,
+                        ease: "power2.out"
+                    });
+                });
+            }
+        });
+    </script>
+
+
+</body></html>
