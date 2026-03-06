@@ -1,16 +1,18 @@
-<html lang="es" class="scroll-smooth"><head>
+<html lang="es" class="scroll-smooth">
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tarjetas de Presentación Premium – APEX</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
@@ -46,16 +48,28 @@
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30.37 27.82' width='34' height='34'%3E%3Cpath fill='%23ffffff' d='M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z'/%3E%3Cpath fill='%23ffffff' d='M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z'/%3E%3Cpath fill='%23ffffff' d='M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z'/%3E%3Cpath fill='%23ffffff' d='M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z'/%3E%3C/svg%3E") 12 10, auto;
         }
 
-        a, button, .clickable { cursor: inherit; }
+        a,
+        button,
+        .clickable {
+            cursor: inherit;
+        }
 
         /* Heading Trim */
-        h1, h2, h3, h4, h5, h6 { line-height: 1; }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1;
+        }
 
         /* Underline Link Effect */
         .underline-link {
             text-decoration: none;
             position: relative;
         }
+
         .underline-link::before {
             content: "";
             position: absolute;
@@ -68,7 +82,11 @@
             transform-origin: right;
             transform: scaleX(0);
         }
-        .underline-link:hover::before { transform-origin: left; transform: scaleX(1); }
+
+        .underline-link:hover::before {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
 
         /* Complex Button CSS */
         .btn-main {
@@ -84,7 +102,8 @@
             --smooth-ease: cubic-bezier(.32, .72, 0, 1);
         }
 
-        .btn-icon-left, .btn-icon-right {
+        .btn-icon-left,
+        .btn-icon-right {
             position: absolute;
             top: 50%;
             transform: translateY(-50%) scale(0);
@@ -96,8 +115,15 @@
             pointer-events: none;
         }
 
-        .btn-icon-left { left: 0.75rem; }
-        .btn-icon-right { right: 0.75rem; transform: translateY(-50%) scale(1); opacity: 1; }
+        .btn-icon-left {
+            left: 0.75rem;
+        }
+
+        .btn-icon-right {
+            right: 0.75rem;
+            transform: translateY(-50%) scale(1);
+            opacity: 1;
+        }
 
         .btn-text {
             display: block;
@@ -111,22 +137,58 @@
         }
 
         @media (hover: hover) and (pointer: fine) {
-            .btn-main:hover .btn-icon-right { transform: translateY(-50%) scale(0); opacity: 0; }
-            .btn-main:hover .btn-icon-left { transform: translateY(-50%) scale(1); opacity: 1; }
-            .btn-main:hover .btn-text { transform: translateX(0.5rem); margin-left: 1.5rem; margin-right: 0.5rem; }
+            .btn-main:hover .btn-icon-right {
+                transform: translateY(-50%) scale(0);
+                opacity: 0;
+            }
+
+            .btn-main:hover .btn-icon-left {
+                transform: translateY(-50%) scale(1);
+                opacity: 1;
+            }
+
+            .btn-main:hover .btn-text {
+                transform: translateX(0.5rem);
+                margin-left: 1.5rem;
+                margin-right: 0.5rem;
+            }
         }
-        .btn-main:active { transform: scale(0.965); transition: transform 0.15s ease; }
+
+        .btn-main:active {
+            transform: scale(0.965);
+            transition: transform 0.15s ease;
+        }
 
         @media screen and (max-width: 767px) {
-            .btn-main { transform: none !important; padding-left: 1.5rem; padding-right: 1.5rem; }
-            .btn-icon-left, .btn-icon-right { display: none !important; }
-            .btn-text { margin: 0 !important; transform: none !important; }
+            .btn-main {
+                transform: none !important;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .btn-icon-left,
+            .btn-icon-right {
+                display: none !important;
+            }
+
+            .btn-text {
+                margin: 0 !important;
+                transform: none !important;
+            }
         }
 
         /* Image Reveal Hover */
-        .hover-img-wrap { overflow: hidden; }
-        .hover-img-wrap img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .hover-trigger:hover .hover-img-wrap img { transform: scale(1.05); }
+        .hover-img-wrap {
+            overflow: hidden;
+        }
+
+        .hover-img-wrap img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hover-trigger:hover .hover-img-wrap img {
+            transform: scale(1.05);
+        }
 
         /* MAGICAL CURSOR CLICK EFFECT */
         .click-magic-star {
@@ -138,41 +200,103 @@
         }
 
         @keyframes star-burst {
-            0% { transform: translate(-50%, -50%) scale(0) rotate(-20deg); opacity: 1; filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8)); }
-            50% { transform: translate(-50%, -50%) scale(1.5) rotate(15deg); opacity: 1; filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 1)); }
-            100% { transform: translate(-50%, -50%) scale(0.5) rotate(45deg); opacity: 0; }
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-20deg);
+                opacity: 1;
+                filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8));
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.5) rotate(15deg);
+                opacity: 1;
+                filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 1));
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(0.5) rotate(45deg);
+                opacity: 0;
+            }
         }
 
         /* SCROLL TOP BUTTON */
         .btn-scroll-top {
-            position: fixed; bottom: 2.5rem; right: 2.5rem; width: 4rem; height: 4rem;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%;
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            width: 4rem;
+            height: 4rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             backdrop-filter: blur(0.5rem);
-            opacity: 0; visibility: hidden; transform: translateY(1.5rem);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(1.5rem);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 1000;
         }
-        .btn-scroll-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .btn-scroll-top svg { width: 2.25rem; height: 2.25rem; overflow: visible !important; }
-        
+
+        .btn-scroll-top.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .btn-scroll-top svg {
+            width: 2.25rem;
+            height: 2.25rem;
+            overflow: visible !important;
+        }
+
         .scroll-magic-star {
-            transform-origin: center; transform-box: fill-box;
+            transform-origin: center;
+            transform-box: fill-box;
             animation: scroll-float-star 3s ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.4)); transition: all 0.4s ease;
+            filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.4));
+            transition: all 0.4s ease;
         }
+
         .scroll-magic-hand {
-            transform: translateY(1rem); opacity: 0;
+            transform: translateY(1rem);
+            opacity: 0;
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
         }
 
-        .btn-scroll-top:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5); }
-        .btn-scroll-top:hover .scroll-magic-hand { transform: translateY(0); opacity: 1; }
-        .btn-scroll-top:hover .scroll-magic-star { animation: none; transform: scale(1.15) rotate(15deg) translateY(-0.1rem); filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 1)) drop-shadow(0 0 1rem rgba(255, 255, 255, 0.5)); }
-        .btn-scroll-top.is-launching { transform: translateY(-120vh) scale(0.8); opacity: 0; transition: transform 1s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.8s ease; }
+        .btn-scroll-top:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-scroll-top:hover .scroll-magic-hand {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .btn-scroll-top:hover .scroll-magic-star {
+            animation: none;
+            transform: scale(1.15) rotate(15deg) translateY(-0.1rem);
+            filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 1)) drop-shadow(0 0 1rem rgba(255, 255, 255, 0.5));
+        }
+
+        .btn-scroll-top.is-launching {
+            transform: translateY(-120vh) scale(0.8);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.8s ease;
+        }
 
         @keyframes scroll-float-star {
-            0% { transform: translateY(0.1rem) scale(0.95); }
-            100% { transform: translateY(-0.25rem) scale(1.05); }
+            0% {
+                transform: translateY(0.1rem) scale(0.95);
+            }
+
+            100% {
+                transform: translateY(-0.25rem) scale(1.05);
+            }
         }
 
         /* LOGO ANIMADO SVG (NUEVO) */
@@ -185,73 +309,120 @@
             animation: float 5s ease-in-out infinite;
             will-change: transform;
         }
+
         .glow-orb {
             position: absolute;
-            top: 15px; 
+            top: 15px;
             left: 50%;
             margin-left: -40px;
             width: 80px;
             height: 80px;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 40%, transparent 70%);
             border-radius: 50%;
             z-index: 1;
             pointer-events: none;
             animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
             will-change: transform, opacity;
         }
+
         .svg-icon {
             width: 100%;
             height: auto;
             z-index: 2;
             position: relative;
             overflow: visible;
-            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.6));
+            filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.6));
         }
+
         .magic-star {
             transform-origin: center;
             transform-box: fill-box;
             animation: pulse-star 3s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
             will-change: transform;
         }
+
         @keyframes float {
-            0%, 100% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(0, -12px, 0); }
+
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            50% {
+                transform: translate3d(0, -12px, 0);
+            }
         }
+
         @keyframes pulse-star {
-            0% { transform: scale3d(0.9, 0.9, 1) rotate(0deg); }
-            100% { transform: scale3d(1.15, 1.15, 1) rotate(15deg); }
+            0% {
+                transform: scale3d(0.9, 0.9, 1) rotate(0deg);
+            }
+
+            100% {
+                transform: scale3d(1.15, 1.15, 1) rotate(15deg);
+            }
         }
+
         @keyframes pulse-glow {
-            0% { transform: scale3d(0.7, 0.7, 1); opacity: 0.4; }
-            100% { transform: scale3d(1.4, 1.4, 1); opacity: 1; }
+            0% {
+                transform: scale3d(0.7, 0.7, 1);
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: scale3d(1.4, 1.4, 1);
+                opacity: 1;
+            }
         }
-        .cls-1, .cls-2 { fill: #ffffff; }
-        .cls-2 { stroke: #ffffff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.2px; }
+
+        .cls-1,
+        .cls-2 {
+            fill: #ffffff;
+        }
+
+        .cls-2 {
+            stroke: #ffffff;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.2px;
+        }
     </style>
 </head>
+
 <body class="font-sans bg-apex-black text-white selection:bg-white selection:text-black relative">
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 mix-blend-difference px-6 py-6 md:px-12 flex justify-between items-center">
-        <a href="#" class="text-xl tracking-[0.2em] font-semibold uppercase text-white hover:opacity-70 transition-opacity">A P E X</a>
+        <a href="#"
+            class="text-xl tracking-[0.2em] font-semibold uppercase text-white hover:opacity-70 transition-opacity">A P
+            E X</a>
         <a href="#contacto" class="btn-main bg-white text-black py-2.5 px-3 md:py-3 md:px-4 text-sm font-medium">
-            <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-up-linear" width="1.2rem" stroke-width="1.5"></iconify-icon></span>
+            <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-up-linear" width="1.2rem"
+                    stroke-width="1.5"></iconify-icon></span>
             <span class="btn-text">Contacto</span>
-            <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-up-linear" width="1.2rem" stroke-width="1.5"></iconify-icon></span>
+            <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-up-linear" width="1.2rem"
+                    stroke-width="1.5"></iconify-icon></span>
         </a>
     </nav>
 
     <!-- 1. Hero -->
-    <header id="hero-section" class="relative w-full min-h-[90vh] flex flex-col justify-end pb-24 pt-40 px-6 md:px-12 overflow-hidden bg-apex-black border-b border-white/5">
+    <header id="hero-section"
+        class="relative w-full min-h-[90vh] flex flex-col justify-end pb-24 pt-40 px-6 md:px-12 overflow-hidden bg-apex-black border-b border-white/5">
         <div id="hero-webgl-container" class="absolute inset-0 z-0"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-apex-black via-apex-black/80 to-transparent pointer-events-none"></div>
+        <div
+            class="absolute inset-0 z-0 bg-gradient-to-t from-apex-black via-apex-black/80 to-transparent pointer-events-none">
+        </div>
 
         <div class="relative z-10 max-w-7xl mx-auto w-full pointer-events-none">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
                 <div class="max-w-4xl">
                     <div class="flex gap-3 mb-8 flex-wrap pointer-events-auto items-center">
-                        <span class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white backdrop-blur-md uppercase tracking-wider border border-white/10">APEX Creative</span>
-                        <span class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white text-black uppercase tracking-wider border border-white">Tarjetas Premium</span>
+                        <span
+                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white backdrop-blur-md uppercase tracking-wider border border-white/10">APEX
+                            Creative</span>
+                        <span
+                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white text-black uppercase tracking-wider border border-white">Tarjetas
+                            Premium</span>
                     </div>
                     <h1 class="text-5xl md:text-7xl font-semibold tracking-tighter uppercase text-white mb-6">
                         Una tarjeta que habla de tu negocio antes de que tú lo hagas.
@@ -259,13 +430,17 @@
                 </div>
                 <div class="lg:max-w-sm flex flex-col gap-8 pb-2 pointer-events-auto">
                     <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed">
-                        En una reunión, una tarjeta no es solo un papel. <span class="text-white font-medium">Es el primer mensaje que tu marca deja en la mesa.</span>
+                        En una reunión, una tarjeta no es solo un papel. <span class="text-white font-medium">Es el
+                            primer mensaje que tu marca deja en la mesa.</span>
                     </p>
                     <div>
-                        <a href="#contacto" class="btn-main bg-white text-black py-4 px-6 text-base font-medium w-full md:w-auto hover:bg-gray-200 transition-colors">
-                            <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
+                        <a href="#contacto"
+                            class="btn-main bg-white text-black py-4 px-6 text-base font-medium w-full md:w-auto hover:bg-gray-200 transition-colors">
+                            <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem"
+                                    stroke-width="1.5"></iconify-icon></span>
                             <span class="btn-text">Solicitar información</span>
-                            <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
+                            <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem"
+                                    stroke-width="1.5"></iconify-icon></span>
                         </a>
                     </div>
                 </div>
@@ -278,40 +453,55 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
                 <!-- Large Dark Card -->
-                <div class="lg:col-span-2 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-14 flex flex-col justify-between min-h-[50vh] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
-                        <iconify-icon icon="solar:trash-bin-trash-linear" width="8rem" stroke-width="1.5"></iconify-icon>
+                <div
+                    class="lg:col-span-2 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-14 flex flex-col justify-between min-h-[50vh] relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
+                        <iconify-icon icon="solar:trash-bin-trash-linear" width="8rem"
+                            stroke-width="1.5"></iconify-icon>
                     </div>
                     <div class="relative z-10 mb-20">
-                        <div class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-8">La realidad</div>
+                        <div
+                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-8">
+                            La realidad</div>
                         <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white max-w-2xl">
                             La mayoría de tarjetas de presentación se olvidan en minutos.
                         </h2>
                     </div>
                     <div class="relative z-10 flex flex-wrap gap-3 mt-auto">
-                        <div class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon> Demasiado delgadas
+                        <div
+                            class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
+                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
+                            Demasiado delgadas
                         </div>
-                        <div class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon> Demasiado comunes
+                        <div
+                            class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
+                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
+                            Demasiado comunes
                         </div>
-                        <div class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon> Demasiado parecidas
+                        <div
+                            class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
+                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
+                            Demasiado parecidas
                         </div>
                     </div>
                 </div>
 
                 <!-- Subtle Accent Card -->
-                <div class="lg:col-span-1 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-12 flex flex-col justify-center relative overflow-hidden group">
-                    <div class="absolute -right-8 -top-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+                <div
+                    class="lg:col-span-1 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-12 flex flex-col justify-center relative overflow-hidden group">
+                    <div
+                        class="absolute -right-8 -top-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
                         <iconify-icon icon="solar:star-fall-linear" width="16rem" stroke-width="1"></iconify-icon>
                     </div>
-                    <iconify-icon icon="solar:star-fall-linear" width="3rem" stroke-width="1.5" class="mb-8 text-white/50"></iconify-icon>
+                    <iconify-icon icon="solar:star-fall-linear" width="3rem" stroke-width="1.5"
+                        class="mb-8 text-white/50"></iconify-icon>
                     <h3 class="text-3xl font-semibold tracking-tighter mb-6 text-white">
                         Una tarjeta premium es diferente.
                     </h3>
                     <p class="text-base text-gray-400 font-light leading-relaxed">
-                        Cuando alguien la sostiene, siente inmediatamente que está tratando con un negocio serio, sólido y detallista.
+                        Cuando alguien la sostiene, siente inmediatamente que está tratando con un negocio serio, sólido
+                        y detallista.
                     </p>
                 </div>
             </div>
@@ -323,7 +513,9 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
                 <div class="max-w-2xl">
-                    <div class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">El estándar APEX</div>
+                    <div
+                        class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">
+                        El estándar APEX</div>
                     <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white">
                         Qué hace diferente a una tarjeta premium
                     </h2>
@@ -335,38 +527,52 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <!-- Card 1 -->
-                <div class="bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-10 flex flex-col lg:flex-row justify-between gap-8 hover-trigger hover:border-white/20 transition-colors duration-500">
+                <div
+                    class="bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-10 flex flex-col lg:flex-row justify-between gap-8 hover-trigger hover:border-white/20 transition-colors duration-500">
                     <div class="flex-1 flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold tracking-tight mb-4 text-white">Materiales superiores</h3>
                             <p class="text-base text-gray-400 font-light leading-relaxed">
-                                Papeles gruesos y texturas elegantes que transmiten calidad y solidez desde el primer contacto.
+                                Papeles gruesos y texturas elegantes que transmiten calidad y solidez desde el primer
+                                contacto.
                             </p>
                         </div>
                         <div class="mt-12">
-                            <span class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider">Tacto inconfundible</span>
+                            <span
+                                class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider">Tacto
+                                inconfundible</span>
                         </div>
                     </div>
-                    <div class="w-full lg:w-5/12 rounded-2xl overflow-hidden hover-img-wrap aspect-square lg:aspect-auto ring-1 ring-white/10 shrink-0">
-                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Textura de papel grueso" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 transition-opacity">
+                    <div
+                        class="w-full lg:w-5/12 rounded-2xl overflow-hidden hover-img-wrap aspect-square lg:aspect-auto ring-1 ring-white/10 shrink-0">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg"
+                            alt="Textura de papel grueso"
+                            class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 transition-opacity">
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-10 flex flex-col lg:flex-row justify-between gap-8 hover-trigger hover:border-white/20 transition-colors duration-500">
+                <div
+                    class="bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-10 flex flex-col lg:flex-row justify-between gap-8 hover-trigger hover:border-white/20 transition-colors duration-500">
                     <div class="flex-1 flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold tracking-tight mb-4 text-white">Diseños memorables</h3>
                             <p class="text-base text-gray-400 font-light leading-relaxed">
-                                Una tarjeta premium no se satura de información. Se enfoca en comunicar valor visual puro.
+                                Una tarjeta premium no se satura de información. Se enfoca en comunicar valor visual
+                                puro.
                             </p>
                         </div>
                         <div class="mt-12">
-                            <span class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider">Minimalismo visual</span>
+                            <span
+                                class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider">Minimalismo
+                                visual</span>
                         </div>
                     </div>
-                    <div class="w-full lg:w-5/12 rounded-2xl overflow-hidden hover-img-wrap aspect-square lg:aspect-auto ring-1 ring-white/10 shrink-0">
-                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" alt="Diseño minimalista" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 transition-opacity">
+                    <div
+                        class="w-full lg:w-5/12 rounded-2xl overflow-hidden hover-img-wrap aspect-square lg:aspect-auto ring-1 ring-white/10 shrink-0">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg"
+                            alt="Diseño minimalista"
+                            class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 transition-opacity">
                     </div>
                 </div>
             </div>
@@ -374,106 +580,109 @@
     </section>
 
     <!-- 4. Tipos de tarjetas (List + Images) -->
-<section class="py-32 px-4 md:px-8 border-t border-white/5 bg-apex-black">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-      
-      <div class="lg:col-span-5 lg:sticky lg:top-32 h-fit">
-        <div class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-8">Nuestro catálogo</div>
-        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white mb-6">
-          Tipos de tarjetas premium
-        </h2>
-        <p class="text-lg text-gray-400 font-light leading-relaxed">
-          Cada acabado cuenta una historia diferente sobre tu marca. Elige la textura, el peso y el contraste que mejor te represente.
-        </p>
-      </div>
+    <section class="py-32 px-4 md:px-8 border-t border-white/5 bg-apex-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
-      <div class="lg:col-span-7 flex flex-col gap-10">
+                <div class="lg:col-span-5 lg:sticky lg:top-32 h-fit">
+                    <div
+                        class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-8">
+                        Nuestro catálogo</div>
+                    <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white mb-6">
+                        Tipos de tarjetas premium
+                    </h2>
+                    <p class="text-lg text-gray-400 font-light leading-relaxed">
+                        Cada acabado cuenta una historia diferente sobre tu marca. Elige la textura, el peso y el
+                        contraste que mejor te represente.
+                    </p>
+                </div>
 
-        <!-- Item 1 -->
-        <div class="group border-b border-white/10 pb-10 hover-trigger">
-          <div class="flex flex-col md:flex-row gap-8 items-center justify-between">
-            <div class="flex-1 w-full">
-              <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-300 mb-3 group-hover:text-white transition-colors">Foil metálico</h3>
-              <p class="text-base text-gray-400 font-light mb-6 leading-relaxed">
-                Detalles brillantes que capturan la luz. Oro, plata o colores holográficos estampados sobre papel mate para un contraste espectacular.
-              </p>
-              <ul class="text-sm text-gray-500 space-y-3 font-medium">
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Marcas de lujo</li>
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Sector inmobiliario</li>
-              </ul>
+                <div class="lg:col-span-7 flex flex-col gap-10">
+
+                    <!-- Item 1 -->
+                    <div class="group border-b border-white/10 pb-10 hover-trigger">
+                        <div class="flex flex-col md:flex-row gap-8 items-center justify-between">
+                            <div class="flex-1 w-full">
+                                <h3
+                                    class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-300 mb-3 group-hover:text-white transition-colors">
+                                    Foil metálico</h3>
+                                <p class="text-base text-gray-400 font-light mb-6 leading-relaxed">
+                                    Detalles brillantes que capturan la luz. Oro, plata o colores holográficos
+                                    estampados sobre papel mate para un contraste espectacular.
+                                </p>
+                                <ul class="text-sm text-gray-500 space-y-3 font-medium">
+                                    <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear"
+                                            class="text-white/80 text-lg"></iconify-icon> Marcas de lujo</li>
+                                    <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear"
+                                            class="text-white/80 text-lg"></iconify-icon> Sector inmobiliario</li>
+                                </ul>
+                            </div>
+                            <div
+                                class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0 ring-1 ring-white/10">
+                                <img src="assets/images/tarjetas/goldcard1.jpg" alt="Foil metálico"
+                                    class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group border-b border-white/10 pb-10 hover-trigger">
+                        <div class="flex flex-col md:flex-row gap-8 items-center justify-between">
+                            <div class="flex-1 w-full">
+                                <h3
+                                    class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-300 mb-3 group-hover:text-white transition-colors">
+                                    Letterpress</h3>
+                                <p class="text-base text-gray-400 font-light mb-6 leading-relaxed">
+                                    Impresión profunda que crea una textura elegante en papel algodonado. La tinta se
+                                    presiona, creando una sensación táctil distintiva.
+                                </p>
+                                <ul class="text-sm text-gray-500 space-y-3 font-medium">
+                                    <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear"
+                                            class="text-white/80 text-lg"></iconify-icon> Estudios profesionales</li>
+                                    <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear"
+                                            class="text-white/80 text-lg"></iconify-icon> Arquitectos y diseñadores</li>
+                                </ul>
+                            </div>
+                            <div
+                                class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0 ring-1 ring-white/10">
+                                <img src="assets/images/tarjetas/letterpress-card.webp" alt="Letterpress"
+                                    class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group pb-4 hover-trigger">
+                        <div class="flex flex-col md:flex-row gap-8 items-center justify-between">
+                            <div class="flex-1 w-full">
+                                <h3
+                                    class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-300 mb-3 group-hover:text-white transition-colors">
+                                    Bordes pintados</h3>
+                                <p class="text-base text-gray-400 font-light mb-6 leading-relaxed">
+                                    Capas gruesas de papel empalmado con bordes de color visible. Un detalle sutil que
+                                    hace que la tarjeta destaque incluso apilada.
+                                </p>
+                                <ul class="text-sm text-gray-500 space-y-3 font-medium">
+                                    <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear"
+                                            class="text-white/80 text-lg"></iconify-icon> Marcas creativas</li>
+                                    <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear"
+                                            class="text-white/80 text-lg"></iconify-icon> Identidades disruptivas</li>
+                                </ul>
+                            </div>
+                            <div
+                                class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0 ring-1 ring-white/10">
+                                <img src="assets/images/tarjetas/coloring-card.webp" alt="Bordes pintados"
+                                    class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
             </div>
-            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0 ring-1 ring-white/10">
-              <img src="assets/images/tarjetas/goldcard1.jpg" alt="Foil metálico"
-                   class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
-            </div>
-          </div>
         </div>
-
-        <!-- Item 2 -->
-        <div class="group border-b border-white/10 pb-10 hover-trigger">
-          <div class="flex flex-col md:flex-row gap-8 items-center justify-between">
-            <div class="flex-1 w-full">
-              <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-300 mb-3 group-hover:text-white transition-colors">Letterpress</h3>
-              <p class="text-base text-gray-400 font-light mb-6 leading-relaxed">
-                Impresión profunda que crea una textura elegante en papel algodonado. La tinta se presiona, creando una sensación táctil distintiva.
-              </p>
-              <ul class="text-sm text-gray-500 space-y-3 font-medium">
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Estudios profesionales</li>
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Arquitectos y diseñadores</li>
-              </ul>
-            </div>
-            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0 ring-1 ring-white/10">
-              <img src="assets/images/tarjetas/letterpress-card.webp" alt="Letterpress"
-                   class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="group border-b border-white/10 pb-10 hover-trigger">
-          <div class="flex flex-col md:flex-row gap-8 items-center justify-between">
-            <div class="flex-1 w-full">
-              <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-300 mb-3 group-hover:text-white transition-colors">Bordes pintados</h3>
-              <p class="text-base text-gray-400 font-light mb-6 leading-relaxed">
-                Capas gruesas de papel empalmado con bordes de color visible. Un detalle sutil que hace que la tarjeta destaque incluso apilada.
-              </p>
-              <ul class="text-sm text-gray-500 space-y-3 font-medium">
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Marcas creativas</li>
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Identidades disruptivas</li>
-              </ul>
-            </div>
-            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0 ring-1 ring-white/10">
-              <img src="assets/images/tarjetas/coloring-card.webp" alt="Bordes pintados"
-                   class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="group pb-4 hover-trigger">
-          <div class="flex flex-col md:flex-row gap-8 items-center justify-between">
-            <div class="flex-1 w-full">
-              <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-gray-300 mb-3 group-hover:text-white transition-colors">Soft-touch</h3>
-              <p class="text-base text-gray-400 font-light mb-6 leading-relaxed">
-                Laminado especial con un acabado suave tipo piel de durazno. Transmite modernidad y otorga una experiencia táctil adictiva.
-              </p>
-              <ul class="text-sm text-gray-500 space-y-3 font-medium">
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Negocios modernos</li>
-                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-linear" class="text-white/80 text-lg"></iconify-icon> Profesionales de la salud</li>
-              </ul>
-            </div>
-            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden hover-img-wrap bg-apex-dark shrink-0 ring-1 ring-white/10">
-              <img src="assets/images/tarjetas/softtouch-card.webp" alt="Soft touch business card"
-                   class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- 5 & 7. Para quién y Qué esperar -->
     <section class="bg-apex-dark border-y border-white/5" id="stats-section">
@@ -481,68 +690,96 @@
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row justify-between mb-16 gap-8 items-start">
                     <div class="max-w-xl">
-                        <div class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider mb-6">Audiencia ideal</div>
+                        <div
+                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider mb-6">
+                            Audiencia ideal</div>
                         <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white">
                             La elección correcta
                         </h2>
                     </div>
                     <p class="text-lg md:text-xl font-light max-w-lg text-gray-400">
-                        La tarjeta correcta depende del cliente que quieres impresionar. El material y acabado dictan cómo perciben tu negocio.
+                        La tarjeta correcta depende del cliente que quieres impresionar. El material y acabado dictan
+                        cómo perciben tu negocio.
                     </p>
                 </div>
 
                 <div class="border-t border-white/10 mb-12"></div>
-                
+
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
                     <!-- Left -->
                     <div>
-                        <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Pensadas para negocios que entienden el valor de la presentación.</h3>
+                        <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Pensadas para negocios que
+                            entienden el valor de la presentación.</h3>
                         <ul class="space-y-8">
                             <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:users-group-two-rounded-linear" class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Empresarios que se reúnen con clientes importantes.</span>
+                                <iconify-icon icon="solar:users-group-two-rounded-linear"
+                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                <span class="text-base text-gray-400 font-light">Empresarios que se reúnen con clientes
+                                    importantes.</span>
                             </li>
                             <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:case-minimalistic-linear" class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Profesionales que quieren proyectar máxima seriedad.</span>
+                                <iconify-icon icon="solar:case-minimalistic-linear"
+                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                <span class="text-base text-gray-400 font-light">Profesionales que quieren proyectar
+                                    máxima seriedad.</span>
                             </li>
                             <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:eye-linear" class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Negocios que cuidan cada detalle minúsculo de su imagen.</span>
+                                <iconify-icon icon="solar:eye-linear"
+                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                <span class="text-base text-gray-400 font-light">Negocios que cuidan cada detalle
+                                    minúsculo de su imagen.</span>
                             </li>
                             <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:star-linear" class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Marcas que buscan diferenciarse desde el primer contacto.</span>
+                                <iconify-icon icon="solar:star-linear"
+                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                <span class="text-base text-gray-400 font-light">Marcas que buscan diferenciarse desde
+                                    el primer contacto.</span>
                             </li>
                         </ul>
                         <div class="mt-12 bg-white/5 border border-white/10 p-6 rounded-2xl">
-                            <p class="text-sm text-gray-300 leading-relaxed font-light">No están pensadas para impresión rápida o económica. Están diseñadas para crear una impresión sólida y duradera.</p>
+                            <p class="text-sm text-gray-300 leading-relaxed font-light">No están pensadas para impresión
+                                rápida o económica. Están diseñadas para crear una impresión sólida y duradera.</p>
                         </div>
                     </div>
 
                     <!-- Right -->
                     <div>
-                        <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Lo que puedes esperar de nosotros.</h3>
+                        <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Lo que puedes esperar de
+                            nosotros.</h3>
                         <div class="grid grid-cols-1 gap-4">
-                            <div class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:chat-line-linear" class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Comunicación clara durante todo el proceso.</span>
+                            <div
+                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                <iconify-icon icon="solar:chat-line-linear"
+                                    class="text-white text-xl shrink-0"></iconify-icon>
+                                <span class="text-sm font-light text-gray-300">Comunicación clara durante todo el
+                                    proceso.</span>
                             </div>
-                            <div class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:question-circle-linear" class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Asesoramiento para aclarar cualquier detalle.</span>
+                            <div
+                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                <iconify-icon icon="solar:question-circle-linear"
+                                    class="text-white text-xl shrink-0"></iconify-icon>
+                                <span class="text-sm font-light text-gray-300">Asesoramiento para aclarar cualquier
+                                    detalle.</span>
                             </div>
-                            <div class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:document-add-linear" class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Revisión exhaustiva de opciones antes de producir.</span>
+                            <div
+                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                <iconify-icon icon="solar:document-add-linear"
+                                    class="text-white text-xl shrink-0"></iconify-icon>
+                                <span class="text-sm font-light text-gray-300">Revisión exhaustiva de opciones antes de
+                                    producir.</span>
                             </div>
-                            <div class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:verified-check-linear" class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Atención cuidadosa a materiales y acabados finos.</span>
+                            <div
+                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                <iconify-icon icon="solar:verified-check-linear"
+                                    class="text-white text-xl shrink-0"></iconify-icon>
+                                <span class="text-sm font-light text-gray-300">Atención cuidadosa a materiales y
+                                    acabados finos.</span>
                             </div>
                             <div class="bg-white text-black p-5 rounded-2xl flex items-center gap-5 mt-4">
-                                <iconify-icon icon="solar:cup-star-linear" class="text-black text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-medium">Un resultado pensado exclusivamente para impresionar.</span>
+                                <iconify-icon icon="solar:cup-star-linear"
+                                    class="text-black text-xl shrink-0"></iconify-icon>
+                                <span class="text-sm font-medium">Un resultado pensado exclusivamente para
+                                    impresionar.</span>
                             </div>
                         </div>
                     </div>
@@ -555,7 +792,9 @@
     <section class="py-32 px-4 md:px-8 bg-apex-black">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
-                <div class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">Proceso de trabajo</div>
+                <div
+                    class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">
+                    Proceso de trabajo</div>
                 <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white">
                     Simplicidad y perfección
                 </h2>
@@ -563,14 +802,21 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <!-- Step 1 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">1</div>
+                <div
+                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
+                        1</div>
                     <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Entendemos tu negocio</h3>
-                    <p class="text-gray-400 font-light text-sm leading-relaxed">Conversamos para definir qué quieres comunicar exactamente cuando entregas tu tarjeta.</p>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed">Conversamos para definir qué quieres
+                        comunicar exactamente cuando entregas tu tarjeta.</p>
                 </div>
                 <!-- Step 2 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">2</div>
+                <div
+                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
+                        2</div>
                     <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Elegimos el formato</h3>
                     <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Definimos elementos clave:</p>
                     <ul class="text-gray-500 text-sm space-y-2 font-light">
@@ -580,8 +826,11 @@
                     </ul>
                 </div>
                 <!-- Step 3 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">3</div>
+                <div
+                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
+                        3</div>
                     <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Producción premium</h3>
                     <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Cuidamos cada milímetro:</p>
                     <ul class="text-gray-500 text-sm space-y-2 font-light">
@@ -591,10 +840,14 @@
                     </ul>
                 </div>
                 <!-- Step 4 -->
-                <div class="bg-apex-dark p-8 rounded-[2rem] border border-white/10 hover:border-white/30 transition-colors duration-300">
-                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-sm font-semibold mb-8 text-black shadow-lg shadow-white/10">4</div>
+                <div
+                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/10 hover:border-white/30 transition-colors duration-300">
+                    <div
+                        class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-sm font-semibold mb-8 text-black shadow-lg shadow-white/10">
+                        4</div>
                     <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Entrega final</h3>
-                    <p class="text-gray-400 font-light text-sm leading-relaxed">Recibes piezas físicas impecables, listas para representar la seriedad de tu negocio.</p>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed">Recibes piezas físicas impecables,
+                        listas para representar la seriedad de tu negocio.</p>
                 </div>
             </div>
         </div>
@@ -602,11 +855,17 @@
 
     <!-- 8. Cierre Poderoso -->
     <footer class="bg-apex-darker py-32 px-4 md:px-8 relative overflow-hidden border-t border-white/5" id="contacto">
-        <div class="absolute top-0 right-0 -mr-[20vw] -mt-[10vw] w-[50vw] h-[50vw] rounded-full border-[1px] border-white/5 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -ml-[20vw] -mb-[10vw] w-[40vw] h-[40vw] rounded-full border-[1px] border-white/5 pointer-events-none"></div>
+        <div
+            class="absolute top-0 right-0 -mr-[20vw] -mt-[10vw] w-[50vw] h-[50vw] rounded-full border-[1px] border-white/5 pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 -ml-[20vw] -mb-[10vw] w-[40vw] h-[40vw] rounded-full border-[1px] border-white/5 pointer-events-none">
+        </div>
 
         <div class="max-w-5xl mx-auto text-center relative z-10">
-            <div class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-10">El impacto final</div>
+            <div
+                class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-10">
+                El impacto final</div>
             <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter text-white uppercase leading-[0.9] mb-8">
                 Las personas olvidan muchas conversaciones.
                 <span class="text-gray-400 block mt-4">Pero recuerdan cómo las hiciste sentir.</span>
@@ -618,15 +877,26 @@
             <!-- NUEVO LOGO ANIMADO SVG -->
             <div class="floating-group">
                 <div class="glow-orb"></div>
-                <svg class="svg-icon" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82">
+                <svg class="svg-icon" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 30.37 27.82">
                     <g id="Capa_1-2" data-name="Capa 1">
                         <g>
-                            <path class="cls-2 magic-star" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
+                            <path class="cls-2 magic-star"
+                                d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z">
+                            </path>
                             <g class="hand-paths">
-                                <path class="cls-1" d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
-                                <path class="cls-1" d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
-                                <path class="cls-1" d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
-                                <path class="cls-1" d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
+                                <path class="cls-1"
+                                    d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z">
+                                </path>
+                                <path class="cls-1"
+                                    d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z">
+                                </path>
+                                <path class="cls-1"
+                                    d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z">
+                                </path>
+                                <path class="cls-1"
+                                    d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z">
+                                </path>
                             </g>
                         </g>
                     </g>
@@ -634,16 +904,21 @@
             </div>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8">
-                <a href="mailto:hola@apex-creative.com.mx" class="btn-main bg-white text-black py-4 px-8 text-base font-medium hover:bg-gray-200 transition-colors">
-                    <span class="btn-icon-left"><iconify-icon icon="solar:letter-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
+                <a href="mailto:hola@apex-creative.com.mx"
+                    class="btn-main bg-white text-black py-4 px-8 text-base font-medium hover:bg-gray-200 transition-colors">
+                    <span class="btn-icon-left"><iconify-icon icon="solar:letter-linear" width="1.5rem"
+                            stroke-width="1.5"></iconify-icon></span>
                     <span class="btn-text">Solicitar información</span>
-                    <span class="btn-icon-right"><iconify-icon icon="solar:letter-linear" width="1.5rem" stroke-width="1.5"></iconify-icon></span>
+                    <span class="btn-icon-right"><iconify-icon icon="solar:letter-linear" width="1.5rem"
+                            stroke-width="1.5"></iconify-icon></span>
                 </a>
             </div>
 
-            <div class="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500 font-light">
+            <div
+                class="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500 font-light">
                 <div>
-                    <a href="mailto:hola@apex-creative.com.mx" class="underline-link hover:text-white transition-colors">hola@apex-creative.com.mx</a>
+                    <a href="mailto:hola@apex-creative.com.mx"
+                        class="underline-link hover:text-white transition-colors">hola@apex-creative.com.mx</a>
                 </div>
                 <div class="tracking-[0.2em] font-medium uppercase text-gray-400">
                     A P E X © 2024
@@ -659,12 +934,23 @@
     <button class="btn-scroll-top" id="scrollTopBtn" aria-label="Volver arriba">
         <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82">
             <g id="Capa_1-2" data-name="Capa 1">
-                <path class="scroll-magic-star fill-white stroke-white stroke-[1.21px] stroke-linecap-round stroke-linejoin-round" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"></path>
+                <path
+                    class="scroll-magic-star fill-white stroke-white stroke-[1.21px] stroke-linecap-round stroke-linejoin-round"
+                    d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z">
+                </path>
                 <g class="scroll-magic-hand fill-white">
-                    <path d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z"></path>
-                    <path d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z"></path>
-                    <path d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z"></path>
-                    <path d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z"></path>
+                    <path
+                        d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z">
+                    </path>
+                    <path
+                        d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z">
+                    </path>
+                    <path
+                        d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z">
+                    </path>
+                    <path
+                        d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z">
+                    </path>
                 </g>
             </g>
         </svg>
@@ -672,7 +958,7 @@
 
     <!-- Magic Cursor & Scroll Effect Script -->
     <script>
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const star = document.createElement('div');
             star.className = 'click-magic-star';
             star.style.left = e.pageX + 'px';
@@ -774,7 +1060,7 @@
             drawPoint(point) {
                 const pos = { x: point.x * this.width, y: (1 - point.y) * this.height };
                 let intensity = 1;
-                
+
                 if (point.age < this.maxAge * 0.3) {
                     intensity = Math.sin((point.age / (this.maxAge * 0.3)) * (Math.PI / 2));
                 } else {
@@ -786,7 +1072,7 @@
                 const radius = this.radius;
                 let color = `${((point.vx + 1) / 2) * 255}, ${((point.vy + 1) / 2) * 255}, ${intensity * 255}`;
                 let offset = this.size * 5;
-                
+
                 this.ctx.shadowOffsetX = offset;
                 this.ctx.shadowOffsetY = offset;
                 this.ctx.shadowBlur = radius * 1;
@@ -978,7 +1264,7 @@
                 this.mesh = new THREE.Mesh(geometry, material);
                 this.mesh.position.z = 0;
                 this.sceneManager.scene.add(this.mesh);
-                
+
                 const w = this.sceneManager.container.clientWidth;
                 const h = this.sceneManager.container.clientHeight;
                 this.uniforms.uResolution.value.set(w, h);
@@ -1003,7 +1289,7 @@
         class App {
             constructor(containerId) {
                 this.container = document.getElementById(containerId);
-                if(!this.container) return;
+                if (!this.container) return;
 
                 this.renderer = new THREE.WebGLRenderer({
                     antialias: true,
@@ -1012,14 +1298,14 @@
                     stencil: false,
                     depth: false
                 });
-                
+
                 this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
                 this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
                 this.container.appendChild(this.renderer.domElement);
 
                 this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / this.container.clientHeight, 0.1, 10000);
                 this.camera.position.z = 50;
-                
+
                 this.scene = new THREE.Scene();
                 this.scene.background = new THREE.Color(0x050505);
                 this.clock = new THREE.Clock();
@@ -1035,17 +1321,17 @@
 
             init() {
                 this.gradientBackground.init();
-                
+
                 const observer = new IntersectionObserver((entries) => {
                     this.isVisible = entries[0].isIntersecting;
                 }, { threshold: 0 });
                 observer.observe(this.container);
 
                 window.addEventListener("resize", () => this.onResize());
-                
+
                 window.addEventListener("mousemove", (ev) => this.onPointerMove(ev));
                 window.addEventListener("touchmove", (ev) => {
-                    if(ev.touches.length > 0) this.onPointerMove(ev.touches[0]);
+                    if (ev.touches.length > 0) this.onPointerMove(ev.touches[0]);
                 });
 
                 this.render();
@@ -1053,9 +1339,9 @@
             }
 
             onPointerMove(ev) {
-                if(!this.isVisible) return;
+                if (!this.isVisible) return;
                 const rect = this.container.getBoundingClientRect();
-                
+
                 const x = ev.clientX - rect.left;
                 const y = ev.clientY - rect.top;
 
@@ -1087,14 +1373,14 @@
             }
 
             tick() {
-                if(this.isVisible) {
+                if (this.isVisible) {
                     this.render();
                 }
                 requestAnimationFrame(() => this.tick());
             }
 
             onResize() {
-                if(!this.container) return;
+                if (!this.container) return;
                 const w = this.container.clientWidth;
                 const h = this.container.clientHeight;
                 this.camera.aspect = w / h;
@@ -1110,4 +1396,6 @@
     </script>
 
 
-</body></html>
+</body>
+
+</html>
