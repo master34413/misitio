@@ -1,26 +1,106 @@
-<html lang="es" class="scroll-smooth"><head>
+<html lang="es" class="scroll-smooth">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APEX Creative | Estrategia y Diseño</title>
-    <meta name="description" content="No vendemos diseño. Creamos negocios que destacan. Agencia de branding, consultoría e impresión creativa.">
-    
+    <meta name="description"
+        content="No vendemos diseño. Creamos negocios que destacan. Agencia de branding, consultoría e impresión creativa.">
+
     <!-- Fonts: Instrument Serif (Titles) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@300;400;500&amp;display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Tailwind Config & Custom CSS -->
     <style>
-        /* Custom Tailwind Configuration */
+        /* Base & Utility Styles */
+        body {
+            background-color: #050505;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        ::selection {
+            background-color: rgba(212, 175, 55, 0.3);
+            color: white;
+        }
+
+        /* Apple-style blur effect for portfolio placeholders */
+        .apple-blur-bg {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .apple-blur-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.15), transparent 60%);
+            filter: blur(40px);
+            z-index: 0;
+            transition: transform 0.7s ease;
+        }
+
+        .apple-blur-bg:hover::before {
+            transform: scale(1.1) translate(5%, 5%);
+        }
+
+        /* Form Inputs */
+        .custom-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 0;
+            width: 100%;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .custom-input:focus {
+            border-bottom-color: #D4AF37;
+        }
+
+        .custom-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+        }
+
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -44,79 +124,9 @@
                 }
             }
         }
-
-        /* Base & Utility Styles */
-        body {
-            background-color: #050505;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        ::selection {
-            background-color: rgba(212, 175, 55, 0.3);
-            color: white;
-        }
-
-        /* Apple-style blur effect for portfolio placeholders */
-        .apple-blur-bg {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .apple-blur-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.15), transparent 60%);
-            filter: blur(40px);
-            z-index: 0;
-            transition: transform 0.7s ease;
-        }
-        
-        .apple-blur-bg:hover::before {
-            transform: scale(1.1) translate(5%, 5%);
-        }
-
-        /* Form Inputs */
-        .custom-input {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.75rem 0;
-            width: 100%;
-            transition: border-color 0.3s ease;
-            outline: none;
-        }
-        .custom-input:focus {
-            border-bottom-color: #D4AF37;
-        }
-        .custom-input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 300;
-        }
-        
-        /* Hide scrollbar for clean aesthetic */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050505;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-    </style>
+    </script>
 </head>
+
 <body class="font-sans antialiased font-light overflow-x-hidden">
 
     <!-- Navbar -->
@@ -130,7 +140,8 @@
                 <a href="#portafolio" class="hover:text-white transition-colors">Portafolio</a>
                 <a href="#proceso" class="hover:text-white transition-colors">Metodología</a>
             </div>
-            <a href="#contacto" class="text-xs md:text-sm font-medium bg-white text-black px-5 py-2.5 rounded-full hover:bg-brand-gold transition-colors duration-300 flex items-center gap-2">
+            <a href="#contacto"
+                class="text-xs md:text-sm font-medium bg-white text-black px-5 py-2.5 rounded-full hover:bg-brand-gold transition-colors duration-300 flex items-center gap-2">
                 Consultar
                 <iconify-icon icon="solar:arrow-right-up-linear" width="16" stroke-width="1.5"></iconify-icon>
             </a>
@@ -142,25 +153,32 @@
         <!-- Hero Section -->
         <section class="sticky top-0 h-screen w-full flex items-center overflow-hidden">
             <!-- Subtle Background Glow -->
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
-            
-            <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 pt-20 lg:pt-0">
-                
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-[120px] pointer-events-none -z-10">
+            </div>
+
+            <div
+                class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 pt-20 lg:pt-0">
+
                 <!-- Text Left -->
                 <div class="text-center lg:text-left flex flex-col justify-center">
-                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tighter text-white leading-[1.05] mb-8">
+                    <h1
+                        class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tighter text-white leading-[1.05] mb-8">
                         No vendemos diseño.<br>
                         <span class="text-white/50 italic">Creamos negocios que destacan.</span>
                     </h1>
                     <p class="text-base md:text-lg text-white/60 max-w-lg mx-auto lg:mx-0 mb-12 leading-relaxed">
-                        La mayoría de los negocios solo intenta vender más. Nosotros ayudamos a que sean <span class="text-white font-normal">imposibles de ignorar</span> a través de diseño y estrategia.
+                        La mayoría de los negocios solo intenta vender más. Nosotros ayudamos a que sean <span
+                            class="text-white font-normal">imposibles de ignorar</span> a través de diseño y estrategia.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <a href="#contacto" class="w-full sm:w-auto text-sm font-medium bg-brand-gold text-black px-8 py-3.5 rounded-full hover:bg-white transition-all duration-300 flex items-center justify-center gap-2">
+                        <a href="#contacto"
+                            class="w-full sm:w-auto text-sm font-medium bg-brand-gold text-black px-8 py-3.5 rounded-full hover:bg-white transition-all duration-300 flex items-center justify-center gap-2">
                             Solicitar una consulta
                             <iconify-icon icon="solar:arrow-right-linear" width="18" stroke-width="1.5"></iconify-icon>
                         </a>
-                        <a href="#portafolio" class="w-full sm:w-auto text-sm font-medium border border-brand-border bg-transparent text-white px-8 py-3.5 rounded-full hover:bg-brand-card transition-all duration-300 flex items-center justify-center">
+                        <a href="#portafolio"
+                            class="w-full sm:w-auto text-sm font-medium border border-brand-border bg-transparent text-white px-8 py-3.5 rounded-full hover:bg-brand-card transition-all duration-300 flex items-center justify-center">
                             Ver nuestro trabajo
                         </a>
                     </div>
@@ -179,68 +197,85 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="mb-16">
                 <h2 class="font-serif text-4xl md:text-5xl tracking-tight text-white mb-4">Especialidades</h2>
-                <p class="text-sm md:text-base text-white/50 max-w-md">Soluciones integrales diseñadas para elevar la percepción de tu marca en cada punto de contacto.</p>
+                <p class="text-sm md:text-base text-white/50 max-w-md">Soluciones integrales diseñadas para elevar la
+                    percepción de tu marca en cada punto de contacto.</p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:bg-brand-cardHover transition-colors duration-300">
-                    <div class="w-12 h-12 rounded-full bg-brand-goldMuted flex items-center justify-center text-brand-gold mb-6 border border-brand-gold/20">
+                <div
+                    class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:bg-brand-cardHover transition-colors duration-300">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-goldMuted flex items-center justify-center text-brand-gold mb-6 border border-brand-gold/20">
                         <iconify-icon icon="solar:pen-new-square-linear" width="24" stroke-width="1.5"></iconify-icon>
                     </div>
                     <h3 class="font-serif text-2xl text-white mb-4 tracking-tight">Branding</h3>
                     <ul class="space-y-3 text-sm text-white/60">
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Identidad visual
                         </li>
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Diseño de marca
                         </li>
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Estrategia creativa
                         </li>
                     </ul>
                 </div>
 
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:bg-brand-cardHover transition-colors duration-300">
-                    <div class="w-12 h-12 rounded-full bg-brand-goldMuted flex items-center justify-center text-brand-gold mb-6 border border-brand-gold/20">
+                <div
+                    class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:bg-brand-cardHover transition-colors duration-300">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-goldMuted flex items-center justify-center text-brand-gold mb-6 border border-brand-gold/20">
                         <iconify-icon icon="solar:chart-square-linear" width="24" stroke-width="1.5"></iconify-icon>
                     </div>
                     <h3 class="font-serif text-2xl text-white mb-4 tracking-tight">Consultoría</h3>
                     <ul class="space-y-3 text-sm text-white/60">
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Estrategia para negocios
                         </li>
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Optimización de marketing
                         </li>
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Crecimiento comercial
                         </li>
                     </ul>
                 </div>
 
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:bg-brand-cardHover transition-colors duration-300">
-                    <div class="w-12 h-12 rounded-full bg-brand-goldMuted flex items-center justify-center text-brand-gold mb-6 border border-brand-gold/20">
-                        <iconify-icon icon="solar:printer-minimalistic-linear" width="24" stroke-width="1.5"></iconify-icon>
+                <div
+                    class="bg-brand-card border border-brand-border rounded-2xl p-8 hover:bg-brand-cardHover transition-colors duration-300">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-goldMuted flex items-center justify-center text-brand-gold mb-6 border border-brand-gold/20">
+                        <iconify-icon icon="solar:printer-minimalistic-linear" width="24"
+                            stroke-width="1.5"></iconify-icon>
                     </div>
                     <h3 class="font-serif text-2xl text-white mb-4 tracking-tight">Impresión Creativa</h3>
                     <ul class="space-y-3 text-sm text-white/60">
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Papelería premium
                         </li>
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Tarjetas de marca
                         </li>
                         <li class="flex items-start gap-2">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70" width="16"></iconify-icon>
+                            <iconify-icon icon="solar:check-circle-linear" class="text-brand-gold mt-0.5 opacity-70"
+                                width="16"></iconify-icon>
                             Volantes que venden
                         </li>
                     </ul>
@@ -255,18 +290,23 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
                 <div>
                     <h2 class="font-serif text-4xl md:text-5xl tracking-tight text-white mb-4">Trabajos Destacados</h2>
-                    <p class="text-sm md:text-base text-white/50 max-w-md">Resultados tangibles a través de diseño estratégico y ejecución impecable.</p>
+                    <p class="text-sm md:text-base text-white/50 max-w-md">Resultados tangibles a través de diseño
+                        estratégico y ejecución impecable.</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="group cursor-pointer">
-                    <div class="apple-blur-bg border border-brand-border rounded-2xl aspect-video mb-6 flex items-center justify-center">
-                        <span class="relative z-10 text-white/30 font-serif tracking-tight text-2xl">Identidad &amp; Branding</span>
+                    <div
+                        class="apple-blur-bg border border-brand-border rounded-2xl aspect-video mb-6 flex items-center justify-center">
+                        <span class="relative z-10 text-white/30 font-serif tracking-tight text-2xl">Identidad &amp;
+                            Branding</span>
                     </div>
                     <div>
-                        <h3 class="text-lg text-white font-medium mb-2 group-hover:text-brand-gold transition-colors">Reposicionamiento de Marca Premium</h3>
-                        <p class="text-sm text-white/50 mb-3">Rediseño completo de identidad visual y papelería para consultora financiera.</p>
+                        <h3 class="text-lg text-white font-medium mb-2 group-hover:text-brand-gold transition-colors">
+                            Reposicionamiento de Marca Premium</h3>
+                        <p class="text-sm text-white/50 mb-3">Rediseño completo de identidad visual y papelería para
+                            consultora financiera.</p>
                         <div class="flex items-center gap-2 text-xs font-medium text-brand-gold">
                             <iconify-icon icon="solar:graph-up-linear" width="14"></iconify-icon>
                             Resultado: Aumento del 40% en percepción de valor por nuevos clientes.
@@ -275,12 +315,16 @@
                 </div>
 
                 <div class="group cursor-pointer">
-                    <div class="apple-blur-bg border border-brand-border rounded-2xl aspect-video mb-6 flex items-center justify-center">
-                        <span class="relative z-10 text-white/30 font-serif tracking-tight text-2xl">Estrategia &amp; Empaque</span>
+                    <div
+                        class="apple-blur-bg border border-brand-border rounded-2xl aspect-video mb-6 flex items-center justify-center">
+                        <span class="relative z-10 text-white/30 font-serif tracking-tight text-2xl">Estrategia &amp;
+                            Empaque</span>
                     </div>
                     <div>
-                        <h3 class="text-lg text-white font-medium mb-2 group-hover:text-brand-gold transition-colors">Lanzamiento Comercial</h3>
-                        <p class="text-sm text-white/50 mb-3">Estrategia de go-to-market y diseño de packaging para línea de productos artesanales.</p>
+                        <h3 class="text-lg text-white font-medium mb-2 group-hover:text-brand-gold transition-colors">
+                            Lanzamiento Comercial</h3>
+                        <p class="text-sm text-white/50 mb-3">Estrategia de go-to-market y diseño de packaging para
+                            línea de productos artesanales.</p>
                         <div class="flex items-center gap-2 text-xs font-medium text-brand-gold">
                             <iconify-icon icon="solar:graph-up-linear" width="14"></iconify-icon>
                             Resultado: Sold out en la primera semana de lanzamiento.
@@ -300,21 +344,33 @@
                     <span class="text-white/50 italic">Empieza en la estrategia.</span>
                 </h2>
                 <p class="text-sm md:text-base text-white/60">
-                    En APEX Creative cada proyecto sigue un proceso pensado para que el resultado no solo se vea bien, sino que también comunique valor y ayude a tu negocio a crecer.
+                    En APEX Creative cada proyecto sigue un proceso pensado para que el resultado no solo se vea bien,
+                    sino que también comunique valor y ayude a tu negocio a crecer.
                 </p>
             </div>
 
             <div class="relative border-l border-brand-border/50 ml-4 md:ml-8 space-y-16 pb-8">
                 <div class="relative pl-8 md:pl-12">
-                    <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+                    <div
+                        class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_10px_rgba(212,175,55,0.5)]">
+                    </div>
                     <div class="text-xs font-medium text-brand-gold mb-2 tracking-widest uppercase">Paso 01</div>
                     <h3 class="font-serif text-3xl text-white tracking-tight mb-4">Diagnóstico estratégico</h3>
-                    <p class="text-sm text-white/60 mb-4">Antes de diseñar cualquier pieza entendemos el contexto de tu negocio. Analizamos:</p>
+                    <p class="text-sm text-white/60 mb-4">Antes de diseñar cualquier pieza entendemos el contexto de tu
+                        negocio. Analizamos:</p>
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-white/50">
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Qué vendes y tu historia</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Quién es tu cliente ideal</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Cómo te perciben actualmente</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-white/30 rounded-full"></div>Cómo se presenta tu competencia</li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1 h-1 bg-white/30 rounded-full"></div>Qué vendes y tu historia
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1 h-1 bg-white/30 rounded-full"></div>Quién es tu cliente ideal
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1 h-1 bg-white/30 rounded-full"></div>Cómo te perciben actualmente
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1 h-1 bg-white/30 rounded-full"></div>Cómo se presenta tu competencia
+                        </li>
                     </ul>
                 </div>
 
@@ -322,18 +378,23 @@
                     <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-brand-border"></div>
                     <div class="text-xs font-medium text-white/40 mb-2 tracking-widest uppercase">Paso 02 &amp; 03</div>
                     <h3 class="font-serif text-3xl text-white tracking-tight mb-4">Concepto y Refinamiento</h3>
-                    <p class="text-sm text-white/60">Una vez que entendemos tu negocio, desarrollamos el concepto visual. Creamos las propuestas iniciales y refinamos cada detalle estratégicamente.</p>
+                    <p class="text-sm text-white/60">Una vez que entendemos tu negocio, desarrollamos el concepto
+                        visual. Creamos las propuestas iniciales y refinamos cada detalle estratégicamente.</p>
                 </div>
 
                 <div class="relative pl-8 md:pl-12">
                     <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-brand-border"></div>
                     <div class="text-xs font-medium text-white/40 mb-2 tracking-widest uppercase">Paso 04</div>
                     <h3 class="font-serif text-3xl text-white tracking-tight mb-4">Producción e impresión</h3>
-                    <p class="text-sm text-white/60 mb-4">Cuando el diseño está listo pasamos a producción. Aquí cuidamos aspectos vitales como:</p>
+                    <p class="text-sm text-white/60 mb-4">Cuando el diseño está listo pasamos a producción. Aquí
+                        cuidamos aspectos vitales como:</p>
                     <div class="flex flex-wrap gap-3">
-                        <span class="text-xs border border-brand-border px-3 py-1 rounded-full text-white/50">Calidad de impresión</span>
-                        <span class="text-xs border border-brand-border px-3 py-1 rounded-full text-white/50">Elección de papeles</span>
-                        <span class="text-xs border border-brand-border px-3 py-1 rounded-full text-white/50">Acabados premium</span>
+                        <span class="text-xs border border-brand-border px-3 py-1 rounded-full text-white/50">Calidad de
+                            impresión</span>
+                        <span class="text-xs border border-brand-border px-3 py-1 rounded-full text-white/50">Elección
+                            de papeles</span>
+                        <span class="text-xs border border-brand-border px-3 py-1 rounded-full text-white/50">Acabados
+                            premium</span>
                     </div>
                 </div>
             </div>
@@ -341,9 +402,11 @@
             <!-- Closing CTA -->
             <div class="mt-20 text-center bg-brand-card border border-brand-border rounded-3xl p-10 md:p-16">
                 <h3 class="font-serif text-3xl md:text-4xl tracking-tight text-white mb-6">
-                    Los negocios que crecen no dejan su imagen al azar. <span class="text-brand-gold">La diseñan estratégicamente.</span>
+                    Los negocios que crecen no dejan su imagen al azar. <span class="text-brand-gold">La diseñan
+                        estratégicamente.</span>
                 </h3>
-                <a href="#contacto" class="inline-flex items-center gap-2 text-sm font-medium bg-white text-black px-8 py-3.5 rounded-full hover:bg-brand-gold transition-colors duration-300">
+                <a href="#contacto"
+                    class="inline-flex items-center gap-2 text-sm font-medium bg-white text-black px-8 py-3.5 rounded-full hover:bg-brand-gold transition-colors duration-300">
                     Iniciar un proyecto
                 </a>
             </div>
@@ -352,8 +415,10 @@
 
     <!-- Final CTA & Contact -->
     <section id="contacto" class="py-24 border-t border-brand-border relative overflow-hidden bg-brand-bg">
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-gold/5 rounded-t-full blur-[100px] pointer-events-none -z-10"></div>
-        
+        <div
+            class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-gold/5 rounded-t-full blur-[100px] pointer-events-none -z-10">
+        </div>
+
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
                 <h2 class="font-serif text-5xl md:text-7xl tracking-tighter text-white leading-tight mb-8">
@@ -361,22 +426,29 @@
                     <span class="text-brand-gold italic">aparece la estrella.</span>
                 </h2>
                 <p class="text-base text-white/60 mb-8 max-w-md">
-                    Los negocios que crecen no improvisan su imagen. La diseñan estratégicamente. Si ese es tu caso, podemos trabajar juntos.
+                    Los negocios que crecen no improvisan su imagen. La diseñan estratégicamente. Si ese es tu caso,
+                    podemos trabajar juntos.
                 </p>
-                <div class="flex items-center gap-3 text-sm text-white/80 border border-brand-border bg-brand-card w-fit px-5 py-3 rounded-full">
+                <div
+                    class="flex items-center gap-3 text-sm text-white/80 border border-brand-border bg-brand-card w-fit px-5 py-3 rounded-full">
                     <iconify-icon icon="solar:letter-linear" width="18" class="text-brand-gold"></iconify-icon>
-                    <a href="mailto:hola@apex-creative.com.mx" class="hover:text-white transition-colors">hola@apex-creative.com.mx</a>
+                    <a href="mailto:hola@apex-creative.com.mx"
+                        class="hover:text-white transition-colors">hola@apex-creative.com.mx</a>
                 </div>
             </div>
 
             <div class="bg-brand-card border border-brand-border rounded-3xl p-8 md:p-10">
                 <h3 class="font-serif text-3xl text-white mb-8 tracking-tight">Agenda una consulta</h3>
                 <form class="space-y-6">
-                    <div><input type="text" placeholder="Nombre completo" class="custom-input text-sm" required=""></div>
-                    <div><input type="email" placeholder="Correo electrónico" class="custom-input text-sm" required=""></div>
+                    <div><input type="text" placeholder="Nombre completo" class="custom-input text-sm" required="">
+                    </div>
+                    <div><input type="email" placeholder="Correo electrónico" class="custom-input text-sm" required="">
+                    </div>
                     <div><input type="text" placeholder="Empresa o negocio" class="custom-input text-sm"></div>
-                    <div><textarea placeholder="Cuéntanos brevemente sobre tu proyecto..." rows="3" class="custom-input text-sm resize-none" required=""></textarea></div>
-                    <button type="submit" class="w-full bg-white text-black text-sm font-medium py-4 rounded-full hover:bg-brand-gold transition-colors duration-300 mt-4 flex items-center justify-center gap-2">
+                    <div><textarea placeholder="Cuéntanos brevemente sobre tu proyecto..." rows="3"
+                            class="custom-input text-sm resize-none" required=""></textarea></div>
+                    <button type="submit"
+                        class="w-full bg-white text-black text-sm font-medium py-4 rounded-full hover:bg-brand-gold transition-colors duration-300 mt-4 flex items-center justify-center gap-2">
                         Enviar mensaje
                         <iconify-icon icon="solar:plain-linear" width="18"></iconify-icon>
                     </button>
@@ -391,8 +463,10 @@
             <div class="font-serif text-xl tracking-tighter text-white uppercase">APEX</div>
             <p class="text-xs text-white/40">© 2024 APEX Creative. Estrategia &amp; Diseño.</p>
             <div class="flex items-center gap-4 text-white/40">
-                <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:camera-linear" width="20"></iconify-icon></a>
-                <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:link-circle-linear" width="20"></iconify-icon></a>
+                <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:camera-linear"
+                        width="20"></iconify-icon></a>
+                <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:link-circle-linear"
+                        width="20"></iconify-icon></a>
             </div>
         </div>
     </footer>
@@ -401,17 +475,17 @@
     <script>
         const container = document.getElementById('three-canvas-container');
         const scene = new THREE.Scene();
-        
+
         // Setup Camera
         const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
         camera.position.z = 35;
-        
+
         // Setup Renderer
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio for performance
         container.appendChild(renderer.domElement);
-        
+
         // The detailed solid white logo SVG
         const svgString = `<?xml version="1.0" encoding="UTF-8"?>
         <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.14 30.94">
@@ -429,7 +503,7 @@
 
         let geometry, material, particleSystem;
         let particleCount = 0;
-        
+
         // Data arrays for morphing
         const logoPos = [];
         const randomPos = [];
@@ -444,11 +518,11 @@
         img.onload = () => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d', { willReadFrequently: true });
-            
-            const densityWidth = 220; 
+
+            const densityWidth = 220;
             const aspectRatio = 34.14 / 30.94;
             const densityHeight = densityWidth / aspectRatio;
-            
+
             canvas.width = densityWidth;
             canvas.height = densityHeight;
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -516,18 +590,18 @@
             const rect = container.getBoundingClientRect();
             let clientX = e.clientX - rect.left;
             let clientY = e.clientY - rect.top;
-            
+
             // Normalize mouse coordinates for the container
             mouse.x = (clientX / container.clientWidth) * 2 - 1;
             mouse.y = -(clientY / container.clientHeight) * 2 + 1;
-            
+
             raycaster.setFromCamera(mouse, camera);
             raycaster.ray.intersectPlane(plane, mouse3D);
         };
 
         window.addEventListener('mousemove', onPointerMove);
         window.addEventListener('touchmove', (e) => {
-            if(e.touches.length > 0) {
+            if (e.touches.length > 0) {
                 const rect = container.getBoundingClientRect();
                 let clientX = e.touches[0].clientX - rect.left;
                 let clientY = e.touches[0].clientY - rect.top;
@@ -550,10 +624,10 @@
             // We use half the window height so it morphs fully while the section is still sticky
             const scrollMax = window.innerHeight * 0.6;
             const scrollProgress = Math.min(window.scrollY / scrollMax, 1);
-            
+
             // Smooth easing curve (ease-in-out)
-            const easeProgress = scrollProgress < 0.5 
-                ? 2 * scrollProgress * scrollProgress 
+            const easeProgress = scrollProgress < 0.5
+                ? 2 * scrollProgress * scrollProgress
                 : 1 - Math.pow(-2 * scrollProgress + 2, 2) / 2;
 
             if (particleSystem) {
@@ -594,7 +668,7 @@
                         const dx = currentX - mouse3D.x;
                         const dy = currentY - mouse3D.y;
                         const dist2D = Math.sqrt(dx * dx + dy * dy);
-                        
+
                         if (dist2D < repelRadius) {
                             const force = Math.pow((repelRadius - dist2D) / repelRadius, 2);
                             // Push away from mouse
@@ -615,7 +689,7 @@
                     posArray[idx + 1] = currentY;
                     posArray[idx + 2] = currentZ;
                 }
-                
+
                 posAttr.needsUpdate = true;
             }
 
@@ -631,4 +705,6 @@
     </script>
 
 
-</body></html>
+</body>
+
+</html>
