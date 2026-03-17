@@ -1,4 +1,4 @@
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,6 @@
     <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="assets/animation/ScrollSmoother.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
@@ -90,10 +89,7 @@
         </div>
     </nav>
 
-    <div id="smooth-wrapper">
-        <div id="smooth-content">
-
-            <!-- 1. Hero Section -->
+    <!-- 1. Hero Section -->
     <section
         class="relative pt-40 pb-24 md:pt-52 md:pb-32 px-6 flex flex-col items-center text-center max-w-5xl mx-auto">
         <div
@@ -102,7 +98,7 @@
             Agencia Creativa &amp; Consultoría
         </div>
 
-        <h1 data-speed="0.85"
+        <h1
             class="hero-anim opacity-0 text-5xl md:text-7xl lg:text-[5rem] font-medium tracking-tight leading-[1.1] text-balance mb-8 text-white">
             No vendemos diseño.<br class="hidden md:block">
             Creamos negocios que <span
@@ -668,7 +664,7 @@
 
     <!-- 7 & 8. CTA & Contact Section -->
     <section id="contacto" class="py-24 px-6 w-full max-w-6xl mx-auto mb-10 border-t border-neutral-900">
-        <div data-speed="1.05"
+        <div
             class="section-anim invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 md:p-16 lg:p-24 flex flex-col lg:flex-row gap-16 justify-between items-center relative overflow-hidden shadow-sm">
 
             <!-- Subtle glow inside container -->
@@ -729,36 +725,10 @@
         </div>
     </footer>
 
-        </div> <!-- /#smooth-content -->
-    </div> <!-- /#smooth-wrapper -->
-
     <!-- GSAP Animations Script -->
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
-            gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
-            // Inicializar ScrollSmoother
-            const smoother = ScrollSmoother.create({
-                wrapper: '#smooth-wrapper',
-                content: '#smooth-content',
-                smooth: 1.5, // Duración de la inercia (suavidad)
-                effects: true, // Habilita data-speed y data-lag
-                smoothTouch: 0.1, // Suavidad en dispositivos móviles
-            });
-
-            // Smooth scroll en anclas (menú de navegación)
-            document.querySelectorAll('nav a[href^="#"], a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId && targetId !== '#') {
-                        const targetElement = document.querySelector(targetId);
-                        if(targetElement) {
-                            e.preventDefault();
-                            smoother.scrollTo(targetElement, true, "top top");
-                        }
-                    }
-                });
-            });
+            gsap.registerPlugin(ScrollTrigger);
 
             document.querySelectorAll('.invisible-until-scroll').forEach(el => {
                 el.classList.remove('invisible-until-scroll');
