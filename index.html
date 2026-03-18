@@ -24,6 +24,38 @@
         .invisible-until-scroll {
             visibility: hidden;
         }
+
+        /* Mejor rendimiento para tarjetas animadas */
+        .stacked-card {
+            will-change: transform, opacity;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            box-shadow: 0 -20px 40px -15px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.03) inset;
+        }
+
+        /* Reduce repaint cost */
+        .stacked-cards-wrapper {
+            position: relative;
+        }
+
+        /* Opcional: desactivar suavizado pesado en móvil */
+        @media (max-width: 768px) {
+            .stacked-card {
+                will-change: auto;
+            }
+        }
+
+        /* Accesibilidad + performance */
+        @media (prefers-reduced-motion: reduce) {
+            .stacked-card,
+            .hero-anim,
+            .section-anim,
+            .stagger-item {
+                transition: none !important;
+                animation: none !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -135,106 +167,77 @@
                 </div>
 
                 <div class="stacked-cards-wrapper w-full pb-[10vh]">
-                    <!-- Branding -->
-                    <div
-                        class="stacked-card w-full mb-[15vh] md:mb-[30vh] rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.6)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
-                        <div class="flex-1">
-                            <div
-                                class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
-                                <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5"
-                                    class="text-3xl"></iconify-icon>
-                            </div>
-                            <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Branding</h3>
-                            <p class="text-neutral-400 font-normal leading-relaxed text-lg">Creamos identidades visuales
-                                memorables, sólidas y orientadas a captar la atención de tu cliente ideal, construyendo
-                                marcas que expresan verdadero valor.</p>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center">
-                            <ul
-                                class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Identidad visual
-                                </li>
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Diseño de marca y logotipos
-                                </li>
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Estrategia creativa /
-                                    comunicación
-                                </li>
-                            </ul>
-                        </div>
+            <!-- Branding -->
+            <div class="stacked-card w-full mb-[15vh] md:mb-[30vh] rounded-[2rem] border border-neutral-800 bg-neutral-950/95 p-8 md:p-14 flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+                <div class="flex-1">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
+                        <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
                     </div>
+                    <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Branding</h3>
+                    <p class="text-neutral-400 font-normal leading-relaxed text-lg">Creamos identidades visuales memorables, sólidas y orientadas a captar la atención de tu cliente ideal, construyendo marcas que expresan verdadero valor.</p>
+                </div>
+                <div class="flex-1 flex flex-col justify-center">
+                    <ul class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Identidad visual
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Diseño de marca y logotipos
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Estrategia creativa / comunicación
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-                    <!-- Consultoría -->
-                    <div
-                        class="stacked-card w-full mb-[15vh] md:mb-[30vh] rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
-                        <div class="flex-1">
-                            <div
-                                class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
-                                <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5"
-                                    class="text-3xl"></iconify-icon>
-                            </div>
-                            <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
-                            <p class="text-neutral-400 font-normal leading-relaxed text-lg">Desarrollamos soluciones y
-                                planes de acción específicos para optimizar tu presencia comercial y asegurar de que
-                                estás enviando el mensaje correcto.</p>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center">
-                            <ul
-                                class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Estrategia para negocios
-                                </li>
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Optimización de marketing
-                                </li>
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Crecimiento comercial
-                                </li>
-                            </ul>
-                        </div>
+            <!-- Consultoría -->
+            <div class="stacked-card w-full mb-[15vh] md:mb-[30vh] rounded-[2rem] border border-neutral-800 bg-neutral-950/95 p-8 md:p-14 flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+                <div class="flex-1">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
+                        <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
                     </div>
+                    <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
+                    <p class="text-neutral-400 font-normal leading-relaxed text-lg">Desarrollamos soluciones y planes de acción específicos para optimizar tu presencia comercial y asegurar de que estás enviando el mensaje correcto.</p>
+                </div>
+                <div class="flex-1 flex flex-col justify-center">
+                    <ul class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Estrategia para negocios
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Optimización de marketing
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Crecimiento comercial
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-                    <!-- Impresión Creativa -->
-                    <div
-                        class="stacked-card w-full rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.95)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
-                        <div class="flex-1">
-                            <div
-                                class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
-                                <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5"
-                                    class="text-3xl"></iconify-icon>
-                            </div>
-                            <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Impresión
-                                creativa</h3>
-                            <p class="text-neutral-400 font-normal leading-relaxed text-lg">Llevamos tu marca al mundo
-                                físico con materiales de alta gama, acabados especiales y papeles premium que transmiten
-                                calidad al tacto.</p>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center">
-                            <ul
-                                class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Papelería premium
-                                </li>
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Tarjetas de marca
-                                </li>
-                                <li class="flex items-center gap-4">
-                                    <iconify-icon icon="solar:check-circle-linear"
-                                        class="text-neutral-500 text-xl"></iconify-icon> Material POP y Empaques
-                                </li>
-                            </ul>
-                        </div>
+            <!-- Impresión Creativa -->
+            <div class="stacked-card w-full rounded-[2rem] border border-neutral-800 bg-neutral-950/95 p-8 md:p-14 flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+                <div class="flex-1">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
+                        <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
                     </div>
+                    <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Impresión creativa</h3>
+                    <p class="text-neutral-400 font-normal leading-relaxed text-lg">Llevamos tu marca al mundo físico con materiales de alta gama, acabados especiales y papeles premium que transmiten calidad al tacto.</p>
+                </div>
+                <div class="flex-1 flex flex-col justify-center">
+                    <ul class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Papelería premium
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Tarjetas de marca
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Material POP y Empaques
+                        </li>
+                    </ul>
+                </div>
+            </div>
                 </div>
             </section>
 
@@ -809,19 +812,24 @@
 
     <!-- GSAP Animations Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
+        document.addEventListener("DOMContentLoaded", () => {
             gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-            // 1. Inicializar ScrollSmoother
-            const smoother = ScrollSmoother.create({
-                wrapper: '#smooth-wrapper',
-                content: '#smooth-content',
-                smooth: 1.5,               // Tiempo para que el contenido alcance la posición (suavidad)
-                effects: true,             // Habilitar atributos data-speed y data-lag
-                smoothTouch: 0.1           // Mucho más rápido y responsivo en móviles
-            });
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-            // 2. Revelar elementos ocultos
+            // ScrollSmoother: menos agresivo y opcional en móvil
+            let smoother = null;
+            if (!prefersReducedMotion) {
+                smoother = ScrollSmoother.create({
+                    wrapper: '#smooth-wrapper',
+                    content: '#smooth-content',
+                    smooth: isMobile ? 0 : 1.1,
+                    effects: !isMobile,
+                    smoothTouch: 0
+                });
+            }
+
             document.querySelectorAll('.invisible-until-scroll').forEach(el => {
                 el.classList.remove('invisible-until-scroll');
                 el.style.opacity = '0';
@@ -832,43 +840,40 @@
                 {
                     y: 0,
                     opacity: 1,
-                    duration: 1.2,
-                    stagger: 0.15,
+                    duration: 1,
+                    stagger: 0.12,
                     ease: "power3.out",
                     delay: 0.1
                 }
             );
 
-            // 3. Efecto creativo al scrollear hacia abajo (Hero Exit Animation)
-            // Aplica opacidad, escala, y blur de forma escalonada cuando el usuario comienza a bajar
-            gsap.to("#hero-section .hero-anim", {
+            // Depuración de Hero Scroll
+            // En vez de animar a los hijos (que están siendo controlados en la carga), animamos al contenedor general:
+            gsap.to("#hero-section", {
                 scrollTrigger: {
                     trigger: "#hero-section",
                     start: "top top",
                     end: "bottom top",
-                    scrub: 1.5,
+                    scrub: 1
                 },
                 opacity: 0,
-                y: -60,
-                scale: 0.9,
-                filter: "blur(5px)", // Efecto premium de desenfoque al alejarse
-                stagger: 0.05,
-                ease: "power1.inOut"
+                y: -40,
+                scale: 0.96,
+                ease: "none"
             });
-
 
             gsap.utils.toArray('.section-anim').forEach(section => {
                 gsap.fromTo(section,
-                    { y: 40, opacity: 0 },
+                    { y: 32, opacity: 0 },
                     {
                         scrollTrigger: {
                             trigger: section,
-                            start: "top 85%",
+                            start: "top 85%"
                         },
                         y: 0,
                         opacity: 1,
-                        duration: 1,
-                        ease: "power3.out"
+                        duration: 0.8,
+                        ease: "power2.out"
                     }
                 );
             });
@@ -876,59 +881,95 @@
             gsap.utils.toArray('.stagger-container').forEach(container => {
                 const items = container.querySelectorAll('.stagger-item');
                 gsap.fromTo(items,
-                    { y: 40, opacity: 0 },
+                    { y: 28, opacity: 0 },
                     {
                         scrollTrigger: {
                             trigger: container,
-                            start: "top 80%",
+                            start: "top 82%"
                         },
                         y: 0,
                         opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.15,
+                        duration: 0.7,
+                        stagger: 0.12,
                         ease: "power2.out"
                     }
                 );
             });
 
-            // 4. Efecto de "Stacked Cards" para la sección Qué Hacemos
-            const stackedCards = gsap.utils.toArray('.stacked-card');
+            // ===== STACKED CARDS OPTIMIZADAS =====
+            const cards = gsap.utils.toArray(".stacked-card");
+            const wrapper = document.querySelector(".stacked-cards-wrapper");
 
-            stackedCards.forEach((card, i) => {
-                // Animación de entrada inicial para cada tarjeta
-                gsap.fromTo(card,
-                    { y: 60, opacity: 0 },
-                    {
-                        y: 0, opacity: 1, duration: 1, ease: "power3.out",
-                        scrollTrigger: { trigger: card, start: "top 85%" }
+            // Entrada simple
+            gsap.fromTo(cards,
+                { y: 40, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.7,
+                    stagger: 0.08,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: wrapper,
+                        start: "top 80%"
                     }
-                );
+                }
+            );
 
-                // Fijar (Pin) cada tarjeta para crear el efecto de que se esconden una detrás de otra
-                // Esto es fundamental si usamos ScrollSmoother, ya que anula el "sticky" clásico del CSS
-                ScrollTrigger.create({
-                    trigger: card,
-                    start: "top 100px",
-                    endTrigger: ".stacked-cards-wrapper",
-                    end: "bottom top",
-                    pin: true,
-                    pinSpacing: false, // No empuja los elementos, permite que se superpongan!
+            // En móvil: sin pinning complejo
+            if (isMobile || prefersReducedMotion) {
+                cards.forEach((card, i) => {
+                    if (i === cards.length - 1) return;
+                    gsap.to(card, {
+                        scale: 0.97,
+                        opacity: 0.75,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: cards[i + 1],
+                            start: "top 92%",
+                            end: "top 72%",
+                            scrub: true
+                        }
+                    });
                 });
 
-                if (i === stackedCards.length - 1) return; // La última tarjeta no se achica
+                ScrollTrigger.refresh();
+                return;
+            }
 
-                // Efecto "Stacked": se encoge, pierde brillo y se desenfoca cuando la SIGUIENTE llega
-                gsap.to(card, {
-                    scale: 0.94 - (stackedCards.length - 1 - i) * 0.02,
-                    filter: "brightness(0.3) blur(4px)",
-                    scrollTrigger: {
-                        trigger: stackedCards[i + 1],
-                        start: "top 95%",    // Inicia cuando la SIGUIENTE tarjeta aparece
-                        end: "top 100px",      // Termina cuando la SIGUIENTE tarjeta se encaja arriba
-                        scrub: true,
-                    }
+            // Desktop: un solo pin maestro
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: "top 120px",
+                    end: `+=${cards.length * 420}`,
+                    scrub: 0.8,
+                    pin: true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true
+                }
+            });
+
+            cards.forEach((card, i) => {
+                if (i === cards.length - 1) return;
+
+                tl.to(card, {
+                    y: -20,
+                    scale: 0.94 - (i * 0.02),
+                    opacity: 0.55,
+                    ease: "none",
+                    duration: 1
+                }, i);
+            });
+
+            // Profundidad visual sutil sin blur
+            cards.forEach((card, i) => {
+                gsap.set(card, {
+                    zIndex: cards.length - i
                 });
             });
+
+            ScrollTrigger.refresh();
         });
     </script>
 
