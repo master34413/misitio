@@ -268,9 +268,11 @@
             <!-- 3. Resultados / Portafolio Section -->
             <section id="portafolio"
                 class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900 bg-black relative z-20">
-                <div class="section-anim invisible-until-scroll mb-16">
-                    <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Portafolio</h2>
-                    <p class="text-sm text-neutral-400 font-normal">Trabajos fuertes. Resultados reales.</p>
+                <div class="section-anim invisible-until-scroll mb-20 overflow-hidden text-center">
+                    <h2 class="text-6xl md:text-8xl lg:text-[9rem] font-bold tracking-tighter uppercase leading-[0.85] text-white flex flex-col items-center">
+                        <span class="push-pull-left w-full text-left pl-[2%]">TRABAJOS</span>
+                        <span class="push-pull-right w-full text-right pr-[2%] text-neutral-600">REALES.</span>
+                    </h2>
                 </div>
 
                 <div class="stagger-container grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
@@ -388,10 +390,12 @@
 
             <!-- 4. Cómo trabajamos Section -->
             <section id="metodo" class="pt-24 pb-16 px-6 w-full max-w-4xl mx-auto border-t border-neutral-900">
-                <h2
-                    class="section-anim invisible-until-scroll text-3xl md:text-4xl font-medium tracking-tight text-center text-white mb-20">
-                    Cómo trabajamos</h2>
-
+                <div class="section-anim invisible-until-scroll mb-20 md:mb-28 overflow-hidden">
+                    <h2 class="text-6xl md:text-8xl lg:text-[9rem] font-bold tracking-tighter uppercase leading-[0.85] text-white flex flex-col items-center">
+                        <span class="push-pull-left w-full text-left pl-[2%]">CÓMO</span>
+                        <span class="push-pull-right w-full text-right pr-[2%] text-neutral-600">TRABAJAMOS.</span>
+                    </h2>
+                </div>
                 <div class="stagger-container flex flex-col gap-12 md:gap-16 relative mb-24">
                     <!-- Connecting line for desktop -->
                     <div class="hidden md:block absolute left-[2.25rem] top-4 bottom-12 w-px bg-neutral-800"></div>
@@ -778,9 +782,9 @@
                     </div>
 
                     <div class="max-w-lg relative z-10 w-full text-center lg:text-left">
-                        <h2
-                            class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] text-white mb-6 text-balance">
-                            Donde intervenimos,<br> <span class="text-neutral-500">aparece la estrella.</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] text-white mb-6 overflow-hidden flex flex-col">
+                            <span class="push-pull-left block w-full text-left">Donde intervenimos,</span>
+                            <span class="push-pull-right block w-full text-left pr-[5%] text-neutral-500">aparece la estrella.</span>
                         </h2>
                         <p class="text-base text-neutral-400 font-normal mb-8 text-balance">
                             Escríbenos directamente a <a href="mailto:hola@apex-creative.com.mx"
@@ -954,6 +958,46 @@
                     }
                 );
             });
+
+            // ===== SCROLLING TEXT ANIMATION INVERT SCRUB (Push-Pull dinámico en Títulos) =====
+            const pushPullLefts = gsap.utils.toArray('.push-pull-left');
+            const pushPullRights = gsap.utils.toArray('.push-pull-right');
+
+            if (!prefersReducedMotion) {
+                // Títulos que se mueven hacia la izquierda (Scrub)
+                pushPullLefts.forEach((el) => {
+                    gsap.fromTo(el, 
+                        { x: "5vw" }, 
+                        {
+                            x: "-5vw",
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: el.parentElement,
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: 1
+                            }
+                        }
+                    );
+                });
+
+                // Efecto Inverso: Títulos que se mueven hacia la derecha (Push-pull sync)
+                pushPullRights.forEach((el) => {
+                    gsap.fromTo(el, 
+                        { x: "-5vw" }, 
+                        {
+                            x: "5vw",
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: el.parentElement,
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: 1
+                            }
+                        }
+                    );
+                });
+            }
 
             ScrollTrigger.refresh();
         });
