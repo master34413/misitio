@@ -122,86 +122,83 @@
     </section>
 
     <!-- 2. Qué hacemos Section -->
-    <section id="servicios" class="py-24 px-6 w-full max-w-6xl mx-auto">
-        <div
-            class="section-anim invisible-until-scroll mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white">Qué hacemos</h2>
-            <p class="text-sm text-neutral-400 max-w-xs font-normal">Soluciones estratégicas divididas en tres bloques
-                simples.</p>
+    <section id="servicios" class="py-24 px-6 w-full max-w-5xl mx-auto relative z-10">
+        <div class="section-anim invisible-until-scroll mb-16 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-white">Qué hacemos</h2>
+            <p class="text-base text-neutral-400 max-w-sm font-normal">Soluciones estratégicas diseñadas para posicionarte como referente, divididas en tres bloques simples.</p>
         </div>
 
-        <div class="stagger-container grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="stacked-cards-wrapper flex flex-col gap-[15vh] md:gap-[30vh] w-full pb-[10vh]">
             <!-- Branding -->
-            <div
-                class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50">
-                <div
-                    class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
-                    <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+            <div class="stacked-card sticky top-32 w-full rounded-[2rem] border border-neutral-800 bg-[#000000] p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.6)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+                <div class="flex-1">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-8 text-white shadow-inner">
+                        <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Branding</h3>
+                    <p class="text-neutral-400 font-normal leading-relaxed text-lg">Creamos identidades visuales memorables, sólidas y orientadas a captar la atención de tu cliente ideal, construyendo marcas que expresan verdadero valor.</p>
                 </div>
-                <h3 class="text-xl font-medium tracking-tight mb-4 text-white">Branding</h3>
-                <ul class="space-y-3 text-sm text-neutral-400 font-normal">
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Identidad visual
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Diseño de marca
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Estrategia creativa
-                    </li>
-                </ul>
+                <div class="flex-1 flex flex-col justify-center">
+                    <ul class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Identidad visual
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Diseño de marca y logotipos
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Estrategia creativa / comunicación
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Consultoría -->
-            <div
-                class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50">
-                <div
-                    class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
-                    <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
+            <div class="stacked-card sticky top-32 w-full rounded-[2rem] border border-neutral-800 bg-[#0a0a0a] p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+                <div class="flex-1">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-8 text-white shadow-inner">
+                        <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
+                    <p class="text-neutral-400 font-normal leading-relaxed text-lg">Desarrollamos soluciones y planes de acción específicos para optimizar tu presencia comercial y asegurar de que estás enviando el mensaje correcto.</p>
                 </div>
-                <h3 class="text-xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
-                <ul class="space-y-3 text-sm text-neutral-400 font-normal">
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Estrategia para negocios
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Optimización de marketing
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Crecimiento comercial
-                    </li>
-                </ul>
+                <div class="flex-1 flex flex-col justify-center">
+                    <ul class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Estrategia para negocios
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Optimización de marketing
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Crecimiento comercial
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Impresión Creativa -->
-            <div
-                class="stagger-item invisible-until-scroll rounded-xl border border-neutral-800 bg-neutral-950 p-8 text-neutral-50 shadow-sm transition-colors hover:bg-neutral-900/50">
-                <div
-                    class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
-                    <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5"
-                        class="text-xl"></iconify-icon>
+            <div class="stacked-card sticky top-32 w-full rounded-[2rem] border border-neutral-800 bg-[#121212] p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.95)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+                <div class="flex-1">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-8 text-white shadow-inner">
+                        <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Impresión creativa</h3>
+                    <p class="text-neutral-400 font-normal leading-relaxed text-lg">Llevamos tu marca al mundo físico con materiales de alta gama, acabados especiales y papeles premium que transmiten calidad al tacto.</p>
                 </div>
-                <h3 class="text-xl font-medium tracking-tight mb-4 text-white">Impresión creativa</h3>
-                <ul class="space-y-3 text-sm text-neutral-400 font-normal">
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Papelería premium
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Tarjetas de marca
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                            class="text-neutral-500"></iconify-icon> Volantes que venden
-                    </li>
-                </ul>
+                <div class="flex-1 flex flex-col justify-center">
+                    <ul class="space-y-6 text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6 md:pl-10">
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Papelería premium
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Tarjetas de marca
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <iconify-icon icon="solar:check-circle-linear" class="text-neutral-500 text-xl"></iconify-icon> Material POP y Empaques
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -813,6 +810,34 @@
                         ease: "power2.out"
                     }
                 );
+            });
+
+            // 4. Efecto de "Stacked Cards" para la sección Qué Hacemos
+            const stackedCards = gsap.utils.toArray('.stacked-card');
+            
+            stackedCards.forEach((card, i) => {
+                // Animación de entrada inicial para cada tarjeta
+                gsap.fromTo(card, 
+                    { y: 60, opacity: 0 },
+                    { 
+                        y: 0, opacity: 1, duration: 1, ease: "power3.out",
+                        scrollTrigger: { trigger: card, start: "top 85%" }
+                    }
+                );
+
+                if (i === stackedCards.length - 1) return; // La última tarjeta no se achica
+                
+                // Efecto "Stacked": se encoge, pierde brillo y se desenfoca cuando la SIGUIENTE llega
+                gsap.to(card, {
+                    scale: 0.94 - (stackedCards.length - 1 - i) * 0.02,
+                    filter: "brightness(0.4) blur(3px)",
+                    scrollTrigger: {
+                        trigger: stackedCards[i + 1],
+                        start: "top 85%",    // Inicia cuando la SIGUIENTE tarjeta aparece
+                        end: "top 25%",      // Termina cuando la SIGUIENTE tarjeta se encaja arriba
+                        scrub: true,
+                    }
+                });
             });
         });
     </script>
