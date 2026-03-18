@@ -128,11 +128,11 @@
             <p class="text-base text-neutral-400 max-w-sm font-normal">Soluciones estratégicas diseñadas para posicionarte como referente, divididas en tres bloques simples.</p>
         </div>
 
-        <div class="stacked-cards-wrapper flex flex-col gap-[15vh] md:gap-[30vh] w-full pb-[10vh]">
+        <div class="stacked-cards-wrapper w-full pb-[10vh]">
             <!-- Branding -->
-            <div class="stacked-card sticky top-32 w-full rounded-[2rem] border border-neutral-800 bg-[#000000] p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.6)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+            <div class="stacked-card w-full mb-[15vh] md:mb-[30vh] rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.6)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
                 <div class="flex-1">
-                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-8 text-white shadow-inner">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
                         <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
                     </div>
                     <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Branding</h3>
@@ -154,9 +154,9 @@
             </div>
 
             <!-- Consultoría -->
-            <div class="stacked-card sticky top-32 w-full rounded-[2rem] border border-neutral-800 bg-[#0a0a0a] p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+            <div class="stacked-card w-full mb-[15vh] md:mb-[30vh] rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
                 <div class="flex-1">
-                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-8 text-white shadow-inner">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
                         <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
                     </div>
                     <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
@@ -178,9 +178,9 @@
             </div>
 
             <!-- Impresión Creativa -->
-            <div class="stacked-card sticky top-32 w-full rounded-[2rem] border border-neutral-800 bg-[#121212] p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.95)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
+            <div class="stacked-card w-full rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-14 shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.95)] flex flex-col md:flex-row gap-10 md:gap-20 origin-top">
                 <div class="flex-1">
-                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-8 text-white shadow-inner">
+                    <div class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
                         <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5" class="text-3xl"></iconify-icon>
                     </div>
                     <h3 class="text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white">Impresión creativa</h3>
@@ -204,7 +204,7 @@
     </section>
 
     <!-- 3. Resultados / Portafolio Section -->
-    <section id="portafolio" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
+    <section id="portafolio" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900 bg-black relative z-20">
         <div class="section-anim invisible-until-scroll mb-16">
             <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Portafolio</h2>
             <p class="text-sm text-neutral-400 font-normal">Trabajos fuertes. Resultados reales.</p>
@@ -825,16 +825,27 @@
                     }
                 );
 
+                // Fijar (Pin) cada tarjeta para crear el efecto de que se esconden una detrás de otra
+                // Esto es fundamental si usamos ScrollSmoother, ya que anula el "sticky" clásico del CSS
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 100px",
+                    endTrigger: ".stacked-cards-wrapper",
+                    end: "bottom top",
+                    pin: true,
+                    pinSpacing: false, // No empuja los elementos, permite que se superpongan!
+                });
+
                 if (i === stackedCards.length - 1) return; // La última tarjeta no se achica
                 
                 // Efecto "Stacked": se encoge, pierde brillo y se desenfoca cuando la SIGUIENTE llega
                 gsap.to(card, {
                     scale: 0.94 - (stackedCards.length - 1 - i) * 0.02,
-                    filter: "brightness(0.4) blur(3px)",
+                    filter: "brightness(0.3) blur(4px)",
                     scrollTrigger: {
                         trigger: stackedCards[i + 1],
-                        start: "top 85%",    // Inicia cuando la SIGUIENTE tarjeta aparece
-                        end: "top 25%",      // Termina cuando la SIGUIENTE tarjeta se encaja arriba
+                        start: "top 95%",    // Inicia cuando la SIGUIENTE tarjeta aparece
+                        end: "top 100px",      // Termina cuando la SIGUIENTE tarjeta se encaja arriba
                         scrub: true,
                     }
                 });
