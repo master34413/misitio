@@ -47,7 +47,7 @@
 
         /* Estrella Flotante 3D Actualizada */
         #floating-star {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             z-index: 100;
@@ -68,13 +68,6 @@
 
 <body
     class="selection:bg-neutral-800 selection:text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden">
-
-    <!-- Estrella Flotante 3D -->
-    <div id="floating-star">
-        <svg id="star-svg" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.45 21.16">
-            <path class="cls-1" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.55" d="M10.96,19.88c-.17.01-.31.03-.47-.07-.47-.3-1.33-6.07-1.88-6.96l-7.34-1.96.11-.39,7.08-1.73c.65-.84,1.55-7.36,2.12-7.49.3-.07.42.38.5.58.47,1.21,1.1,6.23,1.66,6.8l7.45,2.08-7.45,2.07-1.77,7.07Z"/>
-        </svg>
-    </div>
 
     <!-- Ambient Background Glow -->
     <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
@@ -139,6 +132,13 @@
     <!-- GSAP ScrollSmoother Wrappers -->
     <div id="smooth-wrapper">
         <div id="smooth-content">
+
+            <!-- Estrella Flotante 3D -->
+            <div id="floating-star">
+                <svg id="star-svg" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.45 21.16">
+                    <path class="cls-1" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.55" d="M10.96,19.88c-.17.01-.31.03-.47-.07-.47-.3-1.33-6.07-1.88-6.96l-7.34-1.96.11-.39,7.08-1.73c.65-.84,1.55-7.36,2.12-7.49.3-.07.42.38.5.58.47,1.21,1.1,6.23,1.66,6.8l7.45,2.08-7.45,2.07-1.77,7.07Z"/>
+                </svg>
+            </div>
 
             <!-- 1. Hero Section -->
             <section id="hero-section"
@@ -688,8 +688,10 @@
                         <h2
                             class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] text-white mb-6 overflow-hidden flex flex-col">
                             <span class="push-pull-left block w-full text-left">Donde intervenimos,</span>
-                            <span class="push-pull-right block w-full text-left pr-[5%] text-neutral-500">aparece la
-                                estrella.</span>
+                            <span class="push-pull-right block w-full text-left pr-[5%] text-neutral-500 flex items-center">
+                                aparece la estrella. 
+                                <span id="star-destination" class="inline-block w-8 h-8 md:w-12 md:h-12 ml-3 md:ml-4 shrink-0"></span>
+                            </span>
                         </h2>
                         <p class="text-base text-neutral-400 font-normal mb-8 text-balance">
                             Escríbenos directamente a <a href="mailto:hola@apex-creative.com.mx"
@@ -904,86 +906,104 @@
                 });
             }
 
-            // ===== ANIMACIÓN ESTRELLA FLOTANTE 3D =====
+            // ===== ANIMACIÓN ESTRELLA FLOTANTE 3D (ANCLAJE MATEMÁTICO) =====
 
-            // 1. Giro constante en bucle infinito
-            gsap.to("#star-svg", {
-                rotationY: 360,
-                repeat: -1,
-                duration: 2.5,
-                ease: "linear",
-                transformOrigin: "50% 50%"
-            });
+            // 1. Giro constante
+            gsap.to("#star-svg", { rotationY: 360, repeat: -1, duration: 2.5, ease: "linear", transformOrigin: "50% 50%" });
 
-            // 2. FUNCIÓN CLAVE: Alinear con el logo de APEX
+            // 2. Localizar el origen (logo) y el destino (ancla)
             const logoOriginal = document.querySelector("nav svg#Capa_2");
+            const starDestination = document.querySelector("#star-destination");
 
-            function setStartPos() {
+            // Función para leer coordenadas sumando el scroll
+            function getAbsoluteCoords(element) {
+                if (!element) return { x: 0, y: 0, width: 0, height: 0 };
+                const rect = element.getBoundingClientRect();
+                return {
+                    x: rect.left + window.scrollX,
+                    y: rect.top + window.scrollY,
+                    width: rect.width,
+                    height: rect.height
+                };
+            }
+
+            // 3. Posicionar la estrella en el logo antes de hacer scroll
+            function resetStarPosition() {
                 if (!logoOriginal) return;
-                
-                // Leemos las coordenadas exactas del logo en la pantalla
-                const rect = logoOriginal.getBoundingClientRect();
-                
-                // Colocamos la estrella flotante sobre el logo original
+                const startPos = getAbsoluteCoords(logoOriginal);
                 gsap.set("#floating-star", {
-                    x: rect.left,
-                    y: rect.top,
-                    width: rect.width,   // Toma el mismo ancho del logo
-                    height: rect.height  // Toma el mismo alto del logo
+                    x: startPos.x,
+                    y: startPos.y,
+                    width: startPos.width,
+                    height: startPos.height
                 });
             }
 
-            // Ejecutamos al cargar la página y si el usuario cambia el tamaño de la ventana
-            setStartPos();
-            window.addEventListener("resize", setStartPos);
+            // Usamos window.load para garantizar que el CSS/fuentes cargaron y las medidas son exactas
+            window.addEventListener("load", () => {
+                resetStarPosition();
 
+                let mm = gsap.matchMedia();
 
-            // 3. Viaje atado al Scroll
-            let mm = gsap.matchMedia();
+                // RUTA ESCRITORIO
+                mm.add("(min-width: 768px)", () => {
+                    let starJourney = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: "body", 
+                            start: "top top",
+                            endTrigger: "#contacto", 
+                            end: "center center",
+                            scrub: 1.5,
+                            invalidateOnRefresh: true // Recalcula si cambia el tamaño de la ventana
+                        }
+                    });
 
-            // RUTA DESKTOP
-            mm.add("(min-width: 768px)", () => {
-                let starJourney = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body", 
-                        start: "top top",
-                        endTrigger: "#contacto", // Finaliza en la sección de contacto
-                        end: "center center",
-                        scrub: 1.5
-                    }
+                    starJourney
+                        .to("#floating-star", { opacity: 1, duration: 0.05 }) // Aparece encima del logo
+                        
+                        // Viaje usando el 30%, 60% y 85% de la distancia total hacia el destino
+                        .to("#floating-star", { x: () => window.innerWidth * 0.7, y: () => getAbsoluteCoords(starDestination).y * 0.3, scale: 3.5, duration: 1 })
+                        .to("#floating-star", { x: () => window.innerWidth * 0.15, y: () => getAbsoluteCoords(starDestination).y * 0.6, scale: 2.5, duration: 1.5 })
+                        .to("#floating-star", { x: () => window.innerWidth * 0.6, y: () => getAbsoluteCoords(starDestination).y * 0.85, scale: 4, duration: 1.5 })
+                        
+                        // ATERRIZAJE PERFECTO
+                        .to("#floating-star", { 
+                            x: () => getAbsoluteCoords(starDestination).x, 
+                            y: () => getAbsoluteCoords(starDestination).y, 
+                            width: () => getAbsoluteCoords(starDestination).width, 
+                            height: () => getAbsoluteCoords(starDestination).height, 
+                            scale: 1, 
+                            duration: 1 
+                        });
                 });
 
-                starJourney
-                    // Aparece exactamente en las coordenadas calculadas
-                    .to("#floating-star", { opacity: 1, duration: 0.05 })
-                    
-                    // Empieza a desprenderse y viajar (los valores x/y controlan la ruta por la pantalla)
-                    .to("#floating-star", { x: "35vw", y: "25vh", scale: 3.5, duration: 1 })
-                    .to("#floating-star", { x: "15vw", y: "50vh", scale: 2.5, duration: 1.5 })
-                    .to("#floating-star", { x: "70vw", y: "70vh", scale: 4, duration: 1.5 })
-                    
-                    // Aterrizaje final: Ajusta estos valores para que quede justo al lado de tu texto
-                    .to("#floating-star", { x: "50vw", y: "85vh", scale: 8, duration: 1 });
-            });
+                // RUTA MÓVIL
+                mm.add("(max-width: 767px)", () => {
+                    let starJourneyMobile = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: "body", start: "top top", endTrigger: "#contacto", end: "center center", scrub: 1.5, invalidateOnRefresh: true
+                        }
+                    });
 
-            // RUTA MÓVIL
-            mm.add("(max-width: 767px)", () => {
-                let starJourneyMobile = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        start: "top top",
-                        endTrigger: "#contacto",
-                        end: "center center",
-                        scrub: 1.5
-                    }
+                    starJourneyMobile
+                        .to("#floating-star", { opacity: 1, duration: 0.05 })
+                        .to("#floating-star", { x: () => window.innerWidth * 0.7, y: () => getAbsoluteCoords(starDestination).y * 0.3, scale: 2.5, duration: 1 })
+                        .to("#floating-star", { x: () => window.innerWidth * 0.1, y: () => getAbsoluteCoords(starDestination).y * 0.6, scale: 2, duration: 1.5 })
+                        // ATERRIZAJE PERFECTO MÓVIL
+                        .to("#floating-star", { 
+                            x: () => getAbsoluteCoords(starDestination).x, 
+                            y: () => getAbsoluteCoords(starDestination).y, 
+                            width: () => getAbsoluteCoords(starDestination).width, 
+                            height: () => getAbsoluteCoords(starDestination).height, 
+                            scale: 1, duration: 1 
+                        });
                 });
 
-                starJourneyMobile
-                    .to("#floating-star", { opacity: 1, duration: 0.05 })
-                    .to("#floating-star", { x: "70vw", y: "20vh", scale: 2.5, duration: 1 })
-                    .to("#floating-star", { x: "10vw", y: "40vh", scale: 2, duration: 1.5 })
-                    .to("#floating-star", { x: "50vw", y: "60vh", scale: 3, duration: 1.5 })
-                    .to("#floating-star", { x: "50vw", y: "85vh", scale: 5, duration: 1 });
+                // Mantiene la precisión al cambiar el tamaño de la ventana o rotar el teléfono
+                window.addEventListener("resize", () => {
+                    resetStarPosition();
+                    ScrollTrigger.refresh();
+                });
             });
 
             ScrollTrigger.refresh();
