@@ -267,7 +267,8 @@
             <!-- 4. Cómo trabajamos Section -->
             <section id="metodo" class="pt-24 pb-16 px-6 w-full max-w-4xl mx-auto border-t border-neutral-900">
                 <div class="section-anim invisible-until-scroll mb-20 md:mb-28 overflow-hidden">
-                    <h2 class="text-5xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter uppercase leading-[0.85] text-white flex flex-col items-center">
+                    <h2
+                        class="text-5xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter uppercase leading-[0.85] text-white flex flex-col items-center">
                         <span class="push-pull-left w-full text-left pl-[2%]">CÓMO</span>
                         <span class="push-pull-right w-full text-right pr-[2%] text-neutral-600">TRABAJAMOS.</span>
                     </h2>
@@ -658,9 +659,11 @@
                     </div>
 
                     <div class="max-w-lg relative z-10 w-full text-center lg:text-left">
-                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] text-white mb-6 overflow-hidden flex flex-col">
+                        <h2
+                            class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] text-white mb-6 overflow-hidden flex flex-col">
                             <span class="push-pull-left block w-full text-left">Donde intervenimos,</span>
-                            <span class="push-pull-right block w-full text-left pr-[5%] text-neutral-500">aparece la estrella.</span>
+                            <span class="push-pull-right block w-full text-left pr-[5%] text-neutral-500">aparece la
+                                estrella.</span>
                         </h2>
                         <p class="text-base text-neutral-400 font-normal mb-8 text-balance">
                             Escríbenos directamente a <a href="mailto:hola@apex-creative.com.mx"
@@ -842,8 +845,8 @@
             if (!prefersReducedMotion) {
                 // Títulos que se mueven hacia la izquierda (Scrub)
                 pushPullLefts.forEach((el) => {
-                    gsap.fromTo(el, 
-                        { x: "5vw" }, 
+                    gsap.fromTo(el,
+                        { x: "5vw" },
                         {
                             x: "-5vw",
                             ease: "none",
@@ -859,8 +862,8 @@
 
                 // Efecto Inverso: Títulos que se mueven hacia la derecha (Push-pull sync)
                 pushPullRights.forEach((el) => {
-                    gsap.fromTo(el, 
-                        { x: "-5vw" }, 
+                    gsap.fromTo(el,
+                        { x: "-5vw" },
                         {
                             x: "5vw",
                             ease: "none",
