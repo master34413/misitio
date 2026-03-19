@@ -45,15 +45,13 @@
             }
         }
 
-        /* Estrella Flotante 3D */
+        /* Estrella Flotante 3D Actualizada */
         #floating-star {
             position: fixed;
-            top: 48px; 
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
             z-index: 100;
-            width: 24px;
-            height: 24px;
+            /* Quitamos el left y transform anteriores */
             pointer-events: none;
             opacity: 0;
             filter: drop-shadow(0px 10px 20px rgba(255, 255, 255, 0.3));
@@ -917,7 +915,30 @@
                 transformOrigin: "50% 50%"
             });
 
-            // 2. Viaje creativo atado al Scroll
+            // 2. FUNCIÓN CLAVE: Alinear con el logo de APEX
+            const logoOriginal = document.querySelector("nav svg#Capa_2");
+
+            function setStartPos() {
+                if (!logoOriginal) return;
+                
+                // Leemos las coordenadas exactas del logo en la pantalla
+                const rect = logoOriginal.getBoundingClientRect();
+                
+                // Colocamos la estrella flotante sobre el logo original
+                gsap.set("#floating-star", {
+                    x: rect.left,
+                    y: rect.top,
+                    width: rect.width,   // Toma el mismo ancho del logo
+                    height: rect.height  // Toma el mismo alto del logo
+                });
+            }
+
+            // Ejecutamos al cargar la página y si el usuario cambia el tamaño de la ventana
+            setStartPos();
+            window.addEventListener("resize", setStartPos);
+
+
+            // 3. Viaje atado al Scroll
             let mm = gsap.matchMedia();
 
             // RUTA DESKTOP
@@ -926,23 +947,23 @@
                     scrollTrigger: {
                         trigger: "body", 
                         start: "top top",
-                        endTrigger: "#contacto", // Finaliza cuando llega a la sección de contacto
-                        end: "center center",    // Justo cuando el texto está en el centro
-                        scrub: 1.5               // Suavidad del seguimiento
+                        endTrigger: "#contacto", // Finaliza en la sección de contacto
+                        end: "center center",
+                        scrub: 1.5
                     }
                 });
 
                 starJourney
-                    // Sale del logo
+                    // Aparece exactamente en las coordenadas calculadas
                     .to("#floating-star", { opacity: 1, duration: 0.05 })
-                    // Baja por el Hero hacia la derecha
+                    
+                    // Empieza a desprenderse y viajar (los valores x/y controlan la ruta por la pantalla)
                     .to("#floating-star", { x: "35vw", y: "25vh", scale: 3.5, duration: 1 })
-                    // Cruza a la izquierda durante la sección "Qué hacemos"
-                    .to("#floating-star", { x: "-35vw", y: "50vh", scale: 2.5, duration: 1.5 })
-                    // Se centra hacia la derecha durante "Cómo trabajamos"
-                    .to("#floating-star", { x: "15vw", y: "30vh", scale: 4, duration: 1.5 })
-                    // Aterrizaje majestuoso junto al texto "aparece la estrella."
-                    .to("#floating-star", { x: "28vw", y: "35vh", scale: 8, duration: 1 });
+                    .to("#floating-star", { x: "15vw", y: "50vh", scale: 2.5, duration: 1.5 })
+                    .to("#floating-star", { x: "70vw", y: "70vh", scale: 4, duration: 1.5 })
+                    
+                    // Aterrizaje final: Ajusta estos valores para que quede justo al lado de tu texto
+                    .to("#floating-star", { x: "50vw", y: "85vh", scale: 8, duration: 1 });
             });
 
             // RUTA MÓVIL
@@ -959,10 +980,10 @@
 
                 starJourneyMobile
                     .to("#floating-star", { opacity: 1, duration: 0.05 })
-                    .to("#floating-star", { x: "30vw", y: "20vh", scale: 2.5, duration: 1 })
-                    .to("#floating-star", { x: "-30vw", y: "40vh", scale: 2, duration: 1.5 })
-                    .to("#floating-star", { x: "0vw", y: "30vh", scale: 3, duration: 1.5 })
-                    .to("#floating-star", { x: "10vw", y: "40vh", scale: 5, duration: 1 });
+                    .to("#floating-star", { x: "70vw", y: "20vh", scale: 2.5, duration: 1 })
+                    .to("#floating-star", { x: "10vw", y: "40vh", scale: 2, duration: 1.5 })
+                    .to("#floating-star", { x: "50vw", y: "60vh", scale: 3, duration: 1.5 })
+                    .to("#floating-star", { x: "50vw", y: "85vh", scale: 5, duration: 1 });
             });
 
             ScrollTrigger.refresh();
