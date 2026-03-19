@@ -371,11 +371,20 @@
         <div id="smooth-content">
 
     <section id="heroArea"
-        class="relative pt-40 pb-24 md:pt-48 md:pb-32 px-6 w-full max-w-6xl mx-auto flex items-center min-h-[90vh]">
+        class="relative pt-40 pb-24 md:pt-48 md:pb-32 px-6 w-full max-w-6xl mx-auto flex items-center min-h-[90vh] overflow-hidden">
+
+        <!-- Parallax decorative orbs (background layer) -->
+        <div class="parallax-orb absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full"
+            style="background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%); pointer-events:none;"
+            data-speed="0.4"></div>
+        <div class="parallax-orb absolute -bottom-48 -left-24 w-[400px] h-[400px] rounded-full"
+            style="background: radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%); pointer-events:none;"
+            data-speed="0.6"></div>
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center w-full">
 
             <!-- Hero Copy -->
-            <div class="flex flex-col items-start text-left z-10 w-full lg:max-w-xl">
+            <div class="flex flex-col items-start text-left z-10 w-full lg:max-w-xl" data-speed="0.92" data-lag="0.05">
                 <div class="hero-anim opacity-0 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950 px-3 py-1 text-xs font-normal text-neutral-300 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 mb-8"
                     style="opacity: 0;">
                     <iconify-icon icon="solar:stars-linear" stroke-width="1.5" class="text-neutral-400"></iconify-icon>
@@ -405,7 +414,8 @@
             </div>
 
             <!-- 3D Parallax SVG -->
-            <div class="hero-anim opacity-0 flex justify-center lg:justify-end w-full" style="opacity: 0;">
+            <div class="hero-anim opacity-0 flex justify-center lg:justify-end w-full" style="opacity: 0;"
+                data-speed="1.12" data-lag="0.1">
                 <div class="logo-3d-stage" id="logoStage">
                     <div class="parallax-layer layer-glow"></div>
                     <div class="parallax-layer layer-hand">
@@ -440,11 +450,15 @@
     </section>
 
     <!-- El Problema / Contexto -->
-    <section id="problem" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
+    <section id="problem" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900 relative overflow-hidden">
+
+        <!-- Parallax accent line -->
+        <div class="parallax-line absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-neutral-800/60 to-transparent"
+            data-speed="0.7" style="pointer-events:none;"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
 
             <!-- Left Block -->
-            <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;">
+            <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;" data-speed="0.9" data-lag="0.06">
                 <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-6 text-balance">
                     La primera impresión de tu negocio ocurre en internet.
                 </h2>
@@ -476,7 +490,7 @@
             </div>
 
             <!-- Right Block -->
-            <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;">
+            <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;" data-speed="0.95" data-lag="0.1">
                 <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-6 text-balance">
                     Una página web es el centro digital de tu negocio.
                 </h2>
@@ -655,9 +669,14 @@
     </section>
 
     <!-- Process Section (Cómo trabajamos) -->
-    <section id="process" class="pt-24 pb-16 px-6 w-full max-w-4xl mx-auto border-t border-neutral-900">
+    <section id="process" class="pt-24 pb-16 px-6 w-full max-w-4xl mx-auto border-t border-neutral-900 relative overflow-hidden">
+
+        <!-- Parallax large number watermark -->
+        <div class="process-watermark absolute -right-8 top-16 text-[18rem] font-light text-white/[0.018] leading-none select-none pointer-events-none"
+            data-speed="0.5">P</div>
+
         <h2 class="section-anim opacity-0 text-3xl md:text-4xl font-normal tracking-tight text-center text-white mb-20"
-            style="opacity: 0;">Nuestro Proceso</h2>
+            style="opacity: 0;" data-speed="0.88">Nuestro Proceso</h2>
 
         <div class="stagger-container flex flex-col gap-12 md:gap-16 relative mb-12">
             <div class="hidden md:block absolute left-[2.25rem] top-4 bottom-12 w-px bg-neutral-800"></div>
@@ -665,8 +684,8 @@
             <!-- Step 1 -->
             <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                 style="opacity: 0;">
-                <div
-                    class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2"
+                    data-speed="0.75" data-lag="0.08">
                     01
                 </div>
                 <div>
@@ -679,8 +698,8 @@
             <!-- Step 2 -->
             <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                 style="opacity: 0;">
-                <div
-                    class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2"
+                    data-speed="0.78" data-lag="0.09">
                     02
                 </div>
                 <div>
@@ -694,8 +713,8 @@
             <!-- Step 3 -->
             <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                 style="opacity: 0;">
-                <div
-                    class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2"
+                    data-speed="0.72" data-lag="0.1">
                     03
                 </div>
                 <div>
@@ -708,8 +727,8 @@
             <!-- Step 4 -->
             <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                 style="opacity: 0;">
-                <div
-                    class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                <div class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2"
+                    data-speed="0.76" data-lag="0.07">
                     04
                 </div>
                 <div>
@@ -792,7 +811,13 @@
     </section>
 
     <!-- Contact Section / Llamado a la acción -->
-    <section id="contact" class="py-24 px-6 w-full max-w-6xl mx-auto mb-10 border-t border-neutral-900">
+    <section id="contact" class="py-24 px-6 w-full max-w-6xl mx-auto mb-10 border-t border-neutral-900 relative overflow-hidden">
+
+        <!-- Parallax floating accent -->
+        <div class="absolute -top-24 right-0 w-[500px] h-[500px] rounded-full"
+            style="background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 65%); pointer-events:none;"
+            data-speed="0.5" data-lag="0.15"></div>
+
         <div class="section-anim opacity-0 rounded-xl border border-neutral-800 bg-neutral-950 p-8 md:p-16 lg:p-24 flex flex-col lg:flex-row gap-16 justify-between items-center relative overflow-hidden shadow-sm"
             style="opacity: 0;">
 
