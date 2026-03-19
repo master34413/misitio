@@ -44,11 +44,39 @@
                 transform: none !important;
             }
         }
+
+        /* Estrella Flotante 3D */
+        #floating-star {
+            position: fixed;
+            top: 48px; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+            opacity: 0;
+            filter: drop-shadow(0px 10px 20px rgba(255, 255, 255, 0.3));
+            perspective: 800px;
+        }
+
+        #star-svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
     </style>
 </head>
 
 <body
     class="selection:bg-neutral-800 selection:text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Estrella Flotante 3D -->
+    <div id="floating-star">
+        <svg id="star-svg" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.45 21.16">
+            <path class="cls-1" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.55" d="M10.96,19.88c-.17.01-.31.03-.47-.07-.47-.3-1.33-6.07-1.88-6.96l-7.34-1.96.11-.39,7.08-1.73c.65-.84,1.55-7.36,2.12-7.49.3-.07.42.38.5.58.47,1.21,1.1,6.23,1.66,6.8l7.45,2.08-7.45,2.07-1.77,7.07Z"/>
+        </svg>
+    </div>
 
     <!-- Ambient Background Glow -->
     <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
@@ -877,6 +905,65 @@
                     );
                 });
             }
+
+            // ===== ANIMACIÓN ESTRELLA FLOTANTE 3D =====
+
+            // 1. Giro constante en bucle infinito
+            gsap.to("#star-svg", {
+                rotationY: 360,
+                repeat: -1,
+                duration: 2.5,
+                ease: "linear",
+                transformOrigin: "50% 50%"
+            });
+
+            // 2. Viaje creativo atado al Scroll
+            let mm = gsap.matchMedia();
+
+            // RUTA DESKTOP
+            mm.add("(min-width: 768px)", () => {
+                let starJourney = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "body", 
+                        start: "top top",
+                        endTrigger: "#contacto", // Finaliza cuando llega a la sección de contacto
+                        end: "center center",    // Justo cuando el texto está en el centro
+                        scrub: 1.5               // Suavidad del seguimiento
+                    }
+                });
+
+                starJourney
+                    // Sale del logo
+                    .to("#floating-star", { opacity: 1, duration: 0.05 })
+                    // Baja por el Hero hacia la derecha
+                    .to("#floating-star", { x: "35vw", y: "25vh", scale: 3.5, duration: 1 })
+                    // Cruza a la izquierda durante la sección "Qué hacemos"
+                    .to("#floating-star", { x: "-35vw", y: "50vh", scale: 2.5, duration: 1.5 })
+                    // Se centra hacia la derecha durante "Cómo trabajamos"
+                    .to("#floating-star", { x: "15vw", y: "30vh", scale: 4, duration: 1.5 })
+                    // Aterrizaje majestuoso junto al texto "aparece la estrella."
+                    .to("#floating-star", { x: "28vw", y: "35vh", scale: 8, duration: 1 });
+            });
+
+            // RUTA MÓVIL
+            mm.add("(max-width: 767px)", () => {
+                let starJourneyMobile = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "body",
+                        start: "top top",
+                        endTrigger: "#contacto",
+                        end: "center center",
+                        scrub: 1.5
+                    }
+                });
+
+                starJourneyMobile
+                    .to("#floating-star", { opacity: 1, duration: 0.05 })
+                    .to("#floating-star", { x: "30vw", y: "20vh", scale: 2.5, duration: 1 })
+                    .to("#floating-star", { x: "-30vw", y: "40vh", scale: 2, duration: 1.5 })
+                    .to("#floating-star", { x: "0vw", y: "30vh", scale: 3, duration: 1.5 })
+                    .to("#floating-star", { x: "10vw", y: "40vh", scale: 5, duration: 1 });
+            });
 
             ScrollTrigger.refresh();
         });
