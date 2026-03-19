@@ -415,6 +415,17 @@
             overflow: visible;
             width: 100%;
         }
+
+        /* Scrolling Text Push-Pull */
+        .scrub-title-wrap {
+            overflow: hidden;
+        }
+
+        .push-left,
+        .push-right {
+            display: block;
+            will-change: transform;
+        }
     </style>
 </head>
 
@@ -497,8 +508,9 @@
                         <div
                             class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-8">
                             La realidad</div>
-                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white max-w-2xl">
-                            La mayoría de tarjetas de presentación se olvidan en minutos.
+                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white max-w-2xl scrub-title-wrap">
+                            <span class="push-left">La mayoría de tarjetas de presentación</span>
+                            <span class="push-right text-gray-400">se olvidan en minutos.</span>
                         </h2>
                     </div>
                     <div class="relative z-10 flex flex-wrap gap-3 mt-auto">
@@ -650,8 +662,9 @@
                     <div
                         class="inline-flex w-fit px-4 py-2 rounded-full text-[0.65rem] font-medium border border-white/10 text-gray-400 uppercase tracking-[0.2em] mb-10">
                         Nuestra Especialidad</div>
-                    <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-8 leading-[1.1]">
-                        Bordes Pintados <span class="text-white/40 block mt-2">Premium</span>
+                    <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-8 leading-[1.1] scrub-title-wrap">
+                        <span class="push-left">Bordes Pintados</span>
+                        <span class="push-right text-white/40">Premium</span>
                     </h2>
                     <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed mb-10 max-w-lg">
                         Enfocamos nuestra atención en un solo acabado excepcional. Capas gruesas de papel empalmado con
@@ -873,9 +886,9 @@
             <div
                 class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-10">
                 El impacto final</div>
-            <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter text-white uppercase leading-[0.9] mb-8">
-                Las personas olvidan muchas conversaciones.
-                <span class="text-gray-400 block mt-4">Pero recuerdan cómo las hiciste sentir.</span>
+            <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter text-white uppercase leading-[0.9] mb-8 scrub-title-wrap">
+                <span class="push-left">Las personas olvidan muchas conversaciones.</span>
+                <span class="push-right text-gray-400">Pero recuerdan cómo las hiciste sentir.</span>
             </h2>
             <p class="text-lg md:text-xl text-gray-500 font-light mb-8 max-w-2xl mx-auto">
                 Una tarjeta de presentación impecable hace exactamente eso.
@@ -1449,6 +1462,45 @@
                 yoyo: true,
                 duration: 0.4
             });
+
+            // ===== SCROLLING TEXT INVERT SCRUB (Push-Pull) =====
+            // prefersReducedMotion already declared above — reusing it here
+
+            if (!prefersReducedMotion) {
+                // Titles that slide LEFT on scroll
+                gsap.utils.toArray('.push-left').forEach(el => {
+                    gsap.fromTo(el,
+                        { x: "4vw" },
+                        {
+                            x: "-4vw",
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: el.closest('.scrub-title-wrap'),
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: 1
+                            }
+                        }
+                    );
+                });
+
+                // Titles that slide RIGHT on scroll (inverted direction)
+                gsap.utils.toArray('.push-right').forEach(el => {
+                    gsap.fromTo(el,
+                        { x: "-4vw" },
+                        {
+                            x: "4vw",
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: el.closest('.scrub-title-wrap'),
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: 1
+                            }
+                        }
+                    );
+                });
+            }
         });
     </script>
 
