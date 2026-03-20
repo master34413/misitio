@@ -273,6 +273,22 @@
             }
         }
 
+        /* Mobile Menu */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+            opacity: 0;
+        }
+        #mobile-menu.open {
+            max-height: 240px;
+            opacity: 1;
+        }
+        #menu-toggle-btn[aria-expanded="true"] .menu-bar-top    { transform: translateY(6px) rotate(45deg); }
+        #menu-toggle-btn[aria-expanded="true"] .menu-bar-mid    { opacity: 0; transform: scaleX(0); }
+        #menu-toggle-btn[aria-expanded="true"] .menu-bar-bottom { transform: translateY(-6px) rotate(-45deg); }
+        .menu-bar { display: block; width: 18px; height: 1.5px; background: currentColor; transition: transform 0.25s ease, opacity 0.2s ease; }
+
         /* ScrollSmoother Wrappers */
         #smooth-wrapper {
             overflow: hidden;
@@ -331,11 +347,13 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="hero-anim fixed top-6 inset-x-0 flex justify-center z-50 px-6 opacity-0" style="opacity: 0;">
-        <div
-            class="flex items-center justify-between px-5 py-3 bg-neutral-950/80 backdrop-blur-md border border-neutral-800/80 rounded-xl w-full max-w-4xl shadow-2xl">
-            <a href="#"
-                class="flex items-center gap-2.5 text-base font-normal tracking-tight uppercase text-white hover:text-neutral-300 transition-colors">
+    <nav class="hero-anim fixed top-6 inset-x-0 flex justify-center z-50 px-6 opacity-0" style="opacity: 0;" id="main-nav">
+        <div class="flex flex-col w-full max-w-4xl">
+            <div
+                class="flex items-center justify-between px-5 py-3 bg-neutral-950/80 backdrop-blur-md border border-neutral-800/80 rounded-xl w-full shadow-2xl">
+                <a href="#"
+                    class="flex items-center gap-2.5 text-base font-normal tracking-tight uppercase text-white hover:text-neutral-300 transition-colors"
+                    aria-label="Apex Creative — ir al inicio">
                 <svg class="w-5 h-5" viewBox="0 0 30.37 27.82" xmlns="http://www.w3.org/2000/svg">
                     <g>
                         <path class="cls-2"
@@ -359,15 +377,36 @@
                 </svg>
                 APEX CREATIVE
             </a>
-            <div class="hidden md:flex items-center gap-8 text-sm text-neutral-400 font-normal">
-                <a href="#problem" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">El Problema</a>
-                <a href="#services" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">Qué Hacemos</a>
-                <a href="#process" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">Proceso</a>
+                <div class="hidden md:flex items-center gap-8 text-sm text-neutral-400 font-normal">
+                    <a href="#problem" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">El Problema</a>
+                    <a href="#services" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">Qué Hacemos</a>
+                    <a href="#process" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">Proceso</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-9 px-4 py-2">
+                        Contáctanos
+                    </a>
+                    <!-- Hamburger (mobile only) -->
+                    <button id="menu-toggle-btn" aria-expanded="false" aria-controls="mobile-menu"
+                        aria-label="Abrir menú"
+                        class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 rounded-lg border border-neutral-800 bg-neutral-900 text-white hover:bg-neutral-800 transition-colors">
+                        <span class="menu-bar menu-bar-top"></span>
+                        <span class="menu-bar menu-bar-mid"></span>
+                        <span class="menu-bar menu-bar-bottom"></span>
+                    </button>
+                </div>
             </div>
-            <a href="#contact"
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-9 px-4 py-2">
-                Contáctanos
-            </a>
+            <!-- Mobile dropdown -->
+            <div id="mobile-menu" role="navigation" aria-label="Menú principal móvil">
+                <div class="mt-2 flex flex-col gap-1 px-2 py-3 bg-neutral-950/90 backdrop-blur-md border border-neutral-800/80 rounded-xl shadow-2xl">
+                    <a href="#problem" class="px-4 py-3 text-sm text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition-colors mobile-nav-link">El Problema</a>
+                    <a href="#services" class="px-4 py-3 text-sm text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition-colors mobile-nav-link">Qué Hacemos</a>
+                    <a href="#process" class="px-4 py-3 text-sm text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition-colors mobile-nav-link">Proceso</a>
+                    <div class="h-px bg-neutral-800 mx-4 my-1"></div>
+                    <a href="#contact" class="mx-2 my-1 inline-flex items-center justify-center rounded-md text-sm font-normal bg-white text-black hover:bg-neutral-200 h-9 px-4 transition-colors mobile-nav-link">Contáctanos</a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -376,7 +415,7 @@
         <div id="smooth-content">
 
             <section id="heroArea"
-                class="relative pt-40 pb-24 md:pt-48 md:pb-32 px-6 w-full max-w-6xl mx-auto flex items-center min-h-[90vh]">
+                class="relative pt-40 pb-24 md:pt-48 md:pb-32 px-6 w-full max-w-6xl mx-auto flex items-center min-h-[85vh] md:min-h-[90vh]">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center w-full">
 
                     <!-- Hero Copy -->
@@ -385,7 +424,7 @@
                             style="opacity: 0;">
                             <iconify-icon icon="solar:stars-linear" stroke-width="1.5"
                                 class="text-neutral-400"></iconify-icon>
-                            Especialistas en Presencia Web
+                            Creamos presencia digital para negocios
                         </div>
 
                         <h1 class="hero-anim opacity-0 text-5xl md:text-6xl lg:text-[4.2rem] font-light tracking-tight leading-[1.05] mb-8 text-white"
@@ -670,7 +709,7 @@
                     <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                         style="opacity: 0;">
                         <div
-                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-neutral-950 py-2">
                             01
                         </div>
                         <div>
@@ -685,7 +724,7 @@
                     <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                         style="opacity: 0;">
                         <div
-                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-neutral-950 py-2">
                             02
                         </div>
                         <div>
@@ -702,15 +741,13 @@
                     <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                         style="opacity: 0;">
                         <div
-                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-neutral-950 py-2">
                             03
                         </div>
                         <div>
-                            <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Diseñamos y desarrollamos
-                            </h3>
-                            <p class="text-base text-neutral-400 font-light">Creamos el diseño visual y desarrollamos el
-                                sitio
-                                web para que quede impecable.</p>
+                            <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Diseño y desarrollo</h3>
+                            <p class="text-base text-neutral-400 font-light">Creamos el diseño visual y construimos
+                                el sitio web para que quede impecable en todos los dispositivos.</p>
                         </div>
                     </div>
 
@@ -718,7 +755,7 @@
                     <div class="stagger-item opacity-0 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 relative"
                         style="opacity: 0;">
                         <div
-                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-black py-2">
+                            class="w-12 md:w-20 shrink-0 text-3xl md:text-5xl font-light tracking-tight text-neutral-600 bg-neutral-950 py-2">
                             04
                         </div>
                         <div>
@@ -731,12 +768,10 @@
                 </div>
             </section>
 
-            <!-- Target Audience (Para quién es) -->
-            <section class="py-24 px-6 w-full max-w-5xl mx-auto border-t border-neutral-900">
+            <!-- Para quién es -->
+            <section id="audience" class="py-24 px-6 w-full max-w-5xl mx-auto border-t border-neutral-900">
                 <div class="section-anim opacity-0 text-center mb-16" style="opacity: 0;">
-                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-4">Este servicio es ideal
-                        para
-                        negocios que aún no tienen página web</h2>
+                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-4">Este servicio es para ti si aún no tienes presencia web</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -785,17 +820,17 @@
                             <li class="flex items-start gap-3">
                                 <iconify-icon icon="solar:close-square-linear" stroke-width="1.5"
                                     class="text-neutral-700 text-lg shrink-0 mt-0.5"></iconify-icon>
-                                <span>buscas lo más barato posible</span>
+                                <span>solo buscas el precio más bajo, sin importar el resultado</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <iconify-icon icon="solar:close-square-linear" stroke-width="1.5"
                                     class="text-neutral-700 text-lg shrink-0 mt-0.5"></iconify-icon>
-                                <span>solo quieres algo rápido sin estrategia</span>
+                                <span>quieres algo rápido sin pensar en tu cliente</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <iconify-icon icon="solar:close-square-linear" stroke-width="1.5"
                                     class="text-neutral-700 text-lg shrink-0 mt-0.5"></iconify-icon>
-                                <span>no te importa la presencia digital de tu negocio</span>
+                                <span>la imagen de tu negocio no es una prioridad para ti</span>
                             </li>
                         </ul>
                     </div>
@@ -817,13 +852,12 @@
                             Tu negocio merece<br> <span class="text-neutral-500">ser encontrado.</span>
                         </h2>
                         <p class="text-base text-neutral-400 font-light mb-6 text-balance">
-                            Una página web profesional puede ser el primer paso para que más personas confíen en tu
-                            negocio.
+                            Con una página web bien hecha, más personas pueden encontrarte, entender lo que ofreces y decidir contactarte.
                         </p>
                         <p class="text-sm text-neutral-500 font-light mb-8 text-balance">
-                            Comunícate directamente a <a href="mailto:hola@apex-creative.com.mx"
+                            Escíbenos directamente a <a href="mailto:hola@apex-creative.com.mx"
                                 class="text-neutral-300 hover:text-white hover:underline underline-offset-4 transition-all">hola@apex-creative.com.mx</a>
-                            o completa el formulario.
+                            o llena el formulario y te respondemos pronto.
                         </p>
                     </div>
 
@@ -849,7 +883,7 @@
 
                             <div class="space-y-2 flex flex-col">
                                 <label for="contact-mensaje" class="text-sm font-normal leading-none text-neutral-200">Mensaje</label>
-                                <textarea id="contact-mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas..."
+                <textarea id="contact-mensaje" name="mensaje" placeholder="¿Qué tipo de negocio tienes y qué quieres lograr con tu página web?"
                                     class="flex min-h-[100px] w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors resize-none"></textarea>
                             </div>
 
@@ -970,7 +1004,35 @@
         })();
 
 
+        // ─── MOBILE MENU TOGGLE ───────────────────────────────────────────────────
+        (function initMobileMenu() {
+            const btn  = document.getElementById('menu-toggle-btn');
+            const menu = document.getElementById('mobile-menu');
+            if (!btn || !menu) return;
+
+            function open()  { menu.classList.add('open');  btn.setAttribute('aria-expanded', 'true');  btn.setAttribute('aria-label', 'Cerrar menú'); }
+            function close() { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Abrir menú'); }
+            function toggle() { menu.classList.contains('open') ? close() : open(); }
+
+            btn.addEventListener('click', e => { e.stopPropagation(); toggle(); });
+
+            // Close when any mobile nav link is clicked
+            menu.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', close);
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', e => {
+                if (!document.getElementById('main-nav')?.contains(e.target)) close();
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+        })();
+
+
         // ─── SCROLL TO TOP BUTTON ─────────────────────────────────────────────────
+
         (function initScrollTop() {
             const btn = document.getElementById('scrollTopBtn');
             if (!btn) return;
