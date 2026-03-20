@@ -8,7 +8,7 @@
     <meta name="description" content="Creamos páginas web profesionales para negocios que quieren estar presentes en internet. Diseño claro, estructura estratégica y experiencia enfocada al cliente.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <script defer src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -103,6 +103,13 @@
             }
         }
 
+        /* Typography — Display font for headings */
+        .heading-display {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
         /* 3D Parallax Logo Animations */
         .logo-3d-stage {
             position: relative;
@@ -122,7 +129,7 @@
         }
 
         .logo-3d-stage.reset {
-            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             transform: rotateX(0deg) rotateY(0deg) !important;
         }
 
@@ -182,13 +189,12 @@
 
         @keyframes star-pulse {
             0% {
-                filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-                transform: scale(0.95);
+                filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+                transform: scale(0.97);
             }
-
             100% {
-                filter: drop-shadow(0 0 12px #ffffff) drop-shadow(0 0 25px rgba(255, 255, 255, 0.4));
-                transform: scale(1.1);
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+                transform: scale(1.04);
             }
         }
 
@@ -253,8 +259,8 @@
 
         .btn-scroll-top:hover .magic-star {
             animation: none;
-            transform: scale(1.15) rotate(15deg) translateY(-2px);
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+            transform: scale(1.08) rotate(12deg);
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6));
         }
 
         .btn-scroll-top.is-launching {
@@ -264,13 +270,8 @@
         }
 
         @keyframes float-star {
-            0% {
-                transform: translateY(2px) scale(0.95);
-            }
-
-            100% {
-                transform: translateY(-4px) scale(1.05);
-            }
+            0%   { transform: translateY(1px) scale(0.97); }
+            100% { transform: translateY(-3px) scale(1.03); }
         }
 
         /* Mobile Menu */
@@ -427,7 +428,7 @@
                             Creamos presencia digital para negocios
                         </div>
 
-                        <h1 class="hero-anim opacity-0 text-5xl md:text-6xl lg:text-[4.2rem] font-light tracking-tight leading-[1.05] mb-8 text-white"
+                        <h1 class="hero-anim heading-display opacity-0 text-[clamp(2.6rem,5.5vw,4rem)] leading-[1.08] mb-8 text-white"
                             style="opacity: 0;">
                             Si tu negocio no tiene página web,<br class="hidden md:block">
                             estás perdiendo <span
@@ -490,7 +491,7 @@
 
                     <!-- Left Block -->
                     <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;">
-                        <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-6 text-balance">
+                        <h2 class="heading-display text-3xl md:text-4xl text-white mb-6 text-balance">
                             La primera impresión de tu negocio ocurre en internet.
                         </h2>
                         <p class="text-base text-neutral-400 font-light mb-8 text-balance">
@@ -523,7 +524,7 @@
 
                     <!-- Right Block -->
                     <div class="section-anim opacity-0 flex flex-col" style="opacity: 0;">
-                        <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-6 text-balance">
+                        <h2 class="heading-display text-3xl md:text-4xl text-white mb-6 text-balance">
                             Una página web es el centro digital de tu negocio.
                         </h2>
                         <p class="text-base text-neutral-400 font-light mb-8 text-balance">
@@ -567,44 +568,50 @@
             <!-- Beneficios (Lo que puede lograr) -->
             <section class="py-16 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
                 <div class="section-anim opacity-0 text-center mb-12" style="opacity: 0;">
-                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-4">Lo que una buena página web puede lograr</h2>
+                    <h2 class="heading-display text-3xl md:text-4xl text-white mb-4">Lo que una buena página web puede lograr</h2>
                     <p class="text-sm text-neutral-400 font-light text-balance">En muchos casos, es el primer paso para que alguien decida trabajar contigo.</p>
                 </div>
 
-                <div class="stagger-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
+                <!-- Arrange: asymmetric grid — 1 feature card (2-col wide) + 4 regular -->
+                <div class="stagger-container grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Feature card: spans full width on mobile, 2 cols on md+ -->
+                    <div class="stagger-item opacity-0 col-span-2 md:col-span-2 flex flex-row items-center gap-6 p-8 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
                         style="opacity: 0;">
                         <iconify-icon icon="solar:eye-linear" stroke-width="1.5"
-                            class="text-2xl text-neutral-300 mb-3"></iconify-icon>
-                        <span class="text-sm font-light text-neutral-300">Mostrar tu negocio con claridad</span>
+                            class="text-4xl text-neutral-400 shrink-0"></iconify-icon>
+                        <div>
+                            <span class="block text-base font-normal text-white mb-1">Visibilidad real</span>
+                            <span class="text-sm font-light text-neutral-400">Las personas te encuentran cuando buscan lo que ofreces, sin que tengas que buscarlo tú.</span>
+                        </div>
                     </div>
 
-                    <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
+                    <!-- 4 smaller cards -->
+                    <div class="stagger-item opacity-0 flex flex-col items-start text-left p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
                         style="opacity: 0;">
                         <iconify-icon icon="solar:medal-star-linear" stroke-width="1.5"
-                            class="text-2xl text-neutral-300 mb-3"></iconify-icon>
-                        <span class="text-sm font-light text-neutral-300">Generar confianza en clientes</span>
+                            class="text-xl text-neutral-400 mb-3"></iconify-icon>
+                        <span class="text-sm font-light text-neutral-300">Genera confianza en clientes</span>
                     </div>
 
-                    <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
+                    <div class="stagger-item opacity-0 flex flex-col items-start text-left p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
                         style="opacity: 0;">
                         <iconify-icon icon="solar:document-text-linear" stroke-width="1.5"
-                            class="text-2xl text-neutral-300 mb-3"></iconify-icon>
-                        <span class="text-sm font-light text-neutral-300">Explicar tus servicios correctamente</span>
+                            class="text-xl text-neutral-400 mb-3"></iconify-icon>
+                        <span class="text-sm font-light text-neutral-300">Explica tus servicios con claridad</span>
                     </div>
 
-                    <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
+                    <div class="stagger-item opacity-0 flex flex-col items-start text-left p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
                         style="opacity: 0;">
                         <iconify-icon icon="solar:star-linear" stroke-width="1.5"
-                            class="text-2xl text-neutral-300 mb-3"></iconify-icon>
-                        <span class="text-sm font-light text-neutral-300">Diferenciarte de la competencia</span>
+                            class="text-xl text-neutral-400 mb-3"></iconify-icon>
+                        <span class="text-sm font-light text-neutral-300">Te diferencia de la competencia</span>
                     </div>
 
-                    <div class="stagger-item opacity-0 flex flex-col items-center text-center p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors col-span-2 lg:col-span-1"
+                    <div class="stagger-item opacity-0 flex flex-col items-start text-left p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900/50 transition-colors"
                         style="opacity: 0;">
                         <iconify-icon icon="solar:chat-round-check-linear" stroke-width="1.5"
-                            class="text-2xl text-neutral-300 mb-3"></iconify-icon>
-                        <span class="text-sm font-light text-neutral-300">Facilitar que te contacten</span>
+                            class="text-xl text-neutral-400 mb-3"></iconify-icon>
+                        <span class="text-sm font-light text-neutral-300">Facilita que te contacten</span>
                     </div>
                 </div>
             </section>
@@ -613,7 +620,7 @@
             <section id="services" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
                 <div class="section-anim opacity-0 mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6"
                     style="opacity: 0;">
-                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white max-w-lg text-balance">Creamos páginas web pensadas para negocios reales</h2>
+                    <h2 class="heading-display text-3xl md:text-4xl text-white max-w-lg text-balance">Creamos páginas web pensadas para negocios reales</h2>
                     <p class="text-sm text-neutral-400 max-w-xs font-light text-balance">En APEX Creative diseñamos sitios web que ayudan a presentar tu negocio de forma clara y profesional.</p>
                 </div>
 
@@ -626,7 +633,7 @@
                             <iconify-icon icon="solar:monitor-smartphone-linear" stroke-width="1.5"
                                 class="text-xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-normal tracking-tight mb-4 text-white">Diseño web profesional</h3>
+                        <h3 class="heading-display text-2xl mb-4 text-white">Diseño web profesional</h3>
                         <p class="text-sm text-neutral-400 font-light mb-4">Creamos páginas que transmiten:</p>
                         <ul class="space-y-3 text-sm text-neutral-400 font-light">
                             <li class="flex items-center gap-3">
@@ -651,7 +658,7 @@
                             class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
                             <iconify-icon icon="solar:sitemap-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-normal tracking-tight mb-4 text-white">Estructura estratégica</h3>
+                        <h3 class="heading-display text-2xl mb-4 text-white">Estructura estratégica</h3>
                         <p class="text-sm text-neutral-400 font-light mb-4">Organizamos la información para que se
                             entienda:</p>
                         <ul class="space-y-3 text-sm text-neutral-400 font-light">
@@ -677,7 +684,7 @@
                             class="w-10 h-10 rounded-lg border border-neutral-800 bg-neutral-900 flex items-center justify-center mb-6 text-neutral-100">
                             <iconify-icon icon="solar:routing-linear" stroke-width="1.5" class="text-xl"></iconify-icon>
                         </div>
-                        <h3 class="text-2xl font-normal tracking-tight mb-4 text-white">Experiencia clara</h3>
+                        <h3 class="heading-display text-2xl mb-4 text-white">Experiencia clara</h3>
                         <p class="text-sm text-neutral-400 font-light mb-4">Diseñamos sitios que sean:</p>
                         <ul class="space-y-3 text-sm text-neutral-400 font-light">
                             <li class="flex items-center gap-3">
@@ -699,7 +706,7 @@
 
             <!-- Process Section (Cómo trabajamos) -->
             <section id="process" class="pt-24 pb-16 px-6 w-full max-w-4xl mx-auto border-t border-neutral-900">
-                <h2 class="section-anim opacity-0 text-3xl md:text-4xl font-normal tracking-tight text-center text-white mb-20"
+                <h2 class="section-anim heading-display opacity-0 text-3xl md:text-4xl text-center text-white mb-20"
                     style="opacity: 0;">Nuestro Proceso</h2>
 
                 <div class="stagger-container flex flex-col gap-12 md:gap-16 relative mb-12">
@@ -713,10 +720,8 @@
                             01
                         </div>
                         <div>
-                            <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Entendemos tu negocio</h3>
-                            <p class="text-base text-neutral-400 font-light">Antes de diseñar la página entendemos qué
-                                haces,
-                                qué ofreces y quién es tu cliente.</p>
+                            <h3 class="heading-display text-xl text-white mb-1">Entendemos tu negocio</h3>
+                            <p class="text-base text-neutral-400 font-light">Antes de diseñar la página entendemos qué haces, qué ofreces y quién es tu cliente.</p>
                         </div>
                     </div>
 
@@ -728,12 +733,8 @@
                             02
                         </div>
                         <div>
-                            <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Diseñamos la estructura del
-                                sitio
-                            </h3>
-                            <p class="text-base text-neutral-400 font-light">Organizamos el contenido para que tu
-                                negocio se
-                                presente de forma clara y profesional.</p>
+                            <h3 class="heading-display text-xl text-white mb-1">Diseñamos la estructura del sitio</h3>
+                            <p class="text-base text-neutral-400 font-light">Organizamos el contenido para que tu negocio se presente de forma clara y profesional.</p>
                         </div>
                     </div>
 
@@ -745,9 +746,8 @@
                             03
                         </div>
                         <div>
-                            <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Diseño y desarrollo</h3>
-                            <p class="text-base text-neutral-400 font-light">Creamos el diseño visual y construimos
-                                el sitio web para que quede impecable en todos los dispositivos.</p>
+                            <h3 class="heading-display text-xl text-white mb-1">Diseño y desarrollo</h3>
+                            <p class="text-base text-neutral-400 font-light">Creamos el diseño visual y construimos el sitio web para que quede impecable en todos los dispositivos.</p>
                         </div>
                     </div>
 
@@ -759,7 +759,7 @@
                             04
                         </div>
                         <div>
-                            <h3 class="text-2xl font-normal tracking-tight text-white mb-1">Publicamos tu página</h3>
+                            <h3 class="heading-display text-xl text-white mb-1">Publicamos tu página</h3>
                             <p class="text-base text-neutral-400 font-light">Tu página queda lista para que cualquier
                                 persona
                                 pueda encontrarte y conocer tu negocio.</p>
@@ -977,7 +977,7 @@
         (function initParallax() {
             const heroArea   = document.getElementById('heroArea');
             const logoStage  = document.getElementById('logoStage');
-            const MAX_ROT    = 12;
+            const MAX_ROT    = 8;
             if (!heroArea || !logoStage) return;
 
             let rafId = null, lastEv = null;
