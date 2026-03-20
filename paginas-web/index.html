@@ -1,9 +1,11 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Creative Agency</title>
+    <title>Apex Creative — Diseño Web Profesional para Negocios</title>
+    <meta name="description" content="Creamos páginas web profesionales para negocios que quieren estar presentes en internet. Diseño claro, estructura estratégica y experiencia enfocada al cliente.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -208,7 +210,7 @@
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             z-index: 1000;
         }
 
@@ -358,9 +360,9 @@
                 APEX CREATIVE
             </a>
             <div class="hidden md:flex items-center gap-8 text-sm text-neutral-400 font-normal">
-                <a href="#problem" class="hover:text-neutral-50 transition-colors">El Problema</a>
-                <a href="#services" class="hover:text-neutral-50 transition-colors">Qué Hacemos</a>
-                <a href="#process" class="hover:text-neutral-50 transition-colors">Proceso</a>
+                <a href="#problem" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">El Problema</a>
+                <a href="#services" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">Qué Hacemos</a>
+                <a href="#process" class="hover:text-neutral-50 transition-colors duration-200 relative after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:bg-neutral-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:origin-left">Proceso</a>
             </div>
             <a href="#contact"
                 class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-9 px-4 py-2">
@@ -526,12 +528,8 @@
             <!-- Beneficios (Lo que puede lograr) -->
             <section class="py-16 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
                 <div class="section-anim opacity-0 text-center mb-12" style="opacity: 0;">
-                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-4">Lo que una buena página
-                        web
-                        puede lograr</h2>
-                    <p class="text-sm text-neutral-400 font-light text-balance">En muchos casos, es el primer paso para
-                        que
-                        alguien decida trabajar contigo.</p>
+                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white mb-4">Lo que una buena página web puede lograr</h2>
+                    <p class="text-sm text-neutral-400 font-light text-balance">En muchos casos, es el primer paso para que alguien decida trabajar contigo.</p>
                 </div>
 
                 <div class="stagger-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -576,12 +574,8 @@
             <section id="services" class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-neutral-900">
                 <div class="section-anim opacity-0 mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6"
                     style="opacity: 0;">
-                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white max-w-lg text-balance">Creamos
-                        páginas
-                        web pensadas para negocios reales</h2>
-                    <p class="text-sm text-neutral-400 max-w-xs font-light text-balance">En APEX Creative diseñamos
-                        sitios web
-                        que ayudan a presentar tu negocio de forma clara y profesional.</p>
+                    <h2 class="text-3xl md:text-4xl font-normal tracking-tight text-white max-w-lg text-balance">Creamos páginas web pensadas para negocios reales</h2>
+                    <p class="text-sm text-neutral-400 max-w-xs font-light text-balance">En APEX Creative diseñamos sitios web que ayudan a presentar tu negocio de forma clara y profesional.</p>
                 </div>
 
                 <div class="stagger-container grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -836,32 +830,33 @@
                     <div class="w-full max-w-md relative z-10">
                         <form class="flex flex-col gap-5" onsubmit="event.preventDefault();">
                             <div class="space-y-2 flex flex-col">
-                                <label class="text-sm font-normal leading-none text-neutral-200">Nombre</label>
-                                <input type="text" placeholder="Tu nombre"
+                                <label for="contact-name" class="text-sm font-normal leading-none text-neutral-200">Nombre</label>
+                                <input id="contact-name" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name"
                                     class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors">
                             </div>
 
                             <div class="space-y-2 flex flex-col">
-                                <label class="text-sm font-normal leading-none text-neutral-200">Empresa</label>
-                                <input type="text" placeholder="Nombre de tu negocio"
+                                <label for="contact-empresa" class="text-sm font-normal leading-none text-neutral-200">Empresa</label>
+                                <input id="contact-empresa" name="empresa" type="text" placeholder="Nombre de tu negocio" autocomplete="organization"
                                     class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors">
                             </div>
 
                             <div class="space-y-2 flex flex-col">
-                                <label class="text-sm font-normal leading-none text-neutral-200">Correo</label>
-                                <input type="email" placeholder="tu@correo.com"
+                                <label for="contact-email" class="text-sm font-normal leading-none text-neutral-200">Correo</label>
+                                <input id="contact-email" name="correo" type="email" placeholder="tu@correo.com" autocomplete="email"
                                     class="flex h-10 w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors">
                             </div>
 
                             <div class="space-y-2 flex flex-col">
-                                <label class="text-sm font-normal leading-none text-neutral-200">Mensaje</label>
-                                <textarea placeholder="Cuéntanos qué necesitas..."
+                                <label for="contact-mensaje" class="text-sm font-normal leading-none text-neutral-200">Mensaje</label>
+                                <textarea id="contact-mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas..."
                                     class="flex min-h-[100px] w-full rounded-md border border-neutral-800 bg-black px-3 py-2 text-sm text-neutral-50 ring-offset-black placeholder:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 transition-colors resize-none"></textarea>
                             </div>
 
-                            <button type="submit"
-                                class="mt-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-10 px-4 py-2 w-full">
+                            <button type="submit" id="contact-submit"
+                                class="mt-2 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-normal ring-offset-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-10 px-4 py-2 w-full">
                                 Enviar mensaje
+                                <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="text-base"></iconify-icon>
                             </button>
                         </form>
                     </div>
@@ -873,7 +868,7 @@
                 <div
                     class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-neutral-500">
                     <p class="uppercase tracking-tight font-normal text-neutral-400">APEX CREATIVE</p>
-                    <p>© 2026 Mi Sitio. Todos los derechos reservados.</p>
+                    <p>© 2026 Apex Creative. Todos los derechos reservados.</p>
                 </div>
             </footer>
 
