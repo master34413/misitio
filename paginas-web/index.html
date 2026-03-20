@@ -386,14 +386,11 @@
                             Especialistas en Presencia Web
                         </div>
 
-                        <h1 id="hero-title"
-                            class="hero-title opacity-0 text-5xl md:text-6xl lg:text-[4.2rem] font-light tracking-tight leading-[1.05] mb-8 text-white"
+                        <h1 class="hero-anim opacity-0 text-5xl md:text-6xl lg:text-[4.2rem] font-light tracking-tight leading-[1.05] mb-8 text-white"
                             style="opacity: 0;">
-                            <span id="hero-line1"></span><br class="hidden md:block">
-                            <span id="hero-line2"></span><span id="hero-word"
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 to-neutral-500 opacity-0"
-                                style="opacity:0;">oportunidades</span><span id="hero-period" class="opacity-0"
-                                style="opacity:0;">.</span>
+                            Si tu negocio no tiene página web,<br class="hidden md:block">
+                            estás perdiendo <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 to-neutral-500">oportunidades</span>.
                         </h1>
 
                         <p class="hero-anim opacity-0 text-lg md:text-xl text-neutral-400 font-light max-w-lg text-balance mb-12"
@@ -908,377 +905,207 @@
 
     <!-- Scripts -->
     <script>
-        window.addEventListener("load", () => {
-            gsap.registerPlugin(ScrollTrigger, TextPlugin, ScrollSmoother);
-
-            // Preloader Logic
+        // ─── PRELOADER: arranca sincrónicamente ───────────────────────────────────
+        // Los scripts GSAP son defer → corren después del parse.
+        // Este IIFE corre ahora mismo para que la animación CSS empiece cuanto antes.
+        (function initPreloader() {
             const preloader = document.getElementById('preloader');
-            const drawPaths = document.querySelectorAll('#preloader .draw-animate');
+            if (!preloader) return;
 
+            // Medir y asignar dasharray/dashoffset en los paths del SVG
+            const drawPaths = document.querySelectorAll('#preloader .draw-animate');
             drawPaths.forEach(path => {
                 const length = path.getTotalLength();
-                path.style.setProperty('--path-length', length);
                 path.style.strokeDasharray = length;
                 path.style.strokeDashoffset = length;
             });
 
-            // Start preloader animation
+            // Lanzar animación CSS inmediatamente
             preloader.classList.add('start-animation');
 
-            // Fade out preloader quickly once page is fully loaded
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.remove();
-                document.body.classList.remove('overflow-hidden');
-                initMainAnimations();
-            }, 300);
+            // La animación dura ~3.2 s (sketchLine 2s + fillSolid empieza en 2.2s + 1s).
+            // Ocultamos el preloader cuando AMBAS condiciones se cumplan:
+            //   1) La animación terminó  (~3200 ms)
+            //   2) La página cargó completamente (window load)
+            const animDone    = new Promise(res => setTimeout(res, 3200));
+            const pageLoaded  = new Promise(res => {
+                if (document.readyState === 'complete') res();
+                else window.addEventListener('load', res, { once: true });
+            });
 
-            // 3D Parallax Logic
-            const heroArea = document.getElementById('heroArea');
-            const logoStage = document.getElementById('logoStage');
-            const maxRotation = 12;
+            Promise.all([animDone, pageLoaded]).then(() => {
+                preloader.style.opacity = '0';          // transición CSS 0.8s ya definida
+                setTimeout(() => {
+                    preloader.remove();
+                    document.body.classList.remove('overflow-hidden');
+                    initMainAnimations();               // GSAP ya está disponible
+                }, 800);
+            });
+        })();
 
-            // 3D Parallax — throttled with requestAnimationFrame
-            if (heroArea && logoStage) {
-                let rafId = null;
-                let lastMouseEvent = null;
 
-                function updateParallax() {
-                    if (!lastMouseEvent) return;
-                    const rect = heroArea.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const percentX = (lastMouseEvent.clientX - centerX) / (rect.width / 2);
-                    const percentY = (lastMouseEvent.clientY - centerY) / (rect.height / 2);
-                    const rotateX = percentY * -maxRotation;
-                    const rotateY = percentX * maxRotation;
-                    logoStage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                    rafId = null;
-                }
+        // ─── 3D PARALLAX: throttled con requestAnimationFrame ─────────────────────
+        (function initParallax() {
+            const heroArea   = document.getElementById('heroArea');
+            const logoStage  = document.getElementById('logoStage');
+            const MAX_ROT    = 12;
+            if (!heroArea || !logoStage) return;
 
-                heroArea.addEventListener('mousemove', (e) => {
-                    logoStage.classList.remove('reset');
-                    lastMouseEvent = e;
-                    if (!rafId) rafId = requestAnimationFrame(updateParallax);
-                });
+            let rafId = null, lastEv = null;
 
-                heroArea.addEventListener('mouseleave', () => {
-                    logoStage.classList.add('reset');
-                    logoStage.style.transform = '';
-                    lastMouseEvent = null;
+            function tick() {
+                if (!lastEv) return;
+                const r  = heroArea.getBoundingClientRect();
+                const px = (lastEv.clientX - (r.left + r.width  / 2)) / (r.width  / 2);
+                const py = (lastEv.clientY - (r.top  + r.height / 2)) / (r.height / 2);
+                logoStage.style.transform = `rotateX(${py * -MAX_ROT}deg) rotateY(${px * MAX_ROT}deg)`;
+                rafId = null;
+            }
+
+            heroArea.addEventListener('mousemove', e => {
+                logoStage.classList.remove('reset');
+                lastEv = e;
+                if (!rafId) rafId = requestAnimationFrame(tick);
+            });
+            heroArea.addEventListener('mouseleave', () => {
+                logoStage.classList.add('reset');
+                logoStage.style.transform = '';
+                lastEv = null;
+            });
+        })();
+
+
+        // ─── SCROLL TO TOP BUTTON ─────────────────────────────────────────────────
+        (function initScrollTop() {
+            const btn = document.getElementById('scrollTopBtn');
+            if (!btn) return;
+
+            window.addEventListener('scroll', () => {
+                btn.classList.toggle('is-visible', window.scrollY > 300);
+                if (window.scrollY <= 300) btn.classList.remove('is-launching');
+            });
+
+            btn.addEventListener('click', () => {
+                btn.classList.add('is-launching');
+                if (window._smoother) window._smoother.scrollTo(0, true);
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+
+        // ─── GSAP ANIMATIONS (llamado desde el preloader una vez todo listo) ──────
+        function initMainAnimations() {
+            gsap.registerPlugin(ScrollTrigger, TextPlugin, ScrollSmoother);
+
+            const isMobile            = window.matchMedia('(max-width: 768px)').matches;
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // ScrollSmoother
+            if (!prefersReducedMotion) {
+                window._smoother = ScrollSmoother.create({
+                    wrapper:         '#smooth-wrapper',
+                    content:         '#smooth-content',
+                    smooth:          isMobile ? 0 : 1.4,
+                    effects:         !isMobile,
+                    smoothTouch:     0,
+                    normalizeScroll: true
                 });
             }
 
-            // Scroll to Top Logic
-            const scrollBtn = document.getElementById('scrollTopBtn');
-            if (scrollBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 300) {
-                        scrollBtn.classList.add('is-visible');
-                    } else {
-                        scrollBtn.classList.remove('is-visible');
-                        scrollBtn.classList.remove('is-launching');
-                    }
-                });
+            // 1. HERO — reveal con transform+opacity (sin filter)
+            gsap.fromTo('.hero-anim',
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, stagger: 0.12, ease: 'power3.out' }
+            );
 
-                scrollBtn.addEventListener('click', () => {
-                    scrollBtn.classList.add('is-launching');
-                    if (window._smoother) {
-                        window._smoother.scrollTo(0, true);
-                    } else {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
+
+            // Hero logo — parallax en scroll
+            if (!isMobile) {
+                gsap.to('#logoStage', {
+                    y: 120, ease: 'none',
+                    scrollTrigger: { trigger: '#heroArea', start: 'top top', end: 'bottom top', scrub: 1.5 }
                 });
             }
 
-            // Main GSAP Animations Function
-            function initMainAnimations() {
+            // 2. EL PROBLEMA — directional reveal
+            const prob = gsap.utils.toArray('#problem .section-anim');
+            if (prob[0]) gsap.fromTo(prob[0], { x: -80, opacity: 0 }, {
+                x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                scrollTrigger: { trigger: prob[0], start: 'top 88%', end: 'top 55%', scrub: 0.8 }
+            });
+            if (prob[1]) gsap.fromTo(prob[1], { x: 80, opacity: 0 }, {
+                x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                scrollTrigger: { trigger: prob[1], start: 'top 88%', end: 'top 55%', scrub: 0.8 }
+            });
 
-                // ===== ScrollSmoother Init (runs after preloader) =====
-                // Plugins already registered at top — no need to re-register
-                const isMobile = window.matchMedia('(max-width: 768px)').matches;
-                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // 3. BENEFICIOS — scale+fade stagger
+            const benefits = gsap.utils.toArray('.stagger-container:first-of-type .stagger-item');
+            gsap.fromTo(benefits, { y: 60, opacity: 0, scale: 0.9 }, {
+                y: 0, opacity: 1, scale: 1, stagger: 0.12, ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: benefits[0]?.closest('div'),
+                    start: 'top 85%', end: 'bottom 60%', scrub: 1
+                }
+            });
 
-                if (!prefersReducedMotion) {
-                    window._smoother = ScrollSmoother.create({
-                        wrapper: '#smooth-wrapper',
-                        content: '#smooth-content',
-                        smooth: isMobile ? 0 : 1.4,
-                        effects: !isMobile,
-                        smoothTouch: 0,
-                        normalizeScroll: true
+            // 4. SERVICIOS — cards reveal
+            if (!isMobile) {
+                const svcHead  = document.querySelector('#services .section-anim');
+                const svcCards = gsap.utils.toArray('#services .stagger-item');
+                if (svcHead) gsap.fromTo(svcHead, { y: 40, opacity: 0 }, {
+                    y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                    scrollTrigger: { trigger: svcHead, start: 'top 85%', toggleActions: 'play none none reverse' }
+                });
+                if (svcCards.length) gsap.fromTo(svcCards, { y: 100, opacity: 0, rotateX: 8 }, {
+                    y: 0, opacity: 1, rotateX: 0, stagger: 0.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '#services .stagger-container',
+                        start: 'top 80%', end: 'bottom 40%', scrub: 1.2
+                    }
+                });
+            } else {
+                gsap.utils.toArray('#services .section-anim, #services .stagger-item').forEach(el => {
+                    gsap.fromTo(el, { y: 30, opacity: 0 }, {
+                        y: 0, opacity: 1, duration: 0.7, ease: 'power2.out',
+                        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
                     });
-                    // NOTE: ScrollTrigger handles resize refresh internally — no manual listener needed
-                }
-
-                // =====================================================
-                // 1. HERO — Staggered reveal from bottom (non-title elements)
-                // =====================================================
-                // Hero reveal — transform+opacity only (no filter for compositor performance)
-                gsap.fromTo('.hero-anim',
-                    { y: 40, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        duration: 1,
-                        stagger: 0.12,
-                        ease: 'power3.out'
-                    }
-                );
-
-                // =====================================================
-                // 1b. HERO TITLE — TextPlugin elegant typewriter
-                // =====================================================
-
-                const heroTitle = document.getElementById('hero-title');
-                const heroTitleTL = gsap.timeline({ delay: 0.4 });
-
-                // Step 1: reveal the h1 container
-                heroTitleTL.to('#hero-title', {
-                    opacity: 1, duration: 0.01
                 });
-
-                // Step 2: type line 1 word by word
-                heroTitleTL.to('#hero-line1', {
-                    text: {
-                        value: 'Si tu negocio no tiene página web,',
-                        delimiter: ' '
-                    },
-                    duration: 1.6,
-                    ease: 'none'
-                });
-
-                // Step 3: brief dramatic pause
-                heroTitleTL.to({}, { duration: 0.15 });
-
-                // Step 4: type line 2
-                heroTitleTL.to('#hero-line2', {
-                    text: {
-                        value: 'estás perdiendo ',
-                        delimiter: ' '
-                    },
-                    duration: 0.8,
-                    ease: 'none'
-                });
-
-                // Step 5: reveal 'oportunidades' — transform+opacity only (no filter)
-                heroTitleTL.fromTo('#hero-word',
-                    { opacity: 0, scale: 0.92, letterSpacing: '-0.02em' },
-                    {
-                        opacity: 1, scale: 1, letterSpacing: '0em',
-                        duration: 0.9, ease: 'power3.out'
-                    }
-                );
-
-                // Step 6: period fades in
-                heroTitleTL.to('#hero-period', {
-                    opacity: 1, duration: 0.3, ease: 'power2.out'
-                }, '-=0.2');
-
-                // Hero logo — parallax on scroll
-                if (!isMobile) {
-                    gsap.to('#logoStage', {
-                        y: 120,
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: '#heroArea',
-                            start: 'top top',
-                            end: 'bottom top',
-                            scrub: 1.5
-                        }
-                    });
-                }
-
-                // =====================================================
-                // 2. EL PROBLEMA — Directional scrub reveal
-                // =====================================================
-                const problemBlocks = gsap.utils.toArray('#problem .section-anim');
-                if (problemBlocks[0]) {
-                    gsap.fromTo(problemBlocks[0],
-                        { x: -80, opacity: 0 },
-                        {
-                            x: 0, opacity: 1, duration: 1, ease: 'power3.out',
-                            scrollTrigger: {
-                                trigger: problemBlocks[0],
-                                start: 'top 88%',
-                                end: 'top 55%',
-                                scrub: 0.8
-                            }
-                        }
-                    );
-                }
-                if (problemBlocks[1]) {
-                    gsap.fromTo(problemBlocks[1],
-                        { x: 80, opacity: 0 },
-                        {
-                            x: 0, opacity: 1, duration: 1, ease: 'power3.out',
-                            scrollTrigger: {
-                                trigger: problemBlocks[1],
-                                start: 'top 88%',
-                                end: 'top 55%',
-                                scrub: 0.8
-                            }
-                        }
-                    );
-                }
-
-                // =====================================================
-                // 3. BENEFICIOS — Scale+fade stagger with scrub
-                // =====================================================
-                const benefitItems = gsap.utils.toArray('.stagger-container:first-of-type .stagger-item');
-                gsap.fromTo(benefitItems,
-                    { y: 60, opacity: 0, scale: 0.9 },
-                    {
-                        y: 0, opacity: 1, scale: 1,
-                        stagger: 0.12,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: benefitItems[0]?.closest('div'),
-                            start: 'top 85%',
-                            end: 'bottom 60%',
-                            scrub: 1
-                        }
-                    }
-                );
-
-                // =====================================================
-                // 4. SERVICIOS — Pinned section + cards reveal one by one
-                // =====================================================
-                if (!isMobile) {
-                    const servicesSection = document.querySelector('#services');
-                    const serviceHeading = servicesSection?.querySelector('.section-anim');
-                    const serviceCards = gsap.utils.toArray('#services .stagger-item');
-
-                    if (serviceHeading) {
-                        gsap.fromTo(serviceHeading,
-                            { y: 40, opacity: 0 },
-                            {
-                                y: 0, opacity: 1, duration: 1, ease: 'power3.out',
-                                scrollTrigger: {
-                                    trigger: serviceHeading,
-                                    start: 'top 85%',
-                                    toggleActions: 'play none none reverse'
-                                }
-                            }
-                        );
-                    }
-
-                    if (serviceCards.length) {
-                        // Staggered scrub: each card slides up sequentially
-                        gsap.fromTo(serviceCards,
-                            { y: 100, opacity: 0, rotateX: 8 },
-                            {
-                                y: 0, opacity: 1, rotateX: 0,
-                                stagger: 0.2,
-                                ease: 'power3.out',
-                                scrollTrigger: {
-                                    trigger: '#services .stagger-container',
-                                    start: 'top 80%',
-                                    end: 'bottom 40%',
-                                    scrub: 1.2
-                                }
-                            }
-                        );
-                    }
-                } else {
-                    // Mobile: simple reveal
-                    gsap.utils.toArray('#services .section-anim, #services .stagger-item').forEach(el => {
-                        gsap.fromTo(el,
-                            { y: 30, opacity: 0 },
-                            {
-                                y: 0, opacity: 1, duration: 0.7, ease: 'power2.out',
-                                scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-                            }
-                        );
-                    });
-                }
-
-                // =====================================================
-                // 5. PROCESO — Steps reveal with number parallax
-                // =====================================================
-                const processSteps = gsap.utils.toArray('#process .stagger-item');
-                processSteps.forEach((step, i) => {
-                    const number = step.querySelector('div:first-child');
-                    const text = step.querySelector('div:last-child');
-
-                    const tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: step,
-                            start: 'top 82%',
-                            end: 'top 48%',
-                            scrub: 0.9
-                        }
-                    });
-
-                    if (number) tl.fromTo(number,
-                        { x: -40, opacity: 0, color: '#404040' },
-                        { x: 0, opacity: 1, color: '#737373', ease: 'power2.out' }, 0
-                    );
-                    if (text) tl.fromTo(text,
-                        { x: 40, opacity: 0 },
-                        { x: 0, opacity: 1, ease: 'power2.out' }, 0.05
-                    );
-                });
-
-                const processHeading = document.querySelector('#process .section-anim');
-                if (processHeading) {
-                    gsap.fromTo(processHeading,
-                        { y: 50, opacity: 0 },
-                        {
-                            y: 0, opacity: 1,
-                            scrollTrigger: {
-                                trigger: processHeading,
-                                start: 'top 85%',
-                                end: 'top 55%',
-                                scrub: 0.8
-                            }
-                        }
-                    );
-                }
-
-                // =====================================================
-                // 6. PARA QUIÉN — Clip-path reveal
-                // =====================================================
-                // Section reveals — y+opacity only (no clip-path for compositor performance)
-                gsap.utils.toArray('.section-anim').forEach(el => {
-                    // Skip already handled elements
-                    if (el.closest('#problem') || el.closest('#process') || el.closest('#services')) return;
-                    gsap.fromTo(el,
-                        { y: 40, opacity: 0 },
-                        {
-                            y: 0, opacity: 1,
-                            duration: 0.8,
-                            ease: 'power2.out',
-                            scrollTrigger: {
-                                trigger: el,
-                                start: 'top 88%',
-                                toggleActions: 'play none none none'
-                            }
-                        }
-                    );
-                });
-
-                // =====================================================
-                // 7. CONTACT CTA — Scale reveal with scrub
-                // =====================================================
-                const ctaBlock = document.querySelector('#contact .section-anim');
-                if (ctaBlock) {
-                    gsap.fromTo(ctaBlock,
-                        { scale: 0.94, opacity: 0, y: 60 },
-                        {
-                            scale: 1, opacity: 1, y: 0,
-                            ease: 'power3.out',
-                            scrollTrigger: {
-                                trigger: ctaBlock,
-                                start: 'top 88%',
-                                end: 'top 50%',
-                                scrub: 1
-                            }
-                        }
-                    );
-                }
             }
-        });
+
+            // 5. PROCESO — steps reveal con parallax del número
+            gsap.utils.toArray('#process .stagger-item').forEach(step => {
+                const num  = step.querySelector('div:first-child');
+                const txt  = step.querySelector('div:last-child');
+                const tl   = gsap.timeline({
+                    scrollTrigger: { trigger: step, start: 'top 82%', end: 'top 48%', scrub: 0.9 }
+                });
+                if (num) tl.fromTo(num, { x: -40, opacity: 0, color: '#404040' },
+                                        { x:   0, opacity: 1, color: '#737373', ease: 'power2.out' }, 0);
+                if (txt) tl.fromTo(txt, { x:  40, opacity: 0 },
+                                        { x:   0, opacity: 1, ease: 'power2.out' }, 0.05);
+            });
+            const procHead = document.querySelector('#process .section-anim');
+            if (procHead) gsap.fromTo(procHead, { y: 50, opacity: 0 }, {
+                y: 0, opacity: 1,
+                scrollTrigger: { trigger: procHead, start: 'top 85%', end: 'top 55%', scrub: 0.8 }
+            });
+
+            // 6. SECCIONES GENERALES — y+opacity (sin clip-path)
+            gsap.utils.toArray('.section-anim').forEach(el => {
+                if (el.closest('#problem') || el.closest('#process') || el.closest('#services')) return;
+                gsap.fromTo(el, { y: 40, opacity: 0 }, {
+                    y: 0, opacity: 1, duration: 0.8, ease: 'power2.out',
+                    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+                });
+            });
+
+            // 7. CONTACT CTA — scale reveal
+            const cta = document.querySelector('#contact .section-anim');
+            if (cta) gsap.fromTo(cta, { scale: 0.94, opacity: 0, y: 60 }, {
+                scale: 1, opacity: 1, y: 0, ease: 'power3.out',
+                scrollTrigger: { trigger: cta, start: 'top 88%', end: 'top 50%', scrub: 1 }
+            });
+        }
     </script>
 
 
