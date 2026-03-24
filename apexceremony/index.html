@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitaciones Especiales - Apex Creative</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Asumiendo que ScrollSmoother está en el directorio assets relativo a la raíz -->
+    <script src="../assets/animation/ScrollSmoother.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #FAFAFA;
+        }
+
+        /* Prevención de barridos visuales iniciales */
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overscroll-behavior: none;
+        }
+
+        /* Utilidad para aceleración por hardware en el video si es necesario */
+        .hardware-accelerated {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-neutral-800 selection:text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- GSAP ScrollSmoother Wrappers -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- 1. Hero Scrollable Video Section -->
+            <!-- Le damos gran altura para generar espacio de scroll -->
+            <section id="video-sequence" class="relative w-full h-[400vh] bg-black">
+                
+                <!-- Contenedor Sticky: Permanece fijo mientras la sección fluye -->
+                <div class="sticky top-0 left-0 w-full h-screen overflow-hidden">
+                    
+                    <!-- Video (Enlazado al Scroll) -->
+                    <!-- Atributos vitales: muted, playsinline, preload="auto" para control programático -->
+                    <video 
+                        id="hero-video" 
+                        class="absolute inset-0 w-full h-full object-cover opacity-80 hardware-accelerated"
+                        src="../assets/imagesboda/videoboda.mp4" 
+                        muted 
+                        playsinline 
+                        preload="auto">
+                    </video>
+
+                    <!-- Capa de oscurecimiento para mejor contraste tipográfico -->
+                    <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+                    <!-- Contenido de Texto -->
+                    <div class="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto">
+                        
+                        <!-- Etiqueta decorativa nupcial -->
+                        <div class="hero-content opacity-0 translate-y-8 inline-flex items-center gap-2 rounded-full border border-neutral-500/30 bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs tracking-wide font-medium text-neutral-300 mb-8">
+                            <iconify-icon icon="solar:hearts-linear" stroke-width="1.5" class="text-neutral-400 text-sm"></iconify-icon>
+                            Invitaciones de Boda
+                        </div>
+
+                        <!-- Título Principal -->
+                        <h1 class="hero-content opacity-0 translate-y-8 text-[clamp(2.5rem,5vw,4.5rem)] font-medium tracking-tight leading-[1.05] text-balance mb-8 text-white drop-shadow-xl">
+                            Tu boda merece una invitación que se sienta tan especial como el gran día.
+                        </h1>
+
+                        <!-- Subtexto Descriptivo -->
+                        <div class="hero-content opacity-0 translate-y-8 flex flex-col gap-6 text-base md:text-lg text-neutral-300 font-normal max-w-2xl text-balance mb-12 drop-shadow-md">
+                            <p class="leading-relaxed">
+                                Hoy una invitación no solo informa.<br class="hidden md:block">
+                                También emociona, organiza y presenta tu boda de una forma más elegante y memorable.
+                            </p>
+                            <p class="leading-relaxed">
+                                Creamos invitaciones digitales y páginas web para bodas que reúnen todo en un solo lugar: información, confirmación de asistencia y una experiencia hermosa para tus invitados.
+                            </p>
+                        </div>
+
+                        <!-- Botón CTA -->
+                        <a href="#contacto" class="hero-content opacity-0 translate-y-8 inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-12 px-8 py-2 group shadow-2xl">
+                            Quiero mi invitación digital
+                            <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="ml-2 text-xl group-hover:translate-x-1 transition-transform"></iconify-icon>
+                        </a>
+
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección placeholder inferior (para comprobar que se sale del scroll) -->
+            <section class="h-[60vh] flex flex-col items-center justify-center bg-neutral-950 px-6 border-t border-neutral-900">
+                <p class="text-neutral-500 text-lg font-medium">Contenido de la invitación aquí...</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Scripts de Lógica y GSAP -->
+    <script>
+        // Registrar Plugins
+        gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+        // Intentar Inicializar ScrollSmoother (Si el archivo carga correctamente)
+        let smoother;
+        if (typeof ScrollSmoother !== 'undefined') {
+            try {
+                smoother = ScrollSmoother.create({
+                    wrapper: '#smooth-wrapper',
+                    content: '#smooth-content',
+                    smooth: 1.5,
+                    effects: true,
+                });
+            } catch (e) {
+                console.log("ScrollSmoother error (podría estar usándose premium plugin localmente):", e);
+            }
+        }
+
+        const video = document.getElementById("hero-video");
+        const videoSection = document.getElementById("video-sequence");
+        const heroContents = document.querySelectorAll(".hero-content");
+
+        // Pausar el video inicialmente por seguridad (lo controlará el scroll)
+        video.pause();
+
+        // 1. Animación de revelado de los textos al cargar la página
+        gsap.to(heroContents, {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.3
+        });
+
+        // 2. Control del video atado al ScrollTrigger
+        // Para que `video.duration` sea confiable, necesitamos metadata
+        video.onloadedmetadata = function() {
+            createVideoScroll();
+        };
+        
+        // Cubrir caso de video que ya está cacheado por el navegador
+        if (video.readyState >= 1) { // 1 = HAVE_METADATA
+            createVideoScroll();
+        }
+
+        // Función que construye el ScrollTrigger
+        function createVideoScroll() {
+            // Utilizamos gsap.to apuntando al currentTime del objeto multimedia
+            // Esto es mucho más eficiente que usar events como onUpdate()
+            const videoDuration = video.duration || 10; // Fallback por si acaso
+
+            gsap.to(video, {
+                currentTime: videoDuration,
+                ease: "none", // Movimiento lineal al hacer scroll, sin acelerones
+                scrollTrigger: {
+                    trigger: videoSection,
+                    start: "top top",     // Empieza al chocar el tope de la ventana con el tope de la sección
+                    end: "bottom bottom", // Termina cuando el final de la sección choca con el final de la ventana
+                    scrub: 1, // '1' le otorga 1 seg de inercia y suavizado extra para evitar tirones (jankiness)
+                }
+            });
+        }
+    </script>
+</body>
+</html>
