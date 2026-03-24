@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,12 +31,13 @@
             clip-path: inset(100% 0 0 0);
             transform: translateY(40px);
         }
-        
+
         .txt.first-txt {
             /* El primero comienza visible */
             clip-path: inset(0% 0% 0% 0%);
             transform: translateY(0);
         }
+
         /* Imágenes al 100% de claridad sin filtros adicionales */
 
         /* Mobile Menu */
@@ -77,11 +79,13 @@
 <body class="bg-[#fafafa] text-zinc-900 font-sans antialiased selection:bg-zinc-200 selection:text-zinc-900"
     style="font-family: 'Outfit', sans-serif;">
     <!-- Navigation -->
-    <nav class="fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md transition-transform duration-500 ease-in-out" style="transform: translateY(0);" id="main-nav">
+    <nav class="fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md transition-transform duration-500 ease-in-out"
+        style="transform: translateY(0);" id="main-nav">
         <div class="flex flex-col w-full max-w-4xl relative">
             <div
                 class="flex items-center justify-between px-5 py-3 bg-white/80 backdrop-blur-md border border-neutral-200 rounded-xl w-full shadow-lg z-20 relative">
-                <a href="#" class="flex items-center gap-2 text-base font-bold tracking-tighter uppercase text-zinc-900 hover:text-zinc-600 transition-colors">
+                <a href="#"
+                    class="flex items-center gap-2 text-base font-bold tracking-tighter uppercase text-zinc-900 hover:text-zinc-600 transition-colors">
                     WDNG
                 </a>
 
@@ -94,9 +98,12 @@
 
                 <button id="menu-toggle-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"
                     class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 text-zinc-900 transition-colors cursor-pointer bg-transparent border-none">
-                    <span class="menu-bar menu-bar-top block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
-                    <span class="menu-bar menu-bar-mid block w-[18px] h-[2px] bg-current transition-opacity rounded-full"></span>
-                    <span class="menu-bar menu-bar-bottom block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
+                    <span
+                        class="menu-bar menu-bar-top block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
+                    <span
+                        class="menu-bar menu-bar-mid block w-[18px] h-[2px] bg-current transition-opacity rounded-full"></span>
+                    <span
+                        class="menu-bar menu-bar-bottom block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
                 </button>
             </div>
 
@@ -105,7 +112,8 @@
                 <div
                     class="flex flex-col gap-1 px-2 py-3 bg-white/95 backdrop-blur-md border border-neutral-200 rounded-xl shadow-xl pointer-events-auto">
                     <a href="#"
-                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors">La Boda</a>
+                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors">La
+                        Boda</a>
                     <a href="#"
                         class="mobile-nav-link px-4 py-3 text-sm font-bold text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors">Detalles</a>
                     <div class="h-px bg-neutral-200 mx-4 my-1"></div>
@@ -118,15 +126,19 @@
 
     <!-- SPACER INICIAL (Pantalla de Bienvenida) -->
     <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6">
-        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-zinc-900 mb-6 max-w-5xl text-balance">
+        <h1
+            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-zinc-900 mb-6 max-w-5xl text-balance">
             Tu boda merece una invitación que se sienta tan especial como el gran día.
         </h1>
         <p class="font-elegant text-2xl md:text-3xl text-zinc-600 tracking-wide max-w-3xl text-balance mb-12">
-            Hoy una invitación no solo informa.<br class="hidden md:block"> También emociona, organiza y presenta tu boda de una forma más elegante y memorable.
+            Hoy una invitación no solo informa.<br class="hidden md:block"> También emociona, organiza y presenta tu
+            boda de una forma más elegante y memorable.
         </p>
-        <span class="info text-sm font-medium text-zinc-400 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
+        <span
+            class="info text-sm font-medium text-zinc-400 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
             Descubre más
-            <iconify-icon icon="solar:arrow-down-linear" class="text-lg animate-bounce absolute bottom-0" style="stroke-width: 1.5;"></iconify-icon>
+            <iconify-icon icon="solar:arrow-down-linear" class="text-lg animate-bounce absolute bottom-0"
+                style="stroke-width: 1.5;"></iconify-icon>
         </span>
     </div>
 
@@ -135,14 +147,14 @@
     <div class="scroll-container h-[300vh] relative w-full">
         <!-- Contenedor Sticky -->
         <section class="stage sticky top-0 w-full h-screen overflow-hidden bg-[#0a0a0a]">
-            
+
             <div class="layers absolute inset-0 w-full h-full">
-                
+
                 <!-- CAPA 1 (Base - Sin máscara) -->
                 <svg class="layer absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <image href="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2069&amp;auto=format&amp;fit=crop"
-                           x="0" y="0" width="100" height="100"
-                           preserveAspectRatio="xMidYMid slice" />
+                    <image
+                        href="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=2069&amp;auto=format&amp;fit=crop"
+                        x="0" y="0" width="100" height="100" preserveAspectRatio="xMidYMid slice" />
                 </svg>
 
                 <!-- CAPA 2 (Máscara 2) -->
@@ -156,10 +168,9 @@
                             <g id="blinds2"></g>
                         </mask>
                     </defs>
-                    <image href="https://images.unsplash.com/photo-1583939008593-5c0240d9d68d?q=80&amp;w=2070&amp;auto=format&amp;fit=crop"
-                           x="0" y="0" width="100" height="100"
-                           preserveAspectRatio="xMidYMid slice"
-                           mask="url(#mask2)" />
+                    <image
+                        href="https://images.unsplash.com/photo-1583939008593-5c0240d9d68d?q=80&amp;w=2070&amp;auto=format&amp;fit=crop"
+                        x="0" y="0" width="100" height="100" preserveAspectRatio="xMidYMid slice" mask="url(#mask2)" />
                 </svg>
 
                 <!-- CAPA 3 (Máscara 3) -->
@@ -170,41 +181,48 @@
                             <g id="blinds3"></g>
                         </mask>
                     </defs>
-                    <image href="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&amp;w=2070&amp;auto=format&amp;fit=crop"
-                           x="0" y="0" width="100" height="100"
-                           preserveAspectRatio="xMidYMid slice"
-                           mask="url(#mask3)" />
+                    <image
+                        href="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&amp;w=2070&amp;auto=format&amp;fit=crop"
+                        x="0" y="0" width="100" height="100" preserveAspectRatio="xMidYMid slice" mask="url(#mask3)" />
                 </svg>
 
                 <!-- TEXTOS FLOTANTES SUPERPUESTOS -->
-                <div class="texts absolute inset-0 z-10 flex items-center justify-center p-6 text-center pointer-events-none text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+                <div
+                    class="texts absolute inset-0 z-10 flex items-center justify-center p-6 text-center pointer-events-none text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
 
                     <!-- Texto 1 (Capa 1) -->
                     <div class="txt first-txt">
-                        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1
+                            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
                             La primera impresión de tu boda comienza antes del evento.
                         </h1>
-                        <span class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
+                        <span
+                            class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
                             Antes de llegar a la ceremonia, tus invitados ya están formando una idea de lo que vivirán.
                         </span>
                     </div>
 
                     <!-- Texto 2 (Capa 2) -->
                     <div class="txt">
-                        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1
+                            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
                             Una invitación digital es el centro de información de tu boda.
                         </h1>
-                        <span class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
-                            Una buena invitación digital no solo se ve bien.<br class="hidden md:block"> También hace que todo sea más claro, más práctico y más especial.
+                        <span
+                            class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
+                            Una buena invitación digital no solo se ve bien.<br class="hidden md:block"> También hace
+                            que todo sea más claro, más práctico y más especial.
                         </span>
                     </div>
 
                     <!-- Texto 3 (Capa 3) -->
                     <div class="txt">
-                        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1
+                            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
                             Su boda merece una presentación a la altura del momento.
                         </h1>
-                        <span class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
+                        <span
+                            class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
                             De esta forma, sus invitados tienen acceso a todo de manera clara, elegante y ordenada.
                         </span>
                     </div>
@@ -212,7 +230,8 @@
                 </div>
 
                 <!-- PROGRESS INDICATORS (Barras Negras/Blancas) -->
-                <div class="progress-bar absolute bottom-8 md:bottom-12 left-6 md:left-12 flex gap-3 z-20 drop-shadow-md">
+                <div
+                    class="progress-bar absolute bottom-8 md:bottom-12 left-6 md:left-12 flex gap-3 z-20 drop-shadow-md">
                     <div class="segment w-12 md:w-16 h-[2px] bg-white/20 relative overflow-hidden rounded-full">
                         <div class="fill absolute top-0 left-0 w-full h-full bg-white"></div>
                     </div>
@@ -229,24 +248,28 @@
     </div>
 
     <!-- FOOTER / FINAL SPACER -->
-    <div class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-[#fafafa]">
+    <div
+        class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-[#fafafa]">
         <h2 class="font-elegant text-5xl md:text-7xl tracking-tight font-medium text-zinc-900 mb-12">
             Contacto
         </h2>
-        
+
         <div class="flex flex-col gap-6 text-base md:text-xl font-light text-zinc-600">
             <div class="flex items-center justify-center gap-3">
                 <span class="font-medium text-zinc-900">Correo:</span>
-                <a href="mailto:hola@apex-creative.com.mx" class="hover:text-zinc-400 transition-colors duration-300 relative group">
+                <a href="mailto:hola@apex-creative.com.mx"
+                    class="hover:text-zinc-400 transition-colors duration-300 relative group">
                     hola@apex-creative.com.mx
-                    <span class="absolute left-0 -bottom-1 w-0 h-[1px] bg-zinc-400 transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                        class="absolute left-0 -bottom-1 w-0 h-[1px] bg-zinc-400 transition-all duration-300 group-hover:w-full"></span>
                 </a>
             </div>
             <div class="flex items-center justify-center gap-3">
                 <span class="font-medium text-zinc-900">Teléfono:</span>
                 <a href="tel:9671905265" class="hover:text-zinc-400 transition-colors duration-300 relative group">
                     967 190 5265
-                    <span class="absolute left-0 -bottom-1 w-0 h-[1px] bg-zinc-400 transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                        class="absolute left-0 -bottom-1 w-0 h-[1px] bg-zinc-400 transition-all duration-300 group-hover:w-full"></span>
                 </a>
             </div>
         </div>
@@ -263,15 +286,15 @@
         // 1. Número de franjas por imagen
         const BLIND_COUNT = 30;
         const svgNS = 'http://www.w3.org/2000/svg';
-        
+
         let blindsSets = [];
-        
+
         // 2. Función creadora de persianas HORIZONTALES (Centro hacia afuera)
         function createBlinds(groupId) {
             const g = document.getElementById(groupId);
             if (!g) return null;
             g.innerHTML = '';
-            
+
             // Calculamos proporciones
             const width = window.innerWidth;
             const height = window.innerHeight;
@@ -279,18 +302,18 @@
             const vbWidth = 100;
             const vbHeight = (height / width) * 100;
             const h = vbHeight / BLIND_COUNT;
-            
+
             const blinds = [];
             let currentY = 0;
-            
+
             for (let i = 0; i < BLIND_COUNT; i++) {
                 // Punto muerto central de esta franja
                 const centerY = vbHeight - (currentY + h / 2);
-            
+
                 // Creamos dos rectángulos por franja (arriba y abajo) para abrir desde el medio
                 const rectTop = document.createElementNS(svgNS, 'rect');
                 const rectBottom = document.createElementNS(svgNS, 'rect');
-            
+
                 [rectTop, rectBottom].forEach((r) => {
                     r.setAttribute('x', 0);
                     r.setAttribute('width', vbWidth);
@@ -298,21 +321,21 @@
                     r.setAttribute('fill', 'white');
                     r.setAttribute('shape-rendering', 'crispEdges');
                 });
-            
+
                 // Los posicionamos exactamente en el centro de la franja
                 rectTop.setAttribute('y', centerY);
                 rectBottom.setAttribute('y', centerY);
-            
+
                 g.appendChild(rectTop);
                 g.appendChild(rectBottom);
-            
+
                 blinds.push({
                     top: rectTop,
                     bottom: rectBottom,
                     y: centerY,
                     h: h / 2,
                 });
-                
+
                 currentY += h;
             }
             return blinds;
@@ -324,10 +347,10 @@
             const height = window.innerHeight;
             const vbWidth = 100;
             const vbHeight = (height / width) * 100;
-            
+
             const layers = document.querySelectorAll('.layer');
             blindsSets = []; // Reset
-            
+
             layers.forEach((svg) => {
                 svg.setAttribute('viewBox', `0 0 ${vbWidth} ${vbHeight}`);
                 // Si la capa tiene una máscara, ajustarla
@@ -339,16 +362,16 @@
                     const blindGroup = svg.querySelector('g[id^="blinds"]');
                     if (blindGroup) {
                         const blinds = createBlinds(blindGroup.id);
-                        if(blinds) blindsSets.push(blinds); // Guardamos la colección matemática
+                        if (blinds) blindsSets.push(blinds); // Guardamos la colección matemática
                     }
                 }
             });
-            
+
             buildMasterTimeline();
         }
 
         // 4. Funciones de Animación (GSAP)
-        
+
         // Abre una capa de persianas
         function openBlinds(blinds) {
             return gsap.timeline().to(
@@ -376,8 +399,8 @@
 
         // Clip-path de entrada de Texto
         function textIn(el) {
-            return gsap.fromTo(el, 
-                { clipPath: 'inset(100% 0% 0% 0%)', y: 40 }, 
+            return gsap.fromTo(el,
+                { clipPath: 'inset(100% 0% 0% 0%)', y: 40 },
                 { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: 1.5, ease: 'expo.out' }
             );
         }
@@ -396,9 +419,9 @@
         let master;
         function buildMasterTimeline() {
             if (master) master.kill();
-            
+
             const texts = gsap.utils.toArray('.txt');
-            
+
             master = gsap.timeline({
                 scrollTrigger: {
                     trigger: '.scroll-container', // Nuestro Wrapper de 300vh
@@ -412,17 +435,17 @@
             // ESCENA 1 (Empieza visible)
             // No animamos las persianas porque la capa 1 es fija sin máscara
             // Pero sí sacamos el Texto 1 para dar paso a la Capa 2
-            master.add(textOut(texts[0]), "+=0.2"); 
-            
+            master.add(textOut(texts[0]), "+=0.2");
+
             // ESCENA 2 (Se abre Capa 2 y entra Texto 2)
-            if(blindsSets[0]) {
+            if (blindsSets[0]) {
                 master.add(openBlinds(blindsSets[0]), "-=0.5"); // Sincroniza persianas 2
                 master.add(textIn(texts[1]), "-=1.0");          // Entra Texto 2
                 master.add(textOut(texts[1]), "+=0.5");         // Sale Texto 2
             }
-            
+
             // ESCENA 3 (Se abre Capa 3 y entra Texto 3)
-            if(blindsSets[1]) {
+            if (blindsSets[1]) {
                 master.add(openBlinds(blindsSets[1]), "-=0.5"); // Sincroniza persianas 3
                 master.add(textIn(texts[2]), "-=1.0");          // Entra Texto 3
                 // El Texto 3 se queda al final
@@ -454,7 +477,7 @@
         // 7. INICIALIZADOR Y LISTENER DE RESIZE
         updateLayout();
         initProgressBar();
-        
+
         // Recalcular el lienzo tras un resize responsivo
         let resizeTimer;
         window.addEventListener('resize', () => {
@@ -491,9 +514,10 @@
                 // Hacia arriba o tope
                 navBar.style.transform = 'translateY(0)';
             }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         }, { passive: true });
 
     </script>
 </body>
+
 </html>
