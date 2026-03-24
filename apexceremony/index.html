@@ -11,7 +11,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Outfit:wght@400;600;700;800&display=swap');
+
+        /* Tipografía Cursiva Elegante */
+        .font-elegant {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
 
         /* CSS inspirado en el repositorio de Hiro-kiii para transiciones */
         .txt {
@@ -71,7 +77,7 @@
 <body class="bg-[#fafafa] text-zinc-900 font-sans antialiased selection:bg-zinc-200 selection:text-zinc-900"
     style="font-family: 'Outfit', sans-serif;">
     <!-- Navigation -->
-    <nav class="fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md" id="main-nav">
+    <nav class="fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md transition-transform duration-500 ease-in-out" style="transform: translateY(0);" id="main-nav">
         <div class="flex flex-col w-full max-w-4xl relative">
             <div
                 class="flex items-center justify-between px-5 py-3 bg-white/80 backdrop-blur-md border border-neutral-200 rounded-xl w-full shadow-lg z-20 relative">
@@ -112,10 +118,10 @@
 
     <!-- SPACER INICIAL (Pantalla de Bienvenida) -->
     <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6">
-        <h1 class="text-4xl md:text-6xl lg:text-7xl tracking-tighter font-extrabold text-zinc-900 mb-6 max-w-5xl text-balance">
+        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-zinc-900 mb-6 max-w-5xl text-balance">
             Tu boda merece una invitación que se sienta tan especial como el gran día.
         </h1>
-        <p class="text-base md:text-xl font-medium text-zinc-600 tracking-wide max-w-3xl text-balance mb-12">
+        <p class="font-elegant text-2xl md:text-3xl text-zinc-600 tracking-wide max-w-3xl text-balance mb-12">
             Hoy una invitación no solo informa.<br class="hidden md:block"> También emociona, organiza y presenta tu boda de una forma más elegante y memorable.
         </p>
         <span class="info text-sm font-medium text-zinc-400 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
@@ -175,30 +181,30 @@
 
                     <!-- Texto 1 (Capa 1) -->
                     <div class="txt first-txt">
-                        <h1 class="text-4xl md:text-6xl lg:text-7xl tracking-tight font-bold mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
                             La primera impresión de tu boda comienza antes del evento.
                         </h1>
-                        <span class="text-base md:text-xl font-semibold max-w-2xl leading-relaxed text-balance text-white">
+                        <span class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
                             Antes de llegar a la ceremonia, tus invitados ya están formando una idea de lo que vivirán.
                         </span>
                     </div>
 
                     <!-- Texto 2 (Capa 2) -->
                     <div class="txt">
-                        <h1 class="text-4xl md:text-6xl lg:text-7xl tracking-tight font-bold mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
                             Una invitación digital es el centro de información de tu boda.
                         </h1>
-                        <span class="text-base md:text-xl font-semibold max-w-2xl leading-relaxed text-balance text-white">
+                        <span class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
                             Una buena invitación digital no solo se ve bien.<br class="hidden md:block"> También hace que todo sea más claro, más práctico y más especial.
                         </span>
                     </div>
 
                     <!-- Texto 3 (Capa 3) -->
                     <div class="txt">
-                        <h1 class="text-4xl md:text-6xl lg:text-7xl tracking-tight font-bold mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1 class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
                             Su boda merece una presentación a la altura del momento.
                         </h1>
-                        <span class="text-base md:text-xl font-semibold max-w-2xl leading-relaxed text-balance text-white">
+                        <span class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
                             De esta forma, sus invitados tienen acceso a todo de manera clara, elegante y ordenada.
                         </span>
                     </div>
@@ -224,7 +230,7 @@
 
     <!-- FOOTER / FINAL SPACER -->
     <div class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-[#fafafa]">
-        <h2 class="text-4xl md:text-5xl tracking-tighter font-light text-zinc-900 mb-12">
+        <h2 class="font-elegant text-5xl md:text-7xl tracking-tight font-medium text-zinc-900 mb-12">
             Contacto
         </h2>
         
@@ -472,6 +478,21 @@
                 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
             }
         });
+
+        // Ocultar Navbar al hacer scroll hacia abajo
+        let lastScrollTop = 0;
+        const navBar = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Hacia abajo
+                navBar.style.transform = 'translateY(-150%)';
+            } else {
+                // Hacia arriba o tope
+                navBar.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+        }, { passive: true });
 
     </script>
 </body>
