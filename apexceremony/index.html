@@ -14,7 +14,7 @@
     <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Asumiendo que ScrollSmoother está en el directorio assets relativo a la raíz -->
+    <!-- ScrollSmoother -->
     <script src="../assets/animation/ScrollSmoother.min.js"></script>
     
     <style>
@@ -26,7 +26,6 @@
             color: #FAFAFA;
         }
 
-        /* Prevención de barridos visuales iniciales */
         html, body {
             margin: 0;
             padding: 0;
@@ -34,7 +33,6 @@
             overscroll-behavior: none;
         }
 
-        /* Utilidad para aceleración por hardware en el video si es necesario */
         .hardware-accelerated {
             transform: translateZ(0);
             will-change: transform;
@@ -48,65 +46,151 @@
     <div id="smooth-wrapper">
         <div id="smooth-content">
 
-            <!-- 1. Hero Scrollable Video Section -->
-            <!-- Le damos gran altura para generar espacio de scroll -->
-            <section id="video-sequence" class="relative w-full h-[400vh] bg-black">
+            <!-- SINGLE HERO SCROLLABLE SECTION -->
+            <!-- Ampliado a 1000vh para permitir una lectura calmada de las 5 fases mientras el video corre -->
+            <section id="video-sequence" class="relative w-full h-[1000vh] bg-black">
                 
-                <!-- Contenedor Sticky: Permanece fijo mientras la sección fluye -->
+                <!-- Contenedor Sticky para mantener todo fijado a la ventana -->
                 <div class="sticky top-0 left-0 w-full h-screen overflow-hidden">
                     
-                    <!-- Video (Enlazado al Scroll) -->
-                    <!-- Atributos vitales: muted, playsinline, preload="auto" para control programático -->
+                    <!-- Fondo de Video Lienzo -->
                     <video 
                         id="hero-video" 
-                        class="absolute inset-0 w-full h-full object-cover opacity-80 hardware-accelerated"
+                        class="absolute inset-0 w-full h-full object-cover opacity-75 hardware-accelerated"
                         src="../assets/imagesboda/videoboda.mp4" 
                         muted 
                         playsinline 
                         preload="auto">
                     </video>
 
-                    <!-- Capa de oscurecimiento para mejor contraste tipográfico -->
-                    <div class="absolute inset-0 bg-black/50 z-10"></div>
+                    <!-- Capa para oscurecer y dar altísima legibilidad al texto -->
+                    <div class="absolute inset-0 bg-black/65 z-10 pointer-events-none"></div>
 
-                    <!-- Contenido de Texto -->
-                    <div class="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto">
-                        
-                        <!-- Etiqueta decorativa nupcial -->
-                        <div class="hero-content opacity-0 translate-y-8 inline-flex items-center gap-2 rounded-full border border-neutral-500/30 bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs tracking-wide font-medium text-neutral-300 mb-8">
-                            <iconify-icon icon="solar:hearts-linear" stroke-width="1.5" class="text-neutral-400 text-sm"></iconify-icon>
-                            Invitaciones de Boda
+                    <!-- ===== PANELES DE LECTURA (Z-20) ===== -->
+
+                    <!-- PANEL 1: Hero (Inicial) -->
+                    <div class="panel-container absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto opacity-0 invisible">
+                        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-500/30 bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs tracking-wide font-medium text-neutral-300 mb-8">
+                            <iconify-icon icon="solar:hearts-linear" class="text-neutral-400 text-sm"></iconify-icon> Invitaciones de Boda
                         </div>
-
-                        <!-- Título Principal -->
-                        <h1 class="hero-content opacity-0 translate-y-8 text-[clamp(2.5rem,5vw,4.5rem)] font-medium tracking-tight leading-[1.05] text-balance mb-8 text-white drop-shadow-xl">
+                        <h1 class="text-[clamp(2.5rem,5vw,4.5rem)] font-medium tracking-tight leading-[1.05] text-balance mb-8 text-white drop-shadow-xl">
                             Tu boda merece una invitación que se sienta tan especial como el gran día.
                         </h1>
-
-                        <!-- Subtexto Descriptivo -->
-                        <div class="hero-content opacity-0 translate-y-8 flex flex-col gap-6 text-base md:text-lg text-neutral-300 font-normal max-w-2xl text-balance mb-12 drop-shadow-md">
-                            <p class="leading-relaxed">
-                                Hoy una invitación no solo informa.<br class="hidden md:block">
-                                También emociona, organiza y presenta tu boda de una forma más elegante y memorable.
-                            </p>
-                            <p class="leading-relaxed">
-                                Creamos invitaciones digitales y páginas web para bodas que reúnen todo en un solo lugar: información, confirmación de asistencia y una experiencia hermosa para tus invitados.
-                            </p>
+                        <div class="flex flex-col gap-6 text-base md:text-lg text-neutral-300 font-normal max-w-2xl text-balance mb-12 drop-shadow-md">
+                            <p class="leading-relaxed">Hoy una invitación no solo informa.<br class="hidden md:block"> También emociona, organiza y presenta tu boda de una forma más elegante y memorable.</p>
+                            <p class="leading-relaxed">Creamos invitaciones digitales y páginas web para bodas que reúnen todo en un solo lugar: información, confirmación de asistencia y una experiencia hermosa para tus invitados.</p>
                         </div>
-
-                        <!-- Botón CTA -->
-                        <a href="#contacto" class="hero-content opacity-0 translate-y-8 inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-neutral-200 h-12 px-8 py-2 group shadow-2xl">
-                            Quiero mi invitación digital
-                            <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="ml-2 text-xl group-hover:translate-x-1 transition-transform"></iconify-icon>
-                        </a>
-
                     </div>
+
+                    <!-- PANEL 2: El problema -->
+                    <div class="panel-container absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto opacity-0 invisible translate-y-12">
+                        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-500/30 bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs tracking-wide font-medium text-neutral-300 mb-8">
+                            <iconify-icon icon="solar:sad-circle-linear" class="text-neutral-400 text-sm"></iconify-icon> El problema
+                        </div>
+                        <h2 class="text-[clamp(2.5rem,4.5vw,4rem)] font-medium tracking-tight leading-[1.1] text-balance mb-8 text-white drop-shadow-xl">
+                            La primera impresión de tu boda comienza antes del evento.
+                        </h2>
+                        <div class="flex flex-col gap-6 text-base md:text-lg text-neutral-300 font-normal w-full text-balance drop-shadow-md">
+                            <p class="leading-relaxed max-w-3xl mx-auto">Antes de llegar a la ceremonia, tus invitados ya están formando una idea de lo que vivirán. Muchas veces la información se comparte en varios mensajes, se pierde entre chats o termina siendo confusa:</p>
+                            <ul class="text-left mx-auto space-y-3 bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 w-full max-w-md shadow-2xl">
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:close-circle-linear" class="text-red-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">no encuentran la ubicación</span></li>
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:close-circle-linear" class="text-red-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">olvidan la fecha o el horario</span></li>
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:close-circle-linear" class="text-red-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">no saben cómo confirmar asistencia</span></li>
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:close-circle-linear" class="text-red-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">no tienen clara la información importante</span></li>
+                            </ul>
+                            <p class="leading-relaxed max-w-3xl mx-auto">Una invitación digital resuelve eso de forma elegante. No solo comunica los detalles. También presenta tu boda con estilo y hace que todo se sienta más cuidado desde el primer momento.</p>
+                        </div>
+                    </div>
+
+                    <!-- PANEL 3: Por qué necesitas -->
+                    <div class="panel-container absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto opacity-0 invisible translate-y-12">
+                        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs tracking-wide font-medium text-emerald-300 mb-8">
+                            <iconify-icon icon="solar:star-circle-linear" class="text-emerald-400 text-sm"></iconify-icon> Por qué lo necesitas
+                        </div>
+                        <h2 class="text-[clamp(2.5rem,4.5vw,4rem)] font-medium tracking-tight leading-[1.1] text-balance mb-8 text-white drop-shadow-xl">
+                            Una invitación digital es el centro de información de tu boda.
+                        </h2>
+                        <div class="flex flex-col gap-6 text-base md:text-lg text-neutral-300 font-normal w-full text-balance drop-shadow-md">
+                            <p class="leading-relaxed max-w-3xl mx-auto">No es solo una página bonita. Es el lugar donde tus invitados pueden:</p>
+                            <ul class="text-left mx-auto space-y-4 bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 w-full max-w-lg shadow-2xl">
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:calendar-date-linear" class="text-emerald-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">conocer la fecha, hora y ubicación</span></li>
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:check-read-linear" class="text-emerald-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">confirmar su asistencia fácilmente</span></li>
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:info-circle-linear" class="text-emerald-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">consultar detalles importantes del evento</span></li>
+                                <li class="flex items-center gap-3"><iconify-icon icon="solar:magic-stick-3-linear" class="text-emerald-400 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">sentir desde antes la esencia y el estilo</span></li>
+                            </ul>
+                            <p class="leading-relaxed max-w-3xl mx-auto">Además, te ayuda a mantener todo más organizado y a ofrecer una experiencia más cómoda.<br> Una buena invitación digital no solo se ve bien. Hace que todo sea más claro, práctico y especial.</p>
+                        </div>
+                    </div>
+
+                    <!-- PANEL 4: Qué puede hacer -->
+                    <div class="panel-container absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center max-w-5xl mx-auto opacity-0 invisible translate-y-12">
+                        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-500/30 bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs tracking-wide font-medium text-neutral-300 mb-8">
+                            <iconify-icon icon="solar:verified-check-linear" class="text-neutral-400 text-sm"></iconify-icon> Qué logra
+                        </div>
+                        <h2 class="text-[clamp(2.5rem,4.5vw,4rem)] font-medium tracking-tight leading-[1.1] text-balance mb-8 text-white drop-shadow-xl">
+                            Lo que una invitación digital bien diseñada puede lograr
+                        </h2>
+                        <div class="flex flex-col gap-6 text-base md:text-lg text-neutral-300 font-normal w-full text-balance drop-shadow-md">
+                            <p class="leading-relaxed max-w-3xl mx-auto">Una invitación digital para boda puede ayudarte a:</p>
+                            <ul class="text-left mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 w-full max-w-4xl shadow-2xl">
+                                <li class="flex items-start gap-4"><iconify-icon icon="solar:check-circle-bold" class="text-white mt-1 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">presentar tu evento de forma elegante</span></li>
+                                <li class="flex items-start gap-4"><iconify-icon icon="solar:check-circle-bold" class="text-white mt-1 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">compartir toda la información en un solo lugar</span></li>
+                                <li class="flex items-start gap-4"><iconify-icon icon="solar:check-circle-bold" class="text-white mt-1 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">facilitar la confirmación de asistencia</span></li>
+                                <li class="flex items-start gap-4"><iconify-icon icon="solar:check-circle-bold" class="text-white mt-1 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">evitar confusiones con horarios o detalles</span></li>
+                                <li class="flex items-start gap-4"><iconify-icon icon="solar:check-circle-bold" class="text-white mt-1 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">mejorar la experiencia desde el inicio</span></li>
+                                <li class="flex items-start gap-4"><iconify-icon icon="solar:check-circle-bold" class="text-white mt-1 text-xl shrink-0"></iconify-icon> <span class="text-neutral-200">reflejar el estilo y personalidad de su boda</span></li>
+                            </ul>
+                            <p class="leading-relaxed max-w-3xl mx-auto mt-2 font-medium text-white">En muchos casos, es el primer contacto real que los invitados tienen con la atmósfera del evento.</p>
+                        </div>
+                    </div>
+
+                    <!-- PANEL 5: Qué hacemos (Final) -->
+                    <div class="panel-container absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center w-full max-w-[1200px] mx-auto opacity-0 invisible translate-y-12">
+                        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-500/30 bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs tracking-wide font-medium text-neutral-300 mb-6 font-medium">
+                            <iconify-icon icon="solar:pen-new-round-linear" class="text-neutral-400 text-sm"></iconify-icon> Qué hacemos en Apex Creative
+                        </div>
+                        <h2 class="text-[clamp(2.5rem,4.5vw,4rem)] font-medium tracking-tight leading-[1.1] text-balance mb-6 text-white drop-shadow-xl max-w-5xl">
+                            Creamos páginas para bodas pensadas para emocionar y organizar
+                        </h2>
+                        <div class="flex flex-col gap-8 text-base md:text-lg text-neutral-300 font-normal w-full drop-shadow-md">
+                            <p class="leading-relaxed max-w-4xl mx-auto">No se trata solo de hacer una página. Se trata de crear una experiencia que represente su historia y facilite la comunicación con sus invitados.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 w-full max-w-5xl mx-auto text-left">
+                                <!-- Columna Diseño -->
+                                <div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl flex flex-col h-full">
+                                    <h3 class="text-2xl text-white font-medium mb-4 flex items-center gap-3"><iconify-icon icon="solar:palette-linear" class="text-neutral-400"></iconify-icon> Diseño visual cuidado</h3>
+                                    <p class="mb-5 text-neutral-400">Creamos páginas que transmiten una estética alineada al mood de tu evento:</p>
+                                    <div class="flex flex-wrap gap-3 mt-auto">
+                                        <span class="px-4 py-1.5 bg-black/40 rounded-full text-sm border border-neutral-700/50 text-white">elegancia</span>
+                                        <span class="px-4 py-1.5 bg-black/40 rounded-full text-sm border border-neutral-700/50 text-white">armonía</span>
+                                        <span class="px-4 py-1.5 bg-black/40 rounded-full text-sm border border-neutral-700/50 text-white">personalidad</span>
+                                        <span class="px-4 py-1.5 bg-black/40 rounded-full text-sm border border-neutral-700/50 text-white">emoción</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Columna Estructura -->
+                                <div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl flex flex-col h-full">
+                                    <h3 class="text-2xl text-white font-medium mb-4 flex items-center gap-3"><iconify-icon icon="solar:structure-linear" class="text-neutral-400"></iconify-icon> Estructura clara</h3>
+                                    <p class="mb-5 text-neutral-400">Organizamos la información para que tus invitados entiendan fácilmente:</p>
+                                    <ul class="space-y-3 text-neutral-200 mt-auto">
+                                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-neutral-500"></div> cuándo es la boda</li>
+                                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-neutral-500"></div> dónde será el magno evento</li>
+                                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-neutral-500"></div> cómo confirmar su asistencia</li>
+                                        <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 rounded-full bg-neutral-500"></div> qué detalles extra necesitan saber</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 flex justify-center">
+                                <a href="#contacto" class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-base font-semibold ring-offset-black transition-all focus-visible:outline-none bg-white text-black hover:bg-neutral-200 h-14 px-10 group shadow-2xl pointer-events-auto">
+                                    Solicitar mi Invitación Digital
+                                    <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="ml-2 text-xl group-hover:translate-x-1 transition-transform"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </section>
-            
-            <!-- Sección placeholder inferior (para comprobar que se sale del scroll) -->
-            <section class="h-[60vh] flex flex-col items-center justify-center bg-neutral-950 px-6 border-t border-neutral-900">
-                <p class="text-neutral-500 text-lg font-medium">Contenido de la invitación aquí...</p>
             </section>
 
         </div>
@@ -114,10 +198,8 @@
 
     <!-- Scripts de Lógica y GSAP -->
     <script>
-        // Registrar Plugins
         gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-        // Intentar Inicializar ScrollSmoother (Si el archivo carga correctamente)
         let smoother;
         if (typeof ScrollSmoother !== 'undefined') {
             try {
@@ -128,54 +210,70 @@
                     effects: true,
                 });
             } catch (e) {
-                console.log("ScrollSmoother error (podría estar usándose premium plugin localmente):", e);
+                console.log("ScrollSmoother fallback:", e);
             }
         }
 
         const video = document.getElementById("hero-video");
         const videoSection = document.getElementById("video-sequence");
-        const heroContents = document.querySelectorAll(".hero-content");
+        const panels = gsap.utils.toArray(".panel-container");
 
-        // Pausar el video inicialmente por seguridad (lo controlará el scroll)
         video.pause();
 
-        // 1. Animación de revelado de los textos al cargar la página
-        gsap.to(heroContents, {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.15,
-            ease: "power3.out",
-            delay: 0.3
-        });
+        // 1. Efecto inicial independiente para el Primer Panel al cargar la página.
+        // Lo mostramos suavemente sin depender del scroll.
+        gsap.fromTo(panels[0], 
+            { autoAlpha: 0, y: 32 }, 
+            { autoAlpha: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.2 }
+        );
 
-        // 2. Control del video atado al ScrollTrigger
-        // Para que `video.duration` sea confiable, necesitamos metadata
+        // 2. Control Principal - Sincronizado una vez que se entiende el video
         video.onloadedmetadata = function() {
-            createVideoScroll();
+            createMasterScroll();
         };
         
-        // Cubrir caso de video que ya está cacheado por el navegador
         if (video.readyState >= 1) { // 1 = HAVE_METADATA
-            createVideoScroll();
+            createMasterScroll();
         }
 
-        // Función que construye el ScrollTrigger
-        function createVideoScroll() {
-            // Utilizamos gsap.to apuntando al currentTime del objeto multimedia
-            // Esto es mucho más eficiente que usar events como onUpdate()
-            const videoDuration = video.duration || 10; // Fallback por si acaso
+        function createMasterScroll() {
+            // Se asume una duración predeterminada si el video no reporta la real
+            const videoDuration = video.duration || 10; 
 
-            gsap.to(video, {
-                currentTime: videoDuration,
-                ease: "none", // Movimiento lineal al hacer scroll, sin acelerones
+            // Construir Master Timeline
+            // scrub: 1 significa que el progreso se actualiza interpolándolo con 1 seg de inercia
+            const masterTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: videoSection,
-                    start: "top top",     // Empieza al chocar el tope de la ventana con el tope de la sección
-                    end: "bottom bottom", // Termina cuando el final de la sección choca con el final de la ventana
-                    scrub: 1, // '1' le otorga 1 seg de inercia y suavizado extra para evitar tirones (jankiness)
+                    start: "top top",     
+                    end: "bottom bottom", 
+                    scrub: 1, 
                 }
             });
+
+            // A) Sincronizar el video. Se pone en posición '0' del timeline.
+            // Asignamos una caja temporal (duration 10). GSAP escalará esto de 0 al final del scroll.
+            masterTl.to(video, { currentTime: videoDuration, ease: "none", duration: 10 }, 0);
+
+            // B) Sincronizar Fases de Texto
+            // Fase 1: Hero (Desvanece el panel 0 que está visible por la carga inicial)
+            masterTl.to(panels[0], { autoAlpha: 0, y: -40, duration: 0.8 }, 1.0);
+
+            // Fase 2: El problema
+            masterTl.to(panels[1], { autoAlpha: 1, y: 0, duration: 0.8 }, 1.8) // entra
+                    .to(panels[1], { autoAlpha: 0, y: -40, duration: 0.8 }, 3.5); // sale después de tiempo lectura
+
+            // Fase 3: Por qué necesitas
+            masterTl.to(panels[2], { autoAlpha: 1, y: 0, duration: 0.8 }, 4.1) // solapamos un poco la entrada con la salida anterior
+                    .to(panels[2], { autoAlpha: 0, y: -40, duration: 0.8 }, 5.8);
+
+            // Fase 4: Qué puede hacer
+            masterTl.to(panels[3], { autoAlpha: 1, y: 0, duration: 0.8 }, 6.4)
+                    .to(panels[3], { autoAlpha: 0, y: -40, duration: 0.8 }, 8.1);
+
+            // Fase 5: Qué hacemos
+            // Este panel se quedará en pantalla durante el tramo final del scroll.
+            masterTl.to(panels[4], { autoAlpha: 1, y: 0, duration: 0.8 }, 8.7);
         }
     </script>
 </body>
