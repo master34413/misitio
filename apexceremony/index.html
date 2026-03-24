@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Moments</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
@@ -30,24 +31,84 @@
             transform: translateY(0);
         }
         /* Imágenes al 100% de claridad sin filtros adicionales */
+
+        /* Mobile Menu */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+            opacity: 0;
+        }
+
+        #mobile-menu.open {
+            max-height: 240px;
+            opacity: 1;
+        }
+
+        #menu-toggle-btn[aria-expanded="true"] .menu-bar-top {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        #menu-toggle-btn[aria-expanded="true"] .menu-bar-mid {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        #menu-toggle-btn[aria-expanded="true"] .menu-bar-bottom {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .menu-bar {
+            display: block;
+            width: 18px;
+            height: 1.5px;
+            background: currentColor;
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
     </style>
 </head>
 
 <body class="bg-[#fafafa] text-zinc-900 font-sans antialiased selection:bg-zinc-200 selection:text-zinc-900"
     style="font-family: 'Outfit', sans-serif;">
+    <!-- Navigation -->
+    <nav class="fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md" id="main-nav">
+        <div class="flex flex-col w-full max-w-4xl relative">
+            <div
+                class="flex items-center justify-between px-5 py-3 bg-white/80 backdrop-blur-md border border-neutral-200 rounded-xl w-full shadow-lg z-20 relative">
+                <a href="#" class="flex items-center gap-2 text-base font-bold tracking-tighter uppercase text-zinc-900 hover:text-zinc-600 transition-colors">
+                    WDNG
+                </a>
 
-    <!-- HEADER FLOTANTE -->
-    <header class="frame fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-50 text-white pointer-events-none drop-shadow-md">
-        <div class="frame__logo tracking-tighter font-medium text-lg md:text-xl uppercase pointer-events-auto">WDNG</div>
-        <nav class="frame__demos flex items-center gap-4 md:gap-8 text-xs font-medium tracking-wide text-zinc-400 pointer-events-auto">
-            <a href="#" class="current text-white transition-colors duration-300">The Day</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Gallery</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Details</a>
-        </nav>
-        <a class="frame__rsvp text-xs font-medium tracking-wide uppercase border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all duration-300 hidden md:block pointer-events-auto" href="#">
-            RSVP
-        </a>
-    </header>
+                <div class="hidden md:flex items-center gap-8 text-sm text-zinc-600 font-semibold">
+                    <a href="#" class="hover:text-zinc-900 transition-colors">La Boda</a>
+                    <a href="#" class="hover:text-zinc-900 transition-colors">Detalles</a>
+                    <a href="#"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-bold transition-colors bg-zinc-900 text-white hover:bg-zinc-800 h-9 px-4 py-2">RSVP</a>
+                </div>
+
+                <button id="menu-toggle-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"
+                    class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 text-zinc-900 transition-colors cursor-pointer bg-transparent border-none">
+                    <span class="menu-bar menu-bar-top block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
+                    <span class="menu-bar menu-bar-mid block w-[18px] h-[2px] bg-current transition-opacity rounded-full"></span>
+                    <span class="menu-bar menu-bar-bottom block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
+                </button>
+            </div>
+
+            <div id="mobile-menu"
+                class="absolute top-full left-0 right-0 mt-2 overflow-hidden transition-all duration-300 opacity-0 max-h-0 z-10 md:hidden pointer-events-none">
+                <div
+                    class="flex flex-col gap-1 px-2 py-3 bg-white/95 backdrop-blur-md border border-neutral-200 rounded-xl shadow-xl pointer-events-auto">
+                    <a href="#"
+                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors">La Boda</a>
+                    <a href="#"
+                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors">Detalles</a>
+                    <div class="h-px bg-neutral-200 mx-4 my-1"></div>
+                    <a href="#"
+                        class="mobile-nav-link mx-2 my-1 inline-flex items-center justify-center rounded-md text-sm font-bold bg-zinc-900 text-white hover:bg-zinc-800 h-9 px-4 transition-colors">RSVP</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- SPACER INICIAL (Pantalla de Bienvenida) -->
     <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6">
@@ -395,6 +456,21 @@
             resizeTimer = setTimeout(() => {
                 updateLayout();
             }, 250);
+        });
+
+        // Lógica para el menú móvil
+        document.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById('menu-toggle-btn');
+            const menu = document.getElementById('mobile-menu');
+            if (btn && menu) {
+                function openMenu() { menu.classList.add('open'); menu.classList.remove('pointer-events-none'); btn.setAttribute('aria-expanded', 'true'); }
+                function closeMenu() { menu.classList.remove('open'); menu.classList.add('pointer-events-none'); btn.setAttribute('aria-expanded', 'false'); }
+                function toggleMenu() { menu.classList.contains('open') ? closeMenu() : openMenu(); }
+                btn.addEventListener('click', e => { e.stopPropagation(); toggleMenu(); });
+                menu.querySelectorAll('.mobile-nav-link').forEach(link => { link.addEventListener('click', closeMenu); });
+                document.addEventListener('click', e => { if (!document.getElementById('main-nav')?.contains(e.target)) closeMenu(); });
+                document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+            }
         });
 
     </script>
