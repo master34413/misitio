@@ -48,19 +48,12 @@
     </script>
 
     <style>
-        /* 1. CURSOR PERSONALIZADO NATIVO */
+        /* 1. CURSOR POR DEFECTO */
         body {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             background-color: #050505;
             color: #ffffff;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30.37 27.82' width='34' height='34'%3E%3Cpath fill='%23ffffff' d='M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z'/%3E%3Cpath fill='%23ffffff' d='M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z'/%3E%3Cpath fill='%23ffffff' d='M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z'/%3E%3Cpath fill='%23ffffff' d='M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z'/%3E%3C/svg%3E") 12 10, auto;
-        }
-
-        a,
-        button,
-        .clickable {
-            cursor: inherit;
         }
 
         /* Heading Trim */
@@ -199,33 +192,7 @@
             transform: scale(1.05);
         }
 
-        /* MAGICAL CURSOR CLICK EFFECT */
-        .click-magic-star {
-            position: absolute;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            animation: star-burst 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
 
-        @keyframes star-burst {
-            0% {
-                transform: translate(-50%, -50%) scale(0) rotate(-20deg);
-                opacity: 1;
-                filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.8));
-            }
-
-            50% {
-                transform: translate(-50%, -50%) scale(1.5) rotate(15deg);
-                opacity: 1;
-                filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 1));
-            }
-
-            100% {
-                transform: translate(-50%, -50%) scale(0.5) rotate(45deg);
-                opacity: 0;
-            }
-        }
 
         /* SCROLL TOP BUTTON */
         .btn-scroll-top {
@@ -1006,20 +973,7 @@
     </div><!-- /smooth-wrapper -->
 
     <!-- Magic Cursor & Scroll Effect Script -->
-    <script>
-        document.addEventListener('click', function (e) {
-            const star = document.createElement('div');
-            star.className = 'click-magic-star';
-            star.style.left = e.pageX + 'px';
-            star.style.top = (e.pageY - 15) + 'px';
-            star.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82" width="40" height="40">
-                    <path fill="#ffffff" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z"/>
-                </svg>
-            `;
-            document.body.appendChild(star);
-            setTimeout(() => { star.remove(); }, 600);
-        });
+
 
         const scrollBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', () => {
