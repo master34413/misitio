@@ -99,10 +99,29 @@
         }
 
         /* ----- Animated Glass Cards (Qué hacemos) ----- */
-        @property --hue { syntax: "<number>"; inherits: true; initial-value: 0; }
-        @property --rotate { syntax: "<number>"; inherits: true; initial-value: 0; }
-        @property --bg-y { syntax: "<number>"; inherits: true; initial-value: 0; }
-        @property --bg-x { syntax: "<number>"; inherits: true; initial-value: 0; }
+        @property --hue {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 0;
+        }
+
+        @property --rotate {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 0;
+        }
+
+        @property --bg-y {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 0;
+        }
+
+        @property --bg-x {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 0;
+        }
 
         :root {
             --card-color: #0a0a0a;
@@ -118,7 +137,7 @@
             z-index: 1;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s ease; 
+            transition: transform 0.2s ease;
         }
 
         .glass-card:active {
@@ -136,11 +155,9 @@
         }
 
         .glass-card.is-clicked .glass-card-content {
-            background: radial-gradient(
-                circle at 90% 10%, 
-                rgba(26, 168, 137, 0.25) 0%, 
-                var(--card-color) 70%
-            );
+            background: radial-gradient(circle at 90% 10%,
+                    rgba(26, 168, 137, 0.25) 0%,
+                    var(--card-color) 70%);
         }
 
         .glass-card::before {
@@ -150,11 +167,9 @@
             z-index: 2;
             border-radius: var(--card-radius);
             padding: var(--border-width);
-            background: radial-gradient(
-                circle at calc(var(--bg-x) * 1%) calc(var(--bg-y) * 1%),
-                hsl(calc(var(--hue) * 1deg), 100%, 70%),
-                transparent 40%
-            );
+            background: radial-gradient(circle at calc(var(--bg-x) * 1%) calc(var(--bg-y) * 1%),
+                    hsl(calc(var(--hue) * 1deg), 100%, 70%),
+                    transparent 40%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -177,20 +192,47 @@
         }
 
         @keyframes rotate-bg {
-            0%, 100% { --bg-x: 0; --bg-y: 0; }
-            25% { --bg-x: 100; --bg-y: 0; }
-            50% { --bg-x: 100; --bg-y: 100; }
-            75% { --bg-x: 0; --bg-y: 100; }
+
+            0%,
+            100% {
+                --bg-x: 0;
+                --bg-y: 0;
+            }
+
+            25% {
+                --bg-x: 100;
+                --bg-y: 0;
+            }
+
+            50% {
+                --bg-x: 100;
+                --bg-y: 100;
+            }
+
+            75% {
+                --bg-x: 0;
+                --bg-y: 100;
+            }
         }
 
         @keyframes rotate {
-            from { transform: rotate(0deg) translateY(-60px); }
-            to { transform: rotate(360deg) translateY(-60px); }
+            from {
+                transform: rotate(0deg) translateY(-60px);
+            }
+
+            to {
+                transform: rotate(360deg) translateY(-60px);
+            }
         }
 
         @keyframes hue-animation {
-            0% { --hue: 0; }
-            100% { --hue: 360; }
+            0% {
+                --hue: 0;
+            }
+
+            100% {
+                --hue: 360;
+            }
         }
     </style>
 </head>
@@ -267,8 +309,7 @@
 
             <div id="mobile-menu"
                 class="absolute top-full left-0 right-0 mt-2 overflow-hidden transition-all duration-300 opacity-0 max-h-0 z-10 md:hidden pointer-events-none">
-                <div
-                    class="flex flex-col gap-1 px-2 py-3 bg-[#030303] rounded-xl shadow-2xl pointer-events-auto">
+                <div class="flex flex-col gap-1 px-2 py-3 bg-[#030303] rounded-xl shadow-2xl pointer-events-auto">
                     <a href="#servicios"
                         class="mobile-nav-link px-4 py-3 text-sm text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition-colors">Qué
                         hacemos</a>
@@ -299,12 +340,14 @@
             <section id="hero-section"
                 class="relative pt-40 pb-24 md:pt-52 md:pb-32 flex flex-col items-center text-center w-full mx-auto overflow-hidden">
                 <!-- CANVAS CONTAINER -->
-                <div id="canvas-container" class="absolute inset-0 z-0 pointer-events-auto" style="cursor: crosshair;"></div>
+                <div id="canvas-container" class="absolute inset-0 z-0 pointer-events-auto" style="cursor: crosshair;">
+                </div>
 
                 <div class="relative z-10 px-6 max-w-5xl pointer-events-none flex flex-col items-center">
                     <div
                         class="hero-anim opacity-0 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950 px-3 py-1 text-xs font-semibold text-neutral-300 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 mb-8 pointer-events-auto">
-                        <iconify-icon icon="solar:stars-linear" stroke-width="1.5" class="text-neutral-400"></iconify-icon>
+                        <iconify-icon icon="solar:stars-linear" stroke-width="1.5"
+                            class="text-neutral-400"></iconify-icon>
                         Agencia Creativa &amp; Consultoría
                     </div>
 
@@ -351,7 +394,8 @@
                         <!-- Branding -->
                         <div class="glass-card scroll-card">
                             <div class="glass-glow"></div>
-                            <div class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
+                            <div
+                                class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
                                 <div class="flex-1">
                                     <div
                                         class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
@@ -359,8 +403,10 @@
                                             class="text-3xl"></iconify-icon>
                                     </div>
                                     <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Branding</h3>
-                                    <p class="text-neutral-400 font-normal leading-relaxed text-base">Creamos identidades
-                                        visuales memorables, sólidas y orientadas a captar la atención de tu cliente ideal,
+                                    <p class="text-neutral-400 font-normal leading-relaxed text-base">Creamos
+                                        identidades
+                                        visuales memorables, sólidas y orientadas a captar la atención de tu cliente
+                                        ideal,
                                         construyendo marcas que expresan verdadero valor.</p>
                                 </div>
                                 <div class="flex-1 flex flex-col justify-start md:mt-20">
@@ -386,7 +432,8 @@
                         <!-- Consultoría -->
                         <div class="glass-card scroll-card">
                             <div class="glass-glow"></div>
-                            <div class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
+                            <div
+                                class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
                                 <div class="flex-1">
                                     <div
                                         class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
@@ -395,7 +442,8 @@
                                     </div>
                                     <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
                                     <p class="text-neutral-400 font-normal leading-relaxed text-base">Desarrollamos
-                                        soluciones y planes de acción específicos para optimizar tu presencia comercial y
+                                        soluciones y planes de acción específicos para optimizar tu presencia comercial
+                                        y
                                         asegurar de que estás enviando el mensaje correcto.</p>
                                 </div>
                                 <div class="flex-1 flex flex-col justify-start md:mt-20">
@@ -421,7 +469,8 @@
                         <!-- Impresión Creativa -->
                         <div class="glass-card scroll-card">
                             <div class="glass-glow"></div>
-                            <div class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
+                            <div
+                                class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
                                 <div class="flex-1">
                                     <div
                                         class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
@@ -429,8 +478,10 @@
                                             class="text-3xl"></iconify-icon>
                                     </div>
                                     <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Impresión</h3>
-                                    <p class="text-neutral-400 font-normal leading-relaxed text-base">Llevamos tu marca al
-                                        mundo físico con materiales de alta gama, acabados especiales y papeles premium que
+                                    <p class="text-neutral-400 font-normal leading-relaxed text-base">Llevamos tu marca
+                                        al
+                                        mundo físico con materiales de alta gama, acabados especiales y papeles premium
+                                        que
                                         transmiten calidad al tacto.</p>
                                 </div>
                                 <div class="flex-1 flex flex-col justify-start md:mt-20">
@@ -1196,7 +1247,7 @@
                 card.addEventListener('click', () => {
                     card.classList.toggle('is-clicked');
                     // Opcionalmente quitar el is-clicked de las demás si quieres que sea única:
-                    document.querySelectorAll('.glass-card').forEach(c => { if(c !== card) c.classList.remove('is-clicked'); });
+                    document.querySelectorAll('.glass-card').forEach(c => { if (c !== card) c.classList.remove('is-clicked'); });
                 });
             });
 
@@ -1214,67 +1265,67 @@
       }
     </script>
     <script type="module">
-      import * as THREE from 'three';
-      import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-      import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-      import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+        import * as THREE from 'three';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-      // --- 1. CONFIGURACIÓN DE LA ESCENA ---
-      const container = document.getElementById('canvas-container');
-      if (container) {
-          const w = container.clientWidth;
-          const h = container.clientHeight;
-          const scene = new THREE.Scene();
+        // --- 1. CONFIGURACIÓN DE LA ESCENA ---
+        const container = document.getElementById('canvas-container');
+        if (container) {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            const scene = new THREE.Scene();
 
-          const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100);
-          camera.position.set(0, 4, 12);
+            const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100);
+            camera.position.set(0, 4, 12);
 
-          const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-          renderer.setSize(w, h);
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-          container.appendChild(renderer.domElement);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(w, h);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
 
-          // --- 2. INTERACCIÓN DEL MOUSE (La Magia) ---
-          const mouse = new THREE.Vector2(0, 0);
-          const targetMouse = new THREE.Vector2(0, 0);
-          const windowHalf = new THREE.Vector2(w / 2, h / 2);
+            // --- 2. INTERACCIÓN DEL MOUSE (La Magia) ---
+            const mouse = new THREE.Vector2(0, 0);
+            const targetMouse = new THREE.Vector2(0, 0);
+            const windowHalf = new THREE.Vector2(w / 2, h / 2);
 
-          window.addEventListener('mousemove', (event) => {
-            const rect = container.getBoundingClientRect();
-            // Solo actualizamos si el mouse está sobre el container 
-            // (pero global listener funciona igual para todo tipo de interacciones si el shader cubre toda la pantalla)
-            const clientX = event.clientX - rect.left;
-            const clientY = event.clientY - rect.top;
-            targetMouse.x = (clientX - windowHalf.x) / windowHalf.x;
-            targetMouse.y = (clientY - windowHalf.y) / windowHalf.y;
-          });
+            window.addEventListener('mousemove', (event) => {
+                const rect = container.getBoundingClientRect();
+                // Solo actualizamos si el mouse está sobre el container 
+                // (pero global listener funciona igual para todo tipo de interacciones si el shader cubre toda la pantalla)
+                const clientX = event.clientX - rect.left;
+                const clientY = event.clientY - rect.top;
+                targetMouse.x = (clientX - windowHalf.x) / windowHalf.x;
+                targetMouse.y = (clientY - windowHalf.y) / windowHalf.y;
+            });
 
-          // --- 3. GEOMETRÍA ---
-          const particleCount = 45000;
-          const geometry = new THREE.BufferGeometry();
-          const positions = new Float32Array(particleCount * 3);
-          const scales = new Float32Array(particleCount);
+            // --- 3. GEOMETRÍA ---
+            const particleCount = 45000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const scales = new Float32Array(particleCount);
 
-          for (let i = 0; i < particleCount; i++) {
-            const i3 = i * 3;
-            positions[i3] = (Math.random() - 0.5) * 45;     
-            positions[i3 + 1] = 0.0;                        
-            positions[i3 + 2] = (Math.random() - 0.5) * 45; 
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                positions[i3] = (Math.random() - 0.5) * 45;
+                positions[i3 + 1] = 0.0;
+                positions[i3 + 2] = (Math.random() - 0.5) * 45;
 
-            scales[i] = Math.random(); 
-          }
+                scales[i] = Math.random();
+            }
 
-          geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-          geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
 
-          // --- 4. SHADERS (Con Reacción al Mouse) ---
-          const material = new THREE.ShaderMaterial({
-            uniforms: {
-              uTime: { value: 0.0 },
-              uColor: { value: new THREE.Color('#ffb03a') },
-              uMouse: { value: new THREE.Vector2(0, 0) } 
-            },
-            vertexShader: `
+            // --- 4. SHADERS (Con Reacción al Mouse) ---
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    uTime: { value: 0.0 },
+                    uColor: { value: new THREE.Color('#ffb03a') },
+                    uMouse: { value: new THREE.Vector2(0, 0) }
+                },
+                vertexShader: `
               uniform float uTime;
               uniform vec2 uMouse;
               attribute float aScale;
@@ -1302,7 +1353,7 @@
                 gl_Position = projectionMatrix * mvPosition;
               }
             `,
-            fragmentShader: `
+                fragmentShader: `
               uniform vec3 uColor;
               varying float vElevation;
 
@@ -1320,54 +1371,54 @@
                 gl_FragColor = vec4(uColor * intensity, alpha * 0.8);
               }
             `,
-            transparent: true,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false 
-          });
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
 
-          const particles = new THREE.Points(geometry, material);
-          scene.add(particles);
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
 
-          // --- 5. POST-PROCESAMIENTO (Bloom) ---
-          const composer = new EffectComposer(renderer);
-          const renderPass = new RenderPass(scene, camera);
-          composer.addPass(renderPass);
-          const bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 1.8, 0.6, 0.1);
-          composer.addPass(bloomPass);
+            // --- 5. POST-PROCESAMIENTO (Bloom) ---
+            const composer = new EffectComposer(renderer);
+            const renderPass = new RenderPass(scene, camera);
+            composer.addPass(renderPass);
+            const bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 1.8, 0.6, 0.1);
+            composer.addPass(bloomPass);
 
-          // --- 6. ANIMACIÓN (Con Interpolación / LERP) ---
-          const clock = new THREE.Clock();
+            // --- 6. ANIMACIÓN (Con Interpolación / LERP) ---
+            const clock = new THREE.Clock();
 
-          function animate() {
-            requestAnimationFrame(animate);
+            function animate() {
+                requestAnimationFrame(animate);
 
-            const elapsedTime = clock.getElapsedTime();
-            material.uniforms.uTime.value = elapsedTime;
+                const elapsedTime = clock.getElapsedTime();
+                material.uniforms.uTime.value = elapsedTime;
 
-            mouse.x += (targetMouse.x - mouse.x) * 0.05;
-            mouse.y += (targetMouse.y - mouse.y) * 0.05;
-            
-            material.uniforms.uMouse.value.set(mouse.x, mouse.y);
+                mouse.x += (targetMouse.x - mouse.x) * 0.05;
+                mouse.y += (targetMouse.y - mouse.y) * 0.05;
 
-            camera.position.x += (mouse.x * 4 - camera.position.x) * 0.02;
-            camera.position.y += (-mouse.y * 2 + 4 - camera.position.y) * 0.02;
-            camera.lookAt(0, 0, 0);
+                material.uniforms.uMouse.value.set(mouse.x, mouse.y);
 
-            composer.render();
-          }
+                camera.position.x += (mouse.x * 4 - camera.position.x) * 0.02;
+                camera.position.y += (-mouse.y * 2 + 4 - camera.position.y) * 0.02;
+                camera.lookAt(0, 0, 0);
 
-          animate();
+                composer.render();
+            }
 
-          window.addEventListener('resize', () => {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            windowHalf.set(width / 2, height / 2);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-            composer.setSize(width, height);
-          });
-      }
+            animate();
+
+            window.addEventListener('resize', () => {
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+                windowHalf.set(width / 2, height / 2);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+                composer.setSize(width, height);
+            });
+        }
     </script>
 </body>
 
