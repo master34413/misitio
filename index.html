@@ -97,6 +97,101 @@
             background: currentColor;
             transition: transform 0.25s ease, opacity 0.2s ease;
         }
+
+        /* ----- Animated Glass Cards (Qué hacemos) ----- */
+        @property --hue { syntax: "<number>"; inherits: true; initial-value: 0; }
+        @property --rotate { syntax: "<number>"; inherits: true; initial-value: 0; }
+        @property --bg-y { syntax: "<number>"; inherits: true; initial-value: 0; }
+        @property --bg-x { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+        :root {
+            --card-color: #0a0a0a;
+            --card-radius: 2rem;
+            --border-width: 2px;
+            --animation-speed: 4s;
+        }
+
+        .glass-card {
+            position: relative;
+            background: var(--card-color);
+            border-radius: var(--card-radius);
+            z-index: 1;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease; 
+        }
+
+        .glass-card:active {
+            transform: scale(0.98);
+        }
+
+        .glass-card-content {
+            position: relative;
+            background-color: var(--card-color);
+            transition: background 0.5s ease;
+            border-radius: calc(var(--card-radius) - var(--border-width));
+            z-index: 3;
+            margin: var(--border-width);
+            overflow: hidden;
+        }
+
+        .glass-card.is-clicked .glass-card-content {
+            background: radial-gradient(
+                circle at 90% 10%, 
+                rgba(26, 168, 137, 0.25) 0%, 
+                var(--card-color) 70%
+            );
+        }
+
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            border-radius: var(--card-radius);
+            padding: var(--border-width);
+            background: radial-gradient(
+                circle at calc(var(--bg-x) * 1%) calc(var(--bg-y) * 1%),
+                hsl(calc(var(--hue) * 1deg), 100%, 70%),
+                transparent 40%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            animation: rotate-bg var(--animation-speed) linear infinite, hue-animation var(--animation-speed) linear infinite;
+        }
+
+        .glass-glow {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            top: 25%;
+            left: 25%;
+            z-index: 0;
+            filter: blur(35px);
+            background: hsl(calc(var(--hue) * 1deg), 100%, 60%);
+            opacity: 0.3;
+            animation: rotate var(--animation-speed) linear infinite, hue-animation var(--animation-speed) linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes rotate-bg {
+            0%, 100% { --bg-x: 0; --bg-y: 0; }
+            25% { --bg-x: 100; --bg-y: 0; }
+            50% { --bg-x: 100; --bg-y: 100; }
+            75% { --bg-x: 0; --bg-y: 100; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg) translateY(-60px); }
+            to { transform: rotate(360deg) translateY(-60px); }
+        }
+
+        @keyframes hue-animation {
+            0% { --hue: 0; }
+            100% { --hue: 360; }
+        }
     </style>
 </head>
 
@@ -253,101 +348,108 @@
                     <div class="lg:w-2/3 flex flex-col gap-12 md:gap-20 w-full pt-8 lg:pt-0" id="scroll-content">
 
                         <!-- Branding -->
-                        <div
-                            class="scroll-card rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-14">
-                            <div class="flex-1">
-                                <div
-                                    class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
-                                    <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5"
-                                        class="text-3xl"></iconify-icon>
+                        <!-- Branding -->
+                        <div class="glass-card scroll-card">
+                            <div class="glass-glow"></div>
+                            <div class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
+                                <div class="flex-1">
+                                    <div
+                                        class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
+                                        <iconify-icon icon="solar:crown-star-linear" stroke-width="1.5"
+                                            class="text-3xl"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Branding</h3>
+                                    <p class="text-neutral-400 font-normal leading-relaxed text-base">Creamos identidades
+                                        visuales memorables, sólidas y orientadas a captar la atención de tu cliente ideal,
+                                        construyendo marcas que expresan verdadero valor.</p>
                                 </div>
-                                <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Branding</h3>
-                                <p class="text-neutral-400 font-normal leading-relaxed text-base">Creamos identidades
-                                    visuales memorables, sólidas y orientadas a captar la atención de tu cliente ideal,
-                                    construyendo marcas que expresan verdadero valor.</p>
-                            </div>
-                            <div class="flex-1 flex flex-col justify-start md:mt-20">
-                                <ul
-                                    class="space-y-6 text-sm md:text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6">
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Identidad visual
-                                    </li>
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Diseño de marca
-                                    </li>
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Estrategia creativa
-                                    </li>
-                                </ul>
+                                <div class="flex-1 flex flex-col justify-start md:mt-20">
+                                    <ul
+                                        class="space-y-6 text-sm md:text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6">
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Identidad visual
+                                        </li>
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Diseño de marca
+                                        </li>
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Estrategia creativa
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Consultoría -->
-                        <div
-                            class="scroll-card rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-14">
-                            <div class="flex-1">
-                                <div
-                                    class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
-                                    <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5"
-                                        class="text-3xl"></iconify-icon>
+                        <div class="glass-card scroll-card">
+                            <div class="glass-glow"></div>
+                            <div class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
+                                <div class="flex-1">
+                                    <div
+                                        class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
+                                        <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5"
+                                            class="text-3xl"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
+                                    <p class="text-neutral-400 font-normal leading-relaxed text-base">Desarrollamos
+                                        soluciones y planes de acción específicos para optimizar tu presencia comercial y
+                                        asegurar de que estás enviando el mensaje correcto.</p>
                                 </div>
-                                <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Consultoría</h3>
-                                <p class="text-neutral-400 font-normal leading-relaxed text-base">Desarrollamos
-                                    soluciones y planes de acción específicos para optimizar tu presencia comercial y
-                                    asegurar de que estás enviando el mensaje correcto.</p>
-                            </div>
-                            <div class="flex-1 flex flex-col justify-start md:mt-20">
-                                <ul
-                                    class="space-y-6 text-sm md:text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6">
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Estrategia comercial
-                                    </li>
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Optimización SEO/SEM
-                                    </li>
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Crecimiento continuo
-                                    </li>
-                                </ul>
+                                <div class="flex-1 flex flex-col justify-start md:mt-20">
+                                    <ul
+                                        class="space-y-6 text-sm md:text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6">
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Estrategia comercial
+                                        </li>
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Optimización SEO/SEM
+                                        </li>
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Crecimiento continuo
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Impresión Creativa -->
-                        <div
-                            class="scroll-card rounded-[2rem] border border-neutral-800 bg-neutral-950 p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-14">
-                            <div class="flex-1">
-                                <div
-                                    class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
-                                    <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5"
-                                        class="text-3xl"></iconify-icon>
+                        <div class="glass-card scroll-card">
+                            <div class="glass-glow"></div>
+                            <div class="glass-card-content flex flex-col md:flex-row gap-8 md:gap-14 p-8 md:p-12 w-full">
+                                <div class="flex-1">
+                                    <div
+                                        class="w-14 h-14 rounded-xl border border-neutral-800 bg-black flex items-center justify-center mb-8 text-white shadow-inner">
+                                        <iconify-icon icon="solar:printer-minimalistic-linear" stroke-width="1.5"
+                                            class="text-3xl"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Impresión</h3>
+                                    <p class="text-neutral-400 font-normal leading-relaxed text-base">Llevamos tu marca al
+                                        mundo físico con materiales de alta gama, acabados especiales y papeles premium que
+                                        transmiten calidad al tacto.</p>
                                 </div>
-                                <h3 class="text-3xl font-medium tracking-tight mb-4 text-white">Impresión</h3>
-                                <p class="text-neutral-400 font-normal leading-relaxed text-base">Llevamos tu marca al
-                                    mundo físico con materiales de alta gama, acabados especiales y papeles premium que
-                                    transmiten calidad al tacto.</p>
-                            </div>
-                            <div class="flex-1 flex flex-col justify-start md:mt-20">
-                                <ul
-                                    class="space-y-6 text-sm md:text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6">
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Papelería de alta gama
-                                    </li>
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Empaques y cajas
-                                    </li>
-                                    <li class="flex items-center gap-4">
-                                        <iconify-icon icon="solar:check-circle-linear"
-                                            class="text-neutral-500 text-xl"></iconify-icon> Material POP
-                                    </li>
-                                </ul>
+                                <div class="flex-1 flex flex-col justify-start md:mt-20">
+                                    <ul
+                                        class="space-y-6 text-sm md:text-base text-neutral-300 font-normal border-l border-neutral-800 pl-6">
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Papelería de alta gama
+                                        </li>
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Empaques y cajas
+                                        </li>
+                                        <li class="flex items-center gap-4">
+                                            <iconify-icon icon="solar:check-circle-linear"
+                                                class="text-neutral-500 text-xl"></iconify-icon> Material POP
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
@@ -1088,6 +1190,15 @@
                 document.addEventListener('click', e => { if (!document.getElementById('main-nav')?.contains(e.target)) closeMenu(); });
                 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
             }
+
+            // Animated Glass Card Clicks
+            document.querySelectorAll('.glass-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('is-clicked');
+                    // Opcionalmente quitar el is-clicked de las demás si quieres que sea única:
+                    document.querySelectorAll('.glass-card').forEach(c => { if(c !== card) c.classList.remove('is-clicked'); });
+                });
+            });
 
             ScrollTrigger.refresh();
         });
