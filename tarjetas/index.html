@@ -395,6 +395,7 @@
             stroke-linejoin: round;
             stroke-width: 1.2px;
         }
+
         /* Typewriter highlight */
         #typewriter {
             color: #E8C84A;
@@ -454,534 +455,567 @@
     <div id="smooth-wrapper">
         <div id="smooth-content">
 
-    <!-- 1. Hero -->
-    <header id="hero-section"
-        class="relative w-full min-h-[90vh] flex flex-col justify-end pb-24 pt-40 px-6 md:px-12 overflow-hidden bg-apex-black border-b border-white/5">
-        <div id="hero-webgl-container" class="absolute inset-0 z-0"></div>
-        <div
-            class="absolute inset-0 z-0 bg-gradient-to-t from-apex-black via-apex-black/80 to-transparent pointer-events-none">
-        </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto w-full pointer-events-none">
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
-                <div class="max-w-4xl">
-                    <div class="flex gap-3 mb-8 flex-wrap pointer-events-auto items-center">
-                        <span
-                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white backdrop-blur-md uppercase tracking-wider border border-white/10">APEX
-                            Creative</span>
-                        <span
-                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white text-black uppercase tracking-wider border border-white">Tarjetas
-                            Premium</span>
-                    </div>
-                    <h1 class="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-6">
-                        Hay tarjetas que se entregan. Y hay tarjetas que hablan por ti. <br class="hidden md:block" /><span id="typewriter">Doctor</span><span id="cursor" class="text-white">|</span>
-                    </h1>
+            <!-- 1. Hero -->
+            <header id="hero-section"
+                class="relative w-full min-h-[90vh] flex flex-col justify-end pb-24 pt-40 px-6 md:px-12 overflow-hidden bg-apex-black border-b border-white/5">
+                <div id="hero-webgl-container" class="absolute inset-0 z-0"></div>
+                <div
+                    class="absolute inset-0 z-0 bg-gradient-to-t from-apex-black via-apex-black/80 to-transparent pointer-events-none">
                 </div>
-                <div class="lg:max-w-sm flex flex-col gap-8 pb-2 pointer-events-auto">
-                    <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed">
-                        En una reunión, una tarjeta no es solo un papel. <span class="text-white font-medium">Es el
-                            primer mensaje que tu marca deja en la mesa.</span>
+
+                <div class="relative z-10 max-w-7xl mx-auto w-full pointer-events-none">
+                    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+                        <div class="max-w-4xl">
+                            <div class="flex gap-3 mb-8 flex-wrap pointer-events-auto items-center">
+                                <span
+                                    class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white backdrop-blur-md uppercase tracking-wider border border-white/10">APEX
+                                    Creative</span>
+                                <span
+                                    class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white text-black uppercase tracking-wider border border-white">Tarjetas
+                                    Premium</span>
+                            </div>
+                            <h1 class="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-6">
+                                Hay tarjetas que se entregan. Y hay tarjetas que hablan por ti. <br
+                                    class="hidden md:block" /><span id="typewriter">Doctor</span><span id="cursor"
+                                    class="text-white">|</span>
+                            </h1>
+                        </div>
+                        <div class="lg:max-w-sm flex flex-col gap-8 pb-2 pointer-events-auto">
+                            <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed">
+                                En una reunión, una tarjeta no es solo un papel. <span class="text-white font-medium">Es
+                                    el
+                                    primer mensaje que tu marca deja en la mesa.</span>
+                            </p>
+                            <div>
+                                <a href="#contacto"
+                                    class="btn-main bg-white text-black py-4 px-6 text-base font-medium w-full md:w-auto hover:bg-gray-200 transition-colors">
+                                    <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-linear"
+                                            width="1.5rem" stroke-width="1.5"></iconify-icon></span>
+                                    <span class="btn-text">Solicitar información</span>
+                                    <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-linear"
+                                            width="1.5rem" stroke-width="1.5"></iconify-icon></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 2. La realidad (Bento Layout) -->
+            <section class="py-24 px-4 md:px-8 relative z-20 bg-apex-black">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+                        <!-- Large Dark Card -->
+                        <div
+                            class="lg:col-span-2 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-14 flex flex-col justify-between min-h-[50vh] relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
+                                <iconify-icon icon="solar:trash-bin-trash-linear" width="8rem"
+                                    stroke-width="1.5"></iconify-icon>
+                            </div>
+                            <div class="relative z-10 mb-20">
+                                <div
+                                    class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-8">
+                                    La realidad</div>
+                                <h2
+                                    class="text-4xl md:text-5xl font-semibold tracking-tighter text-white max-w-2xl scrub-title-wrap">
+                                    <span class="push-left">La mayoría de tarjetas de presentación</span>
+                                    <span class="push-right text-gray-400">se olvidan en minutos.</span>
+                                </h2>
+                            </div>
+                            <div class="relative z-10 flex flex-wrap gap-3 mt-auto">
+                                <div
+                                    class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
+                                    <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
+                                    Demasiado delgadas
+                                </div>
+                                <div
+                                    class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
+                                    <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
+                                    Demasiado comunes
+                                </div>
+                                <div
+                                    class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
+                                    <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
+                                    Demasiado parecidas
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Subtle Accent Card -->
+                        <div
+                            class="lg:col-span-1 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-12 flex flex-col justify-center relative overflow-hidden group">
+                            <div
+                                class="absolute -right-8 -top-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+                                <iconify-icon icon="solar:star-fall-linear" width="16rem"
+                                    stroke-width="1"></iconify-icon>
+                            </div>
+                            <iconify-icon icon="solar:star-fall-linear" width="3rem" stroke-width="1.5"
+                                class="mb-8 text-white/50"></iconify-icon>
+                            <h3 class="text-3xl font-semibold tracking-tighter mb-6 text-white">
+                                Una tarjeta premium es diferente.
+                            </h3>
+                            <p class="text-base text-gray-400 font-light leading-relaxed">
+                                Cuando alguien la sostiene, siente inmediatamente que está tratando con un negocio
+                                serio, sólido
+                                y detallista.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Diferenciadores (Focus Cards) -->
+            <section class="py-24 px-4 md:px-8 bg-apex-black">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+                        <div class="max-w-2xl">
+                            <div
+                                class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">
+                                El estándar APEX</div>
+                            <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white scrub-title-wrap">
+                                <span class="push-left">Qué hace diferente</span>
+                                <span class="push-right text-gray-400">a una tarjeta premium</span>
+                            </h2>
+                        </div>
+                        <p class="text-gray-400 text-lg md:text-xl font-light max-w-sm">
+                            En APEX producimos piezas que destacan desde el primer instante.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                        <!-- Card 1 -->
+                        <div
+                            class="bg-apex-dark border border-white/5 rounded-[2.5rem] p-10 md:p-12 flex flex-col justify-between gap-12 group hover:border-white/20 transition-all duration-700 relative overflow-hidden hover:shadow-2xl hover:shadow-white/5 hover:-translate-y-2">
+                            <div
+                                class="absolute -top-10 -right-10 opacity-5 group-hover:opacity-15 group-hover:rotate-12 transition-all duration-700">
+                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="20rem"
+                                    class="text-white blur-md group-hover:blur-[2px] transition-all duration-700"></iconify-icon>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                            </div>
+
+                            <div
+                                class="relative z-10 flex flex-col-reverse md:flex-row gap-6 justify-between items-start md:items-center">
+                                <span
+                                    class="inline-block px-4 py-2 rounded-full text-[0.65rem] font-medium bg-black/50 border border-white/10 text-gray-300 uppercase tracking-[0.15em] group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-500 backdrop-blur-md">
+                                    Tacto inconfundible
+                                </span>
+                                <div
+                                    class="w-16 h-16 rounded-[1.25rem] bg-gradient-to-br from-white/10 to-white/0 border border-white/10 flex items-center justify-center shadow-lg shadow-black/50 group-hover:scale-110 group-hover:border-white/30 transition-all duration-500 backdrop-blur-md shrink-0">
+                                    <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="2rem"
+                                        class="text-white drop-shadow-md"></iconify-icon>
+                                </div>
+                            </div>
+
+                            <div class="relative z-10 mt-auto pt-16">
+                                <h3
+                                    class="text-3xl font-semibold tracking-tighter mb-5 text-white group-hover:translate-x-2 transition-transform duration-500">
+                                    Materiales superiores</h3>
+                                <p
+                                    class="text-lg text-gray-400 font-light leading-relaxed group-hover:text-gray-300 transition-colors duration-500 max-w-sm">
+                                    Papeles gruesos y texturas elegantes que transmiten calidad y solidez desde el
+                                    primer
+                                    contacto.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div
+                            class="bg-apex-dark border border-white/5 rounded-[2.5rem] p-10 md:p-12 flex flex-col justify-between gap-12 group hover:border-white/20 transition-all duration-700 relative overflow-hidden hover:shadow-2xl hover:shadow-white/5 hover:-translate-y-2">
+                            <div
+                                class="absolute -top-10 -right-10 opacity-5 group-hover:opacity-15 group-hover:-rotate-12 transition-all duration-700">
+                                <iconify-icon icon="solar:magic-stick-3-bold-duotone" width="20rem"
+                                    class="text-white blur-md group-hover:blur-[2px] transition-all duration-700"></iconify-icon>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                            </div>
+
+                            <div
+                                class="relative z-10 flex flex-col-reverse md:flex-row gap-6 justify-between items-start md:items-center">
+                                <span
+                                    class="inline-block px-4 py-2 rounded-full text-[0.65rem] font-medium bg-black/50 border border-white/10 text-gray-300 uppercase tracking-[0.15em] group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-500 backdrop-blur-md">
+                                    Minimalismo visual
+                                </span>
+                                <div
+                                    class="w-16 h-16 rounded-[1.25rem] bg-gradient-to-br from-white/10 to-white/0 border border-white/10 flex items-center justify-center shadow-lg shadow-black/50 group-hover:scale-110 group-hover:border-white/30 transition-all duration-500 backdrop-blur-md shrink-0">
+                                    <iconify-icon icon="solar:magic-stick-3-bold-duotone" width="2rem"
+                                        class="text-white drop-shadow-md"></iconify-icon>
+                                </div>
+                            </div>
+
+                            <div class="relative z-10 mt-auto pt-16">
+                                <h3
+                                    class="text-3xl font-semibold tracking-tighter mb-5 text-white group-hover:translate-x-2 transition-transform duration-500">
+                                    Diseños memorables</h3>
+                                <p
+                                    class="text-lg text-gray-400 font-light leading-relaxed group-hover:text-gray-300 transition-colors duration-500 max-w-sm">
+                                    Una tarjeta premium no se satura de información. Se enfoca en comunicar valor visual
+                                    puro.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Nuestra Especialidad (Bordes Pintados) -->
+            <section class="py-32 px-4 md:px-8 border-t border-white/5 bg-apex-black overflow-hidden relative">
+                <!-- Glow effect -->
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.015] rounded-full blur-[120px] pointer-events-none">
+                </div>
+
+                <div class="max-w-7xl mx-auto relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+
+                        <!-- Text Content -->
+                        <div class="flex flex-col">
+                            <div
+                                class="inline-flex w-fit px-4 py-2 rounded-full text-[0.65rem] font-medium border border-white/10 text-gray-400 uppercase tracking-[0.2em] mb-10">
+                                Nuestra Especialidad</div>
+                            <h2
+                                class="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-8 leading-[1.1] scrub-title-wrap">
+                                <span class="push-left">Bordes Pintados</span>
+                                <span class="push-right text-white/40">Premium</span>
+                            </h2>
+                            <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed mb-10 max-w-lg">
+                                Enfocamos nuestra atención en un solo acabado excepcional. Capas gruesas de papel
+                                empalmado con
+                                bordes de color visible. Un detalle sutil pero impactante que eleva cualquier diseño y
+                                asegura
+                                que tu tarjeta sea recordada.
+                            </p>
+
+                            <ul class="text-base text-gray-300 space-y-5 font-light mb-8">
+                                <li class="flex items-center gap-4"><iconify-icon icon="solar:check-circle-linear"
+                                        class="text-white/60 text-xl"></iconify-icon> Ideal para marcas creativas</li>
+                                <li class="flex items-center gap-4"><iconify-icon icon="solar:check-circle-linear"
+                                        class="text-white/60 text-xl"></iconify-icon> Identidades disruptivas y
+                                    memorables</li>
+                                <li class="flex items-center gap-4"><iconify-icon icon="solar:check-circle-linear"
+                                        class="text-white/60 text-xl"></iconify-icon> Máximo contraste visual en cada
+                                    tarjeta
+                                </li>
+                            </ul>
+
+                            <div class="inline-flex items-center gap-2 text-sm text-gray-500 font-light italic">
+                                <iconify-icon icon="solar:clock-circle-linear"
+                                    class="text-gray-600 text-lg"></iconify-icon>
+                                Pronto más estilos
+                            </div>
+                        </div>
+
+                        <!-- Image / Visual Content -->
+                        <div class="relative group">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-[2.5rem] transform group-hover:scale-[1.03] transition-transform duration-700 blur-xl opacity-40">
+                            </div>
+                            <div
+                                class="relative w-full rounded-[2.5rem] overflow-hidden bg-apex-dark ring-1 ring-white/10 aspect-[4/3] transform group-hover:-translate-y-3 transition-transform duration-700 shadow-2xl shadow-black/50">
+                                <img src="assets/images/tarjetas/coloring-card.webp" alt="Tarjetas con Bordes Pintados"
+                                    class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-[1.02] group-hover:scale-105">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5 & 7. Para quién y Qué esperar -->
+            <section class="bg-apex-dark border-y border-white/5" id="stats-section">
+                <div class="py-32 px-4 md:px-8">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="flex flex-col md:flex-row justify-between mb-16 gap-8 items-start">
+                            <div class="max-w-xl">
+                                <div
+                                    class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider mb-6">
+                                    Audiencia ideal</div>
+                                <h2
+                                    class="text-4xl md:text-5xl font-semibold tracking-tighter text-white scrub-title-wrap">
+                                    <span class="push-left">La elección</span>
+                                    <span class="push-right text-gray-400">correcta</span>
+                                </h2>
+                            </div>
+                            <p class="text-lg md:text-xl font-light max-w-lg text-gray-400">
+                                La tarjeta correcta depende del cliente que quieres impresionar. El material y acabado
+                                dictan
+                                cómo perciben tu negocio.
+                            </p>
+                        </div>
+
+                        <div class="border-t border-white/10 mb-12"></div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                            <!-- Left -->
+                            <div>
+                                <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Pensadas para
+                                    negocios que
+                                    entienden el valor de la presentación.</h3>
+                                <ul class="space-y-8">
+                                    <li class="flex items-start gap-5">
+                                        <iconify-icon icon="solar:users-group-two-rounded-linear"
+                                            class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                        <span class="text-base text-gray-400 font-light">Empresarios que se reúnen con
+                                            clientes
+                                            importantes.</span>
+                                    </li>
+                                    <li class="flex items-start gap-5">
+                                        <iconify-icon icon="solar:case-minimalistic-linear"
+                                            class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                        <span class="text-base text-gray-400 font-light">Profesionales que quieren
+                                            proyectar
+                                            máxima seriedad.</span>
+                                    </li>
+                                    <li class="flex items-start gap-5">
+                                        <iconify-icon icon="solar:eye-linear"
+                                            class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                        <span class="text-base text-gray-400 font-light">Negocios que cuidan cada
+                                            detalle
+                                            minúsculo de su imagen.</span>
+                                    </li>
+                                    <li class="flex items-start gap-5">
+                                        <iconify-icon icon="solar:star-linear"
+                                            class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
+                                        <span class="text-base text-gray-400 font-light">Marcas que buscan diferenciarse
+                                            desde
+                                            el primer contacto.</span>
+                                    </li>
+                                </ul>
+                                <div class="mt-12 bg-white/5 border border-white/10 p-6 rounded-2xl">
+                                    <p class="text-sm text-gray-300 leading-relaxed font-light">No están pensadas para
+                                        impresión
+                                        rápida o económica. Están diseñadas para crear una impresión sólida y duradera.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Right -->
+                            <div>
+                                <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Lo que puedes esperar
+                                    de
+                                    nosotros.</h3>
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div
+                                        class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                        <iconify-icon icon="solar:chat-line-linear"
+                                            class="text-white text-xl shrink-0"></iconify-icon>
+                                        <span class="text-sm font-light text-gray-300">Comunicación clara durante todo
+                                            el
+                                            proceso.</span>
+                                    </div>
+                                    <div
+                                        class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                        <iconify-icon icon="solar:question-circle-linear"
+                                            class="text-white text-xl shrink-0"></iconify-icon>
+                                        <span class="text-sm font-light text-gray-300">Asesoramiento para aclarar
+                                            cualquier
+                                            detalle.</span>
+                                    </div>
+                                    <div
+                                        class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                        <iconify-icon icon="solar:document-add-linear"
+                                            class="text-white text-xl shrink-0"></iconify-icon>
+                                        <span class="text-sm font-light text-gray-300">Revisión exhaustiva de opciones
+                                            antes de
+                                            producir.</span>
+                                    </div>
+                                    <div
+                                        class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
+                                        <iconify-icon icon="solar:verified-check-linear"
+                                            class="text-white text-xl shrink-0"></iconify-icon>
+                                        <span class="text-sm font-light text-gray-300">Atención cuidadosa a materiales y
+                                            acabados finos.</span>
+                                    </div>
+                                    <div class="bg-white text-black p-5 rounded-2xl flex items-center gap-5 mt-4">
+                                        <iconify-icon icon="solar:cup-star-linear"
+                                            class="text-black text-xl shrink-0"></iconify-icon>
+                                        <span class="text-sm font-medium">Un resultado pensado exclusivamente para
+                                            impresionar.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Cómo trabajamos -->
+            <section class="py-32 px-4 md:px-8 bg-apex-black">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-20">
+                        <div
+                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">
+                            Proceso de trabajo</div>
+                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white">
+                            Simplicidad y perfección
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                        <!-- Step 1 -->
+                        <div
+                            class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
+                            <div
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
+                                1</div>
+                            <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Entendemos tu negocio</h3>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed">Conversamos para definir qué
+                                quieres
+                                comunicar exactamente cuando entregas tu tarjeta.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div
+                            class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
+                            <div
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
+                                2</div>
+                            <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Elegimos el formato</h3>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Definimos elementos clave:
+                            </p>
+                            <ul class="text-gray-500 text-sm space-y-2 font-light">
+                                <li>— Tipo de papel</li>
+                                <li>— Acabados especiales</li>
+                                <li>— Estética general</li>
+                            </ul>
+                        </div>
+                        <!-- Step 3 -->
+                        <div
+                            class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
+                            <div
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
+                                3</div>
+                            <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Producción premium</h3>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Cuidamos cada milímetro:
+                            </p>
+                            <ul class="text-gray-500 text-sm space-y-2 font-light">
+                                <li>— Calidad de impresión</li>
+                                <li>— Precisión táctil</li>
+                                <li>— Consistencia total</li>
+                            </ul>
+                        </div>
+                        <!-- Step 4 -->
+                        <div
+                            class="bg-apex-dark p-8 rounded-[2rem] border border-white/10 hover:border-white/30 transition-colors duration-300">
+                            <div
+                                class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-sm font-semibold mb-8 text-black shadow-lg shadow-white/10">
+                                4</div>
+                            <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Entrega final</h3>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed">Recibes piezas físicas
+                                impecables,
+                                listas para representar la seriedad de tu negocio.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Cierre Poderoso -->
+            <footer class="bg-apex-darker py-32 px-4 md:px-8 relative overflow-hidden border-t border-white/5"
+                id="contacto">
+                <div
+                    class="absolute top-0 right-0 -mr-[20vw] -mt-[10vw] w-[50vw] h-[50vw] rounded-full border-[1px] border-white/5 pointer-events-none">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 -ml-[20vw] -mb-[10vw] w-[40vw] h-[40vw] rounded-full border-[1px] border-white/5 pointer-events-none">
+                </div>
+
+                <div class="max-w-5xl mx-auto text-center relative z-10">
+                    <div
+                        class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-10">
+                        El impacto final</div>
+                    <h2
+                        class="text-5xl md:text-7xl font-semibold tracking-tighter text-white uppercase leading-[0.9] mb-8 scrub-title-wrap">
+                        <span class="push-left">Las personas olvidan muchas conversaciones.</span>
+                        <span class="push-right text-gray-400">Pero recuerdan cómo las hiciste sentir.</span>
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-500 font-light mb-8 max-w-2xl mx-auto">
+                        Una tarjeta de presentación impecable hace exactamente eso.
                     </p>
-                    <div>
-                        <a href="#contacto"
-                            class="btn-main bg-white text-black py-4 px-6 text-base font-medium w-full md:w-auto hover:bg-gray-200 transition-colors">
-                            <span class="btn-icon-left"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem"
+
+                    <!-- NUEVO LOGO ANIMADO SVG -->
+                    <div class="floating-group">
+                        <div class="glow-orb"></div>
+                        <svg class="svg-icon" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 30.37 27.82">
+                            <g id="Capa_1-2" data-name="Capa 1">
+                                <g>
+                                    <path class="cls-2 magic-star"
+                                        d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z">
+                                    </path>
+                                    <g class="hand-paths">
+                                        <path class="cls-1"
+                                            d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z">
+                                        </path>
+                                        <path class="cls-1"
+                                            d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z">
+                                        </path>
+                                        <path class="cls-1"
+                                            d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z">
+                                        </path>
+                                        <path class="cls-1"
+                                            d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8">
+                        <a href="mailto:hola@apex-creative.com.mx"
+                            class="btn-main bg-white text-black py-4 px-8 text-base font-medium hover:bg-gray-200 transition-colors">
+                            <span class="btn-icon-left"><iconify-icon icon="solar:letter-linear" width="1.5rem"
                                     stroke-width="1.5"></iconify-icon></span>
                             <span class="btn-text">Solicitar información</span>
-                            <span class="btn-icon-right"><iconify-icon icon="solar:arrow-right-linear" width="1.5rem"
+                            <span class="btn-icon-right"><iconify-icon icon="solar:letter-linear" width="1.5rem"
                                     stroke-width="1.5"></iconify-icon></span>
                         </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <!-- 2. La realidad (Bento Layout) -->
-    <section class="py-24 px-4 md:px-8 relative z-20 bg-apex-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-                <!-- Large Dark Card -->
-                <div
-                    class="lg:col-span-2 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-14 flex flex-col justify-between min-h-[50vh] relative overflow-hidden group">
                     <div
-                        class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
-                        <iconify-icon icon="solar:trash-bin-trash-linear" width="8rem"
-                            stroke-width="1.5"></iconify-icon>
-                    </div>
-                    <div class="relative z-10 mb-20">
-                        <div
-                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-8">
-                            La realidad</div>
-                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white max-w-2xl scrub-title-wrap">
-                            <span class="push-left">La mayoría de tarjetas de presentación</span>
-                            <span class="push-right text-gray-400">se olvidan en minutos.</span>
-                        </h2>
-                    </div>
-                    <div class="relative z-10 flex flex-wrap gap-3 mt-auto">
-                        <div
-                            class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
-                            Demasiado delgadas
+                        class="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500 font-light">
+                        <div>
+                            <a href="mailto:hola@apex-creative.com.mx"
+                                class="underline-link hover:text-white transition-colors">hola@apex-creative.com.mx</a>
                         </div>
-                        <div
-                            class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
-                            Demasiado comunes
+                        <div class="tracking-[0.2em] font-medium uppercase text-gray-400">
+                            A P E X © 2026
                         </div>
-                        <div
-                            class="px-4 py-2 rounded-full border border-white/10 text-gray-400 text-sm flex items-center gap-2 bg-apex-black">
-                            <iconify-icon icon="solar:close-circle-linear" class="text-white/50"></iconify-icon>
-                            Demasiado parecidas
+                        <div>
+                            Tarjetas de Presentación Premium
                         </div>
                     </div>
                 </div>
+            </footer>
 
-                <!-- Subtle Accent Card -->
-                <div
-                    class="lg:col-span-1 bg-apex-dark border border-white/5 rounded-[2rem] p-8 md:p-12 flex flex-col justify-center relative overflow-hidden group">
-                    <div
-                        class="absolute -right-8 -top-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
-                        <iconify-icon icon="solar:star-fall-linear" width="16rem" stroke-width="1"></iconify-icon>
-                    </div>
-                    <iconify-icon icon="solar:star-fall-linear" width="3rem" stroke-width="1.5"
-                        class="mb-8 text-white/50"></iconify-icon>
-                    <h3 class="text-3xl font-semibold tracking-tighter mb-6 text-white">
-                        Una tarjeta premium es diferente.
-                    </h3>
-                    <p class="text-base text-gray-400 font-light leading-relaxed">
-                        Cuando alguien la sostiene, siente inmediatamente que está tratando con un negocio serio, sólido
-                        y detallista.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Diferenciadores (Focus Cards) -->
-    <section class="py-24 px-4 md:px-8 bg-apex-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-                <div class="max-w-2xl">
-                    <div
-                        class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">
-                        El estándar APEX</div>
-                    <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white scrub-title-wrap">
-                        <span class="push-left">Qué hace diferente</span>
-                        <span class="push-right text-gray-400">a una tarjeta premium</span>
-                    </h2>
-                </div>
-                <p class="text-gray-400 text-lg md:text-xl font-light max-w-sm">
-                    En APEX producimos piezas que destacan desde el primer instante.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                <!-- Card 1 -->
-                <div
-                    class="bg-apex-dark border border-white/5 rounded-[2.5rem] p-10 md:p-12 flex flex-col justify-between gap-12 group hover:border-white/20 transition-all duration-700 relative overflow-hidden hover:shadow-2xl hover:shadow-white/5 hover:-translate-y-2">
-                    <div
-                        class="absolute -top-10 -right-10 opacity-5 group-hover:opacity-15 group-hover:rotate-12 transition-all duration-700">
-                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="20rem"
-                            class="text-white blur-md group-hover:blur-[2px] transition-all duration-700"></iconify-icon>
-                    </div>
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                    </div>
-
-                    <div
-                        class="relative z-10 flex flex-col-reverse md:flex-row gap-6 justify-between items-start md:items-center">
-                        <span
-                            class="inline-block px-4 py-2 rounded-full text-[0.65rem] font-medium bg-black/50 border border-white/10 text-gray-300 uppercase tracking-[0.15em] group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-500 backdrop-blur-md">
-                            Tacto inconfundible
-                        </span>
-                        <div
-                            class="w-16 h-16 rounded-[1.25rem] bg-gradient-to-br from-white/10 to-white/0 border border-white/10 flex items-center justify-center shadow-lg shadow-black/50 group-hover:scale-110 group-hover:border-white/30 transition-all duration-500 backdrop-blur-md shrink-0">
-                            <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="2rem"
-                                class="text-white drop-shadow-md"></iconify-icon>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 mt-auto pt-16">
-                        <h3
-                            class="text-3xl font-semibold tracking-tighter mb-5 text-white group-hover:translate-x-2 transition-transform duration-500">
-                            Materiales superiores</h3>
-                        <p
-                            class="text-lg text-gray-400 font-light leading-relaxed group-hover:text-gray-300 transition-colors duration-500 max-w-sm">
-                            Papeles gruesos y texturas elegantes que transmiten calidad y solidez desde el primer
-                            contacto.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="bg-apex-dark border border-white/5 rounded-[2.5rem] p-10 md:p-12 flex flex-col justify-between gap-12 group hover:border-white/20 transition-all duration-700 relative overflow-hidden hover:shadow-2xl hover:shadow-white/5 hover:-translate-y-2">
-                    <div
-                        class="absolute -top-10 -right-10 opacity-5 group-hover:opacity-15 group-hover:-rotate-12 transition-all duration-700">
-                        <iconify-icon icon="solar:magic-stick-3-bold-duotone" width="20rem"
-                            class="text-white blur-md group-hover:blur-[2px] transition-all duration-700"></iconify-icon>
-                    </div>
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                    </div>
-
-                    <div
-                        class="relative z-10 flex flex-col-reverse md:flex-row gap-6 justify-between items-start md:items-center">
-                        <span
-                            class="inline-block px-4 py-2 rounded-full text-[0.65rem] font-medium bg-black/50 border border-white/10 text-gray-300 uppercase tracking-[0.15em] group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-500 backdrop-blur-md">
-                            Minimalismo visual
-                        </span>
-                        <div
-                            class="w-16 h-16 rounded-[1.25rem] bg-gradient-to-br from-white/10 to-white/0 border border-white/10 flex items-center justify-center shadow-lg shadow-black/50 group-hover:scale-110 group-hover:border-white/30 transition-all duration-500 backdrop-blur-md shrink-0">
-                            <iconify-icon icon="solar:magic-stick-3-bold-duotone" width="2rem"
-                                class="text-white drop-shadow-md"></iconify-icon>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 mt-auto pt-16">
-                        <h3
-                            class="text-3xl font-semibold tracking-tighter mb-5 text-white group-hover:translate-x-2 transition-transform duration-500">
-                            Diseños memorables</h3>
-                        <p
-                            class="text-lg text-gray-400 font-light leading-relaxed group-hover:text-gray-300 transition-colors duration-500 max-w-sm">
-                            Una tarjeta premium no se satura de información. Se enfoca en comunicar valor visual puro.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Nuestra Especialidad (Bordes Pintados) -->
-    <section class="py-32 px-4 md:px-8 border-t border-white/5 bg-apex-black overflow-hidden relative">
-        <!-- Glow effect -->
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.015] rounded-full blur-[120px] pointer-events-none">
-        </div>
-
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-
-                <!-- Text Content -->
-                <div class="flex flex-col">
-                    <div
-                        class="inline-flex w-fit px-4 py-2 rounded-full text-[0.65rem] font-medium border border-white/10 text-gray-400 uppercase tracking-[0.2em] mb-10">
-                        Nuestra Especialidad</div>
-                    <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-8 leading-[1.1] scrub-title-wrap">
-                        <span class="push-left">Bordes Pintados</span>
-                        <span class="push-right text-white/40">Premium</span>
-                    </h2>
-                    <p class="text-lg md:text-xl text-gray-400 font-light leading-relaxed mb-10 max-w-lg">
-                        Enfocamos nuestra atención en un solo acabado excepcional. Capas gruesas de papel empalmado con
-                        bordes de color visible. Un detalle sutil pero impactante que eleva cualquier diseño y asegura
-                        que tu tarjeta sea recordada.
-                    </p>
-
-                    <ul class="text-base text-gray-300 space-y-5 font-light mb-8">
-                        <li class="flex items-center gap-4"><iconify-icon icon="solar:check-circle-linear"
-                                class="text-white/60 text-xl"></iconify-icon> Ideal para marcas creativas</li>
-                        <li class="flex items-center gap-4"><iconify-icon icon="solar:check-circle-linear"
-                                class="text-white/60 text-xl"></iconify-icon> Identidades disruptivas y memorables</li>
-                        <li class="flex items-center gap-4"><iconify-icon icon="solar:check-circle-linear"
-                                class="text-white/60 text-xl"></iconify-icon> Máximo contraste visual en cada tarjeta
-                        </li>
-                    </ul>
-
-                    <div class="inline-flex items-center gap-2 text-sm text-gray-500 font-light italic">
-                        <iconify-icon icon="solar:clock-circle-linear" class="text-gray-600 text-lg"></iconify-icon>
-                        Pronto más estilos
-                    </div>
-                </div>
-
-                <!-- Image / Visual Content -->
-                <div class="relative group">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-[2.5rem] transform group-hover:scale-[1.03] transition-transform duration-700 blur-xl opacity-40">
-                    </div>
-                    <div
-                        class="relative w-full rounded-[2.5rem] overflow-hidden bg-apex-dark ring-1 ring-white/10 aspect-[4/3] transform group-hover:-translate-y-3 transition-transform duration-700 shadow-2xl shadow-black/50">
-                        <img src="assets/images/tarjetas/coloring-card.webp" alt="Tarjetas con Bordes Pintados"
-                            class="block w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-[1.02] group-hover:scale-105">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 5 & 7. Para quién y Qué esperar -->
-    <section class="bg-apex-dark border-y border-white/5" id="stats-section">
-        <div class="py-32 px-4 md:px-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between mb-16 gap-8 items-start">
-                    <div class="max-w-xl">
-                        <div
-                            class="inline-block px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 text-white uppercase tracking-wider mb-6">
-                            Audiencia ideal</div>
-                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white scrub-title-wrap">
-                            <span class="push-left">La elección</span>
-                            <span class="push-right text-gray-400">correcta</span>
-                        </h2>
-                    </div>
-                    <p class="text-lg md:text-xl font-light max-w-lg text-gray-400">
-                        La tarjeta correcta depende del cliente que quieres impresionar. El material y acabado dictan
-                        cómo perciben tu negocio.
-                    </p>
-                </div>
-
-                <div class="border-t border-white/10 mb-12"></div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-                    <!-- Left -->
-                    <div>
-                        <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Pensadas para negocios que
-                            entienden el valor de la presentación.</h3>
-                        <ul class="space-y-8">
-                            <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:users-group-two-rounded-linear"
-                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Empresarios que se reúnen con clientes
-                                    importantes.</span>
-                            </li>
-                            <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:case-minimalistic-linear"
-                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Profesionales que quieren proyectar
-                                    máxima seriedad.</span>
-                            </li>
-                            <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:eye-linear"
-                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Negocios que cuidan cada detalle
-                                    minúsculo de su imagen.</span>
-                            </li>
-                            <li class="flex items-start gap-5">
-                                <iconify-icon icon="solar:star-linear"
-                                    class="text-white text-2xl shrink-0 mt-0.5"></iconify-icon>
-                                <span class="text-base text-gray-400 font-light">Marcas que buscan diferenciarse desde
-                                    el primer contacto.</span>
-                            </li>
-                        </ul>
-                        <div class="mt-12 bg-white/5 border border-white/10 p-6 rounded-2xl">
-                            <p class="text-sm text-gray-300 leading-relaxed font-light">No están pensadas para impresión
-                                rápida o económica. Están diseñadas para crear una impresión sólida y duradera.</p>
-                        </div>
-                    </div>
-
-                    <!-- Right -->
-                    <div>
-                        <h3 class="text-2xl font-semibold tracking-tight text-white mb-10">Lo que puedes esperar de
-                            nosotros.</h3>
-                        <div class="grid grid-cols-1 gap-4">
-                            <div
-                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:chat-line-linear"
-                                    class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Comunicación clara durante todo el
-                                    proceso.</span>
-                            </div>
-                            <div
-                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:question-circle-linear"
-                                    class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Asesoramiento para aclarar cualquier
-                                    detalle.</span>
-                            </div>
-                            <div
-                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:document-add-linear"
-                                    class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Revisión exhaustiva de opciones antes de
-                                    producir.</span>
-                            </div>
-                            <div
-                                class="bg-apex-black border border-white/5 p-5 rounded-2xl flex items-center gap-5 hover:border-white/20 transition-colors">
-                                <iconify-icon icon="solar:verified-check-linear"
-                                    class="text-white text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-light text-gray-300">Atención cuidadosa a materiales y
-                                    acabados finos.</span>
-                            </div>
-                            <div class="bg-white text-black p-5 rounded-2xl flex items-center gap-5 mt-4">
-                                <iconify-icon icon="solar:cup-star-linear"
-                                    class="text-black text-xl shrink-0"></iconify-icon>
-                                <span class="text-sm font-medium">Un resultado pensado exclusivamente para
-                                    impresionar.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Cómo trabajamos -->
-    <section class="py-32 px-4 md:px-8 bg-apex-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <div
-                    class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-6">
-                    Proceso de trabajo</div>
-                <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-white">
-                    Simplicidad y perfección
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <!-- Step 1 -->
-                <div
-                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div
-                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
-                        1</div>
-                    <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Entendemos tu negocio</h3>
-                    <p class="text-gray-400 font-light text-sm leading-relaxed">Conversamos para definir qué quieres
-                        comunicar exactamente cuando entregas tu tarjeta.</p>
-                </div>
-                <!-- Step 2 -->
-                <div
-                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div
-                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
-                        2</div>
-                    <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Elegimos el formato</h3>
-                    <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Definimos elementos clave:</p>
-                    <ul class="text-gray-500 text-sm space-y-2 font-light">
-                        <li>— Tipo de papel</li>
-                        <li>— Acabados especiales</li>
-                        <li>— Estética general</li>
-                    </ul>
-                </div>
-                <!-- Step 3 -->
-                <div
-                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-colors duration-300">
-                    <div
-                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold mb-8 text-white border border-white/10">
-                        3</div>
-                    <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Producción premium</h3>
-                    <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Cuidamos cada milímetro:</p>
-                    <ul class="text-gray-500 text-sm space-y-2 font-light">
-                        <li>— Calidad de impresión</li>
-                        <li>— Precisión táctil</li>
-                        <li>— Consistencia total</li>
-                    </ul>
-                </div>
-                <!-- Step 4 -->
-                <div
-                    class="bg-apex-dark p-8 rounded-[2rem] border border-white/10 hover:border-white/30 transition-colors duration-300">
-                    <div
-                        class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-sm font-semibold mb-8 text-black shadow-lg shadow-white/10">
-                        4</div>
-                    <h3 class="text-lg font-semibold mb-3 tracking-tight text-white">Entrega final</h3>
-                    <p class="text-gray-400 font-light text-sm leading-relaxed">Recibes piezas físicas impecables,
-                        listas para representar la seriedad de tu negocio.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Cierre Poderoso -->
-    <footer class="bg-apex-darker py-32 px-4 md:px-8 relative overflow-hidden border-t border-white/5" id="contacto">
-        <div
-            class="absolute top-0 right-0 -mr-[20vw] -mt-[10vw] w-[50vw] h-[50vw] rounded-full border-[1px] border-white/5 pointer-events-none">
-        </div>
-        <div
-            class="absolute bottom-0 left-0 -ml-[20vw] -mb-[10vw] w-[40vw] h-[40vw] rounded-full border-[1px] border-white/5 pointer-events-none">
-        </div>
-
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <div
-                class="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-gray-400 uppercase tracking-wider mb-10">
-                El impacto final</div>
-            <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter text-white uppercase leading-[0.9] mb-8 scrub-title-wrap">
-                <span class="push-left">Las personas olvidan muchas conversaciones.</span>
-                <span class="push-right text-gray-400">Pero recuerdan cómo las hiciste sentir.</span>
-            </h2>
-            <p class="text-lg md:text-xl text-gray-500 font-light mb-8 max-w-2xl mx-auto">
-                Una tarjeta de presentación impecable hace exactamente eso.
-            </p>
-
-            <!-- NUEVO LOGO ANIMADO SVG -->
-            <div class="floating-group">
-                <div class="glow-orb"></div>
-                <svg class="svg-icon" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 30.37 27.82">
+            <!-- Scroll Top Button -->
+            <button class="btn-scroll-top" id="scrollTopBtn" aria-label="Volver arriba">
+                <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82">
                     <g id="Capa_1-2" data-name="Capa 1">
-                        <g>
-                            <path class="cls-2 magic-star"
-                                d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z">
+                        <path
+                            class="scroll-magic-star fill-white stroke-white stroke-[1.21px] stroke-linecap-round stroke-linejoin-round"
+                            d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z">
+                        </path>
+                        <g class="scroll-magic-hand fill-white">
+                            <path
+                                d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z">
                             </path>
-                            <g class="hand-paths">
-                                <path class="cls-1"
-                                    d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z">
-                                </path>
-                                <path class="cls-1"
-                                    d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z">
-                                </path>
-                                <path class="cls-1"
-                                    d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z">
-                                </path>
-                                <path class="cls-1"
-                                    d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z">
-                                </path>
-                            </g>
+                            <path
+                                d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z">
+                            </path>
+                            <path
+                                d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z">
+                            </path>
+                            <path
+                                d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z">
+                            </path>
                         </g>
                     </g>
                 </svg>
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8">
-                <a href="mailto:hola@apex-creative.com.mx"
-                    class="btn-main bg-white text-black py-4 px-8 text-base font-medium hover:bg-gray-200 transition-colors">
-                    <span class="btn-icon-left"><iconify-icon icon="solar:letter-linear" width="1.5rem"
-                            stroke-width="1.5"></iconify-icon></span>
-                    <span class="btn-text">Solicitar información</span>
-                    <span class="btn-icon-right"><iconify-icon icon="solar:letter-linear" width="1.5rem"
-                            stroke-width="1.5"></iconify-icon></span>
-                </a>
-            </div>
-
-            <div
-                class="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500 font-light">
-                <div>
-                    <a href="mailto:hola@apex-creative.com.mx"
-                        class="underline-link hover:text-white transition-colors">hola@apex-creative.com.mx</a>
-                </div>
-                <div class="tracking-[0.2em] font-medium uppercase text-gray-400">
-                    A P E X © 2026
-                </div>
-                <div>
-                    Tarjetas de Presentación Premium
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll Top Button -->
-    <button class="btn-scroll-top" id="scrollTopBtn" aria-label="Volver arriba">
-        <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.37 27.82">
-            <g id="Capa_1-2" data-name="Capa 1">
-                <path
-                    class="scroll-magic-star fill-white stroke-white stroke-[1.21px] stroke-linecap-round stroke-linejoin-round"
-                    d="M14.63,9.4c-.08,0-.15.01-.22-.03-.22-.14-.63-2.87-.89-3.29l-3.47-.93.05-.18,3.35-.82c.31-.4.73-3.48,1-3.54.14-.03.2.18.23.27.22.57.52,2.95.78,3.21l3.52.98-3.52.98-.84,3.34Z">
-                </path>
-                <g class="scroll-magic-hand fill-white">
-                    <path
-                        d="M8.26,10.17c.86,1.74,4.23,2.33,5.94,1.89,2.38-.62,4.32-1.24,5.93-3.21.36-.44.45-.87.68-1.37.59-1.26,1.28-2.66,2.56-3.36.6-.33,1.84-.57,1.98.37.06.38,0,.27-.19.43-.68.59-1.27,1.38-1.78,2.12-.81,1.17-1.27,2.27-2.38,3.22-.66.57-1.38,1.07-2.03,1.64-.08.03-.47-.17-.62-.21-.19-.04-.37-.07-.56-.05.71.58,1.49,1.11,1.99,1.89.12.19.45.78.49.97.05.25-.16.54-.05.8.19-.34.4-.66.63-.98.4-.55,1.17-1.3,1.45-1.86.13-.25.19-.72.29-1.01.38-1.15.91-2.47,1.91-3.22.94-.71,2.43-.9,2.56.63.11,1.34-1.32,4.35-1.83,5.73-.94,2.52-.93,3.21-3.45,4.55-1.38.73-2.8,1.38-4.19,2.07-2.23,1.11-5.53,3.16-8.05,2.95-.79-.07-1.68-.45-2.43-.71.68.81,1.72,1.24,2.75,1.41h1.26c.24,1.05-.24,2.18-1.21,2.66-1.22.6-2.73.11-3.87-.46-1.95-.97-5.39-3.64-5.94-5.81-.36-1.43.43-2.58,1.79-2.97.33.91.8,1.89,1.72,2.33-.11-.26-.26-.49-.37-.75-.96-2.2-1.21-4.53-.65-6.87s1.84-4.13,1.37-6.57c-.06-.3-.18-.61-.22-.92-.14-1.08.2-2.1,1.43-2.18,2.04-.14,3.35,1.85,3.26,3.73-.05,1.05-.66,2.08-.14,3.12ZM13.41,14.84c-2.88-.6-6.64,1.02-6.9,4.26.28-.34.47-.74.73-1.1.93-1.29,2.11-2.05,3.61-2.54l2.55-.62Z">
-                    </path>
-                    <path
-                        d="M28.81,11.83c-.53.58-1.12,1.11-1.64,1.7-.47.54-.87,1.14-1.34,1.66.38-1.35,1.05-2.62,1.53-3.93.36-.98.63-1.95.41-3,.7-.42,1.77-.68,2.34.08.85,1.13-.56,2.69-1.3,3.49Z">
-                    </path>
-                    <path
-                        d="M23.43,8.26c.08-.19.22-.38.34-.55.91-1.29,2.6-3.3,4.37-3.07.54.07,1,.73.96,1.27-.02.24-.33,1.17-.53,1.29-.12.07-.41.12-.57.18-.17.07-.33.17-.49.26-.09,0-.16-.17-.23-.24-.81-.75-1.99-.56-2.86-.01-.38.24-.68.57-.99.88Z">
-                    </path>
-                    <path
-                        d="M20.59,13.73c-.16-.64-.7-1.04-1.1-1.52,1.13-.86,2.32-1.69,3.19-2.82-.18.43-.39.85-.54,1.29-.17.49-.28,1.09-.49,1.56-.1.22-.8,1.28-.96,1.44-.03.03-.04.06-.1.04Z">
-                    </path>
-                </g>
-            </g>
-        </svg>
-    </button>
+            </button>
 
         </div><!-- /smooth-content -->
     </div><!-- /smooth-wrapper -->
@@ -1450,15 +1484,15 @@
             words.forEach(word => {
                 tl.to("#typewriter", {
                     text: "",
-                    duration: 0.5, 
+                    duration: 0.5,
                     ease: "none",
-                    delay: 2 
+                    delay: 2
                 })
-                .to("#typewriter", {
-                    text: word,
-                    duration: 1, 
-                    ease: "none"
-                });
+                    .to("#typewriter", {
+                        text: word,
+                        duration: 1,
+                        ease: "none"
+                    });
             });
 
             // Parpadeo del cursor
