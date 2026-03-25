@@ -474,7 +474,7 @@
                             Premium</span>
                     </div>
                     <h1 class="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-6">
-                        Hay tarjetas que se entregan. Y hay tarjetas que hablan por <span id="typewriter">ti</span><span id="cursor" class="text-white">|</span> desde el primer instante.
+                        Hay tarjetas que se entregan. Y hay tarjetas que hablan por ti. <br class="hidden md:block" /><span id="typewriter">Doctor</span><span id="cursor" class="text-white">|</span>
                     </h1>
                 </div>
                 <div class="lg:max-w-sm flex flex-col gap-8 pb-2 pointer-events-auto">
@@ -1443,7 +1443,7 @@
             // Efecto Maquina de escribir con GSAP
             gsap.registerPlugin(TextPlugin);
 
-            const words = ["Doctor", "Arquitecto", "Emprendedor", "Dentista", "Empresario", "ti"];
+            const words = ["Arquitecto", "Emprendedor", "Dentista", "Empresario", "Doctor"];
             let tl = gsap.timeline({ repeat: -1 });
 
             // Inicializa con la primera palabra ('negocio' está por defecto en el HTML)
