@@ -1,0 +1,157 @@
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #030303;
+    }
+
+    canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+    }
+</style>
+
+<div id="canvas-container"></div>
+
+<script type="module">
+    // --- 1. IMPORTACIONES (Vía CDN Skypack para CodePen) ---
+    import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
+    import { EffectComposer } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+    // --- 2. CONFIGURACIÓN DE LA ESCENA ---
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    // Añadimos un poco de niebla negra al fondo para dar profundidad infinita
+    scene.fog = new THREE.FogExp2('#030303', 0.03);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 4, 12);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optimización para pantallas retina
+    container.appendChild(renderer.domElement);
+
+    // --- 3. GEOMETRÍA (El mar de partículas) ---
+    const particleCount = 45000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const scales = new Float32Array(particleCount);
+
+    // Distribuimos las partículas en un plano muy amplio
+    for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+        positions[i3] = (Math.random() - 0.5) * 40;     // X: Ancho
+        positions[i3 + 1] = 0.0;                        // Y: Altura inicial
+        positions[i3 + 2] = (Math.random() - 0.5) * 40; // Z: Profundidad
+
+        scales[i] = Math.random(); // Variación de tamaño
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
+
+    // --- 4. LOS SHADERS (Matemáticas y Estética) ---
+    const material = new THREE.ShaderMaterial({
+        uniforms: {
+            uTime: { value: 0.0 },
+            uColor: { value: new THREE.Color('#ffb03a') } // El color dorado
+        },
+        vertexShader: `
+      uniform float uTime;
+      attribute float aScale;
+      varying float vElevation;
+
+      void main() {
+        vec3 pos = position;
+
+        // Olas complejas combinando senos y cosenos
+        float elevation = sin(pos.x * 0.4 + uTime * 0.6) * 0.8;
+        elevation += cos(pos.z * 0.4 + uTime * 0.6) * 0.8;
+        // Añadimos un detalle secundario para que no sea tan uniforme
+        elevation += sin(pos.x * 1.5 + uTime) * 0.2;
+        
+        pos.y += elevation;
+        vElevation = elevation; // Pasamos la altura al Fragment Shader
+
+        vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+        
+        // Profundidad de campo (DoF): más grandes cerca, más pequeñas lejos
+        gl_PointSize = 30.0 * aScale * (1.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `,
+        fragmentShader: `
+      uniform vec3 uColor;
+      varying float vElevation;
+
+      void main() {
+        // Crear un círculo perfecto
+        vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+        float distanceToCenter = length(cxy);
+        
+        if (distanceToCenter > 1.0) {
+          discard;
+        }
+
+        // Crear un degradado suave (glow radial)
+        // El centro es intenso (1.0) y se desvanece hacia los bordes (0.0)
+        float alpha = 1.0 - distanceToCenter;
+        alpha = pow(alpha, 1.8); // Curva para hacer el centro más "sólido"
+
+        // Variamos un poco el brillo dependiendo de la altura de la ola
+        float intensity = 0.5 + (vElevation * 0.3);
+
+        gl_FragColor = vec4(uColor * intensity, alpha * 0.8);
+      }
+    `,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false // Evita que las partículas se tapen entre sí de forma fea
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // --- 5. POST-PROCESAMIENTO (El Toque Premium / Bloom) ---
+    const composer = new EffectComposer(renderer);
+
+    // Render normal
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+
+    // Efecto de brillo (Bloom)
+    // Parámetros: Resolución, Fuerza, Radio, Umbral
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.8, 0.6, 0.1);
+    composer.addPass(bloomPass);
+
+    // --- 6. ANIMACIÓN Y RESIZE ---
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        const elapsedTime = clock.getElapsedTime();
+        material.uniforms.uTime.value = elapsedTime;
+
+        // Movimiento sutil de cámara para mayor inmersión
+        camera.position.x = Math.sin(elapsedTime * 0.1) * 2;
+        camera.lookAt(0, 0, 0);
+
+        // Usamos el composer en lugar del renderer normal
+        composer.render();
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight);
+    });
+</script>

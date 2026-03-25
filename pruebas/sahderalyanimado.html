@@ -1,0 +1,181 @@
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #030303;
+    }
+
+    canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        cursor: crosshair;
+    }
+</style>
+
+<div id="canvas-container"></div>
+
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+    }
+  }
+</script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+    // --- 1. CONFIGURACIÓN DE LA ESCENA ---
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2('#030303', 0.025);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 4, 12);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    // --- 2. INTERACCIÓN DEL MOUSE (La Magia) ---
+    const mouse = new THREE.Vector2(0, 0);
+    const targetMouse = new THREE.Vector2(0, 0);
+    const windowHalf = new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+
+    window.addEventListener('mousemove', (event) => {
+        // Normalizamos las coordenadas del mouse de -1 a 1
+        targetMouse.x = (event.clientX - windowHalf.x) / windowHalf.x;
+        targetMouse.y = (event.clientY - windowHalf.y) / windowHalf.y;
+    });
+
+    // --- 3. GEOMETRÍA ---
+    const particleCount = 45000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const scales = new Float32Array(particleCount);
+
+    for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+        positions[i3] = (Math.random() - 0.5) * 45;
+        positions[i3 + 1] = 0.0;
+        positions[i3 + 2] = (Math.random() - 0.5) * 45;
+
+        scales[i] = Math.random();
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
+
+    // --- 4. SHADERS (Con Reacción al Mouse) ---
+    const material = new THREE.ShaderMaterial({
+        uniforms: {
+            uTime: { value: 0.0 },
+            uColor: { value: new THREE.Color('#ffb03a') },
+            uMouse: { value: new THREE.Vector2(0, 0) } // Nuevo: Recibe la posición del mouse
+        },
+        vertexShader: `
+      uniform float uTime;
+      uniform vec2 uMouse;
+      attribute float aScale;
+      varying float vElevation;
+
+      void main() {
+        vec3 pos = position;
+
+        // Olas base
+        float elevation = sin(pos.x * 0.4 + uTime * 0.6) * 0.8;
+        elevation += cos(pos.z * 0.4 + uTime * 0.6) * 0.8;
+        elevation += sin(pos.x * 1.5 + uTime) * 0.2;
+
+        // --- EFECTO MÁGICO DEL MOUSE ---
+        // Mapeamos la posición del mouse al mundo 3D de manera aproximada
+        vec2 mappedMouse = vec2(uMouse.x * 20.0, -uMouse.y * 20.0); 
+        // Calculamos qué tan cerca está cada partícula del mouse
+        float mouseDistance = distance(pos.xz, mappedMouse);
+        // Creamos una "montaña" suave alrededor del mouse
+        float magicLift = exp(-mouseDistance * 0.3) * 3.0; 
+        
+        pos.y += elevation + magicLift; // Sumamos la elevación mágica
+        vElevation = elevation + magicLift; 
+
+        vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+        
+        gl_PointSize = 30.0 * aScale * (1.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `,
+        fragmentShader: `
+      uniform vec3 uColor;
+      varying float vElevation;
+
+      void main() {
+        vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+        float distanceToCenter = length(cxy);
+        
+        if (distanceToCenter > 1.0) discard;
+
+        float alpha = 1.0 - distanceToCenter;
+        alpha = pow(alpha, 1.8); 
+
+        // Las partículas brillan más intensamente cuando el mouse las levanta
+        float intensity = 0.5 + (vElevation * 0.35);
+
+        gl_FragColor = vec4(uColor * intensity, alpha * 0.8);
+      }
+    `,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // --- 5. POST-PROCESAMIENTO (Bloom) ---
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.8, 0.6, 0.1);
+    composer.addPass(bloomPass);
+
+    // --- 6. ANIMACIÓN (Con Interpolación / LERP) ---
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        const elapsedTime = clock.getElapsedTime();
+        material.uniforms.uTime.value = elapsedTime;
+
+        // Movimiento fluido del mouse (LERP - Linear Interpolation)
+        // Esto hace que la interacción se sienta como un líquido, no robótica
+        mouse.x += (targetMouse.x - mouse.x) * 0.05;
+        mouse.y += (targetMouse.y - mouse.y) * 0.05;
+
+        // Pasamos el mouse suavizado al Shader
+        material.uniforms.uMouse.value.set(mouse.x, mouse.y);
+
+        // Parallax de la cámara: se mueve suavemente al compás del mouse
+        camera.position.x += (mouse.x * 4 - camera.position.x) * 0.02;
+        camera.position.y += (-mouse.y * 2 + 4 - camera.position.y) * 0.02;
+        camera.lookAt(0, 0, 0);
+
+        composer.render();
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        windowHalf.set(window.innerWidth / 2, window.innerHeight / 2);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight);
+    });
+</script>
