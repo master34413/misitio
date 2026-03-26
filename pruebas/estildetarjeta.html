@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Minimalista Oro</title>
+    <style>
+        /* Estilos base para centrar la tarjeta en la pantalla */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #050505;
+            /* Fondo oscuro para resaltar el brillo */
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* Registro de propiedades para animaciones suaves */
+        @property --rotate {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 0;
+        }
+
+        @property --bg-y {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 0;
+        }
+
+        @property --bg-x {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 0;
+        }
+
+        :root {
+            --card-color: #121212;
+            --card-radius: 20px;
+            --border-width: 2px;
+            --animation-speed: 4s;
+            /* Variable para el color café oro claro */
+            --gold-color: #c19b6c;
+        }
+
+        /* Contenedor Principal */
+        .glass-card {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1.5 / 1;
+            position: relative;
+            background: var(--card-color);
+            border-radius: var(--card-radius);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            /* Mantiene el brillo dentro de los bordes */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* El contenido interno de la tarjeta */
+        .card-content {
+            position: absolute;
+            inset: var(--border-width);
+            /* Crea el espacio para el borde */
+            background: var(--card-color);
+            border-radius: calc(var(--card-radius) - var(--border-width));
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .card-content h3 {
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            color: #eaeaea;
+        }
+
+        /* Efecto de borde iluminado (Border Glow) */
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            border-radius: var(--card-radius);
+            padding: var(--border-width);
+            background: radial-gradient(circle at calc(var(--bg-x) * 1%) calc(var(--bg-y) * 1%),
+                    var(--gold-color),
+                    /* Se aplica el color oro aquí */
+                    transparent 40%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            /* Solo dejamos la animación de rotación, quitamos el hue */
+            animation: rotate-bg var(--animation-speed) linear infinite;
+        }
+
+        /* El resplandor difuminado interno (Glow) */
+        .glow {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            z-index: 0;
+            filter: blur(35px);
+            background: var(--gold-color);
+            /* Se aplica el color oro aquí */
+            opacity: 0.3;
+            /* Solo dejamos la animación de rotación, quitamos el hue */
+            animation: rotate var(--animation-speed) linear infinite;
+            transform-origin: center;
+        }
+
+        /* Animaciones */
+        @keyframes rotate-bg {
+
+            0%,
+            100% {
+                --bg-x: 0;
+                --bg-y: 0;
+            }
+
+            25% {
+                --bg-x: 100;
+                --bg-y: 0;
+            }
+
+            50% {
+                --bg-x: 100;
+                --bg-y: 100;
+            }
+
+            75% {
+                --bg-x: 0;
+                --bg-y: 100;
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg) translateY(-60px);
+            }
+
+            to {
+                transform: rotate(360deg) translateY(-60px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="glass-card">
+        <div class="glow"></div>
+
+        <div class="card-content">
+            <h3>Tu Contenido</h3>
+        </div>
+    </div>
+
+</body>
+
+</html>
