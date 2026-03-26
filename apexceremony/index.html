@@ -94,7 +94,7 @@
     </style>
 </head>
 
-<body class="bg-[#f9bd97] text-white font-sans antialiased selection:bg-white/30 selection:text-white"
+<body class="bg-white text-black font-sans antialiased selection:bg-black/10 selection:text-black"
     style="font-family: 'Sprat', sans-serif;">
     <!-- Navigation -->
     <nav class="fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md transition-transform duration-500 ease-in-out"
@@ -103,19 +103,19 @@
             <div
                 class="flex items-center justify-between px-5 py-3 bg-transparent rounded-xl w-full z-20 relative">
                 <a href="#"
-                    class="flex items-center gap-2 text-base font-bold tracking-tighter uppercase text-white hover:text-white/70 transition-colors">
+                    class="flex items-center gap-2 text-base font-bold tracking-tighter uppercase text-black hover:text-black/70 transition-colors">
                     WDNG
                 </a>
 
-                <div class="hidden md:flex items-center gap-8 text-sm text-white/80 font-semibold">
-                    <a href="#" class="hover:text-white transition-colors">La Boda</a>
-                    <a href="#" class="hover:text-white transition-colors">Detalles</a>
+                <div class="hidden md:flex items-center gap-8 text-sm text-black/80 font-semibold">
+                    <a href="#" class="hover:text-black transition-colors">La Boda</a>
+                    <a href="#" class="hover:text-black transition-colors">Detalles</a>
                     <a href="#"
-                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-bold transition-colors bg-white text-[#f9bd97] hover:bg-white/90 h-9 px-4 py-2">RSVP</a>
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-bold transition-colors bg-black text-white hover:bg-neutral-800 h-9 px-4 py-2">RSVP</a>
                 </div>
 
                 <button id="menu-toggle-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"
-                    class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 text-white transition-colors cursor-pointer bg-transparent border-none">
+                    class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 text-black transition-colors cursor-pointer bg-transparent border-none">
                     <span
                         class="menu-bar menu-bar-top block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
                     <span
@@ -128,32 +128,32 @@
             <div id="mobile-menu"
                 class="absolute top-full left-0 right-0 mt-2 overflow-hidden transition-all duration-300 opacity-0 max-h-0 z-10 md:hidden pointer-events-none">
                 <div
-                    class="flex flex-col gap-1 px-2 py-3 bg-transparent rounded-xl pointer-events-auto">
+                    class="flex flex-col gap-1 px-2 py-3 bg-white border border-neutral-200 shadow-xl rounded-xl pointer-events-auto">
                     <a href="#"
-                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors">La
+                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-black/80 hover:text-black hover:bg-black/5 rounded-lg transition-colors">La
                         Boda</a>
                     <a href="#"
-                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors">Detalles</a>
-                    <div class="h-px bg-white/20 mx-4 my-1"></div>
+                        class="mobile-nav-link px-4 py-3 text-sm font-bold text-black/80 hover:text-black hover:bg-black/5 rounded-lg transition-colors">Detalles</a>
+                    <div class="h-px bg-black/10 mx-4 my-1"></div>
                     <a href="#"
-                        class="mobile-nav-link mx-2 my-1 inline-flex items-center justify-center rounded-md text-sm font-bold bg-white text-[#f9bd97] hover:bg-white/90 h-9 px-4 transition-colors">RSVP</a>
+                        class="mobile-nav-link mx-2 my-1 inline-flex items-center justify-center rounded-md text-sm font-bold bg-black text-white hover:bg-neutral-800 h-9 px-4 transition-colors">RSVP</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- SPACER INICIAL (Pantalla de Bienvenida) -->
-    <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6">
+    <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6 bg-white">
         <h1
-            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-white mb-6 max-w-5xl text-balance">
+            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-black mb-6 max-w-5xl text-balance">
             Tu boda merece una invitación que se sienta tan especial como el gran día.
         </h1>
-        <p class="font-elegant text-2xl md:text-3xl text-white/90 tracking-wide max-w-3xl text-balance mb-12">
+        <p class="font-elegant text-2xl md:text-3xl text-black/80 tracking-wide max-w-3xl text-balance mb-12">
             Hoy una invitación no solo informa.<br class="hidden md:block"> También emociona, organiza y presenta tu
             boda de una forma más elegante y memorable.
         </p>
         <span
-            class="info text-sm font-medium text-white/70 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
+            class="info text-sm font-medium text-black/60 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
             Descubre más
             <iconify-icon icon="solar:arrow-down-linear" class="text-lg animate-bounce absolute bottom-0"
                 style="stroke-width: 1.5;"></iconify-icon>
@@ -267,32 +267,32 @@
 
     <!-- FOOTER / FINAL SPACER -->
     <div
-        class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-[#f9bd97]">
-        <h2 class="font-elegant text-5xl md:text-7xl tracking-tight font-medium text-white mb-12">
+        class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-white">
+        <h2 class="font-elegant text-5xl md:text-7xl tracking-tight font-medium text-black mb-12">
             Contacto
         </h2>
 
-        <div class="flex flex-col gap-6 text-base md:text-xl font-light text-white/90">
+        <div class="flex flex-col gap-6 text-base md:text-xl font-light text-black/80">
             <div class="flex items-center justify-center gap-3">
-                <span class="font-medium text-white">Correo:</span>
+                <span class="font-medium text-black">Correo:</span>
                 <a href="mailto:hola@apex-creative.com.mx"
-                    class="hover:text-white/70 transition-colors duration-300 relative group">
+                    class="hover:text-black/60 transition-colors duration-300 relative group">
                     hola@apex-creative.com.mx
                     <span
-                        class="absolute left-0 -bottom-1 w-0 h-[1px] bg-white/70 transition-all duration-300 group-hover:w-full"></span>
+                        class="absolute left-0 -bottom-1 w-0 h-[1px] bg-black/60 transition-all duration-300 group-hover:w-full"></span>
                 </a>
             </div>
             <div class="flex items-center justify-center gap-3">
-                <span class="font-medium text-white">Teléfono:</span>
-                <a href="tel:9671905265" class="hover:text-white/70 transition-colors duration-300 relative group">
+                <span class="font-medium text-black">Teléfono:</span>
+                <a href="tel:9671905265" class="hover:text-black/60 transition-colors duration-300 relative group">
                     967 190 5265
                     <span
-                        class="absolute left-0 -bottom-1 w-0 h-[1px] bg-white/70 transition-all duration-300 group-hover:w-full"></span>
+                        class="absolute left-0 -bottom-1 w-0 h-[1px] bg-black/60 transition-all duration-300 group-hover:w-full"></span>
                 </a>
             </div>
         </div>
 
-        <div class="mt-32 text-xs tracking-wider text-white/50 uppercase font-medium">
+        <div class="mt-32 text-xs tracking-wider text-black/40 uppercase font-medium">
             © Apex Creative — Invitaciones Especiales
         </div>
     </div>
