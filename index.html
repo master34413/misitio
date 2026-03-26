@@ -99,12 +99,6 @@
         }
 
         /* ----- Animated Glass Cards (Qué hacemos) ----- */
-        @property --hue {
-            syntax: "<number>";
-            inherits: true;
-            initial-value: 0;
-        }
-
         @property --rotate {
             syntax: "<number>";
             inherits: true;
@@ -124,10 +118,11 @@
         }
 
         :root {
-            --card-color: #0a0a0a;
+            --card-color: #121212;
             --card-radius: 2rem;
             --border-width: 2px;
             --animation-speed: 4s;
+            --gold-color: #c19b6c;
         }
 
         .glass-card {
@@ -138,6 +133,7 @@
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.2s ease;
+            overflow: hidden;
         }
 
         .glass-card:active {
@@ -156,7 +152,7 @@
 
         .glass-card.is-clicked .glass-card-content {
             background: radial-gradient(circle at 90% 10%,
-                    rgba(26, 168, 137, 0.25) 0%,
+                    rgba(193, 155, 108, 0.25) 0%,
                     var(--card-color) 70%);
         }
 
@@ -168,13 +164,13 @@
             border-radius: var(--card-radius);
             padding: var(--border-width);
             background: radial-gradient(circle at calc(var(--bg-x) * 1%) calc(var(--bg-y) * 1%),
-                    hsl(calc(var(--hue) * 1deg), 100%, 70%),
+                    var(--gold-color),
                     transparent 40%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask-composite: exclude;
-            animation: rotate-bg var(--animation-speed) linear infinite, hue-animation var(--animation-speed) linear infinite;
+            animation: rotate-bg var(--animation-speed) linear infinite;
         }
 
         .glass-glow {
@@ -185,9 +181,9 @@
             left: 25%;
             z-index: 0;
             filter: blur(35px);
-            background: hsl(calc(var(--hue) * 1deg), 100%, 60%);
+            background: var(--gold-color);
             opacity: 0.3;
-            animation: rotate var(--animation-speed) linear infinite, hue-animation var(--animation-speed) linear infinite;
+            animation: rotate var(--animation-speed) linear infinite;
             transform-origin: center;
         }
 
@@ -222,16 +218,6 @@
 
             to {
                 transform: rotate(360deg) translateY(-60px);
-            }
-        }
-
-        @keyframes hue-animation {
-            0% {
-                --hue: 0;
-            }
-
-            100% {
-                --hue: 360;
             }
         }
     </style>
