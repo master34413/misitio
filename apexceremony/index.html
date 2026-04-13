@@ -143,22 +143,43 @@
         <!-- Shader de burbujas chamán -->
         <div id="hero-canvas-container" style="position:absolute;inset:0;z-index:0;"></div>
         <!-- Contenido sobre el shader -->
-        <div class="relative flex flex-col items-center" style="z-index:1;">
-        <h1
-            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-white mb-6 max-w-5xl text-balance"
-            style="text-shadow:0 2px 40px rgba(200,170,100,0.25);">
-            Tu boda merece una invitación que se sienta tan especial como el gran día.
-        </h1>
-        <p class="font-elegant text-2xl md:text-3xl text-white/80 tracking-wide max-w-3xl text-balance mb-12">
-            Hoy una invitación no solo informa.<br class="hidden md:block"> También emociona, organiza y presenta tu
-            boda de una forma más elegante y memorable.
-        </p>
-        <span
-            class="info text-sm font-medium text-white/50 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
-            Descubre más
-            <iconify-icon icon="solar:arrow-down-linear" class="text-lg animate-bounce absolute bottom-0"
-                style="stroke-width: 1.5;"></iconify-icon>
-        </span>
+        <div class="relative flex flex-col items-start max-w-5xl w-full px-4 md:px-0" style="z-index:1;">
+
+            <!-- Eyebrow label -->
+            <span class="font-ui text-xs tracking-[0.25em] uppercase text-white/40 mb-5 block">Apex Ceremony &mdash; Invitaciones Digitales</span>
+
+            <!-- Título principal con jerarquía mixta -->
+            <h1 class="font-ui font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-white mb-6"
+                style="letter-spacing:-0.02em;">
+                Tu boda merece<br>
+                una invitación
+                <em class="font-elegant not-italic"
+                    style="font-style:italic;font-weight:500;color:rgba(220,190,130,0.95);">
+                    &nbsp;tan especial
+                </em><br>
+                como el gran día.
+            </h1>
+
+            <!-- Subtítulo pequeño y sutil -->
+            <p class="font-ui text-base md:text-lg text-white/55 max-w-xl leading-relaxed mb-10"
+               style="font-weight:300;">
+                Hoy una invitación no solo informa.  También emociona,
+                organiza y presenta tu boda de una forma más elegante y memorable.
+            </p>
+
+            <!-- Botón único CTA -->
+            <a href="#contacto"
+               class="font-ui inline-flex items-center gap-3 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300"
+               style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:#fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);"
+               onmouseover="this.style.background='rgba(210,175,110,0.18)';this.style.borderColor='rgba(210,175,110,0.45)';"
+               onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.borderColor='rgba(255,255,255,0.18)';">
+                Solicitar información
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17 17 7M7 7h10v10"/>
+                </svg>
+            </a>
+
         </div>
     </div>
 
@@ -268,7 +289,7 @@
     </div>
 
     <!-- FOOTER / FINAL SPACER -->
-    <div class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-white">
+    <div id="contacto" class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-white">
         <h2 class="font-elegant text-5xl md:text-7xl tracking-tight font-medium text-black mb-12">
             Contacto
         </h2>
