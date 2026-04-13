@@ -47,18 +47,17 @@
         .txt {
             position: absolute;
             width: 100%;
+            height: 100%;                  /* altura fija para que clip-path funcione en móvil */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            /* La máscara inset(A B C D) recorta el div. Empezamos con el elemento recortado al 100% desde arriba para los que no son el primero */
-            clip-path: inset(100% 0 0 0);
-            transform: translateY(40px);
+            align-items: flex-start;       /* alineación izquierda */
+            justify-content: flex-end;     /* posición inferior */
+            padding: 2rem 1.5rem 6rem;     /* espacio respetando barra de progreso */
+            clip-path: inset(100% 0 0 0);  /* inicia oculto desde arriba */
         }
 
         .txt.first-txt {
-            /* El primero comienza visible */
-            clip-path: inset(0% 0% 0% 0%);
-            transform: translateY(0);
+            clip-path: inset(0% 0% 0% 0%); /* primer texto inicia visible */
         }
 
         /* Imágenes al 100% de claridad sin filtros adicionales */
@@ -253,44 +252,45 @@
                 </svg>
 
                 <!-- TEXTOS FLOTANTES SUPERPUESTOS -->
-                <div
-                    class="texts absolute inset-0 z-10 flex items-center justify-center p-6 text-center pointer-events-none text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+                <div class="texts absolute inset-0 z-10 pointer-events-none text-white">
 
                     <!-- Texto 1 (Capa 1) -->
                     <div class="txt first-txt">
-                        <h1
-                            class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight font-medium mb-4 md:mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1 class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-7xl tracking-tight font-medium mb-4 leading-tight text-white text-left max-w-xl md:max-w-3xl"
+                            style="text-shadow:0 2px 20px rgba(0,0,0,0.85);">
                             La primera impresión de tu boda comienza antes del evento.
                         </h1>
-                        <span
-                            class="font-elegant text-sm sm:text-xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white px-4 md:px-0">
-                            Antes de llegar a la ceremonia, tus invitados ya están formando una idea de lo que vivirán.
-                        </span>
+                        <div style="background:rgba(0,0,0,0.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:8px;padding:0.7rem 1rem;max-width:34rem;">
+                            <span class="font-elegant text-sm sm:text-base md:text-xl leading-relaxed text-white/90 text-left block">
+                                Antes de llegar a la ceremonia, tus invitados ya están formando una idea de lo que vivirán.
+                            </span>
+                        </div>
                     </div>
 
                     <!-- Texto 2 (Capa 2) -->
                     <div class="txt">
-                        <h1
-                            class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight font-medium mb-4 md:mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1 class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-7xl tracking-tight font-medium mb-4 leading-tight text-white text-left max-w-xl md:max-w-3xl"
+                            style="text-shadow:0 2px 20px rgba(0,0,0,0.85);">
                             Una invitación digital es el centro de información de tu boda.
                         </h1>
-                        <span
-                            class="font-elegant text-sm sm:text-xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white px-4 md:px-0">
-                            Una buena invitación digital no solo se ve bien.<br class="hidden md:block"> También hace
-                            que todo sea más claro, más práctico y más especial.
-                        </span>
+                        <div style="background:rgba(0,0,0,0.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:8px;padding:0.7rem 1rem;max-width:34rem;">
+                            <span class="font-elegant text-sm sm:text-base md:text-xl leading-relaxed text-white/90 text-left block">
+                                Una buena invitación digital no solo se ve bien. También hace que todo sea más claro, más práctico y más especial.
+                            </span>
+                        </div>
                     </div>
 
                     <!-- Texto 3 (Capa 3) -->
                     <div class="txt">
-                        <h1
-                            class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight font-medium mb-4 md:mb-6 leading-tight max-w-5xl text-balance text-white">
+                        <h1 class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-7xl tracking-tight font-medium mb-4 leading-tight text-white text-left max-w-xl md:max-w-3xl"
+                            style="text-shadow:0 2px 20px rgba(0,0,0,0.85);">
                             Su boda merece una presentación a la altura del momento.
                         </h1>
-                        <span
-                            class="font-elegant text-sm sm:text-xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white px-4 md:px-0">
-                            De esta forma, sus invitados tienen acceso a todo de manera clara, elegante y ordenada.
-                        </span>
+                        <div style="background:rgba(0,0,0,0.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:8px;padding:0.7rem 1rem;max-width:34rem;">
+                            <span class="font-elegant text-sm sm:text-base md:text-xl leading-relaxed text-white/90 text-left block">
+                                De esta forma, sus invitados tienen acceso a todo de manera clara, elegante y ordenada.
+                            </span>
+                        </div>
                     </div>
 
                 </div>
@@ -472,11 +472,11 @@
             );
         }
 
-        // Clip-path de entrada de Texto
+        // Clip-path de entrada de Texto (sin translateY para mayor compatibilidad móvil)
         function textIn(el) {
             return gsap.fromTo(el,
-                { clipPath: 'inset(100% 0% 0% 0%)', y: 40 },
-                { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: 1.5, ease: 'expo.out' }
+                { clipPath: 'inset(100% 0% 0% 0%)' },
+                { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.out' }
             );
         }
 
@@ -484,7 +484,6 @@
         function textOut(el) {
             return gsap.to(el, {
                 clipPath: 'inset(0% 0% 100% 0%)',
-                y: -30,
                 duration: 1.2,
                 ease: 'power2.inOut',
             });
@@ -502,7 +501,7 @@
                     trigger: '.scroll-container', // Nuestro Wrapper de 300vh
                     start: 'top top',
                     end: 'bottom bottom',
-                    scrub: 1.5, // Suavidad inter-scroll
+                    scrub: isMobileDevice ? 0.5 : 1.5, // Más rápido en móvil táctil
                     invalidateOnRefresh: true,
                 },
             });
@@ -552,6 +551,11 @@
         // 7. INICIALIZADOR Y LISTENER DE RESIZE
         updateLayout();
         initProgressBar();
+
+        // Normalizar scroll táctil en móvil para mejor respuesta con ScrollTrigger
+        if (isMobileDevice) {
+            ScrollTrigger.normalizeScroll(true);
+        }
 
         // Recalcular el lienzo tras un resize responsivo
         let resizeTimer;
