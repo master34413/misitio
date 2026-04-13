@@ -139,21 +139,27 @@
     </nav>
 
     <!-- SPACER INICIAL (Pantalla de Bienvenida) -->
-    <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6 bg-white">
+    <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden" style="background:#08070d;">
+        <!-- Shader de burbujas chamán -->
+        <div id="hero-canvas-container" style="position:absolute;inset:0;z-index:0;"></div>
+        <!-- Contenido sobre el shader -->
+        <div class="relative flex flex-col items-center" style="z-index:1;">
         <h1
-            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-black mb-6 max-w-5xl text-balance">
+            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium text-white mb-6 max-w-5xl text-balance"
+            style="text-shadow:0 2px 40px rgba(200,170,100,0.25);">
             Tu boda merece una invitación que se sienta tan especial como el gran día.
         </h1>
-        <p class="font-elegant text-2xl md:text-3xl text-black/80 tracking-wide max-w-3xl text-balance mb-12">
+        <p class="font-elegant text-2xl md:text-3xl text-white/80 tracking-wide max-w-3xl text-balance mb-12">
             Hoy una invitación no solo informa.<br class="hidden md:block"> También emociona, organiza y presenta tu
             boda de una forma más elegante y memorable.
         </p>
         <span
-            class="info text-sm font-medium text-black/60 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
+            class="info text-sm font-medium text-white/50 tracking-wide flex items-center gap-2 relative pb-8 uppercase">
             Descubre más
             <iconify-icon icon="solar:arrow-down-linear" class="text-lg animate-bounce absolute bottom-0"
                 style="stroke-width: 1.5;"></iconify-icon>
         </span>
+        </div>
     </div>
 
     <!-- ===== ESCENARIO PRINCIPAL CON SVG Y MASCARAS ===== -->
@@ -530,6 +536,191 @@
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         }, { passive: true });
 
+    </script>
+
+    <!-- Three.js Champagne Shader -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        // --- 1. CONFIGURACIÓN ---
+        const heroContainer = document.getElementById('hero-canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2('#08070d', 0.008);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
+        camera.position.set(0, 0, 45);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.inset = '0';
+        heroContainer.appendChild(renderer.domElement);
+
+        // --- 2. INTERACCIÓN ---
+        const mouse = new THREE.Vector2(0, 0);
+        const targetMouse = new THREE.Vector2(0, 0);
+        const windowHalf = new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+        window.addEventListener('mousemove', (e) => {
+            targetMouse.x = (e.clientX - windowHalf.x) / windowHalf.x;
+            targetMouse.y = -(e.clientY - windowHalf.y) / windowHalf.y;
+        });
+
+        // --- 3. GEOMETRÍA ---
+        const particleCount = 30000;
+        const positions = new Float32Array(particleCount * 3);
+        const scales    = new Float32Array(particleCount);
+        const randoms   = new Float32Array(particleCount);
+        const colors    = new Float32Array(particleCount * 3);
+
+        // Paleta chamán / oro elegante
+        const palette = [
+            new THREE.Color('#c9a96e'), // Oro chamán
+            new THREE.Color('#f5e6c8'), // Crema cálido
+            new THREE.Color('#e2c27d'), // Oro pálido
+            new THREE.Color('#b89060'), // Bronce suave
+            new THREE.Color('#fff8ec'), // Blanco cálido
+        ];
+
+        for (let i = 0; i < particleCount; i++) {
+            const i3 = i * 3;
+            positions[i3]     = (Math.random() - 0.5) * 120;
+            positions[i3 + 1] = (Math.random() - 0.5) * 100;
+            positions[i3 + 2] = (Math.random() - 0.5) * 80;
+            scales[i]   = Math.random();
+            randoms[i]  = Math.random();
+            const c = palette[Math.floor(Math.random() * palette.length)];
+            colors[i3] = c.r; colors[i3+1] = c.g; colors[i3+2] = c.b;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('aScale',   new THREE.BufferAttribute(scales, 1));
+        geometry.setAttribute('aRandom',  new THREE.BufferAttribute(randoms, 1));
+        geometry.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+
+        // --- 4. SHADER (Burbujas Chamán) ---
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime:  { value: 0.0 },
+                uMouse: { value: new THREE.Vector2(0, 0) }
+            },
+            vertexShader: `
+                uniform float uTime;
+                uniform vec2 uMouse;
+                attribute float aScale;
+                attribute float aRandom;
+                attribute vec3 color;
+                varying vec3 vColor;
+                varying float vAlpha;
+
+                void main() {
+                    vec3 pos = position;
+                    float t = uTime * 0.25;
+
+                    // Deriva fluida suave (ondas elegantes, no agresivas)
+                    pos.x += sin(pos.y * 0.04 + t) * 2.5 + cos(pos.z * 0.06 + t) * 1.5;
+                    pos.y += sin(pos.z * 0.04 + t) * 2.5 + cos(pos.x * 0.06 + t) * 1.5;
+                    pos.z += sin(pos.x * 0.04 + t) * 2.5 + cos(pos.y * 0.06 + t) * 1.5;
+
+                    // Bucle vertical infinito (burbujas subiendo)
+                    pos.y = mod(pos.y + (aRandom * uTime * 4.0) + 50.0, 100.0) - 50.0;
+
+                    // Vórtice elegante del mouse
+                    vec2 mappedMouse = vec2(uMouse.x * 55.0, uMouse.y * 45.0);
+                    vec2 dir = pos.xy - mappedMouse;
+                    float dist = length(dir);
+                    vec2 tangent = normalize(vec2(-dir.y, dir.x));
+                    float vortexForce = exp(-dist * 0.045) * 20.0;
+                    pos.xy += tangent * vortexForce;
+                    pos.z  += exp(-dist * 0.055) * 15.0;
+
+                    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+
+                    float reactiveSize = aScale * 22.0 + vortexForce * 1.2;
+                    gl_PointSize = reactiveSize * (1.0 / -mvPosition.z);
+                    gl_Position  = projectionMatrix * mvPosition;
+
+                    // Añade un destello dorado blanco al ser atrapada por el vórtice
+                    float champagneShine = clamp(vortexForce / 20.0, 0.0, 1.0);
+                    vColor = mix(color, vec3(1.0, 0.97, 0.88), champagneShine);
+
+                    float fadeZ = smoothstep(-40.0, 0.0, pos.z);
+                    vAlpha = fadeZ;
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vColor;
+                varying float vAlpha;
+
+                void main() {
+                    vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+                    float d = length(cxy);
+                    if (d > 1.0) discard;
+
+                    // Burbuja: núcleo brillante con corona difuminada
+                    float core  = exp(-d * 2.5);
+                    float halo  = exp(-d * 0.8) * 0.3;
+                    float alpha = (core + halo) * vAlpha;
+
+                    gl_FragColor = vec4(vColor, alpha);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // --- 5. BLOOM elegante ---
+        const composer = new EffectComposer(renderer);
+        composer.addPass(new RenderPass(scene, camera));
+        const bloom = new UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight),
+            1.8,  // strength
+            0.5,  // radius
+            0.1   // threshold
+        );
+        composer.addPass(bloom);
+
+        // --- 6. LOOP ---
+        const clock = new THREE.Clock();
+        (function animate() {
+            requestAnimationFrame(animate);
+            material.uniforms.uTime.value = clock.getElapsedTime();
+
+            mouse.x += (targetMouse.x - mouse.x) * 0.06;
+            mouse.y += (targetMouse.y - mouse.y) * 0.06;
+            material.uniforms.uMouse.value.set(mouse.x, mouse.y);
+
+            camera.position.x += (mouse.x * 8 - camera.position.x) * 0.02;
+            camera.position.y += (mouse.y * 8 - camera.position.y) * 0.02;
+            camera.lookAt(0, 0, 0);
+
+            composer.render();
+        })();
+
+        window.addEventListener('resize', () => {
+            windowHalf.set(window.innerWidth / 2, window.innerHeight / 2);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 
