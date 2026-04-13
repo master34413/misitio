@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        /* Futura (títulos) y Media Sans (cuerpo) se cargan como stack del sistema */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
 
         @font-face {
             font-family: 'Sprat';
@@ -32,14 +32,14 @@
             font-display: swap;
         }
 
-        /* Tipografía de UI (navbar, contacto) — Media Sans */
+        /* Tipografía elegante global — Playfair Display */
         .font-ui {
-            font-family: 'Media Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-style: italic;
         }
 
-        /* Tipografía de Títulos — Futura */
         .font-elegant {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', Georgia, serif;
             font-style: italic;
         }
 
@@ -100,7 +100,7 @@
 </head>
 
 <body class="bg-white text-black font-sans antialiased selection:bg-black/10 selection:text-black"
-    style="font-family: 'Media Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    style="font-family: 'Playfair Display', Georgia, serif; font-style: italic;">
     <!-- Navigation -->
     <nav class="font-ui fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md transition-transform duration-500 ease-in-out"
         style="transform: translateY(0);" id="main-nav">
