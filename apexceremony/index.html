@@ -419,6 +419,15 @@
 
             layers.forEach((svg) => {
                 svg.setAttribute('viewBox', `0 0 ${vbWidth} ${vbHeight}`);
+
+                // Actualizar también las dimensiones del <image> para cubrir el viewBox completo
+                // sin esto, en portrait móvil la imagen sólo cubre ~46% de la pantalla
+                const svgImg = svg.querySelector('image');
+                if (svgImg) {
+                    svgImg.setAttribute('width', vbWidth);
+                    svgImg.setAttribute('height', vbHeight);
+                }
+
                 // Si la capa tiene una máscara, ajustarla
                 const maskRect = svg.querySelector('mask rect');
                 if (maskRect) {
