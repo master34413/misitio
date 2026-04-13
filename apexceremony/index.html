@@ -1,9 +1,9 @@
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Moments</title>
+    <title>Apex Ceremony — Invitaciones Digitales</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -96,6 +96,32 @@
             background: currentColor;
             transition: transform 0.25s ease, opacity 0.2s ease;
         }
+
+        /* === OPTIMIZACIONES MÓVIL === */
+        html { scroll-behavior: smooth; }
+
+        /* Navbar adaptativa: oscura sobre hero/scroll, clara sobre contacto */
+        #main-nav {
+            --nav-txt: #ffffff;
+            --nav-bg: rgba(8, 6, 18, 0.45);
+            --nav-border: rgba(255, 255, 255, 0.1);
+        }
+        #main-nav.nav-light {
+            --nav-txt: #111111;
+            --nav-bg: rgba(255, 255, 255, 0.88);
+            --nav-border: rgba(0, 0, 0, 0.08);
+        }
+        .nav-pill {
+            background: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+        .nav-text-adaptive {
+            color: var(--nav-txt) !important;
+            transition: color 0.4s ease;
+        }
     </style>
 </head>
 
@@ -105,9 +131,9 @@
     <nav class="font-ui fixed top-6 inset-x-0 flex justify-center z-50 px-6 drop-shadow-md transition-transform duration-500 ease-in-out"
         style="transform: translateY(0);" id="main-nav">
         <div class="flex flex-col w-full max-w-4xl relative">
-            <div class="flex items-center justify-between px-5 py-3 bg-transparent rounded-xl w-full z-20 relative">
+            <div class="nav-pill flex items-center justify-between px-5 py-3 rounded-xl w-full z-20 relative">
                 <a href="#"
-                    class="flex items-center gap-2 text-base font-bold tracking-tighter uppercase text-black hover:text-black/70 transition-colors">
+                    class="flex items-center gap-2 text-sm md:text-base font-bold tracking-tighter uppercase nav-text-adaptive transition-colors">
                     Apex Ceremony
                 </a>
 
@@ -117,7 +143,7 @@
                 </div>
 
                 <button id="menu-toggle-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"
-                    class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 text-black transition-colors cursor-pointer bg-transparent border-none">
+                    class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 nav-text-adaptive transition-colors cursor-pointer bg-transparent border-none">
                     <span
                         class="menu-bar menu-bar-top block w-[18px] h-[2px] bg-current transition-transform rounded-full"></span>
                     <span
@@ -139,7 +165,7 @@
     </nav>
 
     <!-- SPACER INICIAL (Pantalla de Bienvenida) -->
-    <div class="spacer relative w-full h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden" style="background:#08070d;">
+    <div class="spacer relative w-full min-h-[100dvh] flex flex-col items-center justify-center text-center px-6 overflow-hidden" style="background:#08070d;">
         <!-- Shader de burbujas chamán -->
         <div id="hero-canvas-container" style="position:absolute;inset:0;z-index:0;"></div>
         <!-- Contenido sobre el shader -->
@@ -149,21 +175,20 @@
             <span class="font-ui text-xs tracking-[0.25em] uppercase text-white/40 mb-5 block">Apex Ceremony &mdash; Invitaciones Digitales</span>
 
             <!-- Título principal con jerarquía mixta -->
-            <h1 class="font-ui font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-white mb-6"
+            <h1 class="font-ui font-bold text-[clamp(1.75rem,8vw,6rem)] leading-[1.05] text-white mb-5 md:mb-6"
                 style="letter-spacing:-0.02em;">
-                Tu boda merece<br>
-                una invitación
-                <em class="font-elegant not-italic"
-                    style="font-style:italic;font-weight:500;color:rgba(220,190,130,0.95);">
-                    &nbsp;tan especial
-                </em><br>
+                Tu boda merece una invitación
+                <em class="font-elegant"
+                    style="font-style:italic;font-weight:500;color:rgba(220,190,130,0.95);display:block;">
+                    tan especial
+                </em>
                 como el gran día.
             </h1>
 
             <!-- Subtítulo pequeño y sutil -->
-            <p class="font-ui text-base md:text-lg text-white/55 max-w-2xl leading-relaxed mb-10 text-center"
+            <p class="font-ui text-sm sm:text-base md:text-lg text-white/55 max-w-2xl leading-relaxed mb-8 md:mb-10 text-center px-2"
                style="font-weight:300;">
-                Hoy una invitación no solo informa.  También emociona,
+                Hoy una invitación no solo informa. También emociona,
                 organiza y presenta tu boda de una forma más elegante y memorable.
             </p>
 
@@ -234,11 +259,11 @@
                     <!-- Texto 1 (Capa 1) -->
                     <div class="txt first-txt">
                         <h1
-                            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
+                            class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight font-medium mb-4 md:mb-6 leading-tight max-w-5xl text-balance text-white">
                             La primera impresión de tu boda comienza antes del evento.
                         </h1>
                         <span
-                            class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
+                            class="font-elegant text-sm sm:text-xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white px-4 md:px-0">
                             Antes de llegar a la ceremonia, tus invitados ya están formando una idea de lo que vivirán.
                         </span>
                     </div>
@@ -246,11 +271,11 @@
                     <!-- Texto 2 (Capa 2) -->
                     <div class="txt">
                         <h1
-                            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
+                            class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight font-medium mb-4 md:mb-6 leading-tight max-w-5xl text-balance text-white">
                             Una invitación digital es el centro de información de tu boda.
                         </h1>
                         <span
-                            class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
+                            class="font-elegant text-sm sm:text-xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white px-4 md:px-0">
                             Una buena invitación digital no solo se ve bien.<br class="hidden md:block"> También hace
                             que todo sea más claro, más práctico y más especial.
                         </span>
@@ -259,11 +284,11 @@
                     <!-- Texto 3 (Capa 3) -->
                     <div class="txt">
                         <h1
-                            class="font-elegant text-5xl md:text-7xl lg:text-8xl tracking-tight font-medium mb-6 leading-tight max-w-5xl text-balance text-white">
+                            class="font-elegant text-2xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight font-medium mb-4 md:mb-6 leading-tight max-w-5xl text-balance text-white">
                             Su boda merece una presentación a la altura del momento.
                         </h1>
                         <span
-                            class="font-elegant text-2xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white">
+                            class="font-elegant text-sm sm:text-xl md:text-3xl max-w-2xl leading-relaxed text-balance text-white px-4 md:px-0">
                             De esta forma, sus invitados tienen acceso a todo de manera clara, elegante y ordenada.
                         </span>
                     </div>
@@ -289,8 +314,8 @@
     </div>
 
     <!-- FOOTER / FINAL SPACER -->
-    <div id="contacto" class="spacer relative w-full h-screen flex flex-col justify-center items-center text-center px-6 bg-white">
-        <h2 class="font-elegant text-5xl md:text-7xl tracking-tight font-medium text-black mb-12">
+    <div id="contacto" class="spacer relative w-full min-h-[100dvh] flex flex-col justify-center items-center text-center px-8 py-20 bg-white">
+        <h2 class="font-elegant text-4xl sm:text-5xl md:text-7xl tracking-tight font-medium text-black mb-8 md:mb-12">
             Contacto
         </h2>
 
@@ -298,7 +323,7 @@
             <div class="flex items-center justify-center gap-3">
                 <span class="font-medium text-black">Correo:</span>
                 <a href="mailto:hola@apex-creative.com.mx"
-                    class="hover:text-black/60 transition-colors duration-300 relative group">
+                    class="hover:text-black/60 transition-colors duration-300 relative group break-all">
                     hola@apex-creative.com.mx
                     <span
                         class="absolute left-0 -bottom-1 w-0 h-[1px] bg-black/60 transition-all duration-300 group-hover:w-full"></span>
@@ -314,7 +339,7 @@
             </div>
         </div>
 
-        <div class="font-ui mt-32 text-xs tracking-wider text-black/40 uppercase font-medium">
+        <div class="font-ui mt-14 md:mt-28 text-xs tracking-wider text-black/40 uppercase font-medium">
             © Apex Creative — Invitaciones Especiales
         </div>
     </div>
@@ -324,7 +349,8 @@
         gsap.registerPlugin(ScrollTrigger);
 
         // 1. Número de franjas por imagen
-        const BLIND_COUNT = 30;
+        const isMobileDevice = window.innerWidth < 768 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        const BLIND_COUNT = isMobileDevice ? 15 : 30;
         const svgNS = 'http://www.w3.org/2000/svg';
 
         let blindsSets = [];
@@ -557,6 +583,16 @@
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         }, { passive: true });
 
+        // Navbar adaptativa: oscura en hero/scroll, clara en sección de contacto
+        const contactSection = document.getElementById('contacto');
+        const mainNav = document.getElementById('main-nav');
+        if (contactSection && mainNav) {
+            const navColorObserver = new IntersectionObserver((entries) => {
+                mainNav.classList.toggle('nav-light', entries[0].isIntersecting);
+            }, { threshold: 0.15 });
+            navColorObserver.observe(contactSection);
+        }
+
     </script>
 
     <!-- Three.js Champagne Shader -->
@@ -599,8 +635,16 @@
             targetMouse.y = -(e.clientY - windowHalf.y) / windowHalf.y;
         });
 
+        // Soporte táctil para el vórtice (móvil)
+        window.addEventListener('touchmove', (e) => {
+            const t = e.touches[0];
+            targetMouse.x = (t.clientX - windowHalf.x) / windowHalf.x;
+            targetMouse.y = -(t.clientY - windowHalf.y) / windowHalf.y;
+        }, { passive: true });
+
         // --- 3. GEOMETRÍA ---
-        const particleCount = 30000;
+        const isMobile = window.innerWidth < 768 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        const particleCount = isMobile ? 8000 : 30000;
         const positions = new Float32Array(particleCount * 3);
         const scales    = new Float32Array(particleCount);
         const randoms   = new Float32Array(particleCount);
@@ -707,16 +751,18 @@
         const particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
-        // --- 5. BLOOM elegante ---
+        // --- 5. BLOOM elegante (desactivado en móvil para mejor rendimiento) ---
         const composer = new EffectComposer(renderer);
         composer.addPass(new RenderPass(scene, camera));
-        const bloom = new UnrealBloomPass(
-            new THREE.Vector2(window.innerWidth, window.innerHeight),
-            1.8,  // strength
-            0.5,  // radius
-            0.1   // threshold
-        );
-        composer.addPass(bloom);
+        if (!isMobile) {
+            const bloom = new UnrealBloomPass(
+                new THREE.Vector2(window.innerWidth, window.innerHeight),
+                1.8,  // strength
+                0.5,  // radius
+                0.1   // threshold
+            );
+            composer.addPass(bloom);
+        }
 
         // --- 6. LOOP ---
         const clock = new THREE.Clock();
