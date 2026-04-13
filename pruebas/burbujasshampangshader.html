@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Efecto Espectacular - Vórtice de Partículas</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #020005;
+            /* Fondo ultra oscuro casi abisal */
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="canvas-container"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        // --- 1. CONFIGURACIÓN ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2('#020005', 0.01);
+
+        // Cámara un poco más alejada para ver la inmensidad
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
+        camera.position.set(0, 0, 45);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // --- 2. INTERACCIÓN ---
+        const mouse = new THREE.Vector2(0, 0);
+        const targetMouse = new THREE.Vector2(0, 0);
+        const windowHalf = new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+
+        window.addEventListener('mousemove', (event) => {
+            targetMouse.x = (event.clientX - windowHalf.x) / windowHalf.x;
+            targetMouse.y = -(event.clientY - windowHalf.y) / windowHalf.y;
+        });
+
+        // --- 3. GEOMETRÍA MASIVA ---
+        const particleCount = 35000; // Más densidad para el efecto de fluido
+        const positions = new Float32Array(particleCount * 3);
+        const scales = new Float32Array(particleCount);
+        const randoms = new Float32Array(particleCount);
+        const colors = new Float32Array(particleCount * 3);
+
+        // Paleta vibrante y contrastante (Neón + Oro + Cian)
+        const colorPalette = [
+            new THREE.Color('#ff0a54'), // Magenta Neón
+            new THREE.Color('#05d9e8'), // Cian Eléctrico
+            new THREE.Color('#ffb03a'), // Oro vivo
+            new THREE.Color('#7b2cbf')  // Púrpura profundo
+        ];
+
+        for (let i = 0; i < particleCount; i++) {
+            const i3 = i * 3;
+            // Distribuimos en un gran campo tridimensional
+            positions[i3] = (Math.random() - 0.5) * 120;
+            positions[i3 + 1] = (Math.random() - 0.5) * 100;
+            positions[i3 + 2] = (Math.random() - 0.5) * 80;
+
+            scales[i] = Math.random();
+            randoms[i] = Math.random();
+
+            const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+            colors[i3] = color.r;
+            colors[i3 + 1] = color.g;
+            colors[i3 + 2] = color.b;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
+        geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        // --- 4. SHADER AVANZADO (Magia Visual) ---
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime: { value: 0.0 },
+                uMouse: { value: new THREE.Vector2(0, 0) }
+            },
+            vertexShader: `
+                uniform float uTime;
+                uniform vec2 uMouse;
+                attribute float aScale;
+                attribute float aRandom;
+                attribute vec3 color;
+                varying vec3 vColor;
+                varying float vAlpha;
+
+                void main() {
+                    vec3 pos = position;
+                    float t = uTime * 0.3;
+
+                    // 1. DINÁMICA DE FLUIDOS (Humo Cósmico)
+                    // Usamos ondas trigonométricas complejas para simular turbulencia
+                    pos.x += sin(pos.y * 0.05 + t) * 3.0 + cos(pos.z * 0.08 + t) * 2.0;
+                    pos.y += sin(pos.z * 0.05 + t) * 3.0 + cos(pos.x * 0.08 + t) * 2.0;
+                    pos.z += sin(pos.x * 0.05 + t) * 3.0 + cos(pos.y * 0.08 + t) * 2.0;
+
+                    // Bucle infinito vertical
+                    pos.y = mod(pos.y + (aRandom * uTime * 5.0) + 50.0, 100.0) - 50.0;
+
+                    // 2. EFECTO TORNADO / VÓRTICE (Mouse)
+                    vec2 mappedMouse = vec2(uMouse.x * 60.0, uMouse.y * 50.0); 
+                    vec2 dir = pos.xy - mappedMouse;
+                    float dist = length(dir);
+                    
+                    // Vector tangente (Perpendicular a la dirección) para hacerlas girar
+                    vec2 tangent = normalize(vec2(-dir.y, dir.x));
+                    
+                    // Fuerza gravitacional: Fuerte en el centro, se disipa suavemente
+                    float vortexForce = exp(-dist * 0.04) * 25.0; 
+                    
+                    // Aplicamos el giro y la atracción hacia la pantalla
+                    pos.xy += tangent * vortexForce;
+                    pos.z += exp(-dist * 0.05) * 20.0; // Saltan hacia la cámara
+
+                    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                    
+                    // 3. TAMAÑO Y COLOR REACTIVO
+                    // Las partículas se agrandan y se vuelven blancas al ser arrastradas por el vórtice
+                    float reactiveSize = aScale * 25.0 + (vortexForce * 1.5);
+                    gl_PointSize = reactiveSize * (1.0 / -mvPosition.z);
+                    gl_Position = projectionMatrix * mvPosition;
+
+                    // Mezclamos el color base con blanco puro basado en la fuerza del vórtice
+                    vColor = mix(color, vec3(1.0, 1.0, 1.0), clamp(vortexForce / 25.0, 0.0, 1.0));
+
+                    // 4. FADE (Profundidad)
+                    float fadeZ = smoothstep(-40.0, 0.0, pos.z); 
+                    vAlpha = fadeZ;
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vColor;
+                varying float vAlpha;
+
+                void main() {
+                    vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+                    float distanceToCenter = length(cxy);
+                    
+                    if (distanceToCenter > 1.0) discard;
+
+                    // Núcleo brillante con borde muy difuminado (Efecto Halo/Glow)
+                    float alpha = exp(-distanceToCenter * 3.0) * vAlpha; 
+
+                    gl_FragColor = vec4(vColor, alpha);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending, // Clave para que los colores brillen como luz real
+            depthWrite: false
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // --- 5. POST-PROCESAMIENTO (Overdrive de Bloom) ---
+        const composer = new EffectComposer(renderer);
+        const renderPass = new RenderPass(scene, camera);
+        composer.addPass(renderPass);
+
+        // Bloom muy alto para crear ese efecto cinematográfico/Cyberpunk
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 2.8, 0.3, 0.05);
+        composer.addPass(bloomPass);
+
+        // --- 6. ANIMACIÓN ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            material.uniforms.uTime.value = clock.getElapsedTime();
+
+            // Inercia súper suave para el ratón (se siente "pesado" y elegante)
+            mouse.x += (targetMouse.x - mouse.x) * 0.08;
+            mouse.y += (targetMouse.y - mouse.y) * 0.08;
+            material.uniforms.uMouse.value.set(mouse.x, mouse.y);
+
+            // La cámara hace un barrido dramático con el ratón
+            camera.position.x += (mouse.x * 10 - camera.position.x) * 0.02;
+            camera.position.y += (mouse.y * 10 - camera.position.y) * 0.02;
+            camera.lookAt(0, 0, 0);
+
+            composer.render();
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            windowHalf.set(window.innerWidth / 2, window.innerHeight / 2);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+
+</html>
