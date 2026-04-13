@@ -211,7 +211,7 @@
     <!-- Ajustamos la altura a 300vh para permitir un scroll largo a través de las "fases" -->
     <div class="scroll-container h-[300vh] relative w-full">
         <!-- Contenedor Sticky -->
-        <section class="stage sticky top-0 w-full h-screen overflow-hidden bg-[#0a0a0a]">
+        <section class="stage sticky top-0 w-full h-[100dvh] overflow-hidden bg-[#0a0a0a]">
 
             <div class="layers absolute inset-0 w-full h-full">
 
@@ -347,6 +347,12 @@
     <!-- ====== SCRIPT GSAP: MAGIA DEL SCROLL ====== -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
+
+        // Configuración optimizada para móvil
+        ScrollTrigger.config({
+            limitCallbacks: true,     // Evita callbacks redundantes en scroll rápido
+            ignoreMobileResize: true  // Ignora el resize por barra de dirección de iOS
+        });
 
         // 1. Número de franjas por imagen
         const isMobileDevice = window.innerWidth < 768 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
@@ -501,7 +507,7 @@
                     trigger: '.scroll-container', // Nuestro Wrapper de 300vh
                     start: 'top top',
                     end: 'bottom bottom',
-                    scrub: isMobileDevice ? 0.5 : 1.5, // Más rápido en móvil táctil
+                    scrub: isMobileDevice ? true : 1.5, // true = instant sync en móvil (ideal con momentum scroll)
                     invalidateOnRefresh: true,
                 },
             });
@@ -552,10 +558,8 @@
         updateLayout();
         initProgressBar();
 
-        // Normalizar scroll táctil en móvil para mejor respuesta con ScrollTrigger
-        if (isMobileDevice) {
-            ScrollTrigger.normalizeScroll(true);
-        }
+        // Refresh tras carga completa (fuentes, imágenes) para posiciones correctas
+        window.addEventListener('load', () => setTimeout(() => ScrollTrigger.refresh(), 200));
 
         // Recalcular el lienzo tras un resize responsivo
         let resizeTimer;
@@ -566,20 +570,20 @@
             }, 250);
         });
 
-        // Lógica para el menú móvil
-        document.addEventListener("DOMContentLoaded", () => {
-            const btn = document.getElementById('menu-toggle-btn');
-            const menu = document.getElementById('mobile-menu');
-            if (btn && menu) {
-                function openMenu() { menu.classList.add('open'); menu.classList.remove('pointer-events-none'); btn.setAttribute('aria-expanded', 'true'); }
-                function closeMenu() { menu.classList.remove('open'); menu.classList.add('pointer-events-none'); btn.setAttribute('aria-expanded', 'false'); }
-                function toggleMenu() { menu.classList.contains('open') ? closeMenu() : openMenu(); }
-                btn.addEventListener('click', e => { e.stopPropagation(); toggleMenu(); });
-                menu.querySelectorAll('.mobile-nav-link').forEach(link => { link.addEventListener('click', closeMenu); });
-                document.addEventListener('click', e => { if (!document.getElementById('main-nav')?.contains(e.target)) closeMenu(); });
-                document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+        // Lógica para el menú móvil (script está en body = DOM ya disponible)
+        {
+            const menuToggleBtn = document.getElementById('menu-toggle-btn');
+            const mobileMenuEl  = document.getElementById('mobile-menu');
+            if (menuToggleBtn && mobileMenuEl) {
+                const openMobileMenu  = () => { mobileMenuEl.classList.add('open'); mobileMenuEl.classList.remove('pointer-events-none'); menuToggleBtn.setAttribute('aria-expanded', 'true'); };
+                const closeMobileMenu = () => { mobileMenuEl.classList.remove('open'); mobileMenuEl.classList.add('pointer-events-none'); menuToggleBtn.setAttribute('aria-expanded', 'false'); };
+                const toggleMobileMenu = () => mobileMenuEl.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
+                menuToggleBtn.addEventListener('click', e => { e.stopPropagation(); toggleMobileMenu(); });
+                mobileMenuEl.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', closeMobileMenu));
+                document.addEventListener('click', e => { if (!document.getElementById('main-nav')?.contains(e.target)) closeMobileMenu(); });
+                document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
             }
-        });
+        }
 
         // Ocultar Navbar al hacer scroll hacia abajo
         let lastScrollTop = 0;
@@ -777,10 +781,12 @@
             composer.addPass(bloom);
         }
 
-        // --- 6. LOOP ---
+        // --- 6. LOOP con pausa automática al salir del viewport ---
         const clock = new THREE.Clock();
-        (function animate() {
-            requestAnimationFrame(animate);
+        let rafId = null;
+
+        function animate() {
+            rafId = requestAnimationFrame(animate);
             material.uniforms.uTime.value = clock.getElapsedTime();
 
             mouse.x += (targetMouse.x - mouse.x) * 0.06;
@@ -792,7 +798,19 @@
             camera.lookAt(0, 0, 0);
 
             composer.render();
-        })();
+        }
+
+        animate();
+
+        // Pausar el loop cuando el hero no es visible (ahorra GPU/batería en móvil)
+        new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                if (!rafId) animate();
+            } else {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+        }, { threshold: 0 }).observe(heroContainer);
 
         window.addEventListener('resize', () => {
             windowHalf.set(window.innerWidth / 2, window.innerHeight / 2);
