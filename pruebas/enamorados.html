@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Partículas Enamorados</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #030303;
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+        // Importamos el cargador de SVG
+        import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+
+        // --- 1. CONFIGURACIÓN DE LA ESCENA ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2('#030303', 0.035);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 0, 25); // Cámara mirando de frente
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // --- 2. INTERACCIÓN DEL MOUSE ---
+        const mouse = new THREE.Vector2(0, 0);
+        const targetMouse = new THREE.Vector2(0, 0);
+        const windowHalf = new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+
+        window.addEventListener('mousemove', (event) => {
+            targetMouse.x = (event.clientX - windowHalf.x) / windowHalf.x;
+            targetMouse.y = -(event.clientY - windowHalf.y) / windowHalf.y; // Invertimos Y para que coincida con WebGL
+        });
+
+        // --- 3. PROCESAMIENTO DEL SVG ---
+        // Tu código SVG tal cual
+        const svgString = `<?xml version="1.0" encoding="UTF-8"?>
+        <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.95 216.87">
+          <g id="Capa_1-2" data-name="Capa 1"><g><path d="M46.53,138.5c.17,1.5.22,3,.19,4.51-.14,6.65-1.02,13.37-1.3,20.03-.23,5.49-.05,11.06.18,16.57.11,2.64,1.17,10.22.47,12.23-.15.44-.67.75-.65,1.28.79.34,2.22.73,2.76,1.38s.47,2,1.02,2.85c.35.55,1.64,1.47,2.23,1.81,2.37,1.38,4.92,1.59,7.59,1.89-.27,1.24-1.15,5.22-2.25,5.74-1.33.61-5.47.61-7.01.48-2.57-.21-6.59-1.9-8.67-1.83-.2,0-.44,0-.56.19.24,1.91-1.41,1.92-2.93,2.03-1.55.12-5.96.2-7.26-.28-1-.37-1.02-.78-1.04-1.81-.01-.87.04-2.65.13-3.5s.7-2.3.72-2.99c.02-.52-.59-.96-.54-1.79s.89-2.27.9-2.78c0-.34-.58-1.26-.67-1.89-.35-2.38.67-4.22.87-6.39.53-5.95-1.54-13.51-1.83-19.68-.16-3.36.42-7.66-.02-10.83-.19-1.41-1.63-2.84-1.64-4.43-.01-1.91.97-5.61,1.26-7.75.85-6.14,1.57-12.3,2.76-18.39l-.16-.62c-2.5,10.06-3.28,20.45-5.61,30.53-.96,4.14-2.84,8.94-2.68,13.16.21,5.49,1.25,12.06,1.87,17.63.23,2.09,1.26,5.91.48,7.7-.27.62-1.64,2.04-1.53,2.55.09.43,1.17,1.27,1.35,2.14s-.13,1.64-.11,2.36c.02.52.44,1.11.51,1.67s-.18,1.19-.09,1.55c.14.57,2,3.69,2.45,4.36,1.13,1.67,4.24,4.49,3.9,6.57-.23,1.42-3.91,2.05-5.06,2.12-2.48.16-8.75-.85-10.74-2.31-1.15-.84-1.29-1.95-2.04-2.93-.62-.81-2.43-1.62-2.71-2.44s-.09-1.94-.23-2.71c-.08-.42-.51-.67-.54-1.12-.05-.66.67-1.57.73-2.38.08-.95-.34-1.64-.35-2.41s.48-1.57.34-2.36c-.09-.54-.98-1.67-1.2-2.49-.27-1.01-.15-2.05-.31-3-.12-.68-.57-1.37-.75-2.01-1-3.75-.23-11.37-.14-15.51.14-6.06-.04-12.55.77-18.55.3-2.28,1.84-7.08,1.41-9-.12-.53-.83-1.48-1.07-2.24-1.54-4.93,0-10.71.18-15.64.07-1.77-.46-4.22-.79-6.01-1.01-5.5-2.82-10.81-4.15-16.22-.82-.01-1.94-.86-2.57-.94-.48-.07-2.22.65-2.42.46,0-.4-.03-.8,0-1.19.92-11.82,3.97-24.25,4.6-36.04.15-2.84-.5-8.28-.95-11.21-.24-1.59-1.13-2.95-1.26-4.44s.3-2.79.16-4.2-.96-2.91-1.09-4.43c-.25-3.02,1.6-10.4,3.1-13.1,3.32-5.97,8.62-5.53,12.16-9.72.61-.72,1.87-3.08,2.57-3.32.57-.19.9.1,1.38-.46.94-1.1,1.64-7.84,2.26-9.88C25.26,1.38,31.33-1.99,38.99,1.19c1.39.58,5.88,3.49,6.54,4.68,1.14,2.07-.22,2.85-.45,4.53-.2,1.43-.24,3.4-.38,4.95-.11,1.2.41,2.72-.64,3.59-.35.29-.93.39-1.15.6-.87.84-.08,3.9-.59,5.2-.58,1.48-1.83.43-2.23.71-.29.33-.24.87-.46,1.21-.19.29-.57.33-.62.4-.1.17.19.51-.04.95-.27.52-.95.68-1.28,1.31-.52.99-.37,2.46-2.01,2.49.5,2.01,2.45,3.17,3.67,4.69,3.89,4.85,4.93,17.44,4.61,23.55-.17,3.26-1.07,3.35-2.12,5.98-1.72,4.3-.22,4.84.59,8.59.14.63.5,3.51.42,4-.04.22-.1.33-.28.46-1.3-.89-2.53-1.91-3.86-2.76-1.59-1.03-3.59-1.9-5.05-3.05-2.59-2.05-3.47-4.4-6.69-6.36-.38-.23-1.34-.55-1.55-.75-.36-.35.09-1.1.12-1.54.14-1.94-1.09-4-1.27-5.96-.34-.03-.18.6-.16.8.13,1.37.85,3.23.88,4.46.01.72-.58,1.54-.54,2,.05.56,3.14,2.15,3.87,2.76,1.66,1.4,2.81,3.51,4.51,4.87,1.54,1.24,3.63,2.19,5.29,3.35,2.91,2.03,5.61,4.37,8.58,6.32.23.14.17.25.11.46-.14.53-2.44,4.86-2.78,5.15-.57.48-2.23.17-2.86-.27-2.51-1.77-2.82-3.91-4.33-6.15-1.19-1.77-3.18-3.02-2.83.26.21,1.97,3.45,6.21-.78,5.56-2.08-.32-6.55-3.83-8.39-5.21-4.63-3.47-10.21-7.34-12.86-12.52-1.79-3.49-3.24-7.28-4.72-10.92-.05-.13-.08-.57-.27-.28,1.58,4.35,2.81,9.6,5.19,13.57,2.47,4.13,8.53,8.09,12.52,10.84.76.53,2.69,1.49,3.17,1.97s1.07,3.04,1.7,4c.79,1.18,1.83,1.29,2.93,2.04,2.5,1.71,4.5,2.6,6.91,4.12.45.28.72.78,1.16,1.05.71.43,1.84.64,2.61.97-.34,4.69-1.09,9.36-1.44,14.05-.64,8.4-.63,16.77-2.59,25.02l.12.47c.28.19,3.16,1.08,3.48,1.08h3.77ZM13.43,109.07c2.69.28,5.34.92,8.02,1.26,2.87.37,6.77,1.01,9.49-.02,3.68-1.39,5.36-6.75,6.2-10.26l-1.92,4.23c-3.75,7.13-8.06,5.97-15.26,5.33-1.81-.16-3.74-.6-5.52-.73-.22-.02-1.01-.15-1.01.18Z"/><g><path d="M39.54,95.09c-1.12-.7-2.51-1.16-3.62-1.8-1.24-.72-2.19-1.73-3.38-2.51-.6-.4-1.27-.47-1.92-1.03-1.01-.88-1.28-2.27-1.93-3.4.14-.28.33,0,.47.09,1.21.73,5.77,3.97,6.62,1.3.37-1.17-2.46-6.54-1.11-6.82,1.48-.3,2.95,4.68,3.5,5.51.51.78,2.51,1.84,2.64,2.72-.16.67-.7,1.17-.99,1.89-.55,1.38-.57,2.59-.28,4.04Z"/><g><path d="M64.31,94.95c.27.28.25.79.06,1.12-.72,1.09-5.24-.29-6.45-.43l3.51,1.73.09.85c-.49.71-3.41-.19-4.19-.43-1.77-.55-3.41-1.59-5.29-1.79-.04-.26.33-.27.51-.31,1.78-.44,3.71-.55,5.6-1.03.62-.16,1.86-.77,2.28-.81s3.59.8,3.88,1.1Z"/><path d="M56.09,83.13c.09.43-.05.3-.24.41-2.02,1.29-5.11,2.83-7.3,3.91-.54.27-3.29,1.66-3.68,1.37l2.57-4.69c3-.12,5.54-1.47,8.64-1.01Z"/><path d="M84.95,68.88c-.46,1.11-1.37,1.62-2.58,1.29-.59-.16-.89-.74-1.46-.83-.39,1.69,1.61,2.25.93,3.97-.18.44-.74.78-.74,1.27,0,.72,1.29,1.83.72,2.85-.59.07-.28-.67-.73-1.2-.11-.13-1.07-.84-1.19-.82-1.2,1.7,1.77,2.89.43,4.66-.6.8-1.79.76-2.54,1.33-.38.28-.41.64-.74.82-.41-1.88,3.49-2.07,1.74-3.86-.34.31-.41.76-.73,1.11-.47.52-1.58.95-1.91,1.57-.87,1.63,2.58,4.47-.3,5.96-.05-.83.62-1,.26-1.91-.45-1.14-1.58-1.17-2.29-1.95-1.17-1.27-.43-3.8-.64-5.43l-1.28-8.92.56,7.26c.1,3.18.14,8.7-1.7,11.38-1.72,2.5-9.74,5.72-12.76,6.54-3.77,1.03-7.86,1.09-11.47,2.32-.52.17-.8.57-1.38.65-.8.11-4.26-.67-4.7-1.24-1.17-1.51-.56-4.96.91-6.22,4.14,1.09,8.25-1.78,11.72-3.74,2.75-1.55,5.45-3.26,8.13-4.93l-3.65-10.36,2.71,9.51-.04.79-2.99,1.81c-1.22-.08-2.41-.41-3.64-.34-1.36.08-4.68,1.43-5.6,1l-4.39-3.52c-.1-1.69.1-3.41-.26-5.07-.33-1.53-1.29-2.75-1.43-4.45-.32-3.97,3.08-8.69,6.09-11.03,3-2.34,7.24-2.93,8.2-7.06.44-1.87-.07-5.69-1.4-7.13-1.07-1.15-4.65-2.06-4.94-3.34-.3-1.35.6-1.54.7-2.37.06-.5-.23-.91-.11-1.38.08-.34.44-.33.47-.48.07-.31-.06-.68.04-1.03.1-.36.71-.55.71-.96,0-.55-1.12-.7-.93-1.83.17-1.04,3.42-1.68,4.06-2.57.29-.4.24-1.33.5-1.89.34-.74,2.66-3.38,3.34-4.01,2.97-2.76,10.62-2.29,14.04-.42,7.63,4.18,6.48,10.99,8.49,18.18.71,2.52,2.56,3.99,2.07,6.85-.11.68-.69,1.34-.69,2.06-.02,2.04.98,3.31,1.38,4.87.51,1.94-.81,2.42-.83,3.04-.01.56,1.16,1.41,1.25,2.25.09.89-.88,1.55-.88,1.99s1.11,1.09,1.12,2.39c0,1.57-1.2,1.46-1.3,2.85l1.65-.28Z"/><path d="M69.14,89.94c.43,4.17,3.56,6.64,5.59,9.95,2.94,4.8,4.6,11.21,6.16,16.64.85,2.95,2.46,7.68,2.91,10.52.38,2.41-1.71,1.87-3.27,2.71l-.55,2.39c-1.04.58-2.15-.13-3.29.11l-.51,1.46c-1.28.31-2.67-.6-3.81-.55-1.31.06-3.13,1.21-4.56,1.52-1.18.26-2.23.18-3.33.35-1.97.31-3.9,1.42-5.93,1.61-1.8.16-3.14-.26-4.78-.36-2.5-.16-5.85,1.05-8.48,1.26-1.89.15-3.48-.13-5.19-.92.24-2.76,1.04-5.45,1.42-8.18.77-5.59.71-11.27,1.13-16.89.35-4.58,1.1-9.13,1.28-13.71,1.44.3,2.41-.67,3.64-1.05,4.52-1.42,7.33,1.17,11.4,2.1,1.79.41,4.13.54,2.98-1.97,1.75.17,3.89-.04,2.89-2.34l-2.7-1.15,6.98-3.5Z"/></g><g><path d="M65.56,196.8c.47-.12-.06-1.12-.11-1.45-1.54.15-3.61.44-4.72-.87.02-.3.15-.58.15-.89.06-9.28-1.35-21.13-3-30.3-.75-4.17-2.77-7.02-4.04-10.85-1.54-4.61-2.25-9.77-3.44-14.49,2.75-1.12,5.33.05,8.16-.21,1.68-.15,3.11-.85,4.67-1.21,2.2-.51,4.56-.39,6.57-1.53.69-.01.48,2.3.45,2.85-.28,4.76-1.98,9.41-1.65,14.35.27,4.14,2.42,7.21,3.44,11.09,2.41,9.2-1.47,18.96-1.61,28.28,1.14,2.63,4.03,4.91,4.74,7.77.64,2.59-.35,7.05-.5,9.88-.05,1,.2,4.63-.17,5.16-.53.76-2.69.79-3.22-.3-.72-1.49-.12-5.56-.56-7.35-1.01,1.14-2.02,2.32-2.82,3.62-1.3,2.1-2.02,5.19-4.63,6.04-2.23.72-10.43-.22-12.91-.88-.95-.25-2.17-.57-1.77-1.84.35-1.11,6.43-3.11,7.63-3.78l.24.06c2.06,2.75,6.42,1.83,8.54-.46,2.37-2.56,2.48-6.28,3.75-9.31,1.14-2.72,3.58-3.86,1.91-7.18-.3-.59-.93.45-1.34.76-.38.29-.78.58-1.27.67l.37,1.46,2.2-1.1c.26,1.98-1.54,3.24-2.29,4.97-1.65,3.79-1.58,9.63-6.49,10.98-1.1.3-4.84.45-5-1.15-.06-.63,1.95-5.2,2.3-6.34.69-2.28,1.1-4.65,1.57-6.99.19-.13,1.15.55,1.38.55h3.49ZM67.47,194.98c-.21-.14-1.05.11-1.19.35l.12,1.09,1.25-.19-.18-1.25Z"/><path d="M60.32,189.81l-3.58-16.92c-1.42-4.87-2.24-10.09-3.64-14.94-1.05-3.65-3.24-6.47-4.05-10.11-.51-2.28-1.13-6.59-1.23-8.9,0-.21-.12-.55.12-.64l1.64-.31.23.25c1.37,5.59,2.03,11.59,4.23,16.93.66,1.61,1.63,3.13,2.19,4.79,1.07,3.13,1.5,7.16,2.04,10.47,1.03,6.42,1.94,12.86,2.05,19.37Z"/></g></g></g>
+        </svg>`;
+
+        // Usamos el SVGLoader para leer los trazados
+        const loader = new SVGLoader();
+        const svgData = loader.parse(svgString);
+        let allPathPoints = [];
+
+        // Extraemos todos los puntos de todas las líneas del SVG
+        for (const path of svgData.paths) {
+            const shapes = SVGLoader.createShapes(path);
+            for (const shape of shapes) {
+                // Obtenemos muchos puntos a lo largo de cada trazado
+                const points = shape.getSpacedPoints(400);
+                allPathPoints = allPathPoints.concat(points);
+            }
+        }
+
+        // --- 4. GEOMETRÍA DE PARTÍCULAS ---
+        const particleCount = 45000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const scales = new Float32Array(particleCount);
+
+        // Variables para centrar y escalar el SVG en la pantalla
+        const scaleMultiplier = 0.12;
+        const offsetX = 42.5; // Aproximadamente el centro X del SVG
+        const offsetY = 108.4; // Aproximadamente el centro Y del SVG
+
+        for (let i = 0; i < particleCount; i++) {
+            const i3 = i * 3;
+            // Escogemos un punto base aleatorio del trazado del SVG
+            const basePoint = allPathPoints[Math.floor(Math.random() * allPathPoints.length)];
+
+            // Añadimos un poco de "ruido" o dispersión para darle grosor y volumen a las líneas
+            const scatterX = (Math.random() - 0.5) * 0.5;
+            const scatterY = (Math.random() - 0.5) * 0.5;
+            const scatterZ = (Math.random() - 0.5) * 2.0; // Dispersión en profundidad
+
+            positions[i3] = (basePoint.x - offsetX) * scaleMultiplier + scatterX;
+            // Invertimos la Y porque en SVG crece hacia abajo, pero en WebGL crece hacia arriba
+            positions[i3 + 1] = -(basePoint.y - offsetY) * scaleMultiplier + scatterY;
+            positions[i3 + 2] = scatterZ;
+
+            scales[i] = Math.random();
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
+
+        // --- 5. SHADERS (Con Reacción en el Eje Z) ---
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime: { value: 0.0 },
+                uColor: { value: new THREE.Color('#ff2a6d') }, // Un color más romántico (rosa/rojo neón)
+                uMouse: { value: new THREE.Vector2(0, 0) }
+            },
+            vertexShader: `
+                uniform float uTime;
+                uniform vec2 uMouse;
+                attribute float aScale;
+                varying float vElevation;
+
+                void main() {
+                    vec3 pos = position;
+
+                    // Olas base: Ahora distorsionamos la Z (profundidad) en lugar de Y
+                    // para no romper la forma del dibujo frontal
+                    float elevation = sin(pos.x * 2.0 + uTime * 1.5) * 0.2;
+                    elevation += cos(pos.y * 2.0 + uTime * 1.5) * 0.2;
+
+                    // --- EFECTO MÁGICO DEL MOUSE ---
+                    // Mapeamos el mouse a la escala del dibujo
+                    vec2 mappedMouse = vec2(uMouse.x * 15.0, uMouse.y * 15.0); 
+                    float mouseDistance = distance(pos.xy, mappedMouse);
+                    
+                    // Las partículas "saltan" hacia la cámara cuando pasa el mouse
+                    float magicLift = exp(-mouseDistance * 0.8) * 4.0; 
+                    
+                    pos.z += elevation + magicLift; 
+                    vElevation = elevation + magicLift; 
+
+                    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                    
+                    // Tamaño ajustado para que se defina mejor el dibujo
+                    gl_PointSize = 18.0 * aScale * (1.0 / -mvPosition.z); 
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 uColor;
+                varying float vElevation;
+
+                void main() {
+                    vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+                    float distanceToCenter = length(cxy);
+                    
+                    if (distanceToCenter > 1.0) discard;
+
+                    float alpha = 1.0 - distanceToCenter;
+                    alpha = pow(alpha, 1.8); 
+
+                    // Las partículas se iluminan intensamente de blanco al saltar
+                    float intensity = 0.4 + (vElevation * 0.4);
+                    vec3 finalColor = mix(uColor, vec3(1.0, 1.0, 1.0), vElevation * 0.2);
+
+                    gl_FragColor = vec4(finalColor * intensity, alpha * 0.9);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // --- 6. POST-PROCESAMIENTO (Bloom) ---
+        const composer = new EffectComposer(renderer);
+        const renderPass = new RenderPass(scene, camera);
+        composer.addPass(renderPass);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 2.2, 0.4, 0.1);
+        composer.addPass(bloomPass);
+
+        // --- 7. ANIMACIÓN ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = clock.getElapsedTime();
+            material.uniforms.uTime.value = elapsedTime;
+
+            // Interpolación fluida del mouse
+            mouse.x += (targetMouse.x - mouse.x) * 0.08;
+            mouse.y += (targetMouse.y - mouse.y) * 0.08;
+
+            material.uniforms.uMouse.value.set(mouse.x, mouse.y);
+
+            // Efecto Parallax en la cámara
+            camera.position.x += (mouse.x * 2 - camera.position.x) * 0.02;
+            camera.position.y += (mouse.y * 2 - camera.position.y) * 0.02;
+            camera.lookAt(0, 0, 0);
+
+            composer.render();
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            windowHalf.set(window.innerWidth / 2, window.innerHeight / 2);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+
+</html>
