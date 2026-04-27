@@ -1139,12 +1139,18 @@
             // 3. Posicionar la estrella en el logo antes de hacer scroll
             function resetStarPosition() {
                 if (!logoOriginal) return;
-                const startPos = getAbsoluteCoords(logoOriginal);
+                
+                // Como el nav principal tiene position: fixed, su distancia superior 
+                // respecto a la ventana SIEMPRE es la misma, incluso si hacemos scroll.
+                // Por lo tanto, no usamos getAbsoluteCoords (que suma el scrollY), 
+                // sino que extraemos directamente el rectangulo visual original.
+                const rect = logoOriginal.getBoundingClientRect();
+                
                 gsap.set("#floating-star", {
-                    x: startPos.x,
-                    y: startPos.y,
-                    width: startPos.width,
-                    height: startPos.height
+                    x: rect.left,
+                    y: rect.top,
+                    width: rect.width,
+                    height: rect.height
                 });
             }
 
